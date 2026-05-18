@@ -1,6 +1,6 @@
 {
   "type": "process",
-  "name": "0.20mm K1Max PLA + supports + 10% infill",
+  "name": "0.20mm K1Max PLA + supports (v7: bed-only, 55deg)",
   "inherits": "fdm_process_common_klipper",
   "from": "system",
   "setting_id": "GP004",
