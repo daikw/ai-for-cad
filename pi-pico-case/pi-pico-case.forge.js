@@ -12,13 +12,16 @@ const floorTh  = param("Floor thickness", 1.0, { min: 0.8, max: 2.0, unit: "mm" 
 const lidTh    = param("Lid thickness",   1.4, { min: 1.0, max: 2.5, unit: "mm" });
 
 const airBelow = param("Air gap below board", 0.6, { min: 0.5, max: 2.0, unit: "mm" });
-const airAbove = param("Air gap above board components", 2.0, { min: 1.5, max: 4.0, unit: "mm" });
+// v5: bumped airAbove 2.0→5.0 to clear Pi Pico R3 component envelope (2.2mm above PCB top, per official
+// STEP bbox) + lid plug penetration. v4 collided with components by ~0.7cm³.
+const airAbove = param("Air gap above board components", 5.0, { min: 3.0, max: 7.0, unit: "mm" });
 
 const usbW     = param("USB cutout width",  9.0, { min: 7, max: 12, unit: "mm" });
 const usbH     = param("USB cutout height", 4.0, { min: 3, max: 6,  unit: "mm" });
 
 const plugClr  = param("Lid plug clearance per side", 0.2, { min: 0.1, max: 0.4, unit: "mm" });
-const plugH    = param("Lid plug height", 2.2, { min: 1.5, max: 3.5, unit: "mm" });
+// v5: dropped plugH 2.2→2.0 — combined with airAbove=5.0, plug bottom z=5.6 vs component top z=4.8 → 0.8mm clearance
+const plugH    = param("Lid plug height", 2.0, { min: 1.0, max: 3.5, unit: "mm" });
 
 const filletR  = param("Outer vertical edge fillet", 2.0, { min: 0.5, max: 4.0, unit: "mm" });
 

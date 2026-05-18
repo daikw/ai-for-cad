@@ -15,6 +15,8 @@ from pathlib import Path
 ORCA_CLI = Path("/Applications/OrcaSlicer.app/Contents/MacOS/OrcaSlicer")
 PROFILES = Path("/Applications/OrcaSlicer.app/Contents/Resources/profiles/Creality")
 
+REPO_PROFILES = Path(__file__).parent / "profiles"
+
 PRESETS = {
     "k1max-0.20-pla": {
         "process": "process/0.20mm Standard @Creality K1Max (0.4 nozzle).json",
@@ -31,6 +33,14 @@ PRESETS = {
         "machine": "machine/Creality K1 Max (0.4 nozzle).json",
         "filament": "filament/Creality Generic PLA @K1-all.json",
     },
+    "k1max-0.20-pla-supports": {
+        # 0.20mm Standard with auto-supports enabled (45° threshold, normal-auto).
+        # Pre-merged in scripts/profiles/ to sidestep OrcaSlicer's "duplicate process" rejection.
+        "process": None,
+        "process_local": "k1max-0.20-pla-supports.json",
+        "machine": "machine/Creality K1 Max (0.4 nozzle).json",
+        "filament": "filament/Creality Generic PLA @K1-all.json",
+    },
 }
 
 
@@ -38,7 +48,11 @@ def slice_stl(stl: Path, outdir: Path, preset: str) -> Path:
     if not ORCA_CLI.exists():
         sys.exit(f"OrcaSlicer not found at {ORCA_CLI}. Install via: brew install --cask orcaslicer")
     cfg = PRESETS[preset]
-    process = PROFILES / cfg["process"]
+    # Process profile can come from OrcaSlicer's bundle or our local override copy
+    if cfg.get("process_local"):
+        process = REPO_PROFILES / cfg["process_local"]
+    else:
+        process = PROFILES / cfg["process"]
     machine = PROFILES / cfg["machine"]
     filament = PROFILES / cfg["filament"]
     for p in (process, machine, filament):
@@ -50,11 +64,13 @@ def slice_stl(stl: Path, outdir: Path, preset: str) -> Path:
     for f in outdir.glob("plate_*.gcode"):
         f.unlink()
 
+    settings_chain = f"{process};{machine}"
+
     cmd = [
         str(ORCA_CLI),
         "--slice", "0",
         "--outputdir", str(outdir),
-        "--load-settings", f"{process};{machine}",
+        "--load-settings", settings_chain,
         "--load-filaments", str(filament),
         str(stl),
     ]
