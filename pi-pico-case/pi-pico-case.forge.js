@@ -5,23 +5,27 @@
 // ---- Parameters ----
 const boardW   = param("Board width (X)",  51.0, { min: 50, max: 52, unit: "mm" });
 const boardD   = param("Board depth (Y)",  21.0, { min: 20, max: 22, unit: "mm" });
-const boardClr = param("Board side clearance", 0.4, { min: 0.2, max: 1.0, unit: "mm" });
+// v6: bumped 0.4→0.55 after first print — board was too tight to slot in, accounting for FDM
+//     dimensional drift (~0.2mm shrink per side) plus easier insertion margin.
+const boardClr = param("Board side clearance", 0.55, { min: 0.2, max: 1.0, unit: "mm" });
 
 const wall     = param("Wall thickness", 1.6, { min: 1.2, max: 3.0, unit: "mm" });
 const floorTh  = param("Floor thickness", 1.0, { min: 0.8, max: 2.0, unit: "mm" });
 const lidTh    = param("Lid thickness",   1.4, { min: 1.0, max: 2.5, unit: "mm" });
 
 const airBelow = param("Air gap below board", 0.6, { min: 0.5, max: 2.0, unit: "mm" });
-// v5: bumped airAbove 2.0→5.0 to clear Pi Pico R3 component envelope (2.2mm above PCB top, per official
-// STEP bbox) + lid plug penetration. v4 collided with components by ~0.7cm³.
-const airAbove = param("Air gap above board components", 5.0, { min: 3.0, max: 7.0, unit: "mm" });
+// v5: 2.0→5.0 to clear Pi Pico R3 component envelope (2.2mm above PCB top, per official STEP bbox).
+// v6: 5.0→5.5 to keep ≥0.3mm clearance under the taller v6 plug (3mm) above components.
+const airAbove = param("Air gap above board components", 5.5, { min: 3.0, max: 7.0, unit: "mm" });
 
 const usbW     = param("USB cutout width",  9.0, { min: 7, max: 12, unit: "mm" });
 const usbH     = param("USB cutout height", 4.0, { min: 3, max: 6,  unit: "mm" });
 
-const plugClr  = param("Lid plug clearance per side", 0.2, { min: 0.1, max: 0.4, unit: "mm" });
-// v5: dropped plugH 2.2→2.0 — combined with airAbove=5.0, plug bottom z=5.6 vs component top z=4.8 → 0.8mm clearance
-const plugH    = param("Lid plug height", 2.0, { min: 1.0, max: 3.5, unit: "mm" });
+// v6: 0.2→0.1 for tighter friction fit (v5 lid plug was too loose — barely held the lid down).
+const plugClr  = param("Lid plug clearance per side", 0.1, { min: 0.05, max: 0.4, unit: "mm" });
+// v5: 2.2→2.0. v6: 2.0→3.0 for longer engagement (v5 grip was too short — lid floated slightly).
+//     With airAbove=5.5, plug bottom z=5.1mm vs component top z=4.8mm → 0.3mm clearance.
+const plugH    = param("Lid plug height", 3.0, { min: 1.0, max: 4.0, unit: "mm" });
 
 const filletR  = param("Outer vertical edge fillet", 2.0, { min: 0.5, max: 4.0, unit: "mm" });
 
@@ -33,9 +37,18 @@ const eyeDepth  = param("Crawd eye engraving depth (total from lid)", 1.0, { min
 const eyeSize   = param("Crawd eye dot size", 2.0, { min: 0.8, max: 3.0, unit: "mm" });
 
 // Mounting pin geometry (engages 2.1mm dia hole in PCB)
-const pinDia      = param("Mounting pin dia", 1.95, { min: 1.7, max: 2.05, unit: "mm" });
-const pinShoulder = param("Pin shoulder dia", 3.5, { min: 3.0, max: 5.0, unit: "mm" });
-const pinOverhang = param("Pin overhang above PCB", 0.4, { min: 0.0, max: 1.0, unit: "mm" });
+// v6: pinDia 1.95→2.0 (snug fit, 0.05mm clearance per side in 2.1mm hole)
+//     pinShoulder 3.5→4.0 (wider base = more rigid)
+//     pinOverhang 0.4→1.5 (pin sticks 1.5mm above PCB → holds board in place)
+const pinDia      = param("Mounting pin dia", 2.0, { min: 1.7, max: 2.08, unit: "mm" });
+const pinShoulder = param("Pin shoulder dia", 4.0, { min: 3.0, max: 5.0, unit: "mm" });
+const pinOverhang = param("Pin overhang above PCB", 1.5, { min: 0.0, max: 2.5, unit: "mm" });
+
+// v6: LED viewing hole on lid (Pi Pico R3: LED is ~5.5mm from USB-end short edge, on BOOTSEL side)
+const ledX     = param("LED hole X (from case center, +X is USB side)", 20.0, { min: 0, max: 25, unit: "mm" });
+const ledY     = param("LED hole Y (board-center offset toward LED side)", -7.0, { min: -10, max: 10, unit: "mm" });
+const ledHoleW = param("LED hole width",  3.5, { min: 1.5, max: 6, unit: "mm" });
+const ledHoleD = param("LED hole depth",  3.5, { min: 1.5, max: 6, unit: "mm" });
 
 const lidLifted = Param.bool("Lift lid above case for visualization", true);
 
@@ -113,6 +126,10 @@ for (const [ex, ey] of eyePositions) {
   const eyeCutter = box(eyeSize, eyeSize, eyeDepth + 0.1).translate(ex, ey, eyeZ);
   lidPlate = lidPlate.subtract(eyeCutter);
 }
+
+// 3. LED viewing hole — cut all the way through the lid plate at the Pi Pico LED position
+const ledCutter = box(ledHoleW, ledHoleD, lidTh + 0.2).translate(ledX, ledY, lidTh / 2);
+lidPlate = lidPlate.subtract(ledCutter);
 
 // Plug uses a rounded rectangle so it slides past the case's rounded inner corners
 const innerCornerR = Math.max(0.1, filletR - wall);
