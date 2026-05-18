@@ -128,7 +128,8 @@ lid = lidLifted
   ? lid.translate(0, 0, outerH + 6)
   : lid.translate(0, 0, outerH);
 
-return group(
-  caseBody.color("#3a86ff"),
-  lid.color("#ff7a4d"),
-);
+// Return as array so consumers (e.g. print-layout) can destructure.
+return [
+  caseBody.color("#3a86ff").as("case"),
+  lid.color("#ff7a4d").as("lid"),
+];
