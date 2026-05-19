@@ -23,9 +23,12 @@ const c = board.components;
 const components = box(c.w, c.d, c.topMargin)
   .translate(c.offsetX, 0, seatZ + board.pcb.th).color("#1c1c1c").as("components");
 
+// v9 fix: USB connector shell sits ON TOP of the PCB.
+// box(w,d,h) has its base at z=0, so translating by (seatZ + pcb.th) puts the shell bottom
+// exactly on the PCB top face.
 const u = board.usbConnector;
 const usbConn = box(u.w, u.d, u.h)
-  .translate(board.pcb.w / 2 + u.w / 2 - u.overhang, 0, seatZ + board.pcb.th * 0.5)
+  .translate(board.pcb.w / 2 + u.w / 2 - u.overhang, 0, seatZ + board.pcb.th)
   .color("#b0b0b0").as("usb_connector");
 
 return [caseBody, lid, pcb, components, usbConn];

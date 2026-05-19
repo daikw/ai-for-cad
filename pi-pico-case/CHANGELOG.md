@@ -1,5 +1,21 @@
 # pi-pico-case CHANGELOG
 
+## v9 (2026-05-19) — v7-print fixes + stand-in audit
+
+Driven by user feedback after handling the v7 print:
+
+- **LED hole moved to opposite short edge** — `ledX` default 20 → −20 (BOOTSEL side, not USB side).
+- **LED hole enlarged** — `3.5 → 5.0mm` square; v7 print did not visually pierce the lid (likely slicer wall-filling at 3.5mm).
+- **Mounting pin slimmed** — `pinDia` 2.1 → 1.9mm so the 2.1mm board hole accepts the pin with ~0.1mm slack (v7 pin was too thick to seat the board).
+- **USB cutout opens all the way to the lid** — vertical cutter now spans `boardZ−0.5` to `outerH+0.5`, removing the upper wall so the lid alone covers the connector from above. Also widened to `usbW=11mm` for cable shroud clearance.
+- **Lid–case Z gap** — new `lidGap=0.2mm` parameter; lid sits 0.2mm above the case top rim so it's easier to grip and open. Detent groove Z is recomputed so the snap-fit still mates correctly.
+
+### Bug fixes uncovered while doing the above
+
+- **USB cutter Z position was wrong since v1.** `box(w,d,h)` has its base at `z=0`, so `translate(..., usbCenterZ)` placed the cutter from `z=usbCenterZ` upward — not centered on `usbCenterZ` as the variable name implied. Effect: only the *top* part of the USB region was carved; ~1mm of wall remained below the connector. Fixed by translating to the bottom Z explicitly.
+- **Assembly stand-in had USB connector buried in the PCB.** `translate(..., seatZ + pcb.th * 0.5)` put the shell base at `z = seatZ + 0.5`, which is below the PCB top (`z = seatZ + 1.0`). Now `translate(..., seatZ + pcb.th)` so the shell sits ON the PCB top face.
+- New `pico-standin-only.forge.js` — render-only file for visually auditing the stand-in geometry in isolation.
+
 ## v8 (2026-05-19) — refactor
 
 - Moved board specs and assertion helpers to `pi-pico-case-dimensions.js`.

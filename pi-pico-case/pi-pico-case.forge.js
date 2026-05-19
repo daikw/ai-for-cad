@@ -31,6 +31,8 @@ const usbH     = param("USB cutout height", board.usbCutout.h, { min: 3, max: 6,
 const plugClr  = param("Lid plug clearance per side", 0.15, { min: 0.05, max: 0.4, unit: "mm" });
 // Retention comes from detent bumps, so plug height is just lead-in for alignment.
 const plugH    = param("Lid plug height", 2.0, { min: 1.0, max: 4.0, unit: "mm" });
+// v9: small Z gap between case top face and lid bottom — makes the lid easier to grip and open.
+const lidGap   = param("Lid–case Z gap", 0.2, { min: 0, max: 0.5, unit: "mm" });
 
 const detentEnable  = Param.bool("Add lid detent snap-fit",  true);
 const detentBumpW   = param("Detent bump width (along X)", 3.0, { min: 2.0, max: 6.0, unit: "mm" });
@@ -50,16 +52,18 @@ const eyeDepth  = param("Crawd eye engraving depth (total from lid)", 1.0, { min
 const eyeSize   = param("Crawd eye dot size", 2.0, { min: 0.8, max: 3.0, unit: "mm" });
 
 // Mounting pin geometry — engages 2.1mm hole in PCB. cylinder() is (height, radius).
-const pinDia      = param("Mounting pin dia", board.holePos.dia, { min: 1.7, max: 2.2, unit: "mm" });
+// v9: pinDia 2.1 → 1.9 — v7 print had pins slightly thicker than the hole, board wouldn't seat.
+const pinDia      = param("Mounting pin dia", 1.9, { min: 1.7, max: 2.2, unit: "mm" });
 const pinShoulder = param("Pin shoulder dia", 4.0, { min: 3.0, max: 5.0, unit: "mm" });
 const pinOverhang = param("Pin overhang above PCB", 1.5, { min: 0.0, max: 2.5, unit: "mm" });
 const pinSegments = 32;   // keep small cylinders well-tessellated so slicers don't drop polygons
 
-// LED viewing hole — Pi Pico LED sits ~5.5mm from USB-end short edge on the BOOTSEL side
-const ledX     = param("LED hole X (from case center, +X is USB side)", board.led.x, { min: 0, max: 25, unit: "mm" });
+// v9: LED (GP25) is on the BOOTSEL side — opposite short edge from the micro-USB connector.
+const ledX     = param("LED hole X (from case center, +X is USB side)", board.led.x, { min: -25, max: 25, unit: "mm" });
 const ledY     = param("LED hole Y (board-center offset toward LED side)", board.led.y, { min: -10, max: 10, unit: "mm" });
-const ledHoleW = param("LED hole width",  3.5, { min: 1.5, max: 6, unit: "mm" });
-const ledHoleD = param("LED hole depth",  3.5, { min: 1.5, max: 6, unit: "mm" });
+// v9: hole width 3.5 → 5.0 — v7 print did not visually pierce the lid (likely slicer wall filling).
+const ledHoleW = param("LED hole width",  5.0, { min: 1.5, max: 7, unit: "mm" });
+const ledHoleD = param("LED hole depth",  5.0, { min: 1.5, max: 7, unit: "mm" });
 
 const lidLifted = Param.bool("Lift lid above case for visualization", true);
 
@@ -90,8 +94,13 @@ let caseBody = roundedRect(outerW, outerD, filletR)
   .extrude(outerH, { labels: { start: "bottom", end: "top" } });
 caseBody = caseBody.shell(wall, { openFaces: ["top"] });
 
-const usbCutter = box(wall * 2 + 1, usbW, usbH)
-  .translate(outerW / 2, 0, usbCenterZ);
+// v9: USB cutout extends all the way through the top — no upper wall above the connector.
+// The lid (sitting on top of the case rim) covers the opening from above instead.
+// box() has its base at z=0, so translate Z = bottom of the cutter, not its center.
+const usbCutterBottomZ = boardZ - 0.5;                  // start just below PCB underside for clean cut
+const usbCutterH       = outerH - usbCutterBottomZ + 0.5;
+const usbCutter = box(wall * 2 + 1, usbW, usbCutterH)
+  .translate(outerW / 2, 0, usbCutterBottomZ);
 caseBody = caseBody.subtract(usbCutter);
 
 // Mounting posts: shoulder (PCB rests on top) + pin (passes through hole)
@@ -109,7 +118,8 @@ if (detentEnable) {
   const grooveDepth = detentBumpOut + detentSlack;
   const grooveH = detentBumpH + 2 * detentSlack;
   const grooveW = detentBumpW + 2 * detentSlack;
-  const grooveZ = outerH - plugH + DETENT_Z_OFFSET + detentBumpH / 2;
+  // v9: groove follows plug position after the lid is lifted by lidGap
+  const grooveZ = outerH + lidGap - plugH + DETENT_Z_OFFSET + detentBumpH / 2;
   for (const [sx, sy] of [
     [+detentBumpX, +innerD / 2], [+detentBumpX, -innerD / 2],
     [-detentBumpX, +innerD / 2], [-detentBumpX, -innerD / 2],
@@ -176,7 +186,7 @@ let lid = lidPlate.add(plug);
 
 lid = lidLifted
   ? lid.translate(0, 0, outerH + 6)
-  : lid.translate(0, 0, outerH);
+  : lid.translate(0, 0, outerH + lidGap);
 
 return [
   caseBody.color("#3a86ff").as("case"),
