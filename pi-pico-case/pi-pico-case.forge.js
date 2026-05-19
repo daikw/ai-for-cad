@@ -19,7 +19,8 @@ const boardClr = param("Board side clearance", 0.55, { min: 0.2, max: 1.0, unit:
 
 const wall     = param("Wall thickness", 1.6, { min: 1.2, max: 3.0, unit: "mm" });
 const floorTh  = param("Floor thickness", 1.0, { min: 0.8, max: 2.0, unit: "mm" });
-const lidTh    = param("Lid thickness",   1.4, { min: 1.0, max: 2.5, unit: "mm" });
+// v9.1: 1.4 → 0.7 (half) so the LED is easier to see through the lid.
+const lidTh    = param("Lid thickness",   0.7, { min: 0.4, max: 2.5, unit: "mm" });
 
 const airBelow = param("Air gap below board", 0.6, { min: 0.5, max: 2.0, unit: "mm" });
 // Must exceed board.components.topMargin (2.2mm) — checked below.
@@ -46,9 +47,12 @@ const DETENT_Z_OFFSET = 0.4;
 const filletR  = param("Outer vertical edge fillet", 2.0, { min: 0.5, max: 4.0, unit: "mm" });
 
 // Crawd-kun emblem on lid: 2-level engraving (body recess + deeper eye dots)
+// v9.1: depths halved to stay proportional with the thinner lid (0.7mm).
+//   - bodyDepth 0.6 → 0.3 (leaves 0.4mm of lid below the relief)
+//   - eyeDepth  1.0 → 0.5 (leaves 0.2mm below — eyes still solid, not pierced)
 const crawdW    = param("Crawd silhouette width", 32, { min: 20, max: 48, unit: "mm" });
-const bodyDepth = param("Crawd body engraving depth", 0.6, { min: 0.3, max: 1.0, unit: "mm" });
-const eyeDepth  = param("Crawd eye engraving depth (total from lid)", 1.0, { min: 0.4, max: 1.3, unit: "mm" });
+const bodyDepth = param("Crawd body engraving depth", 0.3, { min: 0.15, max: 1.0, unit: "mm" });
+const eyeDepth  = param("Crawd eye engraving depth (total from lid)", 0.5, { min: 0.2, max: 1.3, unit: "mm" });
 const eyeSize   = param("Crawd eye dot size", 2.0, { min: 0.8, max: 3.0, unit: "mm" });
 
 // Mounting pin geometry — engages 2.1mm hole in PCB. cylinder() is (height, radius).

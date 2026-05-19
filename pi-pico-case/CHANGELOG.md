@@ -1,5 +1,18 @@
 # pi-pico-case CHANGELOG
 
+## v9.1 (2026-05-19) — thinner lid + LED-position correction + official-mesh fit check
+
+- **Lid thickness halved**: 1.4 → 0.7mm so the LED is easier to see through and the lid sits flush.
+- Crawd engraving depths scaled with the lid: `bodyDepth` 0.6 → 0.3mm (leaves 0.4mm of lid), `eyeDepth` 1.0 → 0.5mm (leaves 0.2mm — eyes still solid).
+- **LED position reverted to USB-side short edge**: subagent inspection of the official `Pico-R3.step` confirmed GP25 sits ~3.4mm inboard from the USB end, on the BOOTSEL/pin-1 long edge. Updated `dimensions.js` `led: { x: 22.0, y: -8.5 }`. (v9 had `-20, -7` based on user misobservation of the v7 print.)
+- **New collision-check pipeline using the OFFICIAL Pi Pico mesh** (not the simplified box stand-in):
+  1. `forgecad export stl pico-step-only.forge.js --output reference/pico-r3.stl --backend occt` — one-time OCCT-to-mesh conversion that bakes the `rotateX(90).rotateZ(90).translate(25.5,-10.5,2.1)` placement into vertex coordinates.
+  2. trimesh `split` → 17 watertight components (PCB + 16 SMT/connector parts).
+  3. trimesh mirror-X (because forgecad's two-step rotation inverts the X axis vs my intuition).
+  4. `pi-pico-case-assembly-mesh.forge.js` `importMesh`'s each as a separate Object so the spatial analyzer reports per-component overlaps.
+- v9.1 + lifted lid + 17-part official Pi Pico → **zero collisions**. Pins (φ1.9) clear PCB holes (φ2.1), USB connector exits through the +X cutout, all SMT parts stay under the lid.
+- Slice: 13m04s / 5.68cm³ (v9 was 13m38s / 6.00cm³).
+
 ## v9 (2026-05-19) — v7-print fixes + stand-in audit
 
 Driven by user feedback after handling the v7 print:
