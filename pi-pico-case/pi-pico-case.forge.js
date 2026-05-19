@@ -31,7 +31,8 @@ const usbH     = param("USB cutout height", board.usbCutout.h, { min: 3, max: 6,
 
 const plugClr  = param("Lid plug clearance per side", 0.15, { min: 0.05, max: 0.4, unit: "mm" });
 // Retention comes from detent bumps, so plug height is just lead-in for alignment.
-const plugH    = param("Lid plug height", 2.0, { min: 1.0, max: 4.0, unit: "mm" });
+// v9.2: 2.0 → 1.4mm to keep the overall case shorter now that the lid itself is 0.7mm.
+const plugH    = param("Lid plug height", 1.4, { min: 1.0, max: 4.0, unit: "mm" });
 // v9: small Z gap between case top face and lid bottom — makes the lid easier to grip and open.
 const lidGap   = param("Lid–case Z gap", 0.2, { min: 0, max: 0.5, unit: "mm" });
 

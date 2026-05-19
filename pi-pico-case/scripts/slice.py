@@ -41,6 +41,13 @@ PRESETS = {
         "machine": "machine/Creality K1 Max (0.4 nozzle).json",
         "filament": "filament/Creality Generic PLA @K1-all.json",
     },
+    "k1max-0.16-pla-supports": {
+        # 0.16mm Optimal with the same auto-support tuning, for finer top-surface detail.
+        "process": None,
+        "process_local": "k1max-0.16-pla-supports.json",
+        "machine": "machine/Creality K1 Max (0.4 nozzle).json",
+        "filament": "filament/Creality Generic PLA @K1-all.json",
+    },
 }
 
 

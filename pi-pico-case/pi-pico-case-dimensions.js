@@ -13,9 +13,12 @@ const BOARDS = {
     led: { x: 22.0, y: -8.5 },
     // v9: enlarged Y (9→11) so micro-USB connector + cable shroud clears; +Z opening reaches the lid.
     usbCutout: { side: "+x", w: 11.0, h: 4.0 },
-    // Tallest component above PCB top (RP2040 + crystal + USB shell envelope)
+    // Tallest component above PCB top (per official STEP: micro-USB shell at +2.0mm)
     components: { topMargin: 2.2, w: 32, d: 16, offsetX: -3 },
-    usbConnector: { w: 7.6, d: 5.9, h: 2.7, overhang: 1.0 },
+    // Micro-USB shell per official STEP: 7.5×5.65×2.5mm, centered on PCB long axis (Y=0).
+    usbConnector: { w: 7.5, d: 5.65, h: 2.5, overhang: 1.0 },
+    // BOOTSEL push-button (~3.5×3.5×1.5mm) on USB-side, ~7mm inboard from USB short edge.
+    bootsel: { x: 18.5, y: 0, w: 3.5, d: 3.5, h: 1.5 },
   },
 };
 

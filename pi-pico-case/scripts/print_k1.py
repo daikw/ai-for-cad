@@ -48,10 +48,10 @@ STATUS_KEYS = (
 )
 
 
-def upload(host: str, local_path: Path, remote_name: str | None = None) -> str:
+def upload(host: str, local_path: Path, remote_name: str | None = None, http_port: int = 80) -> str:
     """POST the file to /upload. Returns the on-printer absolute path."""
     name = remote_name or local_path.name
-    url = f"http://{host}/upload"
+    url = f"http://{host}:{http_port}/upload"
     with local_path.open("rb") as fh:
         r = requests.post(url, files={"file": (name, fh)}, timeout=60)
     r.raise_for_status()
@@ -131,6 +131,8 @@ def _print_table(d: dict) -> None:
 def main() -> None:
     p = argparse.ArgumentParser()
     p.add_argument("--host", default="192.168.9.252")
+    p.add_argument("--http-port", type=int, default=80,
+                   help="HTTP port for /upload (default 80; use a forwarded port when tunneling)")
     sub = p.add_subparsers(dest="cmd", required=True)
 
     sp = sub.add_parser("upload"); sp.add_argument("file", type=Path); sp.add_argument("--as", dest="rename", default=None)
@@ -145,7 +147,7 @@ def main() -> None:
     args = p.parse_args()
 
     if args.cmd == "upload":
-        path = upload(args.host, args.file, args.rename)
+        path = upload(args.host, args.file, args.rename, http_port=args.http_port)
         print(f"✓ Uploaded → {path}")
     elif args.cmd == "list":
         for f in list_files(args.host):
@@ -162,7 +164,7 @@ def main() -> None:
     elif args.cmd == "stop":
         stop(args.host); print("✓ stop sent")
     elif args.cmd == "submit":
-        path = upload(args.host, args.file, args.rename)
+        path = upload(args.host, args.file, args.rename, http_port=args.http_port)
         print(f"✓ Uploaded → {path}")
         result = start_print(args.host, path)
         print("✓ Print started. Latest reflection:")

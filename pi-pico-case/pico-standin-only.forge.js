@@ -21,4 +21,14 @@ const usbConn = box(u.w, u.d, u.h)
   .translate(board.pcb.w / 2 + u.w / 2 - u.overhang, 0, seatZ + board.pcb.th)
   .color("#b0b0b0").as("usb_connector");
 
-return [pcb, components, usbConn];
+const b = board.bootsel;
+const bootsel = box(b.w, b.d, b.h)
+  .translate(b.x, b.y, seatZ + board.pcb.th)
+  .color("#cc3333").as("bootsel");
+
+// Tiny LED indicator marker for sanity
+const ledMark = box(1.6, 0.8, 0.5)
+  .translate(board.led.x, board.led.y, seatZ + board.pcb.th)
+  .color("#00ff44").as("led");
+
+return [pcb, components, usbConn, bootsel, ledMark];
