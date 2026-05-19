@@ -7,8 +7,10 @@ const BOARDS = {
     pcb: { w: 51.0, d: 21.0, th: 1.0 },
     // 4 corners — mirror these in case-centered coords
     holePos: { x: 23.5, y: 5.7, dia: 2.1 },
-    // v9: LED (GP25) is on the BOOTSEL side of the board — opposite short edge from micro-USB.
-    led: { x: -20.0, y: -7.0 },
+    // v9 (corrected from official STEP, 2026-05-19):
+    // LED (GP25) sits ~3.4mm inboard from the USB-side short edge (not the BOOTSEL side as v9 initially had it).
+    // STEP coords (PCB-corner origin): X≈1.6–2.0, Z≈−2.8–−4.0 → our case-centered coords ≈ (+22, -8.5).
+    led: { x: 22.0, y: -8.5 },
     // v9: enlarged Y (9→11) so micro-USB connector + cable shroud clears; +Z opening reaches the lid.
     usbCutout: { side: "+x", w: 11.0, h: 4.0 },
     // Tallest component above PCB top (RP2040 + crystal + USB shell envelope)
