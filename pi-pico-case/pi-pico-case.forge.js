@@ -19,10 +19,11 @@ const boardClr = param("Board side clearance", 0.55, { min: 0.2, max: 1.0, unit:
 
 const wall     = param("Wall thickness", 1.6, { min: 1.2, max: 3.0, unit: "mm" });
 const floorTh  = param("Floor thickness", 1.0, { min: 0.8, max: 2.0, unit: "mm" });
-// v9.1: 1.4 → 0.7 (half) so the LED is easier to see through the lid.
-const lidTh    = param("Lid thickness",   0.7, { min: 0.4, max: 2.5, unit: "mm" });
+// v9.3: 0.7 → 1.05 (1.5×) — v9.2 lid was too thin and the rim curled during print.
+const lidTh    = param("Lid thickness",   1.05, { min: 0.4, max: 2.5, unit: "mm" });
 
-const airBelow = param("Air gap below board", 0.6, { min: 0.5, max: 2.0, unit: "mm" });
+// v9.3: 0.6 → 1.0 — lift the PCB ~1mm off the floor so the wide pin base seats the board cleanly.
+const airBelow = param("Air gap below board", 1.0, { min: 0.5, max: 2.0, unit: "mm" });
 // Must exceed board.components.topMargin (2.2mm) — checked below.
 const airAbove = param("Air gap above board components", 5.0, { min: 3.0, max: 7.0, unit: "mm" });
 
@@ -42,24 +43,39 @@ const detentBumpOut = param("Detent bump outward protrusion", 0.4, { min: 0.2, m
 const detentBumpH   = param("Detent bump height (Z)", 0.5, { min: 0.3, max: 0.8, unit: "mm" });
 const detentBumpX   = param("Detent bump X offset from plug center", 12.0, { min: 5, max: 20, unit: "mm" });
 const detentSlack   = param("Detent groove clearance", 0.15, { min: 0.05, max: 0.3, unit: "mm" });
+
+// v9.4 (revised): stepped plug — top section keeps the original outline (carries the
+// detent bumps + meets the plate), bottom section is inset on the long sides only.
+// Result: visible step at z=-plugStepBottomH, slight "tucked-in" look from below.
+// Only overhang is plugStepInsetY × plug X length on each side of the bottom section's
+// top — slicer prints it as normal wall overhang (no long bridges needed).
+//
+// The earlier shell-style hollow plug (v9.4 first attempt) was rejected because the
+// open-bottom cavity forced a 50mm cap bridge, blowing up the print time by 7+ minutes.
+const plugStepEnable  = Param.bool("Stepped plug (narrower bottom)", true);
+const plugStepInsetY  = param("Plug step inset (long sides)", 1.0, { min: 0.3, max: 3.0, unit: "mm" });
+const plugStepBottomH = 1.0;  // height of the inset lower section (out of plugH=1.4)
 // Bump centered this far above plug bottom — chosen so the detent engages near deepest insertion.
 const DETENT_Z_OFFSET = 0.4;
 
 const filletR  = param("Outer vertical edge fillet", 2.0, { min: 0.5, max: 4.0, unit: "mm" });
 
 // Crawd-kun emblem on lid: 2-level engraving (body recess + deeper eye dots)
-// v9.1: depths halved to stay proportional with the thinner lid (0.7mm).
-//   - bodyDepth 0.6 → 0.3 (leaves 0.4mm of lid below the relief)
-//   - eyeDepth  1.0 → 0.5 (leaves 0.2mm below — eyes still solid, not pierced)
+// v9.3: depths scaled 1.5× with the thicker lid (0.7 → 1.05).
+//   - bodyDepth 0.3 → 0.45 (leaves 0.6mm of lid below the relief)
+//   - eyeDepth  0.5 → 0.75 (leaves 0.3mm below — eyes still solid, not pierced)
 const crawdW    = param("Crawd silhouette width", 32, { min: 20, max: 48, unit: "mm" });
-const bodyDepth = param("Crawd body engraving depth", 0.3, { min: 0.15, max: 1.0, unit: "mm" });
-const eyeDepth  = param("Crawd eye engraving depth (total from lid)", 0.5, { min: 0.2, max: 1.3, unit: "mm" });
+const bodyDepth = param("Crawd body engraving depth", 0.45, { min: 0.15, max: 1.0, unit: "mm" });
+const eyeDepth  = param("Crawd eye engraving depth (total from lid)", 0.75, { min: 0.2, max: 1.5, unit: "mm" });
 const eyeSize   = param("Crawd eye dot size", 2.0, { min: 0.8, max: 3.0, unit: "mm" });
 
-// Mounting pin geometry — engages 2.1mm hole in PCB. cylinder() is (height, radius).
-// v9: pinDia 2.1 → 1.9 — v7 print had pins slightly thicker than the hole, board wouldn't seat.
+// Mounting pin geometry — 2-step. cylinder() is (height, radius).
+// Bottom (shoulder/base): slightly fat (φ2.5) × 1mm — wider than the PCB hole so the
+//   board rests on it and lifts 1mm above the floor.
+// Top (pin): φ1.9 (vs 2.1mm hole = 0.1mm slack each side) × pcb.th + overhang = 2.5mm.
+// v9.3: pinShoulder 4.0 → 2.5 — was too wide; the new narrower base is what the user requested.
 const pinDia      = param("Mounting pin dia", 1.9, { min: 1.7, max: 2.2, unit: "mm" });
-const pinShoulder = param("Pin shoulder dia", 4.0, { min: 3.0, max: 5.0, unit: "mm" });
+const pinShoulder = param("Pin shoulder dia", 2.5, { min: 2.0, max: 5.0, unit: "mm" });
 const pinOverhang = param("Pin overhang above PCB", 1.5, { min: 0.0, max: 2.5, unit: "mm" });
 const pinSegments = 32;   // keep small cylinders well-tessellated so slicers don't drop polygons
 
@@ -163,17 +179,33 @@ for (const [ex, ey] of eyePositions) {
   lidPlate = lidPlate.subtract(eyeCutter);
 }
 
-// LED viewing hole — through-cut: cutter spans z=-0.1..lidTh+0.1 so plate (z=0..lidTh) is fully cut.
-const ledCutter = box(ledHoleW, ledHoleD, lidTh + 0.2).translate(ledX, ledY, -0.1);
-lidPlate = lidPlate.subtract(ledCutter);
+// (LED hole cut is applied AFTER lid = lidPlate.add(plug) so the cutter pierces BOTH
+//  the plate AND the plug below it. Earlier versions cut only the plate, leaving the
+//  plug intact under the hole — the visible "still blocked" symptom in v6/v7/v9.2 prints.)
 
 // Plug uses rounded rectangle so it slides past the case's rounded inner corners
 const innerCornerR = Math.max(0.1, filletR - wall);
 const plugW = innerW - 2 * plugClr;
 const plugD = innerD - 2 * plugClr;
-let plug = roundedRect(plugW, plugD, innerCornerR + 0.1)
-  .extrude(plugH)
-  .translate(0, 0, -plugH);
+let plug;
+if (plugStepEnable) {
+  // Top section (z=-plugStepTopH..0): full outline, mates to plate + carries detent bumps.
+  const plugStepTopH = plugH - plugStepBottomH;
+  const topPlug = roundedRect(plugW, plugD, innerCornerR + 0.1)
+    .extrude(plugStepTopH)
+    .translate(0, 0, -plugStepTopH);
+  // Bottom section (z=-plugH..-plugStepTopH): inset on long sides → narrower in Y.
+  const bottomD = plugD - 2 * plugStepInsetY;
+  const bottomR = Math.max(0.1, innerCornerR + 0.1 - plugStepInsetY);
+  const bottomPlug = roundedRect(plugW, bottomD, bottomR)
+    .extrude(plugStepBottomH)
+    .translate(0, 0, -plugH);
+  plug = topPlug.add(bottomPlug);
+} else {
+  plug = roundedRect(plugW, plugD, innerCornerR + 0.1)
+    .extrude(plugH)
+    .translate(0, 0, -plugH);
+}
 
 if (detentEnable) {
   const bumpCenterZ = -plugH + DETENT_Z_OFFSET + detentBumpH / 2;
@@ -187,7 +219,15 @@ if (detentEnable) {
   }
 }
 
+
 let lid = lidPlate.add(plug);
+
+// v9.3: LED hole must pierce the ENTIRE lid (plate + plug). The plug lives at z=[-plugH, 0]
+// and the LED position is inside the plug footprint, so cutting only the plate left a
+// 1.4mm-thick chunk of plug blocking the light. Cutter span: plug bottom to plate top.
+const ledCutter = box(ledHoleW, ledHoleD, lidTh + plugH + 0.4)
+  .translate(ledX, ledY, -plugH - 0.2);
+lid = lid.subtract(ledCutter);
 
 lid = lidLifted
   ? lid.translate(0, 0, outerH + 6)

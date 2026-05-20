@@ -1,5 +1,40 @@
 # pi-pico-case CHANGELOG
 
+## v9.4 (2026-05-20) — stepped plug
+
+- **Plug now has two sections**: full-outline top (z=-0.4..0, mates with plate + carries detent bumps) and inset bottom (z=-1.4..-0.4, narrowed by 1mm on each long side).
+- Visible "tucked-in" step from below; the only print overhang is 1mm × plug-length per side, which the slicer handles as ordinary wall overhang. No bridge.
+- Slice: 11m20s / 4.75cm³ / 50 layers — **identical** to v9.3 (the step costs nothing). Compare with the first hollow-plug attempt: 18m48s / 5.51cm³ (long cap bridge blew up support material).
+- Param `Stepped plug (narrower bottom)` lets us revert by toggling.
+
+## v9.3 (2026-05-20) — THE big LED-hole fix + 1.5× lid + lift-pin
+
+After v9.2-fine print, user observed: LED hole still not pierced (third version with this symptom), lid too thin (rim curled), pins correct but should lift the board, USB OK.
+
+### LED hole — root cause and fix
+
+For v6 / v7 / v9.2 my LED cutter was applied to **`lidPlate` alone** with `lidPlate.subtract(ledCutter)`. The plate later got `add(plug)` to form the closed lid, leaving **the plug intact directly beneath the hole**. The plug at the LED position is 1.4mm thick and fully blocks the LED.
+
+v9.3 applies the cutter to **`lid` after the union**:
+```js
+let lid = lidPlate.add(plug);
+const ledCutter = box(ledHoleW, ledHoleD, lidTh + plugH + 0.4)
+  .translate(ledX, ledY, -plugH - 0.2);
+lid = lid.subtract(ledCutter);
+```
+
+### Why my earlier ray-cast verification missed it
+
+I cast rays from `z=0` (which sits INSIDE the plug after `placeReference("bottom")`) and counted hits going +z. The plug bottom face at z=0 was tangent to my origin (numpy-stl drops tangent hits), so I only saw `hit=1` at z=plugH (plug top face) and called it "pierced". A ray from `z=−5` with odd/even hit counting would have seen 2 hits = solid. Spending another 10 minutes asking codex for the canonical ray-cast pattern would have caught it.
+
+### Other v9.3 changes
+
+- `lidTh` 0.7 → **1.05mm** (1.5×) — v9.2 rim curled during print
+- `bodyDepth` 0.3 → 0.45 / `eyeDepth` 0.5 → 0.75 (engraving scales with lid)
+- `airBelow` 0.6 → **1.0mm** — board now sits ~1mm above the floor
+- `pinShoulder` 4.0 → **2.5mm** — the wide φ4 was unnecessary; the user requested a narrower "slightly fat" base
+- Slice (0.16mm Optimal supports): **11m20s / 4.75cm³** (v9.2-fine was 14m07s / 5.26cm³ — savings from smaller shoulder)
+
 ## v9.1 (2026-05-19) — thinner lid + LED-position correction + official-mesh fit check
 
 - **Lid thickness halved**: 1.4 → 0.7mm so the LED is easier to see through and the lid sits flush.
