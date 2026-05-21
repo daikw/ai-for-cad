@@ -179,9 +179,19 @@ for (const [ex, ey] of eyePositions) {
   lidPlate = lidPlate.subtract(eyeCutter);
 }
 
-// (LED hole cut is applied AFTER lid = lidPlate.add(plug) so the cutter pierces BOTH
-//  the plate AND the plug below it. Earlier versions cut only the plate, leaving the
-//  plug intact under the hole — the visible "still blocked" symptom in v6/v7/v9.2 prints.)
+// v9.5: cut the LED hole BEFORE the union — apply a plate-shaped cutter to lidPlate
+// and a plug-shaped cutter to plug separately. Then `add` them.
+//
+// Background: in v9.3/v9.4 we cut a single tall cutter (z=[-plugH-0.2, lidTh+0.2])
+// from the unified lid AFTER `lidPlate.add(plug)`. The union creates a degenerate
+// boundary face at z=0 (plate bottom == plug top), and Truck's subtract took the
+// degenerate face as a trigger and wiped the entire plate above it. The plug
+// survived intact but the plate vanished from the STL — observed only after
+// printing v9.4 and seeing the lid missing.
+//
+// Cutting each part independently sidesteps the degenerate-boundary case.
+const ledCutterPlate = box(ledHoleW, ledHoleD, lidTh + 0.2).translate(ledX, ledY, -0.1);
+lidPlate = lidPlate.subtract(ledCutterPlate);
 
 // Plug uses rounded rectangle so it slides past the case's rounded inner corners
 const innerCornerR = Math.max(0.1, filletR - wall);
@@ -220,14 +230,11 @@ if (detentEnable) {
 }
 
 
-let lid = lidPlate.add(plug);
+// v9.5: LED hole through the plug, applied BEFORE the union (see comment above).
+const ledCutterPlug = box(ledHoleW, ledHoleD, plugH + 0.2).translate(ledX, ledY, -plugH - 0.1);
+plug = plug.subtract(ledCutterPlug);
 
-// v9.3: LED hole must pierce the ENTIRE lid (plate + plug). The plug lives at z=[-plugH, 0]
-// and the LED position is inside the plug footprint, so cutting only the plate left a
-// 1.4mm-thick chunk of plug blocking the light. Cutter span: plug bottom to plate top.
-const ledCutter = box(ledHoleW, ledHoleD, lidTh + plugH + 0.4)
-  .translate(ledX, ledY, -plugH - 0.2);
-lid = lid.subtract(ledCutter);
+let lid = lidPlate.add(plug);
 
 lid = lidLifted
   ? lid.translate(0, 0, outerH + 6)

@@ -1,5 +1,27 @@
 # pi-pico-case CHANGELOG
 
+## v9.5 (2026-05-21) — fix the missing-plate STL bug
+
+v9.4 printed: the plate of the lid was **entirely missing** from the printed part — and `Pi Pico` user-observation, *not* "the plate peeled off mid-print" but "the plate is just not in the STL." Stage-isolation export confirmed:
+
+| stage | operation | tris | Z range |
+|---|---|---|---|
+| 1 | bare plate (extrude) | 140 | `[0, 1.05]` |
+| 2 | + crawd cutout + eye cutters | 416 | `[0, 1.05]` |
+| 3 | + plug.add() | 696 | `[-1.40, 1.05]` |
+| **4** | **+ lid.subtract(ledCutter)** | **156** | **`[-1.40, 0.00]`** ← plate gone |
+
+Root cause: in v9.3/v9.4 I applied a tall LED cutter to the unified lid AFTER `lidPlate.add(plug)`. The union creates a degenerate coplanar face at `z=0` (plate bottom == plug top). Truck's subtract took that face as a trigger and discarded everything above it — wiping the entire plate while leaving the plug intact.
+
+**Fix:** cut the LED hole on `lidPlate` and `plug` SEPARATELY before the union. Each subtract operates on a single solid with no degenerate coplanar boundary, so Truck behaves correctly. After the union, the two holes align at z=0 to form a continuous LED light path.
+
+Net effect: v9.5 STL has the plate back (lid tris 220 → 672, Z range `[0, 1.4]` → `[0, 2.45]`). Slice: 15m06s / 5.55cm³ / 54 layers — the extra ~4 minutes and 0.8cm³ vs v9.4 are the plate that v9.4 was silently skipping.
+
+**Why earlier verification missed it:**
+- Design-view render (lifted lid) showed plate + plug correctly because the lifted view is rendered from the in-memory shape graph, not the exported STL.
+- Print-layout view render would have shown the missing plate, but I only made one for design view before the v9.4 submit.
+- bbox/volume checks would have caught it (lid bbox z = 1.4 instead of 2.45), but I did not have a hard assert on the lid's final Z extent.
+
 ## v9.4 (2026-05-20) — stepped plug
 
 - **Plug now has two sections**: full-outline top (z=-0.4..0, mates with plate + carries detent bumps) and inset bottom (z=-1.4..-0.4, narrowed by 1mm on each long side).
