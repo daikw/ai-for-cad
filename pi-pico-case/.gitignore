@@ -12,3 +12,15 @@ gcode/
 
 # Editor noise
 .DS_Store
+
+# Debug + scratch artifacts kept on disk but out of git
+cam-live.jpg
+debug-pin-slicing.png
+debug-stl-pin.png
+lid-detail-only.forge.js
+lid-only.forge.js
+lid-section-check.forge.js
+pi-pico-case-print.stl
+pico-step-only.forge.js
+template-part.forge.js
+test-step-import.forge.js
