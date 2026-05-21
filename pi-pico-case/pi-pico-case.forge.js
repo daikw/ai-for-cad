@@ -22,8 +22,9 @@ const floorTh  = param("Floor thickness", 1.0, { min: 0.8, max: 2.0, unit: "mm" 
 // v9.3: 0.7 → 1.05 (1.5×) — v9.2 lid was too thin and the rim curled during print.
 const lidTh    = param("Lid thickness",   1.05, { min: 0.4, max: 2.5, unit: "mm" });
 
-// v9.3: 0.6 → 1.0 — lift the PCB ~1mm off the floor so the wide pin base seats the board cleanly.
-const airBelow = param("Air gap below board", 1.0, { min: 0.5, max: 2.0, unit: "mm" });
+// v9.6: keep this Truck-safe at 1mm; the physical 2mm PCB lift comes from the
+// two-tier pin shoulders below.
+const airBelow = param("Air gap below board", 1.0, { min: 0.5, max: 1.0, unit: "mm" });
 // Must exceed board.components.topMargin (2.2mm) — checked below.
 const airAbove = param("Air gap above board components", 5.0, { min: 3.0, max: 7.0, unit: "mm" });
 
@@ -69,12 +70,14 @@ const bodyDepth = param("Crawd body engraving depth", 0.45, { min: 0.15, max: 1.
 const eyeDepth  = param("Crawd eye engraving depth (total from lid)", 0.75, { min: 0.2, max: 1.5, unit: "mm" });
 const eyeSize   = param("Crawd eye dot size", 2.0, { min: 0.8, max: 3.0, unit: "mm" });
 
-// Mounting pin geometry — 2-step. cylinder() is (height, radius).
-// Bottom (shoulder/base): slightly fat (φ2.5) × 1mm — wider than the PCB hole so the
-//   board rests on it and lifts 1mm above the floor.
+// Mounting pin geometry — 3-step. cylinder() is (height, radius).
+// Lower shoulder/base: φ4.0 × 1mm; upper shoulder: φ2.5 × 1mm.
+// The PCB rests on the upper shoulder, so it sits 2mm above the floor while airBelow
+// stays at Truck-safe 1mm.
 // Top (pin): φ1.9 (vs 2.1mm hole = 0.1mm slack each side) × pcb.th + overhang = 2.5mm.
-// v9.3: pinShoulder 4.0 → 2.5 — was too wide; the new narrower base is what the user requested.
+const boardLift    = 2.0;
 const pinDia      = param("Mounting pin dia", 1.9, { min: 1.7, max: 2.2, unit: "mm" });
+const pinBaseDia   = 4.0;
 const pinShoulder = param("Pin shoulder dia", 2.5, { min: 2.0, max: 5.0, unit: "mm" });
 const pinOverhang = param("Pin overhang above PCB", 1.5, { min: 0.0, max: 2.5, unit: "mm" });
 const pinSegments = 32;   // keep small cylinders well-tessellated so slicers don't drop polygons
@@ -97,7 +100,7 @@ const outerW = innerW + 2 * wall;
 const outerD = innerD + 2 * wall;
 const outerH = floorTh + innerH;
 
-const boardZ = floorTh + airBelow;
+const boardZ = floorTh + boardLift;
 const usbCenterZ = boardZ + board.pcb.th / 2;
 
 // ---- Invariant checks (fail-fast on param sweeps) ----
@@ -105,7 +108,10 @@ assertPositive("innerW", innerW);
 assertPositive("innerD", innerD);
 assertGreaterEqual("airAbove vs component top margin", airAbove, board.components.topMargin);
 assertPositive("plug clearance per side", (innerW - (innerW - 2 * plugClr)) / 2);
+assertPositive("upper shoulder height", boardLift - airBelow);
+assertPositive("pin base fits in cavity", innerD - 2 * (pinBaseDia / 2 + board.holePos.y - board.pcb.d / 2));
 assertPositive("pin shoulder fits in cavity", innerD - 2 * (pinShoulder / 2 + board.holePos.y - board.pcb.d / 2));
+assertGreaterEqual("actual clearance above lifted board", outerH - (boardZ + board.pcb.th), board.components.topMargin);
 assertNear("expected outer width matches dimensions sheet", outerW, board.pcb.w + 2 * (boardClr + wall));
 
 const holes = holePositions(board);
@@ -126,12 +132,14 @@ caseBody = caseBody.subtract(usbCutter);
 
 // Mounting posts: shoulder (PCB rests on top) + pin (passes through hole)
 // cylinder() signature: cylinder(height, radius) — height first.
-const shoulderH = airBelow;
+const lowerShoulderH = airBelow;
+const upperShoulderH = boardLift - airBelow;
 const pinTotalH = board.pcb.th + pinOverhang;
 for (const [px, py] of holes) {
-  const shoulder = cylinder(shoulderH, pinShoulder / 2).translate(px, py, floorTh);
-  const pin      = cylinder(pinTotalH, pinDia / 2).translate(px, py, floorTh + shoulderH);
-  caseBody = caseBody.add(shoulder).add(pin);
+  const lowerShoulder = cylinder(lowerShoulderH, pinBaseDia / 2).translate(px, py, floorTh);
+  const upperShoulder = cylinder(upperShoulderH, pinShoulder / 2).translate(px, py, floorTh + lowerShoulderH);
+  const pin           = cylinder(pinTotalH, pinDia / 2).translate(px, py, floorTh + boardLift);
+  caseBody = caseBody.add(lowerShoulder).add(upperShoulder).add(pin);
 }
 
 // Detent grooves in case inner walls — paired with plug bumps below
@@ -229,6 +237,12 @@ if (detentEnable) {
   }
 }
 
+// v9.6: shallow pocket on plug underside.
+const pocketR = 4.0;
+const pocketDepth = 0.3;
+const pocketOvershoot = 0.05;
+const pocketCyl = cylinder(pocketDepth + pocketOvershoot, pocketR).translate(0, 0, -plugH - pocketOvershoot);
+plug = plug.subtract(pocketCyl);
 
 // v9.5: LED hole through the plug, applied BEFORE the union (see comment above).
 const ledCutterPlug = box(ledHoleW, ledHoleD, plugH + 0.2).translate(ledX, ledY, -plugH - 0.1);

@@ -1,5 +1,23 @@
 # pi-pico-case CHANGELOG
 
+## v9.6 (2026-05-21) — 2mm PCB lift with detent-safe Truck fallback
+
+Goal: make the PCB sit 2mm above the floor, add a shallow underside pocket to the lid plug, and keep the detent snap-fit.
+
+The direct `airBelow=2.0` approach still hits ForgeCAD 0.9.4 Truck's CSG boundary bug when detent groove cutters are enabled. I tried the OCCT path first, but file-level `setActiveBackend("occt")` fails in this CLI with `OCCT not initialized — call initOCCT() first`; the CLI-level `--backend occt` path also did not return in a useful time for this workflow. The Truck fallback attempts (`grooveZ` rounded to 0.1mm, then groove cutter depth through the wall) still reproduced the same `generic CSG input must be closed... found 3 boundary edges` error.
+
+**Final fix:** keep `airBelow` at the Truck-safe 1.0mm and make the mounting posts two-stage:
+- lower shoulder: φ4.0 × 1.0mm
+- upper shoulder: φ2.5 × 1.0mm
+- pin starts above that at 2.0mm, so the PCB physically sits 2mm above the floor
+
+Added the v9.6 plug underside pocket: circular φ8.0mm × 0.3mm recess, cut with a cylinder and a small below-face overshoot so it actually removes material from the plug underside.
+
+Verification:
+- `forgecad run pi-pico-case/pi-pico-case.forge.js` passes with detents enabled on Truck.
+- `forgecad export stl pi-pico-case/pi-pico-case-print-layout.forge.js --output /tmp/v96.stl` passes: Object 1 = 3,664 triangles, Object 2 = 1,040 triangles.
+- STL lid check: `lid Z=[0.00,2.45], tris=1040`.
+
 ## v9.5 (2026-05-21) — fix the missing-plate STL bug
 
 v9.4 printed: the plate of the lid was **entirely missing** from the printed part — and `Pi Pico` user-observation, *not* "the plate peeled off mid-print" but "the plate is just not in the STL." Stage-isolation export confirmed:
