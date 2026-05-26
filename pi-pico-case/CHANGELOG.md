@@ -1,5 +1,23 @@
 # pi-pico-case CHANGELOG
 
+## v9.7 (2026-05-26) — LED hole actually over the LED
+
+v9.6 print: PCB lift ✓, lid closes ✓, **LED hole misses the LED**. User-observed "the position hasn't changed since v7" — and they're right. v7 used `(20, -7)` hardcoded; v9 swapped to `(22, -8.5)` claiming a STEP correction. Both were Y-off.
+
+**Audit method:** parse `reference/pico-parts/part-*.stl` bboxes (these are baked from the official STEP into the case-centered frame), find the 0603-sized footprint. part-07 = `0.8 × 1.6 × 0.6mm`, center `(20.70, -5.70)`. That's the LED.
+
+| | X | Y |
+|---|---|---|
+| v9.6 design `board.led` | 22.0 | -8.5 |
+| Real LED (part-07 center) | 20.70 | -5.70 |
+| Offset | +1.30 | **-2.80** ← past hole half-width 2.5mm |
+
+The v9 commit message claims `STEP coords X≈1.6–2.0, Z≈−2.8–−4.0 → case-centered (+22, -8.5)`. The X part is fine; the Z→Y remap picked up a sign or origin error and put the hole 2.8mm past the LED on Y, mostly over PCB edge. The parts-split STL gives the LED position directly with no axis-remap needed, so use that.
+
+**Fix:** `led: { x: 20.7, y: -5.7 }`. Hole stays 5×5mm — that's already 3× the LED footprint so we don't need to grow it.
+
+Verification image: [led-position-audit.png](./led-position-audit.png) shows v9.6 design (red dashed) vs real LED (yellow star).
+
 ## v9.6 (2026-05-21) — 2mm PCB lift with detent-safe Truck fallback
 
 Goal: make the PCB sit 2mm above the floor, add a shallow underside pocket to the lid plug, and keep the detent snap-fit.
