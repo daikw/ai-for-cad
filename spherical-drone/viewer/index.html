@@ -1,0 +1,351 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>spherical-drone assembly viewer</title>
+<style>
+  :root { color-scheme: dark; }
+  html, body { margin: 0; height: 100%; background: #2b323c; color: #dfe5ec; font: 13px/1.5 -apple-system, "Hiragino Sans", sans-serif; }
+  #app { display: flex; height: 100%; }
+  #panel { width: 248px; flex: none; overflow-y: auto; padding: 14px 16px; background: #232932; border-right: 1px solid #3a4350; }
+  #view { flex: 1; position: relative; }
+  canvas { display: block; }
+  h1 { font-size: 14px; margin: 0 0 2px; }
+  .sub { color: #8b97a4; font-size: 11px; margin-bottom: 14px; }
+  fieldset { border: 1px solid #3a4350; border-radius: 6px; margin: 0 0 12px; padding: 8px 10px; }
+  legend { color: #9fb4c8; padding: 0 4px; font-size: 11px; letter-spacing: 0.06em; }
+  label { display: flex; align-items: center; gap: 6px; padding: 2px 0; cursor: pointer; }
+  label.part .sw { width: 10px; height: 10px; border-radius: 2px; flex: none; }
+  input[type="range"] { width: 100%; }
+  select { width: 100%; background: #2b323c; color: inherit; border: 1px solid #3a4350; border-radius: 4px; padding: 4px; }
+  .row { display: flex; justify-content: space-between; align-items: center; gap: 8px; padding: 2px 0; }
+  .val { color: #8b97a4; font-variant-numeric: tabular-nums; }
+  #status { position: absolute; left: 10px; bottom: 8px; color: #8b97a4; font-size: 11px; pointer-events: none; }
+  button { background: #2f3742; color: inherit; border: 1px solid #3a4350; border-radius: 4px; padding: 4px 10px; cursor: pointer; }
+  button:hover { background: #39434f; }
+</style>
+<!-- three.js: exact-version pinned CDN imports (no install, no lockfile churn) -->
+<script type="importmap">
+{
+  "imports": {
+    "three": "https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.module.js",
+    "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.170.0/examples/jsm/"
+  }
+}
+</script>
+</head>
+<body>
+<div id="app">
+  <div id="panel">
+    <h1>spherical-drone viewer</h1>
+    <div class="sub">stl/ の印刷部品 + ゴースト部品でアセンブリを確認</div>
+
+    <fieldset>
+      <legend>SCENE</legend>
+      <select id="scene-select">
+        <option value="drone">drone — 機体単体（球中心原点）</option>
+        <option value="station">station — ステーション + 着座球</option>
+        <option value="docked" selected>docked — ポート A に着座</option>
+      </select>
+    </fieldset>
+
+    <fieldset>
+      <legend>VIEW</legend>
+      <div class="row"><span>分解表示</span><span class="val" id="explode-val">0</span></div>
+      <input type="range" id="explode" min="0" max="100" value="0" />
+      <div class="row"><span>断面クリップ (Y)</span><span class="val" id="clip-val">off</span></div>
+      <input type="range" id="clip" min="0" max="100" value="0" />
+      <label><input type="checkbox" id="ghosts" checked /> ゴースト部品（電装・ピン・Jetson）</label>
+      <label><input type="checkbox" id="grid" checked /> グリッド</label>
+      <div class="row" style="margin-top:6px"><button id="reset-cam">カメラリセット</button></div>
+    </fieldset>
+
+    <fieldset>
+      <legend>PARTS</legend>
+      <div id="part-list"></div>
+    </fieldset>
+  </div>
+  <div id="view"><div id="status">loading…</div></div>
+</div>
+
+<script type="module">
+import * as THREE from "three";
+import { OrbitControls } from "three/addons/controls/OrbitControls.js";
+import { STLLoader } from "three/addons/loaders/STLLoader.js";
+
+// ---- shared dimensions (mirrors ../dims.js; keep in sync by hand) ----------
+const SEAT_Z = 95 + 18.1; // sphere center over the port rim (lld.md §2.3)
+const PORT_X = 175;       // coreW/2 + portW/2
+const MOTOR_R = 42.5;
+const ARM_ANGLES = [45, 135, 225, 315];
+
+THREE.Object3D.DEFAULT_UP = new THREE.Vector3(0, 0, 1); // CAD: Z-up
+
+// ---- part placements: same transforms as drone.forge.js / station.forge.js -
+const qx90 = new THREE.Quaternion().setFromAxisAngle(new THREE.Vector3(1, 0, 0), Math.PI / 2);
+const qz180 = new THREE.Quaternion().setFromAxisAngle(new THREE.Vector3(0, 0, 1), Math.PI);
+const tagQuat = (south) => (south ? qz180.clone().multiply(qx90) : qx90.clone());
+
+const DRONE_PARTS = [
+  { name: "CenterDeck", stl: "center-deck.stl", color: 0x4a505a },
+  { name: "CageTop", stl: "cage-top.stl", color: 0xdde3e8 },
+  { name: "CageBottom", stl: "cage-bottom.stl", color: 0xb9c2cc },
+  { name: "BatteryTray", stl: "battery-tray.stl", color: 0x5b6470 },
+];
+const STATION_PARTS = [
+  { name: "PortA", stl: "port-module.stl", color: 0xaeb6bd, pos: [PORT_X, 0, 0] },
+  { name: "PortB", stl: "port-module.stl", color: 0xaeb6bd, pos: [-PORT_X, 0, 0], quat: qz180 },
+  { name: "CoreBody", stl: "core-body.stl", color: 0x9aa3ab },
+  { name: "CoreLid", stl: "core-lid.stl", color: 0x8b949c },
+  { name: "PogoBaseA", stl: "pogo-base.stl", color: 0xd9c178, pos: [PORT_X, 0, 26] },
+  { name: "PogoBaseB", stl: "pogo-base.stl", color: 0xd9c178, pos: [-PORT_X, 0, 26] },
+];
+for (const sx of [1, -1])
+  for (const sy of [1, -1]) {
+    STATION_PARTS.push({
+      name: `Tag${sx > 0 ? "A" : "B"}${sy > 0 ? "N" : "S"}`,
+      stl: "apriltag-plate.stl",
+      color: 0xe8e4da,
+      pos: [sx * PORT_X, sy * 96.2, 129],
+      quat: tagQuat(sy < 0),
+    });
+  }
+
+// ---- ghost components (transparent stand-ins for purchased parts) ----------
+function ghostMat(color, opacity = 0.4) {
+  return new THREE.MeshStandardMaterial({ color, transparent: true, opacity, roughness: 0.6, depthWrite: false });
+}
+function droneGhosts() {
+  const g = new THREE.Group();
+  const add = (geo, color, x, y, z, opacity) => {
+    const m = new THREE.Mesh(geo, ghostMat(color, opacity));
+    m.position.set(x, y, z);
+    g.add(m);
+    return m;
+  };
+  add(new THREE.BoxGeometry(51, 21, 3), 0x0e7f4e, 0, 0, 5.5);            // Pico W
+  add(new THREE.BoxGeometry(30, 30, 1.2), 0x22262b, 0, 0, -6.1);         // ESC board
+  add(new THREE.BoxGeometry(20, 20, 4), 0x22262b, 0, 0, -3.5);           // ESC components
+  add(new THREE.BoxGeometry(60, 30, 7), 0x8a8f3c, 0, 0, -11.5);          // battery
+  add(new THREE.BoxGeometry(2.5, 26, 25), 0x1c3f5e, 31.3, 0, -2);        // camera board
+  add(new THREE.CylinderGeometry(18, 18, 1.6, 48).rotateX(Math.PI / 2), 0xb87333, 0, 0, -77.8, 0.7); // contact disc
+  for (const a of ARM_ANGLES) {
+    const r = (a * Math.PI) / 180;
+    const x = MOTOR_R * Math.cos(r);
+    const y = MOTOR_R * Math.sin(r);
+    add(new THREE.CylinderGeometry(7, 7, 12, 24).rotateX(Math.PI / 2), 0x7d848c, x, y, 8);            // motor
+    add(new THREE.CylinderGeometry(25.5, 25.5, 2.5, 48).rotateX(Math.PI / 2), 0xcc4444, x, y, 14, 0.3); // prop disc
+  }
+  return g;
+}
+function stationGhosts() {
+  const g = new THREE.Group();
+  const jet = new THREE.Mesh(new THREE.BoxGeometry(103, 90.5, 34.8), ghostMat(0x2f6e3f));
+  jet.position.set(0, 0, 3 + 6 + 17.4);
+  g.add(jet);
+  for (const sx of [1, -1])
+    for (const p of [[0, 0], [0, 11.5], [9.96, -5.75], [-9.96, -5.75]]) { // center + r11.5 @90/210/330
+      const pin = new THREE.Mesh(new THREE.CylinderGeometry(1.25, 1.25, 11.1, 16).rotateX(Math.PI / 2), ghostMat(0xc9a23a, 0.85));
+      pin.position.set(sx * PORT_X + p[0], p[1], 26 + 5.55);
+      g.add(pin);
+    }
+  return g;
+}
+
+// ---- three.js scaffolding ---------------------------------------------------
+const view = document.getElementById("view");
+const status = document.getElementById("status");
+const renderer = new THREE.WebGLRenderer({ antialias: true });
+renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
+renderer.localClippingEnabled = true;
+view.appendChild(renderer.domElement);
+
+const scene = new THREE.Scene();
+scene.background = new THREE.Color(0x2b323c);
+const camera = new THREE.PerspectiveCamera(40, 1, 1, 5000);
+const controls = new OrbitControls(camera, renderer.domElement);
+controls.enableDamping = true;
+
+scene.add(new THREE.HemisphereLight(0xc7d3df, 0x495463, 0.9));
+const key = new THREE.DirectionalLight(0xffe2bf, 1.6);
+key.position.set(260, -320, 420);
+scene.add(key);
+const fill = new THREE.DirectionalLight(0xd4e6fb, 0.5);
+fill.position.set(-260, 210, 220);
+scene.add(fill);
+
+const grid = new THREE.GridHelper(800, 40, 0x55606e, 0x3a4350);
+grid.rotation.x = Math.PI / 2; // GridHelper is XZ; flip into the Z-up XY plane
+scene.add(grid);
+
+const clipPlane = new THREE.Plane(new THREE.Vector3(0, -1, 0), 1e6);
+
+const root = new THREE.Group();
+scene.add(root);
+
+// ---- STL cache + scene assembly --------------------------------------------
+const loader = new STLLoader();
+const geoCache = new Map();
+async function loadGeo(file) {
+  if (!geoCache.has(file)) {
+    geoCache.set(file, loader.loadAsync(`../stl/${file}`).then((g) => (g.computeVertexNormals(), g)));
+  }
+  return geoCache.get(file);
+}
+
+const partList = document.getElementById("part-list");
+let entries = []; // { name, object, basePos, explodeDir, ghost }
+
+function explodeDirFor(name, basePos, sceneName) {
+  // drone parts explode vertically (they stack on the equator ring), station
+  // modules sideways, the seated drone upward out of the funnel
+  const d = {
+    CageTop: [0, 0, 1], CageBottom: [0, 0, -1], BatteryTray: [0, 0, -0.45], CenterDeck: [0, 0, 0],
+    PortA: [1, 0, 0], PortB: [-1, 0, 0], CoreLid: [0, 0, 0.8], CoreBody: [0, 0, 0],
+    PogoBaseA: [1, 0, -0.4], PogoBaseB: [-1, 0, -0.4],
+  }[name];
+  if (d) return new THREE.Vector3(...d);
+  if (name.startsWith("Tag")) return new THREE.Vector3(0, Math.sign(basePos[1] || 1), 0.4);
+  return new THREE.Vector3(0, 0, 0);
+}
+
+async function buildScene(sceneName) {
+  root.clear();
+  partList.innerHTML = "";
+  entries = [];
+  status.textContent = "loading…";
+
+  const defs = [];
+  if (sceneName === "drone") {
+    for (const p of DRONE_PARTS) defs.push({ ...p, offset: [0, 0, 0] });
+  } else {
+    for (const p of STATION_PARTS) defs.push({ ...p });
+    if (sceneName === "docked") {
+      for (const p of DRONE_PARTS) defs.push({ ...p, name: `Drone/${p.name}`, offset: [PORT_X, 0, SEAT_Z], explodeAs: "drone" });
+    }
+  }
+
+  for (const def of defs) {
+    const geo = await loadGeo(def.stl);
+    const mat = new THREE.MeshStandardMaterial({ color: def.color, roughness: 0.62, metalness: 0.05, clippingPlanes: [clipPlane], side: THREE.DoubleSide });
+    const mesh = new THREE.Mesh(geo, mat);
+    if (def.quat) mesh.quaternion.copy(def.quat);
+    const base = new THREE.Vector3(...(def.pos || [0, 0, 0])).add(new THREE.Vector3(...(def.offset || [0, 0, 0])));
+    mesh.position.copy(base);
+    root.add(mesh);
+
+    const shortName = def.name.replace("Drone/", "");
+    const dir = explodeDirFor(shortName, def.pos || [0, 0, 0], sceneName);
+    if (def.explodeAs === "drone" || sceneName === "docked") {
+      if (def.name.startsWith("Drone/")) dir.add(new THREE.Vector3(0, 0, 1.2)); // lift the whole drone out of the funnel
+    }
+    entries.push({ name: def.name, object: mesh, basePos: base, explodeDir: dir, ghost: false, color: def.color });
+  }
+
+  // ghosts
+  if (sceneName === "drone" || sceneName === "docked") {
+    const g = droneGhosts();
+    const base = sceneName === "docked" ? new THREE.Vector3(PORT_X, 0, SEAT_Z) : new THREE.Vector3();
+    g.position.copy(base);
+    root.add(g);
+    entries.push({ name: "ghosts(drone)", object: g, basePos: base, explodeDir: new THREE.Vector3(0, 0, sceneName === "docked" ? 1.2 : 0), ghost: true });
+  }
+  if (sceneName !== "drone") {
+    const g = stationGhosts();
+    root.add(g);
+    entries.push({ name: "ghosts(station)", object: g, basePos: new THREE.Vector3(), explodeDir: new THREE.Vector3(), ghost: true });
+  }
+  if (sceneName === "station") {
+    const seat = new THREE.Mesh(new THREE.SphereGeometry(80, 48, 32), ghostMat(0x7a8a99, 0.16));
+    seat.position.set(PORT_X, 0, SEAT_Z);
+    root.add(seat);
+    entries.push({ name: "seated sphere (R80)", object: seat, basePos: seat.position.clone(), explodeDir: new THREE.Vector3(0, 0, 1.2), ghost: true });
+  }
+
+  // part list UI
+  for (const e of entries) {
+    if (e.ghost) continue;
+    const label = document.createElement("label");
+    label.className = "part";
+    const cb = document.createElement("input");
+    cb.type = "checkbox";
+    cb.checked = true;
+    cb.addEventListener("change", () => (e.object.visible = cb.checked && true));
+    const sw = document.createElement("span");
+    sw.className = "sw";
+    sw.style.background = `#${(e.color ?? 0x888888).toString(16).padStart(6, "0")}`;
+    label.append(cb, sw, document.createTextNode(e.name));
+    partList.appendChild(label);
+  }
+
+  applyExplode();
+  applyGhostVisibility();
+  fitCamera(sceneName);
+  const tris = entries.filter((e) => !e.ghost).reduce((n, e) => n + (e.object.geometry?.attributes.position.count ?? 0) / 3, 0);
+  status.textContent = `${sceneName} — ${entries.filter((e) => !e.ghost).length} parts, ${Math.round(tris).toLocaleString()} tris — drag: orbit / wheel: zoom / 右drag: pan`;
+}
+
+function fitCamera(sceneName) {
+  const target = sceneName === "drone" ? new THREE.Vector3(0, 0, 0) : new THREE.Vector3(0, 0, 60);
+  const dist = sceneName === "drone" ? 420 : 950;
+  camera.position.set(target.x + dist * 0.62, target.y - dist * 0.72, target.z + dist * 0.42);
+  controls.target.copy(target);
+  controls.update();
+}
+
+// ---- UI wiring ---------------------------------------------------------------
+const explodeInput = document.getElementById("explode");
+function applyExplode() {
+  const k = Number(explodeInput.value); // 0..100
+  document.getElementById("explode-val").textContent = k;
+  for (const e of entries) {
+    e.object.position.copy(e.basePos).addScaledVector(e.explodeDir, k * 1.1);
+  }
+}
+explodeInput.addEventListener("input", applyExplode);
+
+const clipInput = document.getElementById("clip");
+function applyClip() {
+  const k = Number(clipInput.value);
+  if (k === 0) {
+    clipPlane.constant = 1e6;
+    document.getElementById("clip-val").textContent = "off";
+  } else {
+    clipPlane.constant = 110 - k * 2.2; // sweep y = +110 .. -110
+    document.getElementById("clip-val").textContent = `y=${clipPlane.constant.toFixed(0)}`;
+  }
+}
+clipInput.addEventListener("input", applyClip);
+applyClip();
+
+const ghostsInput = document.getElementById("ghosts");
+function applyGhostVisibility() {
+  for (const e of entries) if (e.ghost) e.object.visible = ghostsInput.checked;
+}
+ghostsInput.addEventListener("change", applyGhostVisibility);
+
+document.getElementById("grid").addEventListener("change", (ev) => (grid.visible = ev.target.checked));
+const sceneSelect = document.getElementById("scene-select");
+sceneSelect.addEventListener("change", () => buildScene(sceneSelect.value));
+document.getElementById("reset-cam").addEventListener("click", () => fitCamera(sceneSelect.value));
+
+function resize() {
+  const w = view.clientWidth;
+  const h = view.clientHeight;
+  renderer.setSize(w, h);
+  camera.aspect = w / h;
+  camera.updateProjectionMatrix();
+}
+addEventListener("resize", resize);
+resize();
+
+renderer.setAnimationLoop(() => {
+  controls.update();
+  renderer.render(scene, camera);
+});
+
+buildScene(sceneSelect.value).catch((err) => (status.textContent = `読み込み失敗: ${err.message} — serve.sh で配信していますか？`));
+</script>
+</body>
+</html>
