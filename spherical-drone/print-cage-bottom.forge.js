@@ -1,2 +1,2 @@
 // STL export wrapper (export stl has no --param flag): cage lower hemisphere + foot.
-return require("./cage.forge.js", { Half: "bottom" }).shape;
+return require("./cage.forge.js", { Half: "bottom", Build: "solid" }).shape;

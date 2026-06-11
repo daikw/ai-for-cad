@@ -12,6 +12,11 @@
 const { DRONE, icosphere1, arcPoints, hemisphereEdges, capVerts, balancedUnion } = require("./dims.js");
 
 const half = Param.choice("Half", "top", ["top", "bottom"]);
+// "group" returns the raw primitives as a ShapeGroup — zero CSG, so it renders
+// in any environment (manifold's union of shallow-angle strut junctions is not
+// robust: boundary edges -> CSG reject). "solid" booleans everything for STL
+// export and the checks suite; run solid mode with --backend occt.
+const buildMode = Param.choice("Build", "group", ["group", "solid"]);
 const D = DRONE;
 const top = half === "top";
 const sign = top ? 1 : -1;
@@ -130,32 +135,39 @@ if (!top) {
 // Subtracting them from the merged cage afterwards triggers a manifold
 // robustness failure that silently drops the entire strut body (the result
 // degenerates to pads-only, 0.9 cm3) — keep small booleans local.
-let cage = balancedUnion(union, solids); // tree-merge: ~170x faster than the flat fold
-// trim at the ring face via box intersection — trimByPlane leaves an uncapped
-// cross-section in the render-server backend (93 boundary edges -> CSG reject)
-const trimBox = box(2 * D.ringRO + 10, 2 * D.ringRO + 10, D.cageR + 30);
-cage = intersection(cage, top ? trimBox.translate(0, 0, D.ringH / 2) : trimBox.translate(0, 0, -D.ringH / 2 - D.cageR - 30));
-
 const screwLonSet = new Set(D.screwLons[half]);
 const pads = [];
+// Pad centers sit inboard at r = ringRO - padD/2 = 76.5 so the Ø7 disc stays
+// inside the Ø160 envelope with NO boolean clip (chaining difference +
+// intersection on one pad dropped an op on both kernels — checks caught the
+// pads at r81.87). The screw hole stays on the ring pilot circle r78.3,
+// off-center in the pad: outer wall 0.6, inner wall 4.2.
+const padCenterR = D.ringRO - D.padD / 2;
 for (let k = 0; k < D.padCount; k++) {
   const lonDeg = k * 36;
   const lon = (lonDeg * Math.PI) / 180;
-  const x = D.ringPadR * Math.cos(lon);
-  const y = D.ringPadR * Math.sin(lon);
-  let pad = cylinder(D.padH, D.padD / 2).translate(x, y, top ? D.ringH / 2 : -D.ringH / 2 - D.padH);
+  let pad = cylinder(D.padH, D.padD / 2).translate(padCenterR * Math.cos(lon), padCenterR * Math.sin(lon), top ? D.ringH / 2 : -D.ringH / 2 - D.padH);
   if (screwLonSet.has(lonDeg)) {
-    pad = difference(pad, cylinder(D.padH + 2, D.m2Clear / 2).translate(x, y, top ? D.ringH / 2 - 1 : -D.ringH / 2 - D.padH - 1));
+    pad = difference(
+      pad,
+      cylinder(D.padH + 2, D.m2Clear / 2).translate(D.ringPadR * Math.cos(lon), D.ringPadR * Math.sin(lon), top ? D.ringH / 2 - 1 : -D.ringH / 2 - D.padH - 1)
+    );
   }
-  // clip to the Ø160 envelope — a full Ø7 pad at r78.3 would poke out to r81.8.
-  // The clip is the LAST op: difference-after-intersection silently reverted
-  // the clip on OCCT (caught by checks: top pads measured r81.87)
-  pad = intersection(pad, cylinder(D.padH + 2, D.ringRO).translate(0, 0, top ? D.ringH / 2 - 1 : -D.ringH / 2 - D.padH - 1));
   pads.push(pad);
 }
+const tint = top ? "#dde3e8" : "#c8d0d8";
+
+if (buildMode === "group") {
+  // untrimmed: the strut stubs below |z|=3 sit hidden inside the ring body.
+  // The printable artifact is the solid build — this is the display/assembly form.
+  return { shape: group(...[...solids, ...pads].map((sh) => sh.color(tint))), half };
+}
+
+let cage = balancedUnion(union, solids); // tree-merge: ~170x faster than the flat fold
+cage = top ? cage.trimByPlane([0, 0, 1], D.ringH / 2) : cage.trimByPlane([0, 0, -1], D.ringH / 2);
 cage = union(cage, ...pads);
 
 const vol = cage.volume();
 console.log(`cage-${half}: volume ${(vol / 1000).toFixed(1)} cm3 -> PETG ${((vol / 1000) * 1.27).toFixed(1)} g`);
 
-return { shape: cage.color(top ? "#dde3e8" : "#c8d0d8"), half };
+return { shape: cage.color(tint), half };

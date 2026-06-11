@@ -10,8 +10,8 @@ const D = DRONE;
 const S = STATION;
 
 const deck = require("./center-deck.forge.js").shape;
-const cageTop = require("./cage.forge.js", { Half: "top" }).shape;
-const cageBottom = require("./cage.forge.js", { Half: "bottom" }).shape;
+const cageTop = require("./cage.forge.js", { Half: "top", Build: "solid" }).shape;
+const cageBottom = require("./cage.forge.js", { Half: "bottom", Build: "solid" }).shape;
 const tray = require("./battery-tray.forge.js").shape;
 const portBody = require("./port-module.forge.js").shape;
 const core = require("./core-module.forge.js");
@@ -47,11 +47,15 @@ expectNoOverlap("props vs cage-top", props, cageTop, 0.1);
 expectNoOverlap("props vs deck", props, deck, 0.1);
 expectNoOverlap("props(+6mm guard) vs cage-top", union(propGuard), cageTop, 0.1);
 
-// cage stays inside the Ø160 sphere envelope
+// cage stays inside the Ø160 sphere envelope. Measured as real material
+// outside an r=80.05 cylinder — OCCT boundingBox() over-reports trimmed
+// B-rep extents (phantom r=81.87 with zero actual volume out there).
+const outsideShell = difference(
+  cylinder(170, 95, 95, 64).translate(0, 0, -85),
+  cylinder(172, 80.05, 80.05, 64).translate(0, 0, -86)
+);
 for (const [name, c] of [["cage-top", cageTop], ["cage-bottom", cageBottom]]) {
-  const bb = c.boundingBox();
-  const rMax = Math.max(Math.abs(bb.max[0]), Math.abs(bb.min[0]), Math.abs(bb.max[1]), Math.abs(bb.min[1]));
-  expectTrue(`${name} XY extent <= 80.05`, rMax <= 80.05, `r=${rMax.toFixed(2)}`);
+  expectNoOverlap(`${name} inside Ø160.1 envelope`, c, outsideShell, 0.5);
 }
 const bbB = cageBottom.boundingBox();
 expectTrue("foot bottom at z=-77", Math.abs(bbB.min[2] + 77) < 0.05, `zmin=${bbB.min[2].toFixed(2)}`);

@@ -62,6 +62,18 @@ OCCT は本件の全ケースで正しく、ケージ生成も manifold 比 4–
 - manifold は「ぴったり接線接触」の union で開メッシュ（boundary edges）を作ることがある
   → ストラット端 0.2mm 延長・節球 +0.08mm の**オーバーラップ余裕**を入れる
 
+- ケージは `Build=group`（既定）で **boolean なしの ShapeGroup** を返す。manifold は
+  浅い角度で交わるストラット同士の union で開メッシュを作り CSG 連鎖が破綻するため、
+  レンダ経路は group、STL/checks は `Build=solid`（occt / manifold export）で分離
+- manifold の safeCut 結果は重なり領域を二重計上した体積を返す（deck 21.2 vs occt 18.6
+  cm³）。**質量はじめ正式な数値は必ず occt で取る**（manifold は表示用）
+- OCCT の `boundingBox()` はトリム面の制御点由来で**実体のない膨張値**を返すことがある
+  （cage-top r81.87 phantom、実体は r80 内）。エンベロープ検査は bbox でなく
+  「外側殻との intersection 体積 = 0」で行う（checks.forge.js）
+- difference と intersection を同一プリミティブに連鎖すると**どちらかが落ちる**
+  （両カーネル）→ ケージパッドは boolean クリップをやめ、パッド中心を内側
+  r76.5 に置いて穴だけ r78.3 のオフセット配置に変更
+
 ### lld.md からの実装上の変更
 
 | 箇所 | LLD | 実装 | 理由 |
