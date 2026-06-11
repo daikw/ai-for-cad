@@ -3,8 +3,6 @@
 // battery, camera, contact disc) so collision/fit inspection is meaningful.
 // All parts share the sphere-center origin — they are designed in place.
 
-if (getActiveBackend() !== "occt") throw new Error("Run with --backend occt: manifold drops union operands in difference() — see CHANGELOG.md");
-
 const { DRONE } = require("./dims.js");
 const D = DRONE;
 
@@ -32,8 +30,12 @@ if (showGhosts) {
   );
   parts.push({ name: "PicoW Ghost", shape: ghost(pico, "#0e7f4e") });
 
-  // 4-in-1 ESC under the cross bar (z -5 .. -0.5)
-  parts.push({ name: "ESC Ghost", shape: ghost(box(30, 30, 4.5).translate(0, 0, -5), "#22262b") });
+  // 4-in-1 ESC: board hangs under the boss bottoms (z -6.7..-5.5), components
+  // point up into the 4mm air gap between the bosses (clear of their Ø4.5)
+  parts.push({ name: "ESC Ghost", shape: ghost(union(
+    box(30, 30, 1.2).translate(0, 0, -6.7),
+    box(20, 20, 4).translate(0, 0, -5.5)
+  ), "#22262b") });
 
   // battery in the tray
   parts.push({ name: "Battery Ghost", shape: ghost(box(D.batL, D.batW, D.batH).translate(0, 0, D.trayTopZ - D.batH), "#8a8f3c") });

@@ -4,8 +4,6 @@
 // is tuned with 0.5mm printed shims (lld.md §5.1, §2.3).
 // Local coords: disc base at z=0.
 
-if (getActiveBackend() !== "occt") throw new Error("Run with --backend occt: manifold drops union operands in difference() — see CHANGELOG.md");
-
 const { DRONE, STATION } = require("./dims.js");
 const S = STATION;
 

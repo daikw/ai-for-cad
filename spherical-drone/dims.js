@@ -32,11 +32,13 @@ const DRONE = {
   motorPcd: 6.6, // placeholder until motor SKU is fixed (lld.md §11)
   motorHoleD: 1.6,
 
-  // equatorial ring: z [-3, +3], radial r [77.5, 80.0]
+  // equatorial ring: z [-3, +3], radial r [76.6, 80.0] — 3.4 radial wall so the
+  // Ø2.2 pad screw holes at r78.3 keep >=0.6 walls both sides (checks: cage
+  // pads are clipped to r<=80 to honour the Ø160 envelope)
   ringH: 6,
   ringRO: 80,
-  ringRI: 77.5,
-  ringPadR: 78.75, // pad/pilot-hole circle = ring mid-wall
+  ringRI: 76.6,
+  ringPadR: 78.3, // pad/pilot-hole circle
   padCount: 10, // geodesic equator vertices, every 36deg starting at lon 0
   padD: 7,
   padH: 2.5, // pads span z [3, 5.5] (top) / [-5.5, -3] (bottom)
@@ -56,9 +58,17 @@ const DRONE = {
   pcbT: 1.6, // contact disc under the foot: z [-78.6, -77]
   legD: 2.5,
 
-  // ToF line of sight (VL53L1X on deck underside, looking down)
-  tofX: 18,
+  // ToF line of sight (VL53L1X on deck underside, looking down).
+  // The landing foot (Ø36), the 5 foot legs and the pentagon ring all crowd a
+  // straight-down 27° FoV. Solution (verified in checks.forge.js): mount at
+  // r=19 on the lon -18° axis (a leg-gap center) and configure the sensor ROI
+  // offset so the 15° ROI cone tilts 9° outboard along that same azimuth —
+  // it then threads the gap between foot edge, legs and pentagon ring.
+  tofR: 19,
+  tofAzDeg: -18,
   tofFovDeg: 27,
+  tofRoiFovDeg: 15,
+  tofRoiTiltDeg: 9,
 
   // camera tab — kept entirely below the prop plane (props z 13..16 sweep
   // the whole XY ring r17..68, so nothing wide may cross that band)
@@ -98,6 +108,7 @@ const STATION = {
   pinFreeDepth: 57.9, // un-compressed pogo tip -> 2.6mm compression
   pedestalTopDepth: 62.0,
   pedestalD: 30,
+  pogoPocketDepth: 7, // base T8 sits 1mm proud less: top at depth 61, 0.5 below the pad plane
   pinCircleR: 11.5,
   pinBodyD: 2.5,
   pinFreeLen: 8,
@@ -245,7 +256,35 @@ function capVerts(geo, which) {
   return [...ids];
 }
 
-module.exports = { DRONE, STATION, icosphere1, arcPoints, hemisphereEdges, capVerts };
+// ---------------------------------------------------------------------------
+// Boolean strategy helpers (see CHANGELOG.md "manifold バックエンド" note).
+//
+// balancedUnion: union(array) folds sequentially (O(n) ever-growing merges —
+// 96s for a 277-solid cage). Chunked + pairwise tree merging is ~170x faster.
+// safeCut: manifold silently DROPS union operands when difference() runs on a
+// union-base. (A∪B)−C ≡ (A−C)∪(B−C), so distribute the cutters onto each
+// positive primitive, then union. `unionFn`/`diffFn` are the forge globals,
+// passed in because plain .js modules don't get the injected API.
+// ---------------------------------------------------------------------------
+function balancedUnion(unionFn, shapes, chunk = 16) {
+  if (shapes.length === 0) throw new Error("balancedUnion: no shapes");
+  if (shapes.length === 1) return shapes[0];
+  let level = [];
+  for (let i = 0; i < shapes.length; i += chunk) level.push(unionFn(shapes.slice(i, i + chunk)));
+  while (level.length > 1) {
+    const next = [];
+    for (let i = 0; i < level.length; i += 2) next.push(i + 1 < level.length ? unionFn(level[i], level[i + 1]) : level[i]);
+    level = next;
+  }
+  return level[0];
+}
+
+function safeCut(unionFn, diffFn, positives, cutters) {
+  const drilled = cutters.length ? positives.map((p) => diffFn(p, ...cutters)) : positives;
+  return balancedUnion(unionFn, drilled);
+}
+
+module.exports = { DRONE, STATION, icosphere1, arcPoints, hemisphereEdges, capVerts, balancedUnion, safeCut };
 
 // --- self-check: `node lib/dims.js` ---------------------------------------
 if (require.main === module) {

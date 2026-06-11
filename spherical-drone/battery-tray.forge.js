@@ -3,8 +3,6 @@
 // ±Y edges. Squeeze the two prongs on one side outward to release. lld.md §4.4.
 // Coordinates: sphere center = origin (deck frame); battery top at z = -8.
 
-if (getActiveBackend() !== "occt") throw new Error("Run with --backend occt: manifold drops union operands in difference() — see CHANGELOG.md");
-
 const { DRONE } = require("./dims.js");
 const D = DRONE;
 

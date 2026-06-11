@@ -2,8 +2,6 @@
 // The geodesic cage build is expensive (~5 min); default uses a lightweight
 // sphere ghost. Flip "Full drone model" on for the real geometry.
 
-if (getActiveBackend() !== "occt") throw new Error("Run with --backend occt: manifold drops union operands in difference() — see CHANGELOG.md");
-
 const { DRONE, STATION } = require("./dims.js");
 const S = STATION;
 

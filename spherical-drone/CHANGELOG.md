@@ -34,6 +34,34 @@ difference(union(shell, boss), cylinder(12, 1.25).translate(60, 80, 84));
 OCCT は本件の全ケースで正しく、ケージ生成も manifold 比 4–5 倍速い
 （cage-top: 61s vs 245–322s）。
 
+
+### 検証スイート（checks.forge.js）が摘出した設計バグと修正
+
+`forgecad run checks.forge.js --backend occt` が lld.md §10 を実装する。摘出 → 修正済み:
+
+| # | バグ | 修正 |
+|---|------|------|
+| 1 | port-module の外殻キャビティが 3mm 浅く、**ファンネル開口が天板で塞がれていた**（着座球と 57cm³ 干渉） | キャビティを z3..95 に貫通、リム穴付き天板のみ残す |
+| 2 | pogo-base 上面（深さ60）が接点パッド面（60.5）より 0.5mm 高く、**ピン圧縮前に樹脂同士が接触** | ペデスタルポケットを 6→7mm に深化（ベース上面=深さ61、0.5 クリア） |
+| 3 | ケージ取付パッド Ø7 が r81.8〜81.9 まで張り出し **Ø160 球エンベロープ超過** | リング肉厚 2.5→3.4（RI 76.6）、パッド円 r78.3、パッドを r80 円筒で**最後に**クリップ（OCCT では intersection 後の difference がクリップを巻き戻す挙動も確認） |
+| 4 | ToF 視界: 直下 27° FoV はフット/レッグ/ペンタゴンリングに必ず遮られる。さらに**ペンタゴンリングの大円弧ストラットが極側へ ~2mm 垂れ**、唯一の回廊（経度 -18° のレッグ間ギャップ）を塞いでいた | ToF を r19・経度 -18° に移し、ROI オフセットで光軸を 9° 外側へ（ソフト設定必須、dims.js 注記）。ペンタゴンリング 5 辺のみ**緯線円弧**で生成し垂れを排除 |
+| 5 | ESC モック形状が雑で取付ボスと 310mm³ 干渉（実物は基板+部品の 2 段） | 基板 30×30×1.2（z-6.7..-5.5）+ 部品 20×20×4（ボス間の空隙）に修正 |
+| 6 | apriltag-plate の差し込みタングが面領域の内側に埋まっていて機能せず | タングを面の下端から突出（y -46..-36）に修正、station 側の起立配置も再計算 |
+
+### ツールチェーン追加知見（forgecad 0.9.4）
+
+- `union(array)` は逐次 fold で巨大 union が遅い（ケージ 277 体 ≈ 96s）。
+  **チャンク+ペアワイズの木マージ（dims.js `balancedUnion`）で ~170 倍**（0.6s）
+- difference バグの恒久対策として `safeCut(union, difference, positives, cuts)` を導入:
+  (A∪B)−C ≡ (A−C)∪(B−C) を利用し、**union 前に各プリミティブへカッターを分配**。
+  manifold/occt 両方で体積一致を確認（deck 18.6cm³ 等）
+- `render 3d` / `render inspect` は `--backend` / `--param` を受けず、render サーバ環境では
+  `importMesh`（binary 読み込み）も不可。`render hq` は有料。
+  → モデルを manifold-safe にするのが唯一の直接レンダ経路
+- `export stl` は `--backend` 可・`--param` 不可 → print-*.forge.js ラッパーで変種を焼き込み
+- manifold は「ぴったり接線接触」の union で開メッシュ（boundary edges）を作ることがある
+  → ストラット端 0.2mm 延長・節球 +0.08mm の**オーバーラップ余裕**を入れる
+
 ### lld.md からの実装上の変更
 
 | 箇所 | LLD | 実装 | 理由 |

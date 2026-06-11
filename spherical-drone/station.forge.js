@@ -3,8 +3,6 @@
 // ghosts (Jetson dev kit, pogo pins, seated drone sphere) for fit checks.
 // World coords: core box center at origin XY, floor z=0, +X toward port A.
 
-if (getActiveBackend() !== "occt") throw new Error("Run with --backend occt: manifold drops union operands in difference() — see CHANGELOG.md");
-
 const { DRONE, STATION } = require("./dims.js");
 const S = STATION;
 
@@ -25,21 +23,22 @@ const parts = [
   { name: "CoreLid", shape: core.lid },
 ];
 
-// pogo bases seated in the pedestal pockets (pocket floor z=27)
+// pogo bases seated in the pedestal pockets (pocket floor z=26)
 for (const sx of [1, -1]) {
-  parts.push({ name: `PogoBase${sx > 0 ? "A" : "B"}`, shape: pogo.shape.translate(sx * portOffset, 0, 27) });
+  parts.push({ name: `PogoBase${sx > 0 ? "A" : "B"}`, shape: pogo.shape.translate(sx * portOffset, 0, 26) });
 }
 
-// AprilTag plates standing in the ±Y wall slots of each port
-// (built flat, tongue toward -Y of its local frame; stand up against the wall
-//  inner boss face so the tag faces into the funnel area... display outward)
+// AprilTag plates standing in the ±Y wall slots: rotateX(90) stands the plate
+// up with the tongue down and the sticker recess facing the funnel; the -Y
+// side adds rotateZ(180) so its recess also faces inward. Tongue bottom rests
+// on the slot floor (z 83), faces rise ~80mm above the rim.
 for (const sx of [1, -1])
   for (const sy of [1, -1]) {
-    const up = tag.shape.rotateX(-90 * sy); // tongue down
-    const yWall = sy * (S.portL / 2 - S.wallT) - sy * 3;
+    let up = tag.shape.rotateX(90);
+    if (sy < 0) up = up.rotateZ(180);
     parts.push({
       name: `Tag${sx > 0 ? "A" : "B"}${sy > 0 ? "N" : "S"}`,
-      shape: up.translate(sx * portOffset, yWall, S.portH - 10 + 46),
+      shape: up.translate(sx * portOffset, sy * 96.2, 129),
     });
   }
 
@@ -52,12 +51,12 @@ if (showGhosts) {
     shape: ghost(box(S.jetsonW, S.jetsonL, S.jetsonH).translate(0, 0, S.floorT + 6), "#2f6e3f"),
   });
 
-  // pogo pins at free length (tips z = 95 - 57.9 = 37.1)
+  // pogo pins at free length (base bottom z=26, tips z = 95 - 57.9 = 37.1)
   for (const sx of [1, -1])
     for (const { x, y } of [{ x: 0, y: 0 }, ...circularLayout(3, S.pinCircleR, { startDeg: 90 })]) {
       parts.push({
         name: `Pin Ghost`,
-        shape: ghost(cylinder(S.pinFreeLen + 2.1, S.pinBodyD / 2).translate(sx * portOffset + x, y, 27), "#c9a23a", 0.8),
+        shape: ghost(cylinder(S.pinFreeLen + 3.1, S.pinBodyD / 2).translate(sx * portOffset + x, y, 26), "#c9a23a", 0.8),
       });
     }
 
