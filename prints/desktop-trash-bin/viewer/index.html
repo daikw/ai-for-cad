@@ -1,0 +1,365 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>desktop trash bin decoration viewer</title>
+<link rel="icon" href="data:," />
+<style>
+  :root {
+    color-scheme: dark;
+    --bg: #20252b;
+    --panel: #272e35;
+    --panel-2: #303840;
+    --line: #46515b;
+    --text: #e3e8ec;
+    --muted: #a7b1bb;
+    --green: #9fb8aa;
+    --amber: #f0d18b;
+    --blue: #8aa6c8;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; min-height: 100%; overflow: hidden; background: var(--bg); color: var(--text); font: 13px/1.45 -apple-system, BlinkMacSystemFont, "Hiragino Sans", sans-serif; letter-spacing: 0; }
+  #app { display: grid; grid-template-columns: 382px minmax(0, 1fr); min-height: 100vh; }
+  #panel { overflow-y: auto; padding: 16px; background: var(--panel); border-right: 1px solid var(--line); }
+  h1 { margin: 0; font-size: 16px; font-weight: 650; }
+  h2 { margin: 0 0 8px; font-size: 12px; color: var(--muted); font-weight: 650; text-transform: uppercase; }
+  .sub { color: var(--muted); font-size: 12px; margin: 3px 0 14px; }
+  .proposal-list { display: grid; gap: 8px; }
+  .proposal-btn { width: 100%; text-align: left; color: inherit; background: var(--panel-2); border: 1px solid var(--line); border-radius: 6px; padding: 10px; cursor: pointer; }
+  .proposal-btn:hover { background: #35404a; }
+  .proposal-btn.active { border-color: var(--amber); box-shadow: inset 3px 0 0 var(--amber); }
+  .proposal-title { display: flex; justify-content: space-between; gap: 8px; align-items: baseline; font-weight: 650; }
+  .tag { color: #171b1f; background: var(--amber); border-radius: 999px; padding: 1px 7px; font-size: 10px; flex: none; }
+  .proposal-dim { color: var(--muted); margin-top: 4px; font-variant-numeric: tabular-nums; }
+  .section { margin-top: 14px; border-top: 1px solid var(--line); padding-top: 14px; }
+  .kv { display: grid; grid-template-columns: 118px 1fr; gap: 6px 10px; color: var(--muted); }
+  .kv b { color: var(--text); font-weight: 600; }
+  .bullets { margin: 8px 0 0; padding-left: 18px; color: var(--muted); }
+  .bullets li { margin: 4px 0; }
+  #main { display: grid; grid-template-rows: auto minmax(360px, 1fr) auto; min-width: 0; }
+  #toolbar { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 10px; padding: 12px 14px; border-bottom: 1px solid var(--line); background: #22282f; }
+  .tabs { display: flex; gap: 6px; flex-wrap: wrap; }
+  .tab { color: var(--text); background: var(--panel-2); border: 1px solid var(--line); border-radius: 6px; padding: 7px 10px; cursor: pointer; }
+  .tab.active { border-color: var(--amber); color: #fff7db; }
+  .tools { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; color: var(--muted); }
+  .tools label { display: flex; align-items: center; gap: 6px; }
+  input[type="range"] { width: 120px; }
+  #stage { position: relative; min-height: 0; overflow: hidden; }
+  #view, #renders { position: absolute; inset: 0; }
+  #view { overflow: hidden; }
+  #view canvas { display: block; width: 100%; height: 100%; }
+  #renders { display: none; overflow: auto; padding: 18px; }
+  .render-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 14px; max-width: 1240px; margin: 0 auto; }
+  .render-tile { border: 1px solid var(--line); border-radius: 6px; overflow: hidden; background: #171b20; }
+  .render-tile img { display: block; width: 100%; height: auto; }
+  .render-tile div { padding: 8px 10px; color: var(--muted); }
+  #status { position: absolute; left: 12px; bottom: 10px; color: var(--muted); font-size: 12px; pointer-events: none; background: rgba(32,37,43,0.72); padding: 4px 7px; border-radius: 4px; }
+  #details { border-top: 1px solid var(--line); padding: 12px 14px; background: #22282f; display: grid; grid-template-columns: minmax(240px, 1.1fr) minmax(280px, 1.4fr); gap: 16px; }
+  .notes { color: var(--muted); }
+  .check-list { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 8px; }
+  .check { border: 1px solid var(--line); border-radius: 6px; padding: 8px 9px; background: var(--panel); color: var(--muted); }
+  .check strong { display: block; color: var(--text); font-weight: 650; }
+  @media (max-width: 860px) {
+    #app { grid-template-columns: 1fr; }
+    #panel { max-height: 48vh; border-right: 0; border-bottom: 1px solid var(--line); }
+    #details { grid-template-columns: 1fr; }
+    #stage { min-height: 58vh; }
+  }
+</style>
+<script type="importmap">
+{
+  "imports": {
+    "three": "https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.module.js",
+    "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.170.0/examples/jsm/"
+  }
+}
+</script>
+</head>
+<body>
+<div id="app">
+  <aside id="panel">
+    <h1>desktop trash bin side patterns</h1>
+    <div class="sub">W142箱型シード + 側面装飾7パターン</div>
+    <div class="proposal-list" id="proposal-list"></div>
+
+    <div class="section">
+      <h2>Selected</h2>
+      <div class="kv" id="selected-kv"></div>
+      <ul class="bullets" id="selected-bullets"></ul>
+    </div>
+
+    <div class="section">
+      <h2>Print Notes</h2>
+      <ul class="bullets" id="print-notes"></ul>
+    </div>
+  </aside>
+
+  <main id="main">
+    <div id="toolbar">
+      <div class="tabs">
+        <button class="tab active" data-mode="concept">Preview</button>
+        <button class="tab" data-mode="stl">Selected STL</button>
+        <button class="tab" data-mode="renders">Renders</button>
+      </div>
+      <div class="tools">
+        <label><input id="grid-toggle" type="checkbox" checked /> grid</label>
+        <button class="tab" id="reset-camera">Reset</button>
+      </div>
+    </div>
+
+    <section id="stage">
+      <div id="view"><div id="status">loading...</div></div>
+      <div id="renders">
+        <div class="render-grid">
+          <div class="render-tile"><img src="../render_iso.png" alt="iso render" /><div>iso / vertical ribs seed</div></div>
+          <div class="render-tile"><img src="../render_top.png" alt="top render" /><div>top</div></div>
+          <div class="render-tile"><img src="../render_front.png" alt="front render" /><div>front</div></div>
+          <div class="render-tile"><img src="../render_side.png" alt="side render" /><div>side</div></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="details">
+      <div>
+        <h2>Judgement</h2>
+        <div class="notes" id="judgement"></div>
+      </div>
+      <div>
+        <h2>Fit Checks</h2>
+        <div class="check-list">
+          <div class="check"><strong>Seed body</strong>142.0 x 92.0 x 96.0 mm</div>
+          <div class="check"><strong>Width change</strong>118.0mm x 1.2 = 141.6mm</div>
+          <div class="check"><strong>Front wall</strong>46.0 mm, raised from low sweep seed</div>
+          <div class="check"><strong>Corners</strong>rounded rectangle R10 + 1.4mm fillet</div>
+          <div class="check"><strong>Decoration</strong>0.8mm relief, 0.12mm overlap into side wall</div>
+          <div class="check"><strong>Export</strong>7 selectable STL variants generated</div>
+        </div>
+      </div>
+    </section>
+  </main>
+</div>
+
+<script type="module">
+import * as THREE from "three";
+import { OrbitControls } from "three/addons/controls/OrbitControls.js";
+import { STLLoader } from "three/addons/loaders/STLLoader.js";
+
+THREE.Object3D.DEFAULT_UP = new THREE.Vector3(0, 0, 1);
+
+const patterns = [
+  {
+    id: "vertical-ribs",
+    name: "縦リブ",
+    type: "grip / simple",
+    color: 0x9fb8aa,
+    triangles: "22,388",
+    features: ["側面に細い縦リブを5本ずつ配置", "持つ時の指掛かりが一番わかりやすい", "清掃時に溝が少し残る"],
+    print: ["最も無難な初期候補", "縦方向なのでFDMの積層と相性が良い"],
+    judgement: "迷ったらこの案。装飾が構造補強にも寄るので、机上ゴミ箱として一番堅実。"
+  },
+  {
+    id: "horizontal-rails",
+    name: "水平レール",
+    type: "calm / stacked",
+    color: 0x8aa6c8,
+    triangles: "22,338",
+    features: ["3段の細い水平帯", "低い前面と合わせて横長感が出る", "主張は控えめ"],
+    print: ["外周をなぞる移動が多く表面が揃いやすい", "角のチクつきは1.4mmフィレットで抑制"],
+    judgement: "見た目を静かにまとめる案。作業机に置いても主張しすぎない。"
+  },
+  {
+    id: "diagonal-slashes",
+    name: "斜めスラッシュ",
+    type: "dynamic",
+    color: 0xc87972,
+    triangles: "22,392",
+    features: ["短い斜めリブを3本ずつ配置", "掃き込み方向と視覚的に合う", "少しプロダクト感が強い"],
+    print: ["斜め突起は端部に小さい角が出る", "本体の刺さる角は1.4mmフィレットで軽減"],
+    judgement: "一番動きがある。少し道具っぽい印象に寄せたい場合に良い。"
+  },
+  {
+    id: "dot-grid",
+    name: "ドットグリッド",
+    type: "soft texture",
+    color: 0xf0d18b,
+    triangles: "24,154",
+    features: ["小さな丸突起を4 x 3で配置", "角張った箱に柔らかさが出る", "触感の変化がわかりやすい"],
+    print: ["突起が小さいのでノズル径0.4mm以上で確認推奨", "清掃性はリブ案より少し落ちる"],
+    judgement: "かわいさ寄り。机上小物としての雰囲気は出るが、実用品感は少し下がる。"
+  },
+  {
+    id: "window-frames",
+    name: "窓枠フレーム",
+    type: "structured",
+    color: 0xb8aa96,
+    triangles: "22,510",
+    features: ["側面に2つの角丸窓枠風レリーフ", "大きめの面を分節して見せる", "幅広化した箱に合う"],
+    print: ["角の交点が多いので低速外壁推奨", "掃除しやすさは中程度"],
+    judgement: "箱らしい面の大きさを活かす案。家具っぽい見た目に寄る。"
+  },
+  {
+    id: "wave-bars",
+    name: "段違いウェーブ",
+    type: "playful",
+    color: 0x77b3a7,
+    triangles: "22,690",
+    features: ["短い水平バーを上下にずらして配置", "波形っぽい軽い装飾", "左右対称だが単調ではない"],
+    print: ["短い島が多いので外壁の開始点が増える", "スライサーで小突起の品質確認推奨"],
+    judgement: "遊びはあるが、ゴミ箱としてはまだ控えめ。見た目の軽さが欲しい時の候補。"
+  },
+  {
+    id: "corner-posts",
+    name: "コーナーポスト",
+    type: "protective",
+    color: 0x98a9c5,
+    triangles: "22,406",
+    features: ["側面前後の縦ポスト + 下段レール", "角を守る印象が強い", "箱型の輪郭が一番はっきり出る"],
+    print: ["突起が長く一体化しやすい", "机や手に当たる本体角はフィレット済み"],
+    judgement: "少し頑丈そうに見せる案。角を取った目的とも相性が良い。"
+  }
+];
+
+const list = document.getElementById("proposal-list");
+const selectedKv = document.getElementById("selected-kv");
+const selectedBullets = document.getElementById("selected-bullets");
+const printNotes = document.getElementById("print-notes");
+const judgement = document.getElementById("judgement");
+const status = document.getElementById("status");
+const view = document.getElementById("view");
+const renders = document.getElementById("renders");
+let selected = patterns[0];
+let mode = "concept";
+
+const renderer = new THREE.WebGLRenderer({ antialias: true });
+renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
+view.appendChild(renderer.domElement);
+
+const scene = new THREE.Scene();
+scene.background = new THREE.Color(0x20252b);
+const camera = new THREE.OrthographicCamera(-180, 180, 120, -120, 1, 4000);
+const controls = new OrbitControls(camera, renderer.domElement);
+controls.enableDamping = true;
+
+scene.add(new THREE.HemisphereLight(0xd9e4ec, 0x45505a, 0.9));
+const key = new THREE.DirectionalLight(0xffe3ba, 1.8);
+key.position.set(260, -360, 420);
+scene.add(key);
+const fill = new THREE.DirectionalLight(0xc7d8ee, 0.55);
+fill.position.set(-240, 260, 220);
+scene.add(fill);
+
+const grid = new THREE.GridHelper(380, 19, 0x56616b, 0x3b444d);
+grid.rotation.x = Math.PI / 2;
+scene.add(grid);
+
+const root = new THREE.Group();
+scene.add(root);
+
+function mat(color, opacity = 1) {
+  return new THREE.MeshStandardMaterial({ color, transparent: opacity < 1, opacity, roughness: 0.66, metalness: 0.03, side: THREE.DoubleSide });
+}
+
+function fitCamera() {
+  const box = new THREE.Box3().setFromObject(root);
+  const size = box.getSize(new THREE.Vector3());
+  const center = box.getCenter(new THREE.Vector3());
+  const radius = Math.max(size.x, size.y, size.z, 1);
+  camera.position.set(center.x + radius * 1.12, center.y - radius * 1.32, center.z + radius * 0.82);
+  camera.near = Math.max(0.1, radius / 100);
+  camera.far = radius * 12;
+  camera.zoom = Math.max(0.62, Math.min(1.22, 175 / radius));
+  camera.updateProjectionMatrix();
+  controls.target.copy(center);
+  controls.update();
+}
+
+async function showPreview() {
+  root.clear();
+  await loadSelectedStl(selected.color);
+  fitCamera();
+  status.textContent = `${selected.name} preview`;
+}
+
+async function loadSelectedStl(color) {
+  const loader = new STLLoader();
+  const geo = await loader.loadAsync(`../desktop-trash-bin-${selected.id}.stl`);
+  geo.computeVertexNormals();
+  const mesh = new THREE.Mesh(geo, mat(color));
+  root.add(mesh);
+}
+
+async function showStl() {
+  root.clear();
+  status.textContent = "loading STL...";
+  await loadSelectedStl(selected.color);
+  fitCamera();
+  status.textContent = `desktop-trash-bin-${selected.id}.stl`;
+}
+
+function updateText() {
+  list.innerHTML = "";
+  for (const p of patterns) {
+    const btn = document.createElement("button");
+    btn.className = `proposal-btn${p.id === selected.id ? " active" : ""}`;
+    btn.innerHTML = `<div class="proposal-title"><span>${p.name}</span>${p.id === "vertical-ribs" ? '<span class="tag">SEED</span>' : ""}</div><div class="proposal-dim">W142 x D92 x H96 mm / ${p.type}</div>`;
+    btn.addEventListener("click", () => {
+      selected = p;
+      updateText();
+      renderMode();
+    });
+    list.appendChild(btn);
+  }
+  selectedKv.innerHTML = `<b>寸法</b><span>W142 x D92 x H96 mm</span><b>前面高さ</b><span>46 mm</span><b>装飾</b><span>${selected.id}</span><b>STL</b><span>desktop-trash-bin-${selected.id}.stl</span><b>Triangles</b><span>${selected.triangles}</span>`;
+  selectedBullets.innerHTML = selected.features.map((x) => `<li>${x}</li>`).join("");
+  printNotes.innerHTML = selected.print.map((x) => `<li>${x}</li>`).join("");
+  judgement.textContent = selected.judgement;
+}
+
+function setMode(next) {
+  mode = next;
+  for (const b of document.querySelectorAll(".tab[data-mode]")) b.classList.toggle("active", b.dataset.mode === mode);
+  renders.style.display = mode === "renders" ? "block" : "none";
+  view.style.display = mode === "renders" ? "none" : "block";
+  renderMode();
+}
+
+async function renderMode() {
+  if (mode === "concept") await showPreview();
+  if (mode === "stl") await showStl();
+  if (mode === "renders") status.textContent = "render PNGs";
+}
+
+function applyExplode() {
+}
+
+function resize() {
+  const w = view.clientWidth || 1;
+  const h = view.clientHeight || 1;
+  renderer.setSize(w, h);
+  const span = 180;
+  camera.left = -span * w / h;
+  camera.right = span * w / h;
+  camera.top = span;
+  camera.bottom = -span;
+  camera.updateProjectionMatrix();
+}
+
+function animate() {
+  requestAnimationFrame(animate);
+  controls.update();
+  renderer.render(scene, camera);
+}
+
+document.querySelectorAll(".tab[data-mode]").forEach((b) => b.addEventListener("click", () => setMode(b.dataset.mode)));
+document.getElementById("grid-toggle").addEventListener("change", (e) => grid.visible = e.target.checked);
+document.getElementById("reset-camera").addEventListener("click", fitCamera);
+window.addEventListener("resize", resize);
+
+updateText();
+resize();
+await renderMode();
+animate();
+</script>
+</body>
+</html>
