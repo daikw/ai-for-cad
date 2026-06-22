@@ -1,0 +1,3872 @@
+{
+  "schemaVersion": 1,
+  "generator": {
+    "command": "forgecad render inspect",
+    "forgecadVersion": "0.9.4"
+  },
+  "source": {
+    "entryFile": "2026/06/06/parts-tray-v2/main.forge.js",
+    "projectRoot": "2026/06/06/parts-tray-v2"
+  },
+  "bundle": {
+    "channelsRequested": [
+      "rgb",
+      "mask",
+      "collisions",
+      "thickness"
+    ],
+    "channelsEmitted": [
+      "rgb",
+      "mask",
+      "collisions",
+      "thickness"
+    ],
+    "filters": {
+      "focus": null,
+      "hide": []
+    },
+    "sizePx": 850,
+    "quality": "default",
+    "deterministic": true
+  },
+  "views": {
+    "front": {
+      "kind": "canonical"
+    },
+    "right": {
+      "kind": "canonical"
+    },
+    "top": {
+      "kind": "canonical"
+    },
+    "iso": {
+      "kind": "canonical"
+    }
+  },
+  "scene": {
+    "bbox": {
+      "min": [
+        -100,
+        -75,
+        0
+      ],
+      "max": [
+        100,
+        75,
+        10
+      ]
+    },
+    "volume": 73650.15235472962,
+    "params": [
+      {
+        "name": "Wall thickness",
+        "value": 1.8,
+        "defaultValue": 1.8,
+        "min": 1.4,
+        "max": 3,
+        "step": 0.1,
+        "unit": "mm",
+        "integer": false
+      },
+      {
+        "name": "Divider rib thickness",
+        "value": 1.8,
+        "defaultValue": 1.8,
+        "min": 1.2,
+        "max": 3,
+        "step": 0.1,
+        "unit": "mm",
+        "integer": false
+      },
+      {
+        "name": "Divider below rim",
+        "value": 1,
+        "defaultValue": 1,
+        "min": 0,
+        "max": 2.5,
+        "step": 0.1,
+        "unit": "mm",
+        "integer": false
+      },
+      {
+        "name": "Engraving depth",
+        "value": 0.45,
+        "defaultValue": 0.45,
+        "min": 0.25,
+        "max": 0.8,
+        "step": 0.1,
+        "unit": "mm",
+        "integer": false
+      },
+      {
+        "name": "Connector clearance",
+        "value": 0.35,
+        "defaultValue": 0.35,
+        "min": 0.15,
+        "max": 0.6,
+        "step": 0.1,
+        "unit": "mm",
+        "integer": false
+      }
+    ],
+    "cutPlanes": [],
+    "animations": [],
+    "defaultAnimation": null,
+    "verifications": [
+      {
+        "id": "verify-1",
+        "label": "has geometry",
+        "status": "pass",
+        "message": "Shape has geometry",
+        "group": "FDM v2 tray floor"
+      },
+      {
+        "id": "verify-2",
+        "label": "width <= 201mm",
+        "status": "pass",
+        "message": "200 < 201",
+        "expected": "< 201",
+        "actual": "200",
+        "group": "FDM v2 tray envelope"
+      },
+      {
+        "id": "verify-3",
+        "label": "depth <= 151mm",
+        "status": "pass",
+        "message": "150 < 151",
+        "expected": "< 151",
+        "actual": "150",
+        "group": "FDM v2 tray envelope"
+      },
+      {
+        "id": "verify-4",
+        "label": "height <= 10.2mm",
+        "status": "pass",
+        "message": "10 < 10.2",
+        "expected": "< 10.2",
+        "actual": "10",
+        "group": "FDM v2 tray envelope"
+      }
+    ],
+    "objects": [
+      {
+        "id": "obj-1",
+        "name": "engraved-floor",
+        "treePath": [
+          "engraved-floor"
+        ],
+        "mock": false,
+        "visible": true,
+        "renderable": true
+      },
+      {
+        "id": "obj-2",
+        "name": "north-wall",
+        "treePath": [
+          "north-wall"
+        ],
+        "mock": false,
+        "visible": true,
+        "renderable": true
+      },
+      {
+        "id": "obj-3",
+        "name": "south-wall",
+        "treePath": [
+          "south-wall"
+        ],
+        "mock": false,
+        "visible": true,
+        "renderable": true
+      },
+      {
+        "id": "obj-4",
+        "name": "east-wall",
+        "treePath": [
+          "east-wall"
+        ],
+        "mock": false,
+        "visible": true,
+        "renderable": true
+      },
+      {
+        "id": "obj-5",
+        "name": "west-wall",
+        "treePath": [
+          "west-wall"
+        ],
+        "mock": false,
+        "visible": true,
+        "renderable": true
+      },
+      {
+        "id": "obj-6",
+        "name": "divider-x-left",
+        "treePath": [
+          "divider-x-left"
+        ],
+        "mock": false,
+        "visible": true,
+        "renderable": true
+      },
+      {
+        "id": "obj-7",
+        "name": "divider-x-right",
+        "treePath": [
+          "divider-x-right"
+        ],
+        "mock": false,
+        "visible": true,
+        "renderable": true
+      },
+      {
+        "id": "obj-8",
+        "name": "divider-y-bottom",
+        "treePath": [
+          "divider-y-bottom"
+        ],
+        "mock": false,
+        "visible": true,
+        "renderable": true
+      },
+      {
+        "id": "obj-9",
+        "name": "divider-y-top",
+        "treePath": [
+          "divider-y-top"
+        ],
+        "mock": false,
+        "visible": true,
+        "renderable": true
+      },
+      {
+        "id": "obj-10",
+        "name": "small-bottom-split",
+        "treePath": [
+          "small-bottom-split"
+        ],
+        "mock": false,
+        "visible": true,
+        "renderable": true
+      },
+      {
+        "id": "obj-11",
+        "name": "wide-middle-split",
+        "treePath": [
+          "wide-middle-split"
+        ],
+        "mock": false,
+        "visible": true,
+        "renderable": true
+      },
+      {
+        "id": "obj-12",
+        "name": "top-right-split",
+        "treePath": [
+          "top-right-split"
+        ],
+        "mock": false,
+        "visible": true,
+        "renderable": true
+      },
+      {
+        "id": "obj-13",
+        "name": "lower-right-strip",
+        "treePath": [
+          "lower-right-strip"
+        ],
+        "mock": false,
+        "visible": true,
+        "renderable": true
+      },
+      {
+        "id": "obj-14",
+        "name": "top-left-low-rail",
+        "treePath": [
+          "top-left-low-rail"
+        ],
+        "mock": false,
+        "visible": true,
+        "renderable": true
+      },
+      {
+        "id": "obj-15",
+        "name": "right-mid-low-rail",
+        "treePath": [
+          "right-mid-low-rail"
+        ],
+        "mock": false,
+        "visible": true,
+        "renderable": true
+      },
+      {
+        "id": "obj-16",
+        "name": "male-east-foot--42",
+        "treePath": [
+          "male-east-foot--42"
+        ],
+        "mock": false,
+        "visible": true,
+        "renderable": true
+      },
+      {
+        "id": "obj-17",
+        "name": "male-east-key--42",
+        "treePath": [
+          "male-east-key--42"
+        ],
+        "mock": false,
+        "visible": true,
+        "renderable": true
+      },
+      {
+        "id": "obj-18",
+        "name": "female-west--42-a-foot",
+        "treePath": [
+          "female-west--42-a-foot"
+        ],
+        "mock": false,
+        "visible": true,
+        "renderable": true
+      },
+      {
+        "id": "obj-19",
+        "name": "female-west--42-a-cheek",
+        "treePath": [
+          "female-west--42-a-cheek"
+        ],
+        "mock": false,
+        "visible": true,
+        "renderable": true
+      },
+      {
+        "id": "obj-20",
+        "name": "female-west--42-b-foot",
+        "treePath": [
+          "female-west--42-b-foot"
+        ],
+        "mock": false,
+        "visible": true,
+        "renderable": true
+      },
+      {
+        "id": "obj-21",
+        "name": "female-west--42-b-cheek",
+        "treePath": [
+          "female-west--42-b-cheek"
+        ],
+        "mock": false,
+        "visible": true,
+        "renderable": true
+      },
+      {
+        "id": "obj-22",
+        "name": "male-east-foot-42",
+        "treePath": [
+          "male-east-foot-42"
+        ],
+        "mock": false,
+        "visible": true,
+        "renderable": true
+      },
+      {
+        "id": "obj-23",
+        "name": "male-east-key-42",
+        "treePath": [
+          "male-east-key-42"
+        ],
+        "mock": false,
+        "visible": true,
+        "renderable": true
+      },
+      {
+        "id": "obj-24",
+        "name": "female-west-42-a-foot",
+        "treePath": [
+          "female-west-42-a-foot"
+        ],
+        "mock": false,
+        "visible": true,
+        "renderable": true
+      },
+      {
+        "id": "obj-25",
+        "name": "female-west-42-a-cheek",
+        "treePath": [
+          "female-west-42-a-cheek"
+        ],
+        "mock": false,
+        "visible": true,
+        "renderable": true
+      },
+      {
+        "id": "obj-26",
+        "name": "female-west-42-b-foot",
+        "treePath": [
+          "female-west-42-b-foot"
+        ],
+        "mock": false,
+        "visible": true,
+        "renderable": true
+      },
+      {
+        "id": "obj-27",
+        "name": "female-west-42-b-cheek",
+        "treePath": [
+          "female-west-42-b-cheek"
+        ],
+        "mock": false,
+        "visible": true,
+        "renderable": true
+      },
+      {
+        "id": "obj-28",
+        "name": "male-north-foot--58",
+        "treePath": [
+          "male-north-foot--58"
+        ],
+        "mock": false,
+        "visible": true,
+        "renderable": true
+      },
+      {
+        "id": "obj-29",
+        "name": "male-north-key--58",
+        "treePath": [
+          "male-north-key--58"
+        ],
+        "mock": false,
+        "visible": true,
+        "renderable": true
+      },
+      {
+        "id": "obj-30",
+        "name": "female-south--58-a-foot",
+        "treePath": [
+          "female-south--58-a-foot"
+        ],
+        "mock": false,
+        "visible": true,
+        "renderable": true
+      },
+      {
+        "id": "obj-31",
+        "name": "female-south--58-a-cheek",
+        "treePath": [
+          "female-south--58-a-cheek"
+        ],
+        "mock": false,
+        "visible": true,
+        "renderable": true
+      },
+      {
+        "id": "obj-32",
+        "name": "female-south--58-b-foot",
+        "treePath": [
+          "female-south--58-b-foot"
+        ],
+        "mock": false,
+        "visible": true,
+        "renderable": true
+      },
+      {
+        "id": "obj-33",
+        "name": "female-south--58-b-cheek",
+        "treePath": [
+          "female-south--58-b-cheek"
+        ],
+        "mock": false,
+        "visible": true,
+        "renderable": true
+      },
+      {
+        "id": "obj-34",
+        "name": "male-north-foot-58",
+        "treePath": [
+          "male-north-foot-58"
+        ],
+        "mock": false,
+        "visible": true,
+        "renderable": true
+      },
+      {
+        "id": "obj-35",
+        "name": "male-north-key-58",
+        "treePath": [
+          "male-north-key-58"
+        ],
+        "mock": false,
+        "visible": true,
+        "renderable": true
+      },
+      {
+        "id": "obj-36",
+        "name": "female-south-58-a-foot",
+        "treePath": [
+          "female-south-58-a-foot"
+        ],
+        "mock": false,
+        "visible": true,
+        "renderable": true
+      },
+      {
+        "id": "obj-37",
+        "name": "female-south-58-a-cheek",
+        "treePath": [
+          "female-south-58-a-cheek"
+        ],
+        "mock": false,
+        "visible": true,
+        "renderable": true
+      },
+      {
+        "id": "obj-38",
+        "name": "female-south-58-b-foot",
+        "treePath": [
+          "female-south-58-b-foot"
+        ],
+        "mock": false,
+        "visible": true,
+        "renderable": true
+      },
+      {
+        "id": "obj-39",
+        "name": "female-south-58-b-cheek",
+        "treePath": [
+          "female-south-58-b-cheek"
+        ],
+        "mock": false,
+        "visible": true,
+        "renderable": true
+      }
+    ]
+  },
+  "channels": {
+    "rgb": {
+      "format": "png",
+      "views": {
+        "front": {
+          "path": "channels/rgb/front.png"
+        },
+        "right": {
+          "path": "channels/rgb/right.png"
+        },
+        "top": {
+          "path": "channels/rgb/top.png"
+        },
+        "iso": {
+          "path": "channels/rgb/iso.png"
+        }
+      }
+    },
+    "mask": {
+      "format": "png",
+      "encoding": "rgb8-object-palette",
+      "backgroundIndex": 0,
+      "backgroundColor": [
+        0,
+        0,
+        0
+      ],
+      "decode": "lookup exact RGB color in objects[].color; antialiased edge pixels may be blended",
+      "objects": [
+        {
+          "index": 1,
+          "color": [
+            230,
+            25,
+            75
+          ],
+          "hex": "#e6194b",
+          "id": "obj-1",
+          "name": "engraved-floor",
+          "treePath": [
+            "engraved-floor"
+          ],
+          "mock": false
+        },
+        {
+          "index": 2,
+          "color": [
+            60,
+            180,
+            75
+          ],
+          "hex": "#3cb44b",
+          "id": "obj-2",
+          "name": "north-wall",
+          "treePath": [
+            "north-wall"
+          ],
+          "mock": false
+        },
+        {
+          "index": 3,
+          "color": [
+            255,
+            225,
+            25
+          ],
+          "hex": "#ffe119",
+          "id": "obj-3",
+          "name": "south-wall",
+          "treePath": [
+            "south-wall"
+          ],
+          "mock": false
+        },
+        {
+          "index": 4,
+          "color": [
+            0,
+            130,
+            200
+          ],
+          "hex": "#0082c8",
+          "id": "obj-4",
+          "name": "east-wall",
+          "treePath": [
+            "east-wall"
+          ],
+          "mock": false
+        },
+        {
+          "index": 5,
+          "color": [
+            245,
+            130,
+            48
+          ],
+          "hex": "#f58230",
+          "id": "obj-5",
+          "name": "west-wall",
+          "treePath": [
+            "west-wall"
+          ],
+          "mock": false
+        },
+        {
+          "index": 6,
+          "color": [
+            145,
+            30,
+            180
+          ],
+          "hex": "#911eb4",
+          "id": "obj-6",
+          "name": "divider-x-left",
+          "treePath": [
+            "divider-x-left"
+          ],
+          "mock": false
+        },
+        {
+          "index": 7,
+          "color": [
+            70,
+            240,
+            240
+          ],
+          "hex": "#46f0f0",
+          "id": "obj-7",
+          "name": "divider-x-right",
+          "treePath": [
+            "divider-x-right"
+          ],
+          "mock": false
+        },
+        {
+          "index": 8,
+          "color": [
+            240,
+            50,
+            230
+          ],
+          "hex": "#f032e6",
+          "id": "obj-8",
+          "name": "divider-y-bottom",
+          "treePath": [
+            "divider-y-bottom"
+          ],
+          "mock": false
+        },
+        {
+          "index": 9,
+          "color": [
+            210,
+            245,
+            60
+          ],
+          "hex": "#d2f53c",
+          "id": "obj-9",
+          "name": "divider-y-top",
+          "treePath": [
+            "divider-y-top"
+          ],
+          "mock": false
+        },
+        {
+          "index": 10,
+          "color": [
+            250,
+            190,
+            190
+          ],
+          "hex": "#fabebe",
+          "id": "obj-10",
+          "name": "small-bottom-split",
+          "treePath": [
+            "small-bottom-split"
+          ],
+          "mock": false
+        },
+        {
+          "index": 11,
+          "color": [
+            0,
+            128,
+            128
+          ],
+          "hex": "#008080",
+          "id": "obj-11",
+          "name": "wide-middle-split",
+          "treePath": [
+            "wide-middle-split"
+          ],
+          "mock": false
+        },
+        {
+          "index": 12,
+          "color": [
+            230,
+            190,
+            255
+          ],
+          "hex": "#e6beff",
+          "id": "obj-12",
+          "name": "top-right-split",
+          "treePath": [
+            "top-right-split"
+          ],
+          "mock": false
+        },
+        {
+          "index": 13,
+          "color": [
+            170,
+            110,
+            40
+          ],
+          "hex": "#aa6e28",
+          "id": "obj-13",
+          "name": "lower-right-strip",
+          "treePath": [
+            "lower-right-strip"
+          ],
+          "mock": false
+        },
+        {
+          "index": 14,
+          "color": [
+            255,
+            250,
+            200
+          ],
+          "hex": "#fffac8",
+          "id": "obj-14",
+          "name": "top-left-low-rail",
+          "treePath": [
+            "top-left-low-rail"
+          ],
+          "mock": false
+        },
+        {
+          "index": 15,
+          "color": [
+            128,
+            0,
+            0
+          ],
+          "hex": "#800000",
+          "id": "obj-15",
+          "name": "right-mid-low-rail",
+          "treePath": [
+            "right-mid-low-rail"
+          ],
+          "mock": false
+        },
+        {
+          "index": 16,
+          "color": [
+            170,
+            255,
+            195
+          ],
+          "hex": "#aaffc3",
+          "id": "obj-16",
+          "name": "male-east-foot--42",
+          "treePath": [
+            "male-east-foot--42"
+          ],
+          "mock": false
+        },
+        {
+          "index": 17,
+          "color": [
+            128,
+            128,
+            0
+          ],
+          "hex": "#808000",
+          "id": "obj-17",
+          "name": "male-east-key--42",
+          "treePath": [
+            "male-east-key--42"
+          ],
+          "mock": false
+        },
+        {
+          "index": 18,
+          "color": [
+            255,
+            215,
+            180
+          ],
+          "hex": "#ffd7b4",
+          "id": "obj-18",
+          "name": "female-west--42-a-foot",
+          "treePath": [
+            "female-west--42-a-foot"
+          ],
+          "mock": false
+        },
+        {
+          "index": 19,
+          "color": [
+            0,
+            0,
+            128
+          ],
+          "hex": "#000080",
+          "id": "obj-19",
+          "name": "female-west--42-a-cheek",
+          "treePath": [
+            "female-west--42-a-cheek"
+          ],
+          "mock": false
+        },
+        {
+          "index": 20,
+          "color": [
+            128,
+            128,
+            128
+          ],
+          "hex": "#808080",
+          "id": "obj-20",
+          "name": "female-west--42-b-foot",
+          "treePath": [
+            "female-west--42-b-foot"
+          ],
+          "mock": false
+        },
+        {
+          "index": 21,
+          "color": [
+            230,
+            25,
+            75
+          ],
+          "hex": "#e6194b",
+          "id": "obj-21",
+          "name": "female-west--42-b-cheek",
+          "treePath": [
+            "female-west--42-b-cheek"
+          ],
+          "mock": false
+        },
+        {
+          "index": 22,
+          "color": [
+            60,
+            180,
+            75
+          ],
+          "hex": "#3cb44b",
+          "id": "obj-22",
+          "name": "male-east-foot-42",
+          "treePath": [
+            "male-east-foot-42"
+          ],
+          "mock": false
+        },
+        {
+          "index": 23,
+          "color": [
+            255,
+            225,
+            25
+          ],
+          "hex": "#ffe119",
+          "id": "obj-23",
+          "name": "male-east-key-42",
+          "treePath": [
+            "male-east-key-42"
+          ],
+          "mock": false
+        },
+        {
+          "index": 24,
+          "color": [
+            0,
+            130,
+            200
+          ],
+          "hex": "#0082c8",
+          "id": "obj-24",
+          "name": "female-west-42-a-foot",
+          "treePath": [
+            "female-west-42-a-foot"
+          ],
+          "mock": false
+        },
+        {
+          "index": 25,
+          "color": [
+            245,
+            130,
+            48
+          ],
+          "hex": "#f58230",
+          "id": "obj-25",
+          "name": "female-west-42-a-cheek",
+          "treePath": [
+            "female-west-42-a-cheek"
+          ],
+          "mock": false
+        },
+        {
+          "index": 26,
+          "color": [
+            145,
+            30,
+            180
+          ],
+          "hex": "#911eb4",
+          "id": "obj-26",
+          "name": "female-west-42-b-foot",
+          "treePath": [
+            "female-west-42-b-foot"
+          ],
+          "mock": false
+        },
+        {
+          "index": 27,
+          "color": [
+            70,
+            240,
+            240
+          ],
+          "hex": "#46f0f0",
+          "id": "obj-27",
+          "name": "female-west-42-b-cheek",
+          "treePath": [
+            "female-west-42-b-cheek"
+          ],
+          "mock": false
+        },
+        {
+          "index": 28,
+          "color": [
+            240,
+            50,
+            230
+          ],
+          "hex": "#f032e6",
+          "id": "obj-28",
+          "name": "male-north-foot--58",
+          "treePath": [
+            "male-north-foot--58"
+          ],
+          "mock": false
+        },
+        {
+          "index": 29,
+          "color": [
+            210,
+            245,
+            60
+          ],
+          "hex": "#d2f53c",
+          "id": "obj-29",
+          "name": "male-north-key--58",
+          "treePath": [
+            "male-north-key--58"
+          ],
+          "mock": false
+        },
+        {
+          "index": 30,
+          "color": [
+            250,
+            190,
+            190
+          ],
+          "hex": "#fabebe",
+          "id": "obj-30",
+          "name": "female-south--58-a-foot",
+          "treePath": [
+            "female-south--58-a-foot"
+          ],
+          "mock": false
+        },
+        {
+          "index": 31,
+          "color": [
+            0,
+            128,
+            128
+          ],
+          "hex": "#008080",
+          "id": "obj-31",
+          "name": "female-south--58-a-cheek",
+          "treePath": [
+            "female-south--58-a-cheek"
+          ],
+          "mock": false
+        },
+        {
+          "index": 32,
+          "color": [
+            230,
+            190,
+            255
+          ],
+          "hex": "#e6beff",
+          "id": "obj-32",
+          "name": "female-south--58-b-foot",
+          "treePath": [
+            "female-south--58-b-foot"
+          ],
+          "mock": false
+        },
+        {
+          "index": 33,
+          "color": [
+            170,
+            110,
+            40
+          ],
+          "hex": "#aa6e28",
+          "id": "obj-33",
+          "name": "female-south--58-b-cheek",
+          "treePath": [
+            "female-south--58-b-cheek"
+          ],
+          "mock": false
+        },
+        {
+          "index": 34,
+          "color": [
+            255,
+            250,
+            200
+          ],
+          "hex": "#fffac8",
+          "id": "obj-34",
+          "name": "male-north-foot-58",
+          "treePath": [
+            "male-north-foot-58"
+          ],
+          "mock": false
+        },
+        {
+          "index": 35,
+          "color": [
+            128,
+            0,
+            0
+          ],
+          "hex": "#800000",
+          "id": "obj-35",
+          "name": "male-north-key-58",
+          "treePath": [
+            "male-north-key-58"
+          ],
+          "mock": false
+        },
+        {
+          "index": 36,
+          "color": [
+            170,
+            255,
+            195
+          ],
+          "hex": "#aaffc3",
+          "id": "obj-36",
+          "name": "female-south-58-a-foot",
+          "treePath": [
+            "female-south-58-a-foot"
+          ],
+          "mock": false
+        },
+        {
+          "index": 37,
+          "color": [
+            128,
+            128,
+            0
+          ],
+          "hex": "#808000",
+          "id": "obj-37",
+          "name": "female-south-58-a-cheek",
+          "treePath": [
+            "female-south-58-a-cheek"
+          ],
+          "mock": false
+        },
+        {
+          "index": 38,
+          "color": [
+            255,
+            215,
+            180
+          ],
+          "hex": "#ffd7b4",
+          "id": "obj-38",
+          "name": "female-south-58-b-foot",
+          "treePath": [
+            "female-south-58-b-foot"
+          ],
+          "mock": false
+        },
+        {
+          "index": 39,
+          "color": [
+            0,
+            0,
+            128
+          ],
+          "hex": "#000080",
+          "id": "obj-39",
+          "name": "female-south-58-b-cheek",
+          "treePath": [
+            "female-south-58-b-cheek"
+          ],
+          "mock": false
+        }
+      ],
+      "views": {
+        "front": {
+          "path": "channels/mask/front.png"
+        },
+        "right": {
+          "path": "channels/mask/right.png"
+        },
+        "top": {
+          "path": "channels/mask/top.png"
+        },
+        "iso": {
+          "path": "channels/mask/iso.png"
+        }
+      }
+    },
+    "collisions": {
+      "format": "png",
+      "encoding": "rgb8-collision-highlight",
+      "backgroundColor": [
+        0,
+        0,
+        0
+      ],
+      "decode": "source objects are translucent ghost geometry; boolean intersection volumes use per-finding collisions[].color palette entries",
+      "method": "boolean-intersection",
+      "options": {
+        "minOverlapVolume": 0.1
+      },
+      "style": {
+        "sourceOpacity": 0.22,
+        "sourceColor": [
+          180,
+          200,
+          220
+        ],
+        "collisionColor": [
+          255,
+          68,
+          16
+        ],
+        "collisionHex": "#ff4410",
+        "collisionPalette": [
+          {
+            "index": 1,
+            "color": [
+              255,
+              68,
+              16
+            ],
+            "hex": "#ff4410"
+          },
+          {
+            "index": 2,
+            "color": [
+              0,
+              204,
+              255
+            ],
+            "hex": "#00ccff"
+          },
+          {
+            "index": 3,
+            "color": [
+              255,
+              214,
+              0
+            ],
+            "hex": "#ffd600"
+          },
+          {
+            "index": 4,
+            "color": [
+              66,
+              220,
+              120
+            ],
+            "hex": "#42dc78"
+          },
+          {
+            "index": 5,
+            "color": [
+              255,
+              76,
+              196
+            ],
+            "hex": "#ff4cc4"
+          },
+          {
+            "index": 6,
+            "color": [
+              142,
+              106,
+              255
+            ],
+            "hex": "#8e6aff"
+          },
+          {
+            "index": 7,
+            "color": [
+              255,
+              145,
+              48
+            ],
+            "hex": "#ff9130"
+          },
+          {
+            "index": 8,
+            "color": [
+              86,
+              232,
+              202
+            ],
+            "hex": "#56e8ca"
+          },
+          {
+            "index": 9,
+            "color": [
+              210,
+              245,
+              60
+            ],
+            "hex": "#d2f53c"
+          },
+          {
+            "index": 10,
+            "color": [
+              255,
+              120,
+              120
+            ],
+            "hex": "#ff7878"
+          },
+          {
+            "index": 11,
+            "color": [
+              80,
+              150,
+              255
+            ],
+            "hex": "#5096ff"
+          },
+          {
+            "index": 12,
+            "color": [
+              190,
+              110,
+              60
+            ],
+            "hex": "#be6e3c"
+          }
+        ]
+      },
+      "objectCount": 39,
+      "collisionCount": 14,
+      "objects": [
+        {
+          "index": 0,
+          "id": "obj-1",
+          "name": "engraved-floor",
+          "treePath": [
+            "engraved-floor"
+          ],
+          "mock": false,
+          "bbox": {
+            "min": [
+              -97,
+              -72,
+              0
+            ],
+            "max": [
+              97,
+              72,
+              1.8
+            ]
+          }
+        },
+        {
+          "index": 1,
+          "id": "obj-2",
+          "name": "north-wall",
+          "treePath": [
+            "north-wall"
+          ],
+          "mock": false,
+          "bbox": {
+            "min": [
+              -97,
+              70.19999999999999,
+              1.8
+            ],
+            "max": [
+              97,
+              72,
+              10
+            ]
+          }
+        },
+        {
+          "index": 2,
+          "id": "obj-3",
+          "name": "south-wall",
+          "treePath": [
+            "south-wall"
+          ],
+          "mock": false,
+          "bbox": {
+            "min": [
+              -97,
+              -72,
+              1.8
+            ],
+            "max": [
+              97,
+              -70.19999999999999,
+              10
+            ]
+          }
+        },
+        {
+          "index": 3,
+          "id": "obj-4",
+          "name": "east-wall",
+          "treePath": [
+            "east-wall"
+          ],
+          "mock": false,
+          "bbox": {
+            "min": [
+              95.19999999999999,
+              -72,
+              1.8
+            ],
+            "max": [
+              97,
+              72,
+              10
+            ]
+          }
+        },
+        {
+          "index": 4,
+          "id": "obj-5",
+          "name": "west-wall",
+          "treePath": [
+            "west-wall"
+          ],
+          "mock": false,
+          "bbox": {
+            "min": [
+              -97,
+              -72,
+              1.8
+            ],
+            "max": [
+              -95.19999999999999,
+              72,
+              10
+            ]
+          }
+        },
+        {
+          "index": 5,
+          "id": "obj-6",
+          "name": "divider-x-left",
+          "treePath": [
+            "divider-x-left"
+          ],
+          "mock": false,
+          "bbox": {
+            "min": [
+              -50.9,
+              -70.2,
+              1.8
+            ],
+            "max": [
+              -49.1,
+              70.2,
+              9
+            ]
+          }
+        },
+        {
+          "index": 6,
+          "id": "obj-7",
+          "name": "divider-x-right",
+          "treePath": [
+            "divider-x-right"
+          ],
+          "mock": false,
+          "bbox": {
+            "min": [
+              34.1,
+              -70.2,
+              1.8
+            ],
+            "max": [
+              35.9,
+              70.2,
+              9
+            ]
+          }
+        },
+        {
+          "index": 7,
+          "id": "obj-8",
+          "name": "divider-y-bottom",
+          "treePath": [
+            "divider-y-bottom"
+          ],
+          "mock": false,
+          "bbox": {
+            "min": [
+              -95.2,
+              -22.9,
+              1.8
+            ],
+            "max": [
+              95.2,
+              -21.1,
+              9
+            ]
+          }
+        },
+        {
+          "index": 8,
+          "id": "obj-9",
+          "name": "divider-y-top",
+          "treePath": [
+            "divider-y-top"
+          ],
+          "mock": false,
+          "bbox": {
+            "min": [
+              -95.2,
+              31.1,
+              1.8
+            ],
+            "max": [
+              95.2,
+              32.9,
+              9
+            ]
+          }
+        },
+        {
+          "index": 9,
+          "id": "obj-10",
+          "name": "small-bottom-split",
+          "treePath": [
+            "small-bottom-split"
+          ],
+          "mock": false,
+          "bbox": {
+            "min": [
+              -7.9,
+              -70.2,
+              1.8
+            ],
+            "max": [
+              -6.1,
+              -22.200000000000003,
+              9
+            ]
+          }
+        },
+        {
+          "index": 10,
+          "id": "obj-11",
+          "name": "wide-middle-split",
+          "treePath": [
+            "wide-middle-split"
+          ],
+          "mock": false,
+          "bbox": {
+            "min": [
+              -48.6,
+              4.1,
+              1.8
+            ],
+            "max": [
+              34.6,
+              5.9,
+              9
+            ]
+          }
+        },
+        {
+          "index": 11,
+          "id": "obj-12",
+          "name": "top-right-split",
+          "treePath": [
+            "top-right-split"
+          ],
+          "mock": false,
+          "bbox": {
+            "min": [
+              67.1,
+              33.4,
+              1.8
+            ],
+            "max": [
+              68.9,
+              70.4,
+              9
+            ]
+          }
+        },
+        {
+          "index": 12,
+          "id": "obj-13",
+          "name": "lower-right-strip",
+          "treePath": [
+            "lower-right-strip"
+          ],
+          "mock": false,
+          "bbox": {
+            "min": [
+              35.75,
+              -49.9,
+              1.8
+            ],
+            "max": [
+              97.25,
+              -48.1,
+              9
+            ]
+          }
+        },
+        {
+          "index": 13,
+          "id": "obj-14",
+          "name": "top-left-low-rail",
+          "treePath": [
+            "top-left-low-rail"
+          ],
+          "mock": false,
+          "bbox": {
+            "min": [
+              -85,
+              50.1,
+              1.8
+            ],
+            "max": [
+              -61,
+              51.9,
+              5
+            ]
+          }
+        },
+        {
+          "index": 14,
+          "id": "obj-15",
+          "name": "right-mid-low-rail",
+          "treePath": [
+            "right-mid-low-rail"
+          ],
+          "mock": false,
+          "bbox": {
+            "min": [
+              73.1,
+              -8,
+              1.8
+            ],
+            "max": [
+              74.9,
+              16,
+              5
+            ]
+          }
+        },
+        {
+          "index": 15,
+          "id": "obj-16",
+          "name": "male-east-foot--42",
+          "treePath": [
+            "male-east-foot--42"
+          ],
+          "mock": false,
+          "bbox": {
+            "min": [
+              97,
+              -51.5,
+              0
+            ],
+            "max": [
+              100,
+              -32.5,
+              1.8
+            ]
+          }
+        },
+        {
+          "index": 16,
+          "id": "obj-17",
+          "name": "male-east-key--42",
+          "treePath": [
+            "male-east-key--42"
+          ],
+          "mock": false,
+          "bbox": {
+            "min": [
+              97,
+              -51.5,
+              1.8
+            ],
+            "max": [
+              100,
+              -32.5,
+              5.2
+            ]
+          }
+        },
+        {
+          "index": 17,
+          "id": "obj-18",
+          "name": "female-west--42-a-foot",
+          "treePath": [
+            "female-west--42-a-foot"
+          ],
+          "mock": false,
+          "bbox": {
+            "min": [
+              -100,
+              -55.675,
+              0
+            ],
+            "max": [
+              -97,
+              -51.675,
+              1.8
+            ]
+          }
+        },
+        {
+          "index": 18,
+          "id": "obj-19",
+          "name": "female-west--42-a-cheek",
+          "treePath": [
+            "female-west--42-a-cheek"
+          ],
+          "mock": false,
+          "bbox": {
+            "min": [
+              -100,
+              -55.675,
+              1.8
+            ],
+            "max": [
+              -97,
+              -51.675,
+              5.2
+            ]
+          }
+        },
+        {
+          "index": 19,
+          "id": "obj-20",
+          "name": "female-west--42-b-foot",
+          "treePath": [
+            "female-west--42-b-foot"
+          ],
+          "mock": false,
+          "bbox": {
+            "min": [
+              -100,
+              -32.325,
+              0
+            ],
+            "max": [
+              -97,
+              -28.325000000000003,
+              1.8
+            ]
+          }
+        },
+        {
+          "index": 20,
+          "id": "obj-21",
+          "name": "female-west--42-b-cheek",
+          "treePath": [
+            "female-west--42-b-cheek"
+          ],
+          "mock": false,
+          "bbox": {
+            "min": [
+              -100,
+              -32.325,
+              1.8
+            ],
+            "max": [
+              -97,
+              -28.325000000000003,
+              5.2
+            ]
+          }
+        },
+        {
+          "index": 21,
+          "id": "obj-22",
+          "name": "male-east-foot-42",
+          "treePath": [
+            "male-east-foot-42"
+          ],
+          "mock": false,
+          "bbox": {
+            "min": [
+              97,
+              32.5,
+              0
+            ],
+            "max": [
+              100,
+              51.5,
+              1.8
+            ]
+          }
+        },
+        {
+          "index": 22,
+          "id": "obj-23",
+          "name": "male-east-key-42",
+          "treePath": [
+            "male-east-key-42"
+          ],
+          "mock": false,
+          "bbox": {
+            "min": [
+              97,
+              32.5,
+              1.8
+            ],
+            "max": [
+              100,
+              51.5,
+              5.2
+            ]
+          }
+        },
+        {
+          "index": 23,
+          "id": "obj-24",
+          "name": "female-west-42-a-foot",
+          "treePath": [
+            "female-west-42-a-foot"
+          ],
+          "mock": false,
+          "bbox": {
+            "min": [
+              -100,
+              28.325000000000003,
+              0
+            ],
+            "max": [
+              -97,
+              32.325,
+              1.8
+            ]
+          }
+        },
+        {
+          "index": 24,
+          "id": "obj-25",
+          "name": "female-west-42-a-cheek",
+          "treePath": [
+            "female-west-42-a-cheek"
+          ],
+          "mock": false,
+          "bbox": {
+            "min": [
+              -100,
+              28.325000000000003,
+              1.8
+            ],
+            "max": [
+              -97,
+              32.325,
+              5.2
+            ]
+          }
+        },
+        {
+          "index": 25,
+          "id": "obj-26",
+          "name": "female-west-42-b-foot",
+          "treePath": [
+            "female-west-42-b-foot"
+          ],
+          "mock": false,
+          "bbox": {
+            "min": [
+              -100,
+              51.675,
+              0
+            ],
+            "max": [
+              -97,
+              55.675,
+              1.8
+            ]
+          }
+        },
+        {
+          "index": 26,
+          "id": "obj-27",
+          "name": "female-west-42-b-cheek",
+          "treePath": [
+            "female-west-42-b-cheek"
+          ],
+          "mock": false,
+          "bbox": {
+            "min": [
+              -100,
+              51.675,
+              1.8
+            ],
+            "max": [
+              -97,
+              55.675,
+              5.2
+            ]
+          }
+        },
+        {
+          "index": 27,
+          "id": "obj-28",
+          "name": "male-north-foot--58",
+          "treePath": [
+            "male-north-foot--58"
+          ],
+          "mock": false,
+          "bbox": {
+            "min": [
+              -67.5,
+              72,
+              0
+            ],
+            "max": [
+              -48.5,
+              75,
+              1.8
+            ]
+          }
+        },
+        {
+          "index": 28,
+          "id": "obj-29",
+          "name": "male-north-key--58",
+          "treePath": [
+            "male-north-key--58"
+          ],
+          "mock": false,
+          "bbox": {
+            "min": [
+              -67.5,
+              72,
+              1.8
+            ],
+            "max": [
+              -48.5,
+              75,
+              5.2
+            ]
+          }
+        },
+        {
+          "index": 29,
+          "id": "obj-30",
+          "name": "female-south--58-a-foot",
+          "treePath": [
+            "female-south--58-a-foot"
+          ],
+          "mock": false,
+          "bbox": {
+            "min": [
+              -71.675,
+              -75,
+              0
+            ],
+            "max": [
+              -67.675,
+              -72,
+              1.8
+            ]
+          }
+        },
+        {
+          "index": 30,
+          "id": "obj-31",
+          "name": "female-south--58-a-cheek",
+          "treePath": [
+            "female-south--58-a-cheek"
+          ],
+          "mock": false,
+          "bbox": {
+            "min": [
+              -71.675,
+              -75,
+              1.8
+            ],
+            "max": [
+              -67.675,
+              -72,
+              5.2
+            ]
+          }
+        },
+        {
+          "index": 31,
+          "id": "obj-32",
+          "name": "female-south--58-b-foot",
+          "treePath": [
+            "female-south--58-b-foot"
+          ],
+          "mock": false,
+          "bbox": {
+            "min": [
+              -48.325,
+              -75,
+              0
+            ],
+            "max": [
+              -44.325,
+              -72,
+              1.8
+            ]
+          }
+        },
+        {
+          "index": 32,
+          "id": "obj-33",
+          "name": "female-south--58-b-cheek",
+          "treePath": [
+            "female-south--58-b-cheek"
+          ],
+          "mock": false,
+          "bbox": {
+            "min": [
+              -48.325,
+              -75,
+              1.8
+            ],
+            "max": [
+              -44.325,
+              -72,
+              5.2
+            ]
+          }
+        },
+        {
+          "index": 33,
+          "id": "obj-34",
+          "name": "male-north-foot-58",
+          "treePath": [
+            "male-north-foot-58"
+          ],
+          "mock": false,
+          "bbox": {
+            "min": [
+              48.5,
+              72,
+              0
+            ],
+            "max": [
+              67.5,
+              75,
+              1.8
+            ]
+          }
+        },
+        {
+          "index": 34,
+          "id": "obj-35",
+          "name": "male-north-key-58",
+          "treePath": [
+            "male-north-key-58"
+          ],
+          "mock": false,
+          "bbox": {
+            "min": [
+              48.5,
+              72,
+              1.8
+            ],
+            "max": [
+              67.5,
+              75,
+              5.2
+            ]
+          }
+        },
+        {
+          "index": 35,
+          "id": "obj-36",
+          "name": "female-south-58-a-foot",
+          "treePath": [
+            "female-south-58-a-foot"
+          ],
+          "mock": false,
+          "bbox": {
+            "min": [
+              44.325,
+              -75,
+              0
+            ],
+            "max": [
+              48.325,
+              -72,
+              1.8
+            ]
+          }
+        },
+        {
+          "index": 36,
+          "id": "obj-37",
+          "name": "female-south-58-a-cheek",
+          "treePath": [
+            "female-south-58-a-cheek"
+          ],
+          "mock": false,
+          "bbox": {
+            "min": [
+              44.325,
+              -75,
+              1.8
+            ],
+            "max": [
+              48.325,
+              -72,
+              5.2
+            ]
+          }
+        },
+        {
+          "index": 37,
+          "id": "obj-38",
+          "name": "female-south-58-b-foot",
+          "treePath": [
+            "female-south-58-b-foot"
+          ],
+          "mock": false,
+          "bbox": {
+            "min": [
+              67.675,
+              -75,
+              0
+            ],
+            "max": [
+              71.675,
+              -72,
+              1.8
+            ]
+          }
+        },
+        {
+          "index": 38,
+          "id": "obj-39",
+          "name": "female-south-58-b-cheek",
+          "treePath": [
+            "female-south-58-b-cheek"
+          ],
+          "mock": false,
+          "bbox": {
+            "min": [
+              67.675,
+              -75,
+              1.8
+            ],
+            "max": [
+              71.675,
+              -72,
+              5.2
+            ]
+          }
+        }
+      ],
+      "collisions": [
+        {
+          "index": 1,
+          "id": "obj-2__obj-4",
+          "sourceIndex": 1,
+          "targetIndex": 3,
+          "sourceId": "obj-2",
+          "targetId": "obj-4",
+          "sourceName": "north-wall",
+          "targetName": "east-wall",
+          "overlapVolume": 26.56799999999916,
+          "groupIndex": 1,
+          "color": [
+            255,
+            68,
+            16
+          ],
+          "hex": "#ff4410"
+        },
+        {
+          "index": 2,
+          "id": "obj-2__obj-5",
+          "sourceIndex": 1,
+          "targetIndex": 4,
+          "sourceId": "obj-2",
+          "targetId": "obj-5",
+          "sourceName": "north-wall",
+          "targetName": "west-wall",
+          "overlapVolume": 26.568000000000012,
+          "groupIndex": 2,
+          "color": [
+            0,
+            204,
+            255
+          ],
+          "hex": "#00ccff"
+        },
+        {
+          "index": 3,
+          "id": "obj-2__obj-12",
+          "sourceIndex": 1,
+          "targetIndex": 11,
+          "sourceId": "obj-2",
+          "targetId": "obj-12",
+          "sourceName": "north-wall",
+          "targetName": "top-right-split",
+          "overlapVolume": 2.591999999996556,
+          "groupIndex": 3,
+          "color": [
+            255,
+            214,
+            0
+          ],
+          "hex": "#ffd600"
+        },
+        {
+          "index": 4,
+          "id": "obj-3__obj-4",
+          "sourceIndex": 2,
+          "targetIndex": 3,
+          "sourceId": "obj-3",
+          "targetId": "obj-4",
+          "sourceName": "south-wall",
+          "targetName": "east-wall",
+          "overlapVolume": 26.568000000001632,
+          "groupIndex": 4,
+          "color": [
+            66,
+            220,
+            120
+          ],
+          "hex": "#42dc78"
+        },
+        {
+          "index": 5,
+          "id": "obj-3__obj-5",
+          "sourceIndex": 2,
+          "targetIndex": 4,
+          "sourceId": "obj-3",
+          "targetId": "obj-5",
+          "sourceName": "south-wall",
+          "targetName": "west-wall",
+          "overlapVolume": 26.568000000000296,
+          "groupIndex": 5,
+          "color": [
+            255,
+            76,
+            196
+          ],
+          "hex": "#ff4cc4"
+        },
+        {
+          "index": 6,
+          "id": "obj-4__obj-13",
+          "sourceIndex": 3,
+          "targetIndex": 12,
+          "sourceId": "obj-4",
+          "targetId": "obj-13",
+          "sourceName": "east-wall",
+          "targetName": "lower-right-strip",
+          "overlapVolume": 23.328000000001037,
+          "groupIndex": 6,
+          "color": [
+            142,
+            106,
+            255
+          ],
+          "hex": "#8e6aff"
+        },
+        {
+          "index": 7,
+          "id": "obj-6__obj-8",
+          "sourceIndex": 5,
+          "targetIndex": 7,
+          "sourceId": "obj-6",
+          "targetId": "obj-8",
+          "sourceName": "divider-x-left",
+          "targetName": "divider-y-bottom",
+          "overlapVolume": 23.327999999999363,
+          "groupIndex": 7,
+          "color": [
+            255,
+            145,
+            48
+          ],
+          "hex": "#ff9130"
+        },
+        {
+          "index": 8,
+          "id": "obj-6__obj-9",
+          "sourceIndex": 5,
+          "targetIndex": 8,
+          "sourceId": "obj-6",
+          "targetId": "obj-9",
+          "sourceName": "divider-x-left",
+          "targetName": "divider-y-top",
+          "overlapVolume": 23.32799999999943,
+          "groupIndex": 8,
+          "color": [
+            86,
+            232,
+            202
+          ],
+          "hex": "#56e8ca"
+        },
+        {
+          "index": 9,
+          "id": "obj-7__obj-8",
+          "sourceIndex": 6,
+          "targetIndex": 7,
+          "sourceId": "obj-7",
+          "targetId": "obj-8",
+          "sourceName": "divider-x-right",
+          "targetName": "divider-y-bottom",
+          "overlapVolume": 23.327999999999527,
+          "groupIndex": 9,
+          "color": [
+            210,
+            245,
+            60
+          ],
+          "hex": "#d2f53c"
+        },
+        {
+          "index": 10,
+          "id": "obj-7__obj-9",
+          "sourceIndex": 6,
+          "targetIndex": 8,
+          "sourceId": "obj-7",
+          "targetId": "obj-9",
+          "sourceName": "divider-x-right",
+          "targetName": "divider-y-top",
+          "overlapVolume": 23.328,
+          "groupIndex": 10,
+          "color": [
+            255,
+            120,
+            120
+          ],
+          "hex": "#ff7878"
+        },
+        {
+          "index": 11,
+          "id": "obj-7__obj-11",
+          "sourceIndex": 6,
+          "targetIndex": 10,
+          "sourceId": "obj-7",
+          "targetId": "obj-11",
+          "sourceName": "divider-x-right",
+          "targetName": "wide-middle-split",
+          "overlapVolume": 6.480000000000018,
+          "groupIndex": 11,
+          "color": [
+            80,
+            150,
+            255
+          ],
+          "hex": "#5096ff"
+        },
+        {
+          "index": 12,
+          "id": "obj-7__obj-13",
+          "sourceIndex": 6,
+          "targetIndex": 12,
+          "sourceId": "obj-7",
+          "targetId": "obj-13",
+          "sourceName": "divider-x-right",
+          "targetName": "lower-right-strip",
+          "overlapVolume": 1.9439999999995692,
+          "groupIndex": 12,
+          "color": [
+            190,
+            110,
+            60
+          ],
+          "hex": "#be6e3c"
+        },
+        {
+          "index": 13,
+          "id": "obj-8__obj-10",
+          "sourceIndex": 7,
+          "targetIndex": 9,
+          "sourceId": "obj-8",
+          "targetId": "obj-10",
+          "sourceName": "divider-y-bottom",
+          "targetName": "small-bottom-split",
+          "overlapVolume": 9.07200000000012,
+          "groupIndex": 13,
+          "color": [
+            255,
+            68,
+            16
+          ],
+          "hex": "#ff4410"
+        },
+        {
+          "index": 14,
+          "id": "obj-13__obj-17",
+          "sourceIndex": 12,
+          "targetIndex": 16,
+          "sourceId": "obj-13",
+          "targetId": "obj-17",
+          "sourceName": "lower-right-strip",
+          "targetName": "male-east-key--42",
+          "overlapVolume": 1.5300000000001717,
+          "groupIndex": 14,
+          "color": [
+            0,
+            204,
+            255
+          ],
+          "hex": "#00ccff"
+        }
+      ],
+      "warnings": [],
+      "views": {
+        "front": {
+          "path": "channels/collisions/front.png"
+        },
+        "right": {
+          "path": "channels/collisions/right.png"
+        },
+        "top": {
+          "path": "channels/collisions/top.png"
+        },
+        "iso": {
+          "path": "channels/collisions/iso.png"
+        }
+      }
+    },
+    "thickness": {
+      "format": "png",
+      "encoding": "rgb8-thickness-heatmap",
+      "units": "model",
+      "backgroundColor": [
+        0,
+        0,
+        0
+      ],
+      "decode": "surface heatmap from mesh-normal raycast thickness; red <= minThickness, orange <= warnThickness, green-to-blue through maxThickness, gray unresolved",
+      "method": "mesh-normal-raycast",
+      "options": {
+        "minThickness": 1.2,
+        "warnThickness": 1.6,
+        "maxThickness": 6,
+        "maxSamplesPerObject": 5000
+      },
+      "style": {
+        "criticalColor": [
+          255,
+          28,
+          28
+        ],
+        "warningColor": [
+          255,
+          150,
+          0
+        ],
+        "okColor": [
+          60,
+          220,
+          90
+        ],
+        "thickColor": [
+          70,
+          145,
+          255
+        ],
+        "unknownColor": [
+          90,
+          90,
+          90
+        ]
+      },
+      "objectCount": 39,
+      "objects": [
+        {
+          "index": 1,
+          "id": "obj-1",
+          "name": "engraved-floor",
+          "treePath": [
+            "engraved-floor"
+          ],
+          "mock": false,
+          "triangleCount": 520,
+          "sampledTriangleCount": 520,
+          "sampleStride": 1,
+          "bbox": {
+            "min": [
+              -97,
+              -72,
+              0
+            ],
+            "max": [
+              97,
+              72,
+              1.7999999523162842
+            ]
+          },
+          "sampleCount": 520,
+          "resolvedCount": 520,
+          "unresolvedCount": 0,
+          "minThickness": 0.06144807201686306,
+          "p05Thickness": 1.799999952316284,
+          "medianThickness": 1.7999999523162842,
+          "meanThickness": 5.227273930847936,
+          "maxThickness": 222.11720063308397,
+          "criticalAreaPercent": 0.1938760980080158,
+          "warningAreaPercent": 0.05455050173841116,
+          "belowWarnAreaPercent": 0.24842659974642695,
+          "unresolvedAreaPercent": 0
+        },
+        {
+          "index": 2,
+          "id": "obj-2",
+          "name": "north-wall",
+          "treePath": [
+            "north-wall"
+          ],
+          "mock": false,
+          "triangleCount": 12,
+          "sampledTriangleCount": 12,
+          "sampleStride": 1,
+          "bbox": {
+            "min": [
+              -97,
+              70.19999694824219,
+              1.7999999523162842
+            ],
+            "max": [
+              97,
+              72,
+              10
+            ]
+          },
+          "sampleCount": 12,
+          "resolvedCount": 12,
+          "unresolvedCount": 0,
+          "minThickness": 1.8000030517578192,
+          "p05Thickness": 1.8000030517578192,
+          "medianThickness": 1.8000030517578192,
+          "meanThickness": 4.3945711296500996,
+          "maxThickness": 194,
+          "criticalAreaPercent": 0,
+          "warningAreaPercent": 0,
+          "belowWarnAreaPercent": 0,
+          "unresolvedAreaPercent": 0
+        },
+        {
+          "index": 3,
+          "id": "obj-3",
+          "name": "south-wall",
+          "treePath": [
+            "south-wall"
+          ],
+          "mock": false,
+          "triangleCount": 12,
+          "sampledTriangleCount": 12,
+          "sampleStride": 1,
+          "bbox": {
+            "min": [
+              -97,
+              -72,
+              1.7999999523162842
+            ],
+            "max": [
+              97,
+              -70.19999694824219,
+              10
+            ]
+          },
+          "sampleCount": 12,
+          "resolvedCount": 12,
+          "unresolvedCount": 0,
+          "minThickness": 1.8000030517578192,
+          "p05Thickness": 1.8000030517578192,
+          "medianThickness": 1.8000030517578192,
+          "meanThickness": 4.3945711296500996,
+          "maxThickness": 194,
+          "criticalAreaPercent": 0,
+          "warningAreaPercent": 0,
+          "belowWarnAreaPercent": 0,
+          "unresolvedAreaPercent": 0
+        },
+        {
+          "index": 4,
+          "id": "obj-4",
+          "name": "east-wall",
+          "treePath": [
+            "east-wall"
+          ],
+          "mock": false,
+          "triangleCount": 12,
+          "sampledTriangleCount": 12,
+          "sampleStride": 1,
+          "bbox": {
+            "min": [
+              95.19999694824219,
+              -72,
+              1.7999999523162842
+            ],
+            "max": [
+              97,
+              72,
+              10
+            ]
+          },
+          "sampleCount": 12,
+          "resolvedCount": 12,
+          "unresolvedCount": 0,
+          "minThickness": 1.8000030517578065,
+          "p05Thickness": 1.8000030517578065,
+          "medianThickness": 1.8000030517578065,
+          "meanThickness": 4.383079532920462,
+          "maxThickness": 144,
+          "criticalAreaPercent": 0,
+          "warningAreaPercent": 0,
+          "belowWarnAreaPercent": 0,
+          "unresolvedAreaPercent": 0
+        },
+        {
+          "index": 5,
+          "id": "obj-5",
+          "name": "west-wall",
+          "treePath": [
+            "west-wall"
+          ],
+          "mock": false,
+          "triangleCount": 12,
+          "sampledTriangleCount": 12,
+          "sampleStride": 1,
+          "bbox": {
+            "min": [
+              -97,
+              -72,
+              1.7999999523162842
+            ],
+            "max": [
+              -95.19999694824219,
+              72,
+              10
+            ]
+          },
+          "sampleCount": 12,
+          "resolvedCount": 12,
+          "unresolvedCount": 0,
+          "minThickness": 1.8000030517578065,
+          "p05Thickness": 1.8000030517578065,
+          "medianThickness": 1.8000030517578065,
+          "meanThickness": 4.383079532920462,
+          "maxThickness": 144,
+          "criticalAreaPercent": 0,
+          "warningAreaPercent": 0,
+          "belowWarnAreaPercent": 0,
+          "unresolvedAreaPercent": 0
+        },
+        {
+          "index": 6,
+          "id": "obj-6",
+          "name": "divider-x-left",
+          "treePath": [
+            "divider-x-left"
+          ],
+          "mock": false,
+          "triangleCount": 12,
+          "sampledTriangleCount": 12,
+          "sampleStride": 1,
+          "bbox": {
+            "min": [
+              -50.900001525878906,
+              -70.19999694824219,
+              1.7999999523162842
+            ],
+            "max": [
+              -49.099998474121094,
+              70.19999694824219,
+              9
+            ]
+          },
+          "sampleCount": 12,
+          "resolvedCount": 12,
+          "unresolvedCount": 0,
+          "minThickness": 1.8000030517578132,
+          "p05Thickness": 1.8000030517578132,
+          "medianThickness": 1.8000030517578132,
+          "meanThickness": 4.276147876703722,
+          "maxThickness": 140.3999938964844,
+          "criticalAreaPercent": 0,
+          "warningAreaPercent": 0,
+          "belowWarnAreaPercent": 0,
+          "unresolvedAreaPercent": 0
+        },
+        {
+          "index": 7,
+          "id": "obj-7",
+          "name": "divider-x-right",
+          "treePath": [
+            "divider-x-right"
+          ],
+          "mock": false,
+          "triangleCount": 12,
+          "sampledTriangleCount": 12,
+          "sampleStride": 1,
+          "bbox": {
+            "min": [
+              34.099998474121094,
+              -70.19999694824219,
+              1.7999999523162842
+            ],
+            "max": [
+              35.900001525878906,
+              70.19999694824219,
+              9
+            ]
+          },
+          "sampleCount": 12,
+          "resolvedCount": 12,
+          "unresolvedCount": 0,
+          "minThickness": 1.8000030517578132,
+          "p05Thickness": 1.8000030517578132,
+          "medianThickness": 1.8000030517578132,
+          "meanThickness": 4.276147876703722,
+          "maxThickness": 140.3999938964844,
+          "criticalAreaPercent": 0,
+          "warningAreaPercent": 0,
+          "belowWarnAreaPercent": 0,
+          "unresolvedAreaPercent": 0
+        },
+        {
+          "index": 8,
+          "id": "obj-8",
+          "name": "divider-y-bottom",
+          "treePath": [
+            "divider-y-bottom"
+          ],
+          "mock": false,
+          "triangleCount": 12,
+          "sampledTriangleCount": 12,
+          "sampleStride": 1,
+          "bbox": {
+            "min": [
+              -95.19999694824219,
+              -22.899999618530273,
+              1.7999999523162842
+            ],
+            "max": [
+              95.19999694824219,
+              -21.100000381469727,
+              9
+            ]
+          },
+          "sampleCount": 12,
+          "resolvedCount": 12,
+          "unresolvedCount": 0,
+          "minThickness": 1.799999237060546,
+          "p05Thickness": 1.799999237060546,
+          "medianThickness": 1.799999237060546,
+          "meanThickness": 4.287571539150581,
+          "maxThickness": 190.39999389648438,
+          "criticalAreaPercent": 0,
+          "warningAreaPercent": 0,
+          "belowWarnAreaPercent": 0,
+          "unresolvedAreaPercent": 0
+        },
+        {
+          "index": 9,
+          "id": "obj-9",
+          "name": "divider-y-top",
+          "treePath": [
+            "divider-y-top"
+          ],
+          "mock": false,
+          "triangleCount": 12,
+          "sampledTriangleCount": 12,
+          "sampleStride": 1,
+          "bbox": {
+            "min": [
+              -95.19999694824219,
+              31.100000381469727,
+              1.7999999523162842
+            ],
+            "max": [
+              95.19999694824219,
+              32.900001525878906,
+              9
+            ]
+          },
+          "sampleCount": 12,
+          "resolvedCount": 12,
+          "unresolvedCount": 0,
+          "minThickness": 1.8000011444091788,
+          "p05Thickness": 1.8000011444091788,
+          "medianThickness": 1.8000011444091788,
+          "meanThickness": 4.287575146488687,
+          "maxThickness": 190.39999389648438,
+          "criticalAreaPercent": 0,
+          "warningAreaPercent": 0,
+          "belowWarnAreaPercent": 0,
+          "unresolvedAreaPercent": 0
+        },
+        {
+          "index": 10,
+          "id": "obj-10",
+          "name": "small-bottom-split",
+          "treePath": [
+            "small-bottom-split"
+          ],
+          "mock": false,
+          "triangleCount": 12,
+          "sampledTriangleCount": 12,
+          "sampleStride": 1,
+          "bbox": {
+            "min": [
+              -7.900000095367432,
+              -70.19999694824219,
+              1.7999999523162842
+            ],
+            "max": [
+              -6.099999904632568,
+              -22.200000762939453,
+              9
+            ]
+          },
+          "sampleCount": 12,
+          "resolvedCount": 12,
+          "unresolvedCount": 0,
+          "minThickness": 1.8000001907348635,
+          "p05Thickness": 1.8000001907348635,
+          "medianThickness": 1.8000001907348635,
+          "meanThickness": 4.194175098155613,
+          "maxThickness": 47.999996185302734,
+          "criticalAreaPercent": 0,
+          "warningAreaPercent": 0,
+          "belowWarnAreaPercent": 0,
+          "unresolvedAreaPercent": 0
+        },
+        {
+          "index": 11,
+          "id": "obj-11",
+          "name": "wide-middle-split",
+          "treePath": [
+            "wide-middle-split"
+          ],
+          "mock": false,
+          "triangleCount": 12,
+          "sampledTriangleCount": 12,
+          "sampleStride": 1,
+          "bbox": {
+            "min": [
+              -48.599998474121094,
+              4.099999904632568,
+              1.7999999523162842
+            ],
+            "max": [
+              34.599998474121094,
+              5.900000095367432,
+              9
+            ]
+          },
+          "sampleCount": 12,
+          "resolvedCount": 12,
+          "unresolvedCount": 0,
+          "minThickness": 1.8000001907348635,
+          "p05Thickness": 1.8000001907348635,
+          "medianThickness": 1.8000001907348635,
+          "meanThickness": 4.246503192273826,
+          "maxThickness": 83.19999694824219,
+          "criticalAreaPercent": 0,
+          "warningAreaPercent": 0,
+          "belowWarnAreaPercent": 0,
+          "unresolvedAreaPercent": 0
+        },
+        {
+          "index": 12,
+          "id": "obj-12",
+          "name": "top-right-split",
+          "treePath": [
+            "top-right-split"
+          ],
+          "mock": false,
+          "triangleCount": 12,
+          "sampledTriangleCount": 12,
+          "sampleStride": 1,
+          "bbox": {
+            "min": [
+              67.0999984741211,
+              33.400001525878906,
+              1.7999999523162842
+            ],
+            "max": [
+              68.9000015258789,
+              70.4000015258789,
+              9
+            ]
+          },
+          "sampleCount": 12,
+          "resolvedCount": 12,
+          "unresolvedCount": 0,
+          "minThickness": 1.8000030517578092,
+          "p05Thickness": 1.8000030517578092,
+          "medianThickness": 1.8000030517578092,
+          "meanThickness": 4.158174008302698,
+          "maxThickness": 37,
+          "criticalAreaPercent": 0,
+          "warningAreaPercent": 0,
+          "belowWarnAreaPercent": 0,
+          "unresolvedAreaPercent": 0
+        },
+        {
+          "index": 13,
+          "id": "obj-13",
+          "name": "lower-right-strip",
+          "treePath": [
+            "lower-right-strip"
+          ],
+          "mock": false,
+          "triangleCount": 12,
+          "sampledTriangleCount": 12,
+          "sampleStride": 1,
+          "bbox": {
+            "min": [
+              35.75,
+              -49.900001525878906,
+              1.7999999523162842
+            ],
+            "max": [
+              97.25,
+              -48.099998474121094,
+              9
+            ]
+          },
+          "sampleCount": 12,
+          "resolvedCount": 12,
+          "unresolvedCount": 0,
+          "minThickness": 1.8000030517578092,
+          "p05Thickness": 1.8000030517578092,
+          "medianThickness": 1.8000030517578092,
+          "meanThickness": 4.221168612183485,
+          "maxThickness": 61.5,
+          "criticalAreaPercent": 0,
+          "warningAreaPercent": 0,
+          "belowWarnAreaPercent": 0,
+          "unresolvedAreaPercent": 0
+        },
+        {
+          "index": 14,
+          "id": "obj-14",
+          "name": "top-left-low-rail",
+          "treePath": [
+            "top-left-low-rail"
+          ],
+          "mock": false,
+          "triangleCount": 12,
+          "sampledTriangleCount": 12,
+          "sampleStride": 1,
+          "bbox": {
+            "min": [
+              -85,
+              50.099998474121094,
+              1.7999999523162842
+            ],
+            "max": [
+              -61,
+              51.900001525878906,
+              5
+            ]
+          },
+          "sampleCount": 12,
+          "resolvedCount": 12,
+          "unresolvedCount": 0,
+          "minThickness": 1.8000030517578092,
+          "p05Thickness": 1.8000030517578092,
+          "medianThickness": 1.8000030517578092,
+          "meanThickness": 3.2977133548971778,
+          "maxThickness": 23.999999999999996,
+          "criticalAreaPercent": 0,
+          "warningAreaPercent": 0,
+          "belowWarnAreaPercent": 0,
+          "unresolvedAreaPercent": 0
+        },
+        {
+          "index": 15,
+          "id": "obj-15",
+          "name": "right-mid-low-rail",
+          "treePath": [
+            "right-mid-low-rail"
+          ],
+          "mock": false,
+          "triangleCount": 12,
+          "sampledTriangleCount": 12,
+          "sampleStride": 1,
+          "bbox": {
+            "min": [
+              73.0999984741211,
+              -8,
+              1.7999999523162842
+            ],
+            "max": [
+              74.9000015258789,
+              16,
+              5
+            ]
+          },
+          "sampleCount": 12,
+          "resolvedCount": 12,
+          "unresolvedCount": 0,
+          "minThickness": 1.8000030517578092,
+          "p05Thickness": 1.8000030517578092,
+          "medianThickness": 1.8000030517578092,
+          "meanThickness": 3.2977133548971778,
+          "maxThickness": 24,
+          "criticalAreaPercent": 0,
+          "warningAreaPercent": 0,
+          "belowWarnAreaPercent": 0,
+          "unresolvedAreaPercent": 0
+        },
+        {
+          "index": 16,
+          "id": "obj-16",
+          "name": "male-east-foot--42",
+          "treePath": [
+            "male-east-foot--42"
+          ],
+          "mock": false,
+          "triangleCount": 12,
+          "sampledTriangleCount": 12,
+          "sampleStride": 1,
+          "bbox": {
+            "min": [
+              97,
+              -51.5,
+              0
+            ],
+            "max": [
+              100,
+              -32.5,
+              1.7999999523162842
+            ]
+          },
+          "sampleCount": 12,
+          "resolvedCount": 12,
+          "unresolvedCount": 0,
+          "minThickness": 1.7999999523162842,
+          "p05Thickness": 1.7999999523162842,
+          "medianThickness": 1.7999999523162842,
+          "meanThickness": 3.1863353539201174,
+          "maxThickness": 18.999999999999996,
+          "criticalAreaPercent": 0,
+          "warningAreaPercent": 0,
+          "belowWarnAreaPercent": 0,
+          "unresolvedAreaPercent": 0
+        },
+        {
+          "index": 17,
+          "id": "obj-17",
+          "name": "male-east-key--42",
+          "treePath": [
+            "male-east-key--42"
+          ],
+          "mock": false,
+          "triangleCount": 12,
+          "sampledTriangleCount": 12,
+          "sampleStride": 1,
+          "bbox": {
+            "min": [
+              97,
+              -51.5,
+              1.7999999523162842
+            ],
+            "max": [
+              100,
+              -32.5,
+              5.199999809265137
+            ]
+          },
+          "sampleCount": 12,
+          "resolvedCount": 12,
+          "unresolvedCount": 0,
+          "minThickness": 2.999999999999997,
+          "p05Thickness": 2.999999999999997,
+          "medianThickness": 3.399999856948853,
+          "meanThickness": 4.411229054787132,
+          "maxThickness": 18.999999999999996,
+          "criticalAreaPercent": 0,
+          "warningAreaPercent": 0,
+          "belowWarnAreaPercent": 0,
+          "unresolvedAreaPercent": 0
+        },
+        {
+          "index": 18,
+          "id": "obj-18",
+          "name": "female-west--42-a-foot",
+          "treePath": [
+            "female-west--42-a-foot"
+          ],
+          "mock": false,
+          "triangleCount": 12,
+          "sampledTriangleCount": 12,
+          "sampleStride": 1,
+          "bbox": {
+            "min": [
+              -100,
+              -55.67499923706055,
+              0
+            ],
+            "max": [
+              -97,
+              -51.67499923706055,
+              1.7999999523162842
+            ]
+          },
+          "sampleCount": 12,
+          "resolvedCount": 12,
+          "unresolvedCount": 0,
+          "minThickness": 1.7999999523162842,
+          "p05Thickness": 1.7999999523162842,
+          "medianThickness": 2.999999999999997,
+          "meanThickness": 2.634146307423877,
+          "maxThickness": 3.999999999999997,
+          "criticalAreaPercent": 0,
+          "warningAreaPercent": 0,
+          "belowWarnAreaPercent": 0,
+          "unresolvedAreaPercent": 0
+        },
+        {
+          "index": 19,
+          "id": "obj-19",
+          "name": "female-west--42-a-cheek",
+          "treePath": [
+            "female-west--42-a-cheek"
+          ],
+          "mock": false,
+          "triangleCount": 12,
+          "sampledTriangleCount": 12,
+          "sampleStride": 1,
+          "bbox": {
+            "min": [
+              -100,
+              -55.67499923706055,
+              1.7999999523162842
+            ],
+            "max": [
+              -97,
+              -51.67499923706055,
+              5.199999809265137
+            ]
+          },
+          "sampleCount": 12,
+          "resolvedCount": 12,
+          "unresolvedCount": 0,
+          "minThickness": 2.999999999999997,
+          "p05Thickness": 2.999999999999997,
+          "medianThickness": 3.399999856948853,
+          "meanThickness": 3.4189943651898353,
+          "maxThickness": 3.999999999999997,
+          "criticalAreaPercent": 0,
+          "warningAreaPercent": 0,
+          "belowWarnAreaPercent": 0,
+          "unresolvedAreaPercent": 0
+        },
+        {
+          "index": 20,
+          "id": "obj-20",
+          "name": "female-west--42-b-foot",
+          "treePath": [
+            "female-west--42-b-foot"
+          ],
+          "mock": false,
+          "triangleCount": 12,
+          "sampledTriangleCount": 12,
+          "sampleStride": 1,
+          "bbox": {
+            "min": [
+              -100,
+              -32.32500076293945,
+              0
+            ],
+            "max": [
+              -97,
+              -28.325000762939453,
+              1.7999999523162842
+            ]
+          },
+          "sampleCount": 12,
+          "resolvedCount": 12,
+          "unresolvedCount": 0,
+          "minThickness": 1.7999999523162842,
+          "p05Thickness": 1.7999999523162842,
+          "medianThickness": 2.999999999999997,
+          "meanThickness": 2.634146307423878,
+          "maxThickness": 4,
+          "criticalAreaPercent": 0,
+          "warningAreaPercent": 0,
+          "belowWarnAreaPercent": 0,
+          "unresolvedAreaPercent": 0
+        },
+        {
+          "index": 21,
+          "id": "obj-21",
+          "name": "female-west--42-b-cheek",
+          "treePath": [
+            "female-west--42-b-cheek"
+          ],
+          "mock": false,
+          "triangleCount": 12,
+          "sampledTriangleCount": 12,
+          "sampleStride": 1,
+          "bbox": {
+            "min": [
+              -100,
+              -32.32500076293945,
+              1.7999999523162842
+            ],
+            "max": [
+              -97,
+              -28.325000762939453,
+              5.199999809265137
+            ]
+          },
+          "sampleCount": 12,
+          "resolvedCount": 12,
+          "unresolvedCount": 0,
+          "minThickness": 2.999999999999997,
+          "p05Thickness": 2.999999999999997,
+          "medianThickness": 3.399999856948853,
+          "meanThickness": 3.4189943651898353,
+          "maxThickness": 4,
+          "criticalAreaPercent": 0,
+          "warningAreaPercent": 0,
+          "belowWarnAreaPercent": 0,
+          "unresolvedAreaPercent": 0
+        },
+        {
+          "index": 22,
+          "id": "obj-22",
+          "name": "male-east-foot-42",
+          "treePath": [
+            "male-east-foot-42"
+          ],
+          "mock": false,
+          "triangleCount": 12,
+          "sampledTriangleCount": 12,
+          "sampleStride": 1,
+          "bbox": {
+            "min": [
+              97,
+              32.5,
+              0
+            ],
+            "max": [
+              100,
+              51.5,
+              1.7999999523162842
+            ]
+          },
+          "sampleCount": 12,
+          "resolvedCount": 12,
+          "unresolvedCount": 0,
+          "minThickness": 1.7999999523162842,
+          "p05Thickness": 1.7999999523162842,
+          "medianThickness": 1.7999999523162842,
+          "meanThickness": 3.1863353539201174,
+          "maxThickness": 18.999999999999996,
+          "criticalAreaPercent": 0,
+          "warningAreaPercent": 0,
+          "belowWarnAreaPercent": 0,
+          "unresolvedAreaPercent": 0
+        },
+        {
+          "index": 23,
+          "id": "obj-23",
+          "name": "male-east-key-42",
+          "treePath": [
+            "male-east-key-42"
+          ],
+          "mock": false,
+          "triangleCount": 12,
+          "sampledTriangleCount": 12,
+          "sampleStride": 1,
+          "bbox": {
+            "min": [
+              97,
+              32.5,
+              1.7999999523162842
+            ],
+            "max": [
+              100,
+              51.5,
+              5.199999809265137
+            ]
+          },
+          "sampleCount": 12,
+          "resolvedCount": 12,
+          "unresolvedCount": 0,
+          "minThickness": 2.999999999999997,
+          "p05Thickness": 2.999999999999997,
+          "medianThickness": 3.399999856948853,
+          "meanThickness": 4.411229054787132,
+          "maxThickness": 18.999999999999996,
+          "criticalAreaPercent": 0,
+          "warningAreaPercent": 0,
+          "belowWarnAreaPercent": 0,
+          "unresolvedAreaPercent": 0
+        },
+        {
+          "index": 24,
+          "id": "obj-24",
+          "name": "female-west-42-a-foot",
+          "treePath": [
+            "female-west-42-a-foot"
+          ],
+          "mock": false,
+          "triangleCount": 12,
+          "sampledTriangleCount": 12,
+          "sampleStride": 1,
+          "bbox": {
+            "min": [
+              -100,
+              28.325000762939453,
+              0
+            ],
+            "max": [
+              -97,
+              32.32500076293945,
+              1.7999999523162842
+            ]
+          },
+          "sampleCount": 12,
+          "resolvedCount": 12,
+          "unresolvedCount": 0,
+          "minThickness": 1.7999999523162842,
+          "p05Thickness": 1.7999999523162842,
+          "medianThickness": 2.999999999999997,
+          "meanThickness": 2.634146307423877,
+          "maxThickness": 4,
+          "criticalAreaPercent": 0,
+          "warningAreaPercent": 0,
+          "belowWarnAreaPercent": 0,
+          "unresolvedAreaPercent": 0
+        },
+        {
+          "index": 25,
+          "id": "obj-25",
+          "name": "female-west-42-a-cheek",
+          "treePath": [
+            "female-west-42-a-cheek"
+          ],
+          "mock": false,
+          "triangleCount": 12,
+          "sampledTriangleCount": 12,
+          "sampleStride": 1,
+          "bbox": {
+            "min": [
+              -100,
+              28.325000762939453,
+              1.7999999523162842
+            ],
+            "max": [
+              -97,
+              32.32500076293945,
+              5.199999809265137
+            ]
+          },
+          "sampleCount": 12,
+          "resolvedCount": 12,
+          "unresolvedCount": 0,
+          "minThickness": 2.999999999999997,
+          "p05Thickness": 2.999999999999997,
+          "medianThickness": 3.399999856948853,
+          "meanThickness": 3.4189943651898353,
+          "maxThickness": 4,
+          "criticalAreaPercent": 0,
+          "warningAreaPercent": 0,
+          "belowWarnAreaPercent": 0,
+          "unresolvedAreaPercent": 0
+        },
+        {
+          "index": 26,
+          "id": "obj-26",
+          "name": "female-west-42-b-foot",
+          "treePath": [
+            "female-west-42-b-foot"
+          ],
+          "mock": false,
+          "triangleCount": 12,
+          "sampledTriangleCount": 12,
+          "sampleStride": 1,
+          "bbox": {
+            "min": [
+              -100,
+              51.67499923706055,
+              0
+            ],
+            "max": [
+              -97,
+              55.67499923706055,
+              1.7999999523162842
+            ]
+          },
+          "sampleCount": 12,
+          "resolvedCount": 12,
+          "unresolvedCount": 0,
+          "minThickness": 1.7999999523162842,
+          "p05Thickness": 1.7999999523162842,
+          "medianThickness": 2.999999999999997,
+          "meanThickness": 2.634146307423877,
+          "maxThickness": 3.999999999999997,
+          "criticalAreaPercent": 0,
+          "warningAreaPercent": 0,
+          "belowWarnAreaPercent": 0,
+          "unresolvedAreaPercent": 0
+        },
+        {
+          "index": 27,
+          "id": "obj-27",
+          "name": "female-west-42-b-cheek",
+          "treePath": [
+            "female-west-42-b-cheek"
+          ],
+          "mock": false,
+          "triangleCount": 12,
+          "sampledTriangleCount": 12,
+          "sampleStride": 1,
+          "bbox": {
+            "min": [
+              -100,
+              51.67499923706055,
+              1.7999999523162842
+            ],
+            "max": [
+              -97,
+              55.67499923706055,
+              5.199999809265137
+            ]
+          },
+          "sampleCount": 12,
+          "resolvedCount": 12,
+          "unresolvedCount": 0,
+          "minThickness": 2.999999999999997,
+          "p05Thickness": 2.999999999999997,
+          "medianThickness": 3.399999856948853,
+          "meanThickness": 3.4189943651898353,
+          "maxThickness": 3.999999999999997,
+          "criticalAreaPercent": 0,
+          "warningAreaPercent": 0,
+          "belowWarnAreaPercent": 0,
+          "unresolvedAreaPercent": 0
+        },
+        {
+          "index": 28,
+          "id": "obj-28",
+          "name": "male-north-foot--58",
+          "treePath": [
+            "male-north-foot--58"
+          ],
+          "mock": false,
+          "triangleCount": 12,
+          "sampledTriangleCount": 12,
+          "sampleStride": 1,
+          "bbox": {
+            "min": [
+              -67.5,
+              72,
+              0
+            ],
+            "max": [
+              -48.5,
+              75,
+              1.7999999523162842
+            ]
+          },
+          "sampleCount": 12,
+          "resolvedCount": 12,
+          "unresolvedCount": 0,
+          "minThickness": 1.7999999523162842,
+          "p05Thickness": 1.7999999523162842,
+          "medianThickness": 1.7999999523162842,
+          "meanThickness": 3.186335353920117,
+          "maxThickness": 18.999999999999996,
+          "criticalAreaPercent": 0,
+          "warningAreaPercent": 0,
+          "belowWarnAreaPercent": 0,
+          "unresolvedAreaPercent": 0
+        },
+        {
+          "index": 29,
+          "id": "obj-29",
+          "name": "male-north-key--58",
+          "treePath": [
+            "male-north-key--58"
+          ],
+          "mock": false,
+          "triangleCount": 12,
+          "sampledTriangleCount": 12,
+          "sampleStride": 1,
+          "bbox": {
+            "min": [
+              -67.5,
+              72,
+              1.7999999523162842
+            ],
+            "max": [
+              -48.5,
+              75,
+              5.199999809265137
+            ]
+          },
+          "sampleCount": 12,
+          "resolvedCount": 12,
+          "unresolvedCount": 0,
+          "minThickness": 2.999999999999997,
+          "p05Thickness": 2.999999999999997,
+          "medianThickness": 3.399999856948853,
+          "meanThickness": 4.411229054787131,
+          "maxThickness": 18.999999999999996,
+          "criticalAreaPercent": 0,
+          "warningAreaPercent": 0,
+          "belowWarnAreaPercent": 0,
+          "unresolvedAreaPercent": 0
+        },
+        {
+          "index": 30,
+          "id": "obj-30",
+          "name": "female-south--58-a-foot",
+          "treePath": [
+            "female-south--58-a-foot"
+          ],
+          "mock": false,
+          "triangleCount": 12,
+          "sampledTriangleCount": 12,
+          "sampleStride": 1,
+          "bbox": {
+            "min": [
+              -71.67500305175781,
+              -75,
+              0
+            ],
+            "max": [
+              -67.67500305175781,
+              -72,
+              1.7999999523162842
+            ]
+          },
+          "sampleCount": 12,
+          "resolvedCount": 12,
+          "unresolvedCount": 0,
+          "minThickness": 1.7999999523162842,
+          "p05Thickness": 1.7999999523162842,
+          "medianThickness": 2.999999999999997,
+          "meanThickness": 2.6341463074238765,
+          "maxThickness": 3.999999999999997,
+          "criticalAreaPercent": 0,
+          "warningAreaPercent": 0,
+          "belowWarnAreaPercent": 0,
+          "unresolvedAreaPercent": 0
+        },
+        {
+          "index": 31,
+          "id": "obj-31",
+          "name": "female-south--58-a-cheek",
+          "treePath": [
+            "female-south--58-a-cheek"
+          ],
+          "mock": false,
+          "triangleCount": 12,
+          "sampledTriangleCount": 12,
+          "sampleStride": 1,
+          "bbox": {
+            "min": [
+              -71.67500305175781,
+              -75,
+              1.7999999523162842
+            ],
+            "max": [
+              -67.67500305175781,
+              -72,
+              5.199999809265137
+            ]
+          },
+          "sampleCount": 12,
+          "resolvedCount": 12,
+          "unresolvedCount": 0,
+          "minThickness": 2.999999999999997,
+          "p05Thickness": 2.999999999999997,
+          "medianThickness": 3.399999856948853,
+          "meanThickness": 3.4189943651898353,
+          "maxThickness": 3.999999999999997,
+          "criticalAreaPercent": 0,
+          "warningAreaPercent": 0,
+          "belowWarnAreaPercent": 0,
+          "unresolvedAreaPercent": 0
+        },
+        {
+          "index": 32,
+          "id": "obj-32",
+          "name": "female-south--58-b-foot",
+          "treePath": [
+            "female-south--58-b-foot"
+          ],
+          "mock": false,
+          "triangleCount": 12,
+          "sampledTriangleCount": 12,
+          "sampleStride": 1,
+          "bbox": {
+            "min": [
+              -48.32500076293945,
+              -75,
+              0
+            ],
+            "max": [
+              -44.32500076293945,
+              -72,
+              1.7999999523162842
+            ]
+          },
+          "sampleCount": 12,
+          "resolvedCount": 12,
+          "unresolvedCount": 0,
+          "minThickness": 1.7999999523162842,
+          "p05Thickness": 1.7999999523162842,
+          "medianThickness": 2.999999999999997,
+          "meanThickness": 2.6341463074238765,
+          "maxThickness": 3.999999999999997,
+          "criticalAreaPercent": 0,
+          "warningAreaPercent": 0,
+          "belowWarnAreaPercent": 0,
+          "unresolvedAreaPercent": 0
+        },
+        {
+          "index": 33,
+          "id": "obj-33",
+          "name": "female-south--58-b-cheek",
+          "treePath": [
+            "female-south--58-b-cheek"
+          ],
+          "mock": false,
+          "triangleCount": 12,
+          "sampledTriangleCount": 12,
+          "sampleStride": 1,
+          "bbox": {
+            "min": [
+              -48.32500076293945,
+              -75,
+              1.7999999523162842
+            ],
+            "max": [
+              -44.32500076293945,
+              -72,
+              5.199999809265137
+            ]
+          },
+          "sampleCount": 12,
+          "resolvedCount": 12,
+          "unresolvedCount": 0,
+          "minThickness": 2.999999999999997,
+          "p05Thickness": 2.999999999999997,
+          "medianThickness": 3.399999856948853,
+          "meanThickness": 3.4189943651898353,
+          "maxThickness": 3.999999999999997,
+          "criticalAreaPercent": 0,
+          "warningAreaPercent": 0,
+          "belowWarnAreaPercent": 0,
+          "unresolvedAreaPercent": 0
+        },
+        {
+          "index": 34,
+          "id": "obj-34",
+          "name": "male-north-foot-58",
+          "treePath": [
+            "male-north-foot-58"
+          ],
+          "mock": false,
+          "triangleCount": 12,
+          "sampledTriangleCount": 12,
+          "sampleStride": 1,
+          "bbox": {
+            "min": [
+              48.5,
+              72,
+              0
+            ],
+            "max": [
+              67.5,
+              75,
+              1.7999999523162842
+            ]
+          },
+          "sampleCount": 12,
+          "resolvedCount": 12,
+          "unresolvedCount": 0,
+          "minThickness": 1.7999999523162842,
+          "p05Thickness": 1.7999999523162842,
+          "medianThickness": 1.7999999523162842,
+          "meanThickness": 3.186335353920117,
+          "maxThickness": 18.999999999999996,
+          "criticalAreaPercent": 0,
+          "warningAreaPercent": 0,
+          "belowWarnAreaPercent": 0,
+          "unresolvedAreaPercent": 0
+        },
+        {
+          "index": 35,
+          "id": "obj-35",
+          "name": "male-north-key-58",
+          "treePath": [
+            "male-north-key-58"
+          ],
+          "mock": false,
+          "triangleCount": 12,
+          "sampledTriangleCount": 12,
+          "sampleStride": 1,
+          "bbox": {
+            "min": [
+              48.5,
+              72,
+              1.7999999523162842
+            ],
+            "max": [
+              67.5,
+              75,
+              5.199999809265137
+            ]
+          },
+          "sampleCount": 12,
+          "resolvedCount": 12,
+          "unresolvedCount": 0,
+          "minThickness": 2.999999999999997,
+          "p05Thickness": 2.999999999999997,
+          "medianThickness": 3.399999856948853,
+          "meanThickness": 4.411229054787131,
+          "maxThickness": 18.999999999999996,
+          "criticalAreaPercent": 0,
+          "warningAreaPercent": 0,
+          "belowWarnAreaPercent": 0,
+          "unresolvedAreaPercent": 0
+        },
+        {
+          "index": 36,
+          "id": "obj-36",
+          "name": "female-south-58-a-foot",
+          "treePath": [
+            "female-south-58-a-foot"
+          ],
+          "mock": false,
+          "triangleCount": 12,
+          "sampledTriangleCount": 12,
+          "sampleStride": 1,
+          "bbox": {
+            "min": [
+              44.32500076293945,
+              -75,
+              0
+            ],
+            "max": [
+              48.32500076293945,
+              -72,
+              1.7999999523162842
+            ]
+          },
+          "sampleCount": 12,
+          "resolvedCount": 12,
+          "unresolvedCount": 0,
+          "minThickness": 1.7999999523162842,
+          "p05Thickness": 1.7999999523162842,
+          "medianThickness": 2.999999999999997,
+          "meanThickness": 2.6341463074238765,
+          "maxThickness": 3.999999999999997,
+          "criticalAreaPercent": 0,
+          "warningAreaPercent": 0,
+          "belowWarnAreaPercent": 0,
+          "unresolvedAreaPercent": 0
+        },
+        {
+          "index": 37,
+          "id": "obj-37",
+          "name": "female-south-58-a-cheek",
+          "treePath": [
+            "female-south-58-a-cheek"
+          ],
+          "mock": false,
+          "triangleCount": 12,
+          "sampledTriangleCount": 12,
+          "sampleStride": 1,
+          "bbox": {
+            "min": [
+              44.32500076293945,
+              -75,
+              1.7999999523162842
+            ],
+            "max": [
+              48.32500076293945,
+              -72,
+              5.199999809265137
+            ]
+          },
+          "sampleCount": 12,
+          "resolvedCount": 12,
+          "unresolvedCount": 0,
+          "minThickness": 2.999999999999997,
+          "p05Thickness": 2.999999999999997,
+          "medianThickness": 3.399999856948853,
+          "meanThickness": 3.4189943651898353,
+          "maxThickness": 3.999999999999997,
+          "criticalAreaPercent": 0,
+          "warningAreaPercent": 0,
+          "belowWarnAreaPercent": 0,
+          "unresolvedAreaPercent": 0
+        },
+        {
+          "index": 38,
+          "id": "obj-38",
+          "name": "female-south-58-b-foot",
+          "treePath": [
+            "female-south-58-b-foot"
+          ],
+          "mock": false,
+          "triangleCount": 12,
+          "sampledTriangleCount": 12,
+          "sampleStride": 1,
+          "bbox": {
+            "min": [
+              67.67500305175781,
+              -75,
+              0
+            ],
+            "max": [
+              71.67500305175781,
+              -72,
+              1.7999999523162842
+            ]
+          },
+          "sampleCount": 12,
+          "resolvedCount": 12,
+          "unresolvedCount": 0,
+          "minThickness": 1.7999999523162842,
+          "p05Thickness": 1.7999999523162842,
+          "medianThickness": 2.999999999999997,
+          "meanThickness": 2.6341463074238765,
+          "maxThickness": 3.999999999999997,
+          "criticalAreaPercent": 0,
+          "warningAreaPercent": 0,
+          "belowWarnAreaPercent": 0,
+          "unresolvedAreaPercent": 0
+        },
+        {
+          "index": 39,
+          "id": "obj-39",
+          "name": "female-south-58-b-cheek",
+          "treePath": [
+            "female-south-58-b-cheek"
+          ],
+          "mock": false,
+          "triangleCount": 12,
+          "sampledTriangleCount": 12,
+          "sampleStride": 1,
+          "bbox": {
+            "min": [
+              67.67500305175781,
+              -75,
+              1.7999999523162842
+            ],
+            "max": [
+              71.67500305175781,
+              -72,
+              5.199999809265137
+            ]
+          },
+          "sampleCount": 12,
+          "resolvedCount": 12,
+          "unresolvedCount": 0,
+          "minThickness": 2.999999999999997,
+          "p05Thickness": 2.999999999999997,
+          "medianThickness": 3.399999856948853,
+          "meanThickness": 3.4189943651898353,
+          "maxThickness": 3.999999999999997,
+          "criticalAreaPercent": 0,
+          "warningAreaPercent": 0,
+          "belowWarnAreaPercent": 0,
+          "unresolvedAreaPercent": 0
+        }
+      ],
+      "warnings": [],
+      "views": {
+        "front": {
+          "path": "channels/thickness/front.png"
+        },
+        "right": {
+          "path": "channels/thickness/right.png"
+        },
+        "top": {
+          "path": "channels/thickness/top.png"
+        },
+        "iso": {
+          "path": "channels/thickness/iso.png"
+        }
+      }
+    }
+  }
+}

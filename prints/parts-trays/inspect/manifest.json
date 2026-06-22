@@ -1,0 +1,660 @@
+{
+  "schemaVersion": 1,
+  "generator": {
+    "command": "forgecad render inspect",
+    "forgecadVersion": "0.9.4"
+  },
+  "source": {
+    "entryFile": "2026/06/05/parts-trays/main.forge.js",
+    "projectRoot": "2026/06/05/parts-trays"
+  },
+  "bundle": {
+    "channelsRequested": [
+      "rgb",
+      "mask",
+      "collisions",
+      "thickness"
+    ],
+    "channelsEmitted": [
+      "rgb",
+      "mask",
+      "collisions",
+      "thickness"
+    ],
+    "filters": {
+      "focus": null,
+      "hide": []
+    },
+    "sizePx": 800,
+    "quality": "default",
+    "deterministic": true
+  },
+  "views": {
+    "front": {
+      "kind": "canonical"
+    },
+    "right": {
+      "kind": "canonical"
+    },
+    "top": {
+      "kind": "canonical"
+    },
+    "iso": {
+      "kind": "canonical"
+    }
+  },
+  "scene": {
+    "bbox": {
+      "min": [
+        -50,
+        -50,
+        0
+      ],
+      "max": [
+        50,
+        108,
+        20
+      ]
+    },
+    "volume": 52785.32220870166,
+    "params": [
+      {
+        "name": "Output",
+        "value": 0,
+        "defaultValue": 0,
+        "min": 0,
+        "max": 2,
+        "step": 1,
+        "integer": true,
+        "choices": [
+          "print-set",
+          "square-100",
+          "rect-100x50"
+        ]
+      },
+      {
+        "name": "Wall thickness",
+        "value": 1.8,
+        "defaultValue": 1.8,
+        "min": 1.4,
+        "max": 3,
+        "step": 0.1,
+        "unit": "mm",
+        "integer": false
+      },
+      {
+        "name": "Divider rib thickness",
+        "value": 1.8,
+        "defaultValue": 1.8,
+        "min": 1.2,
+        "max": 3,
+        "step": 0.1,
+        "unit": "mm",
+        "integer": false
+      },
+      {
+        "name": "Outer corner radius",
+        "value": 8,
+        "defaultValue": 8,
+        "min": 2,
+        "max": 14,
+        "step": 0.1,
+        "unit": "mm",
+        "integer": false
+      },
+      {
+        "name": "Divider below rim",
+        "value": 1,
+        "defaultValue": 1,
+        "min": 0,
+        "max": 3,
+        "step": 0.1,
+        "unit": "mm",
+        "integer": false
+      },
+      {
+        "name": "Print layout gap",
+        "value": 8,
+        "defaultValue": 8,
+        "min": 4,
+        "max": 20,
+        "step": 0.1,
+        "unit": "mm",
+        "integer": false
+      }
+    ],
+    "cutPlanes": [],
+    "animations": [],
+    "defaultAnimation": null,
+    "verifications": [
+      {
+        "id": "verify-1",
+        "label": "has printable geometry",
+        "status": "pass",
+        "message": "Shape has geometry",
+        "group": "FDM tray envelope"
+      },
+      {
+        "id": "verify-2",
+        "label": "fits K1 Max X",
+        "status": "pass",
+        "message": "100 < 300",
+        "expected": "< 300",
+        "actual": "100",
+        "group": "FDM tray envelope"
+      },
+      {
+        "id": "verify-3",
+        "label": "fits K1 Max Y",
+        "status": "pass",
+        "message": "100 < 300",
+        "expected": "< 300",
+        "actual": "100",
+        "group": "FDM tray envelope"
+      },
+      {
+        "id": "verify-4",
+        "label": "fits K1 Max Z",
+        "status": "pass",
+        "message": "10 < 300",
+        "expected": "< 300",
+        "actual": "10",
+        "group": "FDM tray envelope"
+      },
+      {
+        "id": "verify-5",
+        "label": "has printable geometry",
+        "status": "pass",
+        "message": "Shape has geometry",
+        "group": "FDM tray envelope"
+      },
+      {
+        "id": "verify-6",
+        "label": "fits K1 Max X",
+        "status": "pass",
+        "message": "100 < 300",
+        "expected": "< 300",
+        "actual": "100",
+        "group": "FDM tray envelope"
+      },
+      {
+        "id": "verify-7",
+        "label": "fits K1 Max Y",
+        "status": "pass",
+        "message": "50 < 300",
+        "expected": "< 300",
+        "actual": "50",
+        "group": "FDM tray envelope"
+      },
+      {
+        "id": "verify-8",
+        "label": "fits K1 Max Z",
+        "status": "pass",
+        "message": "20 < 300",
+        "expected": "< 300",
+        "actual": "20",
+        "group": "FDM tray envelope"
+      },
+      {
+        "id": "verify-9",
+        "label": "layout fits K1 Max X",
+        "status": "pass",
+        "message": "100 < 300",
+        "expected": "< 300",
+        "actual": "100",
+        "group": "Print set bed envelope"
+      },
+      {
+        "id": "verify-10",
+        "label": "layout fits K1 Max Y",
+        "status": "pass",
+        "message": "158 < 300",
+        "expected": "< 300",
+        "actual": "158",
+        "group": "Print set bed envelope"
+      },
+      {
+        "id": "verify-11",
+        "label": "layout fits K1 Max Z",
+        "status": "pass",
+        "message": "20 < 300",
+        "expected": "< 300",
+        "actual": "20",
+        "group": "Print set bed envelope"
+      }
+    ],
+    "objects": [
+      {
+        "id": "obj-1",
+        "name": "square-100-tray",
+        "treePath": [
+          "square-100-tray"
+        ],
+        "mock": false,
+        "visible": true,
+        "renderable": true
+      },
+      {
+        "id": "obj-2",
+        "name": "rect-100x50-tray",
+        "treePath": [
+          "rect-100x50-tray"
+        ],
+        "mock": false,
+        "visible": true,
+        "renderable": true
+      }
+    ]
+  },
+  "channels": {
+    "rgb": {
+      "format": "png",
+      "views": {
+        "front": {
+          "path": "channels/rgb/front.png"
+        },
+        "right": {
+          "path": "channels/rgb/right.png"
+        },
+        "top": {
+          "path": "channels/rgb/top.png"
+        },
+        "iso": {
+          "path": "channels/rgb/iso.png"
+        }
+      }
+    },
+    "mask": {
+      "format": "png",
+      "encoding": "rgb8-object-palette",
+      "backgroundIndex": 0,
+      "backgroundColor": [
+        0,
+        0,
+        0
+      ],
+      "decode": "lookup exact RGB color in objects[].color; antialiased edge pixels may be blended",
+      "objects": [
+        {
+          "index": 1,
+          "color": [
+            230,
+            25,
+            75
+          ],
+          "hex": "#e6194b",
+          "id": "obj-1",
+          "name": "square-100-tray",
+          "treePath": [
+            "square-100-tray"
+          ],
+          "mock": false
+        },
+        {
+          "index": 2,
+          "color": [
+            60,
+            180,
+            75
+          ],
+          "hex": "#3cb44b",
+          "id": "obj-2",
+          "name": "rect-100x50-tray",
+          "treePath": [
+            "rect-100x50-tray"
+          ],
+          "mock": false
+        }
+      ],
+      "views": {
+        "front": {
+          "path": "channels/mask/front.png"
+        },
+        "right": {
+          "path": "channels/mask/right.png"
+        },
+        "top": {
+          "path": "channels/mask/top.png"
+        },
+        "iso": {
+          "path": "channels/mask/iso.png"
+        }
+      }
+    },
+    "collisions": {
+      "format": "png",
+      "encoding": "rgb8-collision-highlight",
+      "backgroundColor": [
+        0,
+        0,
+        0
+      ],
+      "decode": "source objects are translucent ghost geometry; boolean intersection volumes use per-finding collisions[].color palette entries",
+      "method": "boolean-intersection",
+      "options": {
+        "minOverlapVolume": 0.1
+      },
+      "style": {
+        "sourceOpacity": 0.22,
+        "sourceColor": [
+          180,
+          200,
+          220
+        ],
+        "collisionColor": [
+          255,
+          68,
+          16
+        ],
+        "collisionHex": "#ff4410",
+        "collisionPalette": [
+          {
+            "index": 1,
+            "color": [
+              255,
+              68,
+              16
+            ],
+            "hex": "#ff4410"
+          },
+          {
+            "index": 2,
+            "color": [
+              0,
+              204,
+              255
+            ],
+            "hex": "#00ccff"
+          },
+          {
+            "index": 3,
+            "color": [
+              255,
+              214,
+              0
+            ],
+            "hex": "#ffd600"
+          },
+          {
+            "index": 4,
+            "color": [
+              66,
+              220,
+              120
+            ],
+            "hex": "#42dc78"
+          },
+          {
+            "index": 5,
+            "color": [
+              255,
+              76,
+              196
+            ],
+            "hex": "#ff4cc4"
+          },
+          {
+            "index": 6,
+            "color": [
+              142,
+              106,
+              255
+            ],
+            "hex": "#8e6aff"
+          },
+          {
+            "index": 7,
+            "color": [
+              255,
+              145,
+              48
+            ],
+            "hex": "#ff9130"
+          },
+          {
+            "index": 8,
+            "color": [
+              86,
+              232,
+              202
+            ],
+            "hex": "#56e8ca"
+          },
+          {
+            "index": 9,
+            "color": [
+              210,
+              245,
+              60
+            ],
+            "hex": "#d2f53c"
+          },
+          {
+            "index": 10,
+            "color": [
+              255,
+              120,
+              120
+            ],
+            "hex": "#ff7878"
+          },
+          {
+            "index": 11,
+            "color": [
+              80,
+              150,
+              255
+            ],
+            "hex": "#5096ff"
+          },
+          {
+            "index": 12,
+            "color": [
+              190,
+              110,
+              60
+            ],
+            "hex": "#be6e3c"
+          }
+        ]
+      },
+      "objectCount": 2,
+      "collisionCount": 0,
+      "objects": [
+        {
+          "index": 0,
+          "id": "obj-1",
+          "name": "square-100-tray",
+          "treePath": [
+            "square-100-tray"
+          ],
+          "mock": false,
+          "bbox": {
+            "min": [
+              -50,
+              -50,
+              0
+            ],
+            "max": [
+              50,
+              50,
+              10
+            ]
+          }
+        },
+        {
+          "index": 1,
+          "id": "obj-2",
+          "name": "rect-100x50-tray",
+          "treePath": [
+            "rect-100x50-tray"
+          ],
+          "mock": false,
+          "bbox": {
+            "min": [
+              -50,
+              58,
+              0
+            ],
+            "max": [
+              50,
+              108,
+              20
+            ]
+          }
+        }
+      ],
+      "collisions": [],
+      "warnings": [],
+      "views": {
+        "front": {
+          "path": "channels/collisions/front.png"
+        },
+        "right": {
+          "path": "channels/collisions/right.png"
+        },
+        "top": {
+          "path": "channels/collisions/top.png"
+        },
+        "iso": {
+          "path": "channels/collisions/iso.png"
+        }
+      }
+    },
+    "thickness": {
+      "format": "png",
+      "encoding": "rgb8-thickness-heatmap",
+      "units": "model",
+      "backgroundColor": [
+        0,
+        0,
+        0
+      ],
+      "decode": "surface heatmap from mesh-normal raycast thickness; red <= minThickness, orange <= warnThickness, green-to-blue through maxThickness, gray unresolved",
+      "method": "mesh-normal-raycast",
+      "options": {
+        "minThickness": 1.2,
+        "warnThickness": 1.6,
+        "maxThickness": 6,
+        "maxSamplesPerObject": 5000
+      },
+      "style": {
+        "criticalColor": [
+          255,
+          28,
+          28
+        ],
+        "warningColor": [
+          255,
+          150,
+          0
+        ],
+        "okColor": [
+          60,
+          220,
+          90
+        ],
+        "thickColor": [
+          70,
+          145,
+          255
+        ],
+        "unknownColor": [
+          90,
+          90,
+          90
+        ]
+      },
+      "objectCount": 2,
+      "objects": [
+        {
+          "index": 1,
+          "id": "obj-1",
+          "name": "square-100-tray",
+          "treePath": [
+            "square-100-tray"
+          ],
+          "mock": false,
+          "triangleCount": 548,
+          "sampledTriangleCount": 548,
+          "sampleStride": 1,
+          "bbox": {
+            "min": [
+              -50,
+              -50,
+              0
+            ],
+            "max": [
+              50,
+              50,
+              10
+            ]
+          },
+          "sampleCount": 548,
+          "resolvedCount": 548,
+          "unresolvedCount": 0,
+          "minThickness": 1.7913288964527097,
+          "p05Thickness": 1.7999992370605435,
+          "medianThickness": 1.8000001907348635,
+          "meanThickness": 6.471673418487469,
+          "maxThickness": 127.19126830326495,
+          "criticalAreaPercent": 0,
+          "warningAreaPercent": 0,
+          "belowWarnAreaPercent": 0,
+          "unresolvedAreaPercent": 0
+        },
+        {
+          "index": 2,
+          "id": "obj-2",
+          "name": "rect-100x50-tray",
+          "treePath": [
+            "rect-100x50-tray"
+          ],
+          "mock": false,
+          "triangleCount": 468,
+          "sampledTriangleCount": 468,
+          "sampleStride": 1,
+          "bbox": {
+            "min": [
+              -50,
+              58,
+              0
+            ],
+            "max": [
+              50,
+              108,
+              20
+            ]
+          },
+          "sampleCount": 468,
+          "resolvedCount": 468,
+          "unresolvedCount": 0,
+          "minThickness": 0.49733352661132835,
+          "p05Thickness": 1.79133379834913,
+          "medianThickness": 1.8000001907348635,
+          "meanThickness": 6.6540770897047965,
+          "maxThickness": 104.1805179065884,
+          "criticalAreaPercent": 0.026704841371787802,
+          "warningAreaPercent": 0,
+          "belowWarnAreaPercent": 0.026704841371787802,
+          "unresolvedAreaPercent": 0
+        }
+      ],
+      "warnings": [],
+      "views": {
+        "front": {
+          "path": "channels/thickness/front.png"
+        },
+        "right": {
+          "path": "channels/thickness/right.png"
+        },
+        "top": {
+          "path": "channels/thickness/top.png"
+        },
+        "iso": {
+          "path": "channels/thickness/iso.png"
+        }
+      }
+    }
+  }
+}
