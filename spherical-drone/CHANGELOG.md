@@ -91,3 +91,27 @@ OCCT は本件の全ケースで正しく、ケージ生成も manifold 比 4–
 - リング断面 2.5×6 → 2.2×5 + スカラップ
 - battery-tray 壁の窓抜き（−3 g 見込み）
 - 1S 300mAh / カメラ初期非搭載
+
+## 2026-07-02
+
+- `checks.forge.js` を `lib/forge-verify/verify.js`（共有検証ライブラリ）へ移植。
+  既存 31 チェックは同一セマンティクスで全 PASS（`--backend occt`、実測 ~233s）
+- `suite.budget()` による drone AUW 予算チェックを追加。対象は**ドローン側の
+  印刷部品のみ**（center-deck / cage-top / cage-bottom / battery-tray、PLA
+  1.24 g/cm³）+ lld.md §9 の電装・配線上限（56 g + 7 g）。ステーション側
+  （port-module / core-body・lid / pogo-base）は AUW に無関係なので予算から
+  除外（旧版はこれを誤って含めており、合計 1252.98 g という意味のない数字を
+  出していた）。修正後の実測合計は **116.19 g**（75 g ラインに対し WAIVED
+  として毎回表示。lld.md §9 の AUW 見込み 87–106 g に対しやや高いのは、
+  battery-tray が見積 3 g に対し実測 7.7 g 前後だったこと、および電装を
+  常に上限値 56 g で計上していることによる）
+- `motorPcd` / `jetsonHoleX` / `jetsonHoleY` のプレースホルダ値（lld.md §11）を
+  `suite.waived()` 項目として常時可視化。checks の summary から漏れないように
+  した（3 件、毎回表示）
+- リポジトリルートに `forgecad.json`（内容は `{}`）を追加。`forgecad run` は
+  スクリプトのプロジェクトルートを `forgecad.json` を上に辿って解決し、その
+  外への `require()` をブロックするため、`spherical-drone/` から
+  `../lib/forge-verify/verify.js` を読めるようにするには、共通の祖先である
+  リポジトリルートにも `forgecad.json` が要る。ローカル専用の設定で、
+  `forgecad run` はその中身を解釈せず forgecad.io とも通信しない（push/pull/
+  publish のときだけ通信する）
