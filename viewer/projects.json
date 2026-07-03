@@ -1,0 +1,6 @@
+{
+  "projects": [
+    { "id": "spherical-drone", "title": "Spherical Drone", "manifest": "../projects/spherical-drone/viewer.json" },
+    { "id": "handy-fdm-mini", "title": "Handy FDM Mini", "manifest": "../projects/handy-fdm-mini/viewer.json" }
+  ]
+}

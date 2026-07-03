@@ -1,0 +1,36 @@
+{
+  "title": "handy-fdm-mini viewer",
+  "subtitle": "stl/ の印刷部品 + フレーム/レール/モータ/ベッドのゴーストでアセンブリを確認",
+  "stlBase": "../projects/handy-fdm-mini/stl",
+  "up": "z",
+  "clip": { "axis": "y", "min": -120, "max": 120 },
+  "camera": { "target": [0, 0, 120], "dist": 750 },
+  "parts": [
+    { "id": "z-base-bracket", "name": "z-base-bracket", "stl": "z-base-bracket.stl", "color": "#4c6ef5", "pos": [-90, 0, 20], "explode": [0, 0, -1], "group": "assembly" },
+    { "id": "z-carriage", "name": "z-carriage", "stl": "z-carriage.stl", "color": "#7048e8", "pos": [-70, 0, 160], "explode": [-1, 0, 0], "group": "assembly" },
+    { "id": "head-carriage", "name": "head-carriage", "stl": "head-carriage.stl", "color": "#e8590c", "pos": [0, -16, 160], "explode": [1, 0, 0], "group": "assembly" },
+    { "id": "bed-carriage", "name": "bed-carriage", "stl": "bed-carriage.stl", "color": "#2b8a3e", "pos": [0, 0, 26.5], "explode": [0, 0, 1], "group": "assembly" },
+    { "id": "corner-bracket-0", "name": "corner-bracket-0", "stl": "corner-bracket.stl", "color": "#868e96", "pos": [66, -90, 0], "explode": [1, -1, 0], "group": "assembly" },
+    { "id": "corner-bracket-90", "name": "corner-bracket-90", "stl": "corner-bracket.stl", "color": "#868e96", "pos": [-66, -90, 0], "rot": [{ "axis": "z", "deg": 90 }], "explode": [-1, -1, 0], "group": "assembly" },
+    { "id": "corner-bracket-180", "name": "corner-bracket-180", "stl": "corner-bracket.stl", "color": "#868e96", "pos": [-66, 90, 0], "rot": [{ "axis": "z", "deg": 180 }], "explode": [-1, 1, 0], "group": "assembly" },
+    { "id": "corner-bracket-270", "name": "corner-bracket-270", "stl": "corner-bracket.stl", "color": "#868e96", "pos": [66, 90, 0], "rot": [{ "axis": "z", "deg": 270 }], "explode": [1, 1, 0], "group": "assembly" },
+    { "id": "cable-guide-bed", "name": "cable-guide-bed", "stl": "cable-guide.stl", "color": "#f59f00", "pos": [38, 20, 37.5], "explode": [0, 0, 1], "group": "assembly" },
+    { "id": "cable-guide-head", "name": "cable-guide-head", "stl": "cable-guide.stl", "color": "#f59f00", "pos": [18, -30, 180], "rot": [{ "axis": "x", "deg": 180 }], "explode": [0, 0, 1], "group": "assembly" }
+  ],
+  "ghosts": [
+    { "id": "base-front-rail", "type": "box", "size": [200, 20, 20], "color": "#495057", "opacity": 0.5, "pos": [0, -90, 10], "group": "assembly" },
+    { "id": "base-rear-rail", "type": "box", "size": [200, 20, 20], "color": "#495057", "opacity": 0.5, "pos": [0, 90, 10], "group": "assembly" },
+    { "id": "base-left-rail", "type": "box", "size": [20, 160, 20], "color": "#495057", "opacity": 0.5, "pos": [-90, 0, 10], "group": "assembly" },
+    { "id": "base-right-rail", "type": "box", "size": [20, 160, 20], "color": "#495057", "opacity": 0.5, "pos": [90, 0, 10], "group": "assembly" },
+    { "id": "base-center-support", "type": "box", "size": [20, 160, 20], "color": "#495057", "opacity": 0.5, "pos": [0, 0, 10], "group": "assembly" },
+    { "id": "z-column", "type": "box", "size": [20, 20, 240], "color": "#343a40", "opacity": 0.5, "pos": [-90, 0, 140], "group": "assembly" },
+    { "id": "x-gantry", "type": "box", "size": [190, 20, 20], "color": "#5c7cfa", "opacity": 0.4, "pos": [5, 0, 160], "group": "assembly" },
+    { "id": "y-rail", "type": "box", "size": [9, 200, 6.5], "color": "#adb5bd", "opacity": 0.5, "pos": [0, 0, 23.25], "group": "assembly" },
+    { "id": "x-rail", "type": "box", "size": [200, 9, 6.5], "color": "#adb5bd", "opacity": 0.5, "pos": [5, -14.5, 146.75], "group": "assembly" },
+    { "id": "z-rail", "type": "box", "size": [9, 6.5, 150], "color": "#adb5bd", "opacity": 0.5, "pos": [-80, 0, 95], "group": "assembly" },
+    { "id": "bed-plate", "type": "box", "size": [100, 100, 6], "color": "#2b8a3e", "opacity": 0.3, "pos": [0, 0, 38], "group": "assembly" },
+    { "id": "motor-y", "type": "box", "size": [42.3, 42.3, 24], "color": "#d9480f", "opacity": 0.35, "pos": [0, 86.85, 14], "group": "assembly" },
+    { "id": "motor-z", "type": "box", "size": [42.3, 42.3, 24], "color": "#d9480f", "opacity": 0.35, "pos": [-88.85, 0, 248], "group": "assembly" },
+    { "id": "motor-x", "type": "box", "size": [35.2, 35.2, 20], "color": "#d9480f", "opacity": 0.35, "pos": [-88, 0, 180], "group": "assembly" }
+  ]
+}

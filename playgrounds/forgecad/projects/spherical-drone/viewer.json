@@ -1,0 +1,59 @@
+{
+  "title": "spherical-drone viewer",
+  "subtitle": "stl/ の印刷部品 + ゴースト部品でアセンブリを確認",
+  "stlBase": "../projects/spherical-drone/stl",
+  "up": "z",
+  "clip": { "axis": "y", "min": -110, "max": 110 },
+  "camera": { "target": [0, 0, 60], "dist": 950 },
+  "parts": [
+    { "id": "CenterDeck", "name": "CenterDeck", "stl": "center-deck.stl", "color": "#4a505a", "group": "drone" },
+    { "id": "CageTop", "name": "CageTop", "stl": "cage-top.stl", "color": "#dde3e8", "explode": [0, 0, 1], "group": "drone" },
+    { "id": "CageBottom", "name": "CageBottom", "stl": "cage-bottom.stl", "color": "#b9c2cc", "explode": [0, 0, -1], "group": "drone" },
+    { "id": "BatteryTray", "name": "BatteryTray", "stl": "battery-tray.stl", "color": "#5b6470", "explode": [0, 0, -0.45], "group": "drone" },
+
+    { "id": "PortA", "name": "PortA", "stl": "port-module.stl", "color": "#aeb6bd", "pos": [175, 0, 0], "explode": [1, 0, 0], "group": "station" },
+    { "id": "PortB", "name": "PortB", "stl": "port-module.stl", "color": "#aeb6bd", "pos": [-175, 0, 0], "rot": [{ "axis": "z", "deg": 180 }], "explode": [-1, 0, 0], "group": "station" },
+    { "id": "CoreBody", "name": "CoreBody", "stl": "core-body.stl", "color": "#9aa3ab", "group": "station" },
+    { "id": "CoreLid", "name": "CoreLid", "stl": "core-lid.stl", "color": "#8b949c", "explode": [0, 0, 0.8], "group": "station" },
+    { "id": "PogoBaseA", "name": "PogoBaseA", "stl": "pogo-base.stl", "color": "#d9c178", "pos": [175, 0, 26], "explode": [1, 0, -0.4], "group": "station" },
+    { "id": "PogoBaseB", "name": "PogoBaseB", "stl": "pogo-base.stl", "color": "#d9c178", "pos": [-175, 0, 26], "explode": [-1, 0, -0.4], "group": "station" },
+    { "id": "TagAN", "name": "TagAN", "stl": "apriltag-plate.stl", "color": "#e8e4da", "pos": [175, 96.2, 129], "rot": [{ "axis": "x", "deg": 90 }], "explode": [0, 1, 0.4], "group": "station" },
+    { "id": "TagAS", "name": "TagAS", "stl": "apriltag-plate.stl", "color": "#e8e4da", "pos": [175, -96.2, 129], "rot": [{ "axis": "x", "deg": 90 }, { "axis": "z", "deg": 180 }], "explode": [0, -1, 0.4], "group": "station" },
+    { "id": "TagBN", "name": "TagBN", "stl": "apriltag-plate.stl", "color": "#e8e4da", "pos": [-175, 96.2, 129], "rot": [{ "axis": "x", "deg": 90 }], "explode": [0, 1, 0.4], "group": "station" },
+    { "id": "TagBS", "name": "TagBS", "stl": "apriltag-plate.stl", "color": "#e8e4da", "pos": [-175, -96.2, 129], "rot": [{ "axis": "x", "deg": 90 }, { "axis": "z", "deg": 180 }], "explode": [0, -1, 0.4], "group": "station" }
+  ],
+  "ghosts": [
+    { "id": "pico-w", "type": "box", "size": [51, 21, 3], "color": "#0e7f4e", "opacity": 0.4, "pos": [0, 0, 5.5], "group": "drone" },
+    { "id": "esc-board", "type": "box", "size": [30, 30, 1.2], "color": "#22262b", "opacity": 0.4, "pos": [0, 0, -6.1], "group": "drone" },
+    { "id": "esc-components", "type": "box", "size": [20, 20, 4], "color": "#22262b", "opacity": 0.4, "pos": [0, 0, -3.5], "group": "drone" },
+    { "id": "battery", "type": "box", "size": [60, 30, 7], "color": "#8a8f3c", "opacity": 0.4, "pos": [0, 0, -11.5], "group": "drone" },
+    { "id": "camera-board", "type": "box", "size": [2.5, 26, 25], "color": "#1c3f5e", "opacity": 0.4, "pos": [31.3, 0, -2], "group": "drone" },
+    { "id": "contact-disc", "type": "cylinder", "r": 18, "h": 1.6, "axis": "z", "segments": 48, "color": "#b87333", "opacity": 0.7, "pos": [0, 0, -77.8], "group": "drone" },
+
+    { "id": "motor-45", "type": "cylinder", "r": 7, "h": 12, "axis": "z", "segments": 24, "color": "#7d848c", "opacity": 0.4, "pos": [30.052, 30.052, 8], "group": "drone" },
+    { "id": "prop-45", "type": "cylinder", "r": 25.5, "h": 2.5, "axis": "z", "segments": 48, "color": "#cc4444", "opacity": 0.3, "pos": [30.052, 30.052, 14], "group": "drone" },
+    { "id": "motor-135", "type": "cylinder", "r": 7, "h": 12, "axis": "z", "segments": 24, "color": "#7d848c", "opacity": 0.4, "pos": [-30.052, 30.052, 8], "group": "drone" },
+    { "id": "prop-135", "type": "cylinder", "r": 25.5, "h": 2.5, "axis": "z", "segments": 48, "color": "#cc4444", "opacity": 0.3, "pos": [-30.052, 30.052, 14], "group": "drone" },
+    { "id": "motor-225", "type": "cylinder", "r": 7, "h": 12, "axis": "z", "segments": 24, "color": "#7d848c", "opacity": 0.4, "pos": [-30.052, -30.052, 8], "group": "drone" },
+    { "id": "prop-225", "type": "cylinder", "r": 25.5, "h": 2.5, "axis": "z", "segments": 48, "color": "#cc4444", "opacity": 0.3, "pos": [-30.052, -30.052, 14], "group": "drone" },
+    { "id": "motor-315", "type": "cylinder", "r": 7, "h": 12, "axis": "z", "segments": 24, "color": "#7d848c", "opacity": 0.4, "pos": [30.052, -30.052, 8], "group": "drone" },
+    { "id": "prop-315", "type": "cylinder", "r": 25.5, "h": 2.5, "axis": "z", "segments": 48, "color": "#cc4444", "opacity": 0.3, "pos": [30.052, -30.052, 14], "group": "drone" },
+
+    { "id": "jetson", "type": "box", "size": [103, 90.5, 34.8], "color": "#2f6e3f", "opacity": 0.4, "pos": [0, 0, 26.4], "group": "station" },
+    { "id": "pin-a-0", "type": "cylinder", "r": 1.25, "h": 11.1, "axis": "z", "segments": 16, "color": "#c9a23a", "opacity": 0.85, "pos": [175, 0, 31.55], "group": "station" },
+    { "id": "pin-a-90", "type": "cylinder", "r": 1.25, "h": 11.1, "axis": "z", "segments": 16, "color": "#c9a23a", "opacity": 0.85, "pos": [175, 11.5, 31.55], "group": "station" },
+    { "id": "pin-a-210", "type": "cylinder", "r": 1.25, "h": 11.1, "axis": "z", "segments": 16, "color": "#c9a23a", "opacity": 0.85, "pos": [184.96, -5.75, 31.55], "group": "station" },
+    { "id": "pin-a-330", "type": "cylinder", "r": 1.25, "h": 11.1, "axis": "z", "segments": 16, "color": "#c9a23a", "opacity": 0.85, "pos": [165.04, -5.75, 31.55], "group": "station" },
+    { "id": "pin-b-0", "type": "cylinder", "r": 1.25, "h": 11.1, "axis": "z", "segments": 16, "color": "#c9a23a", "opacity": 0.85, "pos": [-175, 0, 31.55], "group": "station" },
+    { "id": "pin-b-90", "type": "cylinder", "r": 1.25, "h": 11.1, "axis": "z", "segments": 16, "color": "#c9a23a", "opacity": 0.85, "pos": [-175, 11.5, 31.55], "group": "station" },
+    { "id": "pin-b-210", "type": "cylinder", "r": 1.25, "h": 11.1, "axis": "z", "segments": 16, "color": "#c9a23a", "opacity": 0.85, "pos": [-165.04, -5.75, 31.55], "group": "station" },
+    { "id": "pin-b-330", "type": "cylinder", "r": 1.25, "h": 11.1, "axis": "z", "segments": 16, "color": "#c9a23a", "opacity": 0.85, "pos": [-184.96, -5.75, 31.55], "group": "station" },
+
+    { "id": "seated-sphere", "type": "sphere", "r": 80, "color": "#7a8a99", "opacity": 0.16, "pos": [175, 0, 113.1], "explode": [0, 0, 1.2], "group": "seat" }
+  ],
+  "scenes": [
+    { "id": "drone", "label": "drone — 機体単体（球中心原点）", "groups": ["drone"], "camera": { "target": [0, 0, 0], "dist": 420 } },
+    { "id": "station", "label": "station — ステーション + 着座球", "groups": ["station", "seat"], "camera": { "target": [0, 0, 60], "dist": 950 } },
+    { "id": "docked", "label": "docked — ポート A に着座", "default": true, "groups": ["station", "drone"], "offsets": { "drone": [175, 0, 113.1] }, "explodeLift": { "drone": [0, 0, 1.2] }, "camera": { "target": [0, 0, 60], "dist": 950 } }
+  ]
+}

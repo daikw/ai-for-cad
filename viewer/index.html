@@ -1,0 +1,378 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>forgecad-experiments assembly viewer</title>
+<style>
+  :root { color-scheme: dark; }
+  html, body { margin: 0; height: 100%; background: #2b323c; color: #dfe5ec; font: 13px/1.5 -apple-system, "Hiragino Sans", sans-serif; }
+  #app { display: flex; height: 100%; }
+  #panel { width: 248px; flex: none; overflow-y: auto; padding: 14px 16px; background: #232932; border-right: 1px solid #3a4350; }
+  #view { flex: 1; position: relative; }
+  canvas { display: block; }
+  h1 { font-size: 14px; margin: 0 0 2px; }
+  .sub { color: #8b97a4; font-size: 11px; margin-bottom: 14px; }
+  fieldset { border: 1px solid #3a4350; border-radius: 6px; margin: 0 0 12px; padding: 8px 10px; }
+  legend { color: #9fb4c8; padding: 0 4px; font-size: 11px; letter-spacing: 0.06em; }
+  label { display: flex; align-items: center; gap: 6px; padding: 2px 0; cursor: pointer; }
+  label.part .sw { width: 10px; height: 10px; border-radius: 2px; flex: none; }
+  input[type="range"] { width: 100%; }
+  select { width: 100%; background: #2b323c; color: inherit; border: 1px solid #3a4350; border-radius: 4px; padding: 4px; }
+  .row { display: flex; justify-content: space-between; align-items: center; gap: 8px; padding: 2px 0; }
+  .val { color: #8b97a4; font-variant-numeric: tabular-nums; }
+  #status { position: absolute; left: 10px; bottom: 8px; color: #8b97a4; font-size: 11px; pointer-events: none; max-width: calc(100% - 20px); }
+  button { background: #2f3742; color: inherit; border: 1px solid #3a4350; border-radius: 4px; padding: 4px 10px; cursor: pointer; }
+  button:hover { background: #39434f; }
+  fieldset.hidden { display: none; }
+</style>
+<!-- three.js: exact-version pinned CDN imports (no install, no lockfile churn) -->
+<script type="importmap">
+{
+  "imports": {
+    "three": "https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.module.js",
+    "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.170.0/examples/jsm/"
+  }
+}
+</script>
+</head>
+<body>
+<div id="app">
+  <div id="panel">
+    <h1 id="viewer-title">forgecad-experiments viewer</h1>
+    <div class="sub" id="viewer-subtitle">プロジェクトのアセンブリを manifest から読み込んで確認</div>
+
+    <fieldset>
+      <legend>PROJECT</legend>
+      <select id="project-select"></select>
+    </fieldset>
+
+    <fieldset id="scene-fieldset">
+      <legend>SCENE</legend>
+      <select id="scene-select"></select>
+    </fieldset>
+
+    <fieldset>
+      <legend>VIEW</legend>
+      <div class="row"><span>分解表示</span><span class="val" id="explode-val">0</span></div>
+      <input type="range" id="explode" min="0" max="100" value="0" />
+      <div class="row"><span>断面クリップ (<span id="clip-axis-label">Y</span>)</span><span class="val" id="clip-val">off</span></div>
+      <input type="range" id="clip" min="0" max="100" value="0" />
+      <label><input type="checkbox" id="ghosts" checked /> ゴースト部品</label>
+      <label><input type="checkbox" id="grid" checked /> グリッド</label>
+      <div class="row" style="margin-top:6px"><button id="reset-cam">カメラリセット</button></div>
+    </fieldset>
+
+    <fieldset>
+      <legend>PARTS</legend>
+      <div id="part-list"></div>
+    </fieldset>
+  </div>
+  <div id="view"><div id="status">loading…</div></div>
+</div>
+
+<script type="module">
+import * as THREE from "three";
+import { OrbitControls } from "three/addons/controls/OrbitControls.js";
+import { STLLoader } from "three/addons/loaders/STLLoader.js";
+
+THREE.Object3D.DEFAULT_UP = new THREE.Vector3(0, 0, 1); // CAD: Z-up
+
+// ---- rotation helper -----------------------------------------------------
+// Manifest "rot" is an ordered array of {axis, deg} world-frame steps, applied
+// as quat = step_N * ... * step_2 * step_1 (each new step prepended in world
+// space). This reproduces compound placements like the spherical-drone south
+// apriltags: qz180.multiply(qx90) === buildQuat([{axis:"x",deg:90},{axis:"z",deg:180}]).
+const AXIS_VEC = { x: new THREE.Vector3(1, 0, 0), y: new THREE.Vector3(0, 1, 0), z: new THREE.Vector3(0, 0, 1) };
+function buildQuat(steps) {
+  const q = new THREE.Quaternion();
+  for (const step of steps || []) {
+    q.premultiply(new THREE.Quaternion().setFromAxisAngle(AXIS_VEC[step.axis], (step.deg * Math.PI) / 180));
+  }
+  return q;
+}
+
+// ---- ghost primitive geometry ---------------------------------------------
+// box()/cylinder() in ForgeCAD's own authoring API center X/Y but span Z as
+// [0, size] (bottom-anchored); three.js geometries are centered on all 3 axes.
+// Manifests store ghost "pos" as the three.js-centered position (already
+// converted from ForgeCAD's bottom-anchored Z when the manifest was authored),
+// so no further conversion happens here.
+function buildGhostGeometry(g) {
+  if (g.type === "box") return new THREE.BoxGeometry(...g.size);
+  if (g.type === "sphere") return new THREE.SphereGeometry(g.r, 48, 32);
+  if (g.type === "cylinder") {
+    const segs = g.segments || 32;
+    const geo = new THREE.CylinderGeometry(g.r, g.r, g.h, segs);
+    // CylinderGeometry is Y-up by default; rotate its length axis to match
+    // the manifest's requested world axis.
+    if (g.axis === "z") geo.rotateX(Math.PI / 2);
+    else if (g.axis === "x") geo.rotateZ(-Math.PI / 2);
+    return geo;
+  }
+  throw new Error(`unknown ghost type: ${g.type}`);
+}
+function ghostMat(color, opacity = 0.4) {
+  return new THREE.MeshStandardMaterial({ color, transparent: true, opacity, roughness: 0.6, depthWrite: false });
+}
+
+// ---- three.js scaffolding ---------------------------------------------------
+const view = document.getElementById("view");
+const status = document.getElementById("status");
+const renderer = new THREE.WebGLRenderer({ antialias: true });
+renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
+renderer.localClippingEnabled = true;
+view.appendChild(renderer.domElement);
+
+const scene = new THREE.Scene();
+scene.background = new THREE.Color(0x2b323c);
+const camera = new THREE.PerspectiveCamera(40, 1, 1, 5000);
+const controls = new OrbitControls(camera, renderer.domElement);
+controls.enableDamping = true;
+
+scene.add(new THREE.HemisphereLight(0xc7d3df, 0x495463, 0.9));
+const key = new THREE.DirectionalLight(0xffe2bf, 1.6);
+key.position.set(260, -320, 420);
+scene.add(key);
+const fill = new THREE.DirectionalLight(0xd4e6fb, 0.5);
+fill.position.set(-260, 210, 220);
+scene.add(fill);
+
+const grid = new THREE.GridHelper(800, 40, 0x55606e, 0x3a4350);
+grid.rotation.x = Math.PI / 2; // GridHelper is XZ; flip into the Z-up XY plane
+scene.add(grid);
+
+const clipPlane = new THREE.Plane(new THREE.Vector3(0, -1, 0), 1e6);
+
+const root = new THREE.Group();
+scene.add(root);
+
+// ---- STL cache (keyed by full URL so switching projects never collides) ---
+const loader = new STLLoader();
+const geoCache = new Map();
+async function loadGeo(url) {
+  if (!geoCache.has(url)) {
+    geoCache.set(url, loader.loadAsync(url).then((g) => (g.computeVertexNormals(), g)));
+  }
+  return geoCache.get(url);
+}
+
+// ---- manifest-driven state ---------------------------------------------------
+const partList = document.getElementById("part-list");
+const sceneFieldset = document.getElementById("scene-fieldset");
+const sceneSelect = document.getElementById("scene-select");
+const projectSelect = document.getElementById("project-select");
+
+let manifest = null;
+let scenes = []; // resolved scene descriptors (synthesized if manifest has none)
+let entries = []; // { name, object, basePos, explodeDir, ghost, color }
+
+function resolveScenes(m) {
+  if (Array.isArray(m.scenes) && m.scenes.length > 0) return m.scenes;
+  // No scenes declared: one implicit scene showing every part + ghost,
+  // ungrouped (groups undefined => no group filtering applied).
+  return [{ id: "__all__", label: "assembly", camera: m.camera }];
+}
+
+async function loadManifest(url) {
+  const res = await fetch(url);
+  if (!res.ok) throw new Error(`manifest fetch failed: ${res.status} ${url}`);
+  return res.json();
+}
+
+function populateSceneSelect() {
+  sceneSelect.innerHTML = "";
+  for (const s of scenes) {
+    const opt = document.createElement("option");
+    opt.value = s.id;
+    opt.textContent = s.label || s.id;
+    sceneSelect.appendChild(opt);
+  }
+  const dflt = scenes.find((s) => s.default) || scenes[0];
+  sceneSelect.value = dflt.id;
+  sceneFieldset.classList.toggle("hidden", scenes.length <= 1);
+}
+
+function inGroup(entryGroup, groups) {
+  if (!groups) return true; // scene has no group filter => show everything
+  if (entryGroup == null) return true; // ungrouped entries are always shown
+  return groups.includes(entryGroup);
+}
+
+async function buildScene(sceneId) {
+  const sceneDef = scenes.find((s) => s.id === sceneId) || scenes[0];
+  root.clear();
+  partList.innerHTML = "";
+  entries = [];
+  status.textContent = "loading…";
+
+  const offsets = sceneDef.offsets || {};
+  const lifts = sceneDef.explodeLift || {};
+
+  for (const def of manifest.parts || []) {
+    if (!inGroup(def.group, sceneDef.groups)) continue;
+    const geo = await loadGeo(`${manifest.stlBase}/${def.stl}`);
+    const mat = new THREE.MeshStandardMaterial({ color: def.color, roughness: 0.62, metalness: 0.05, clippingPlanes: [clipPlane], side: THREE.DoubleSide });
+    const mesh = new THREE.Mesh(geo, mat);
+    mesh.quaternion.copy(buildQuat(def.rot));
+
+    const offset = offsets[def.group] || [0, 0, 0];
+    const base = new THREE.Vector3(...(def.pos || [0, 0, 0])).add(new THREE.Vector3(...offset));
+    mesh.position.copy(base);
+    root.add(mesh);
+
+    const dir = new THREE.Vector3(...(def.explode || [0, 0, 0]));
+    const lift = lifts[def.group];
+    if (lift) dir.add(new THREE.Vector3(...lift));
+
+    entries.push({ name: def.name, object: mesh, basePos: base, explodeDir: dir, ghost: false, color: def.color });
+  }
+
+  for (const def of manifest.ghosts || []) {
+    if (!inGroup(def.group, sceneDef.groups)) continue;
+    const geo = buildGhostGeometry(def);
+    const mesh = new THREE.Mesh(geo, ghostMat(def.color, def.opacity ?? 0.4));
+    mesh.quaternion.copy(buildQuat(def.rot));
+
+    const offset = offsets[def.group] || [0, 0, 0];
+    const base = new THREE.Vector3(...(def.pos || [0, 0, 0])).add(new THREE.Vector3(...offset));
+    mesh.position.copy(base);
+    root.add(mesh);
+
+    const dir = new THREE.Vector3(...(def.explode || [0, 0, 0]));
+    const lift = lifts[def.group];
+    if (lift) dir.add(new THREE.Vector3(...lift));
+
+    entries.push({ name: def.id || def.type, object: mesh, basePos: base, explodeDir: dir, ghost: true });
+  }
+
+  // part list UI
+  for (const e of entries) {
+    if (e.ghost) continue;
+    const label = document.createElement("label");
+    label.className = "part";
+    const cb = document.createElement("input");
+    cb.type = "checkbox";
+    cb.checked = true;
+    cb.addEventListener("change", () => (e.object.visible = cb.checked));
+    const sw = document.createElement("span");
+    sw.className = "sw";
+    sw.style.background = e.color || "#888888";
+    label.append(cb, sw, document.createTextNode(e.name));
+    partList.appendChild(label);
+  }
+
+  applyExplode();
+  applyGhostVisibility();
+  fitCamera(sceneDef);
+  const partCount = entries.filter((e) => !e.ghost).length;
+  const tris = entries.filter((e) => !e.ghost).reduce((n, e) => n + (e.object.geometry?.attributes.position.count ?? 0) / 3, 0);
+  status.textContent = `${manifest.title} / ${sceneDef.label || sceneDef.id} — ${partCount} parts, ${Math.round(tris).toLocaleString()} tris — drag: orbit / wheel: zoom / 右drag: pan`;
+}
+
+function fitCamera(sceneDef) {
+  const camDef = sceneDef.camera || manifest.camera || { target: [0, 0, 0], dist: 600 };
+  const target = new THREE.Vector3(...camDef.target);
+  const dist = camDef.dist;
+  camera.position.set(target.x + dist * 0.62, target.y - dist * 0.72, target.z + dist * 0.42);
+  controls.target.copy(target);
+  controls.update();
+}
+
+// ---- UI wiring ---------------------------------------------------------------
+const explodeInput = document.getElementById("explode");
+function applyExplode() {
+  const k = Number(explodeInput.value); // 0..100
+  document.getElementById("explode-val").textContent = k;
+  for (const e of entries) {
+    e.object.position.copy(e.basePos).addScaledVector(e.explodeDir, k * 1.1);
+  }
+}
+explodeInput.addEventListener("input", applyExplode);
+
+const AXIS_UNIT = { x: new THREE.Vector3(-1, 0, 0), y: new THREE.Vector3(0, -1, 0), z: new THREE.Vector3(0, 0, -1) };
+const clipInput = document.getElementById("clip");
+function applyClip() {
+  const clipCfg = manifest?.clip || { axis: "y", min: -100, max: 100 };
+  document.getElementById("clip-axis-label").textContent = clipCfg.axis.toUpperCase();
+  clipPlane.normal.copy(AXIS_UNIT[clipCfg.axis]);
+  const k = Number(clipInput.value);
+  if (k === 0) {
+    clipPlane.constant = 1e6;
+    document.getElementById("clip-val").textContent = "off";
+  } else {
+    clipPlane.constant = clipCfg.max - (k / 100) * (clipCfg.max - clipCfg.min);
+    document.getElementById("clip-val").textContent = `${clipCfg.axis}=${clipPlane.constant.toFixed(0)}`;
+  }
+}
+clipInput.addEventListener("input", applyClip);
+
+const ghostsInput = document.getElementById("ghosts");
+function applyGhostVisibility() {
+  for (const e of entries) if (e.ghost) e.object.visible = ghostsInput.checked;
+}
+ghostsInput.addEventListener("change", applyGhostVisibility);
+
+document.getElementById("grid").addEventListener("change", (ev) => (grid.visible = ev.target.checked));
+sceneSelect.addEventListener("change", () => buildScene(sceneSelect.value).catch(reportError));
+document.getElementById("reset-cam").addEventListener("click", () => {
+  const sceneDef = scenes.find((s) => s.id === sceneSelect.value) || scenes[0];
+  fitCamera(sceneDef);
+});
+
+function reportError(err) {
+  status.textContent = `読み込み失敗: ${err.message} — viewer/serve.sh で HTTP 配信していますか？（file:// では STL/manifest を fetch できません）`;
+  console.error(err);
+}
+
+// ---- project switching --------------------------------------------------
+async function selectProject(entry) {
+  try {
+    manifest = await loadManifest(entry.manifest);
+    document.getElementById("viewer-title").textContent = manifest.title || entry.title;
+    document.getElementById("viewer-subtitle").textContent = manifest.subtitle || "";
+    scenes = resolveScenes(manifest);
+    populateSceneSelect();
+    applyClip();
+    await buildScene(sceneSelect.value);
+  } catch (err) {
+    reportError(err);
+  }
+}
+
+async function init() {
+  const res = await fetch("./projects.json");
+  if (!res.ok) throw new Error(`projects.json fetch failed: ${res.status}`);
+  const { projects } = await res.json();
+  for (const p of projects) {
+    const opt = document.createElement("option");
+    opt.value = p.id;
+    opt.textContent = p.title;
+    projectSelect.appendChild(opt);
+  }
+  projectSelect.addEventListener("change", () => {
+    const entry = projects.find((p) => p.id === projectSelect.value);
+    selectProject(entry);
+  });
+  await selectProject(projects[0]);
+}
+
+function resize() {
+  const w = view.clientWidth;
+  const h = view.clientHeight;
+  renderer.setSize(w, h);
+  camera.aspect = w / h;
+  camera.updateProjectionMatrix();
+}
+addEventListener("resize", resize);
+resize();
+
+renderer.setAnimationLoop(() => {
+  controls.update();
+  renderer.render(scene, camera);
+});
+
+init().catch(reportError);
+</script>
+</body>
+</html>
