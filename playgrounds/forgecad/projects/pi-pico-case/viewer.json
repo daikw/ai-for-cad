@@ -1,14 +1,25 @@
 {
-  "title": "Pi Pico Case (v9.7)",
-  "subtitle": "current v9.7 print-layout export: case + lid side by side on the bed",
+  "title": "Pi Pico Case",
+  "subtitle": "print-layout export: case + lid side by side on the bed. Select VERSION to compare v5 - v9.7",
   "stlBase": "../projects/pi-pico-case",
   "up": "z",
   "clip": { "axis": "y", "min": -20, "max": 60 },
   "camera": { "target": [0, 15, 4], "dist": 190 },
   "parts": [
-    { "id": "print-layout-v9-7", "name": "pi-pico-case-print-v9.7", "stl": "pi-pico-case-print-v9-7.stl", "color": "#3a86ff", "pos": [0, 0, 0] }
+    { "id": "print-layout", "name": "pi-pico-case print layout", "stl": "pi-pico-case-print-v9-7.stl", "color": "#3a86ff", "pos": [0, 0, 0] }
   ],
-  "scenes": [
-    { "id": "print-layout-v97", "label": "v9.7 print layout (case + lid, current)", "default": true }
+  "versions": [
+    { "id": "v5", "stl": { "print-layout": "pi-pico-case-print-v5.stl" } },
+    { "id": "v6", "stl": { "print-layout": "pi-pico-case-print-v6.stl" } },
+    { "id": "v7", "stl": { "print-layout": "pi-pico-case-print-v7.stl" } },
+    { "id": "v8", "stl": { "print-layout": "pi-pico-case-print-v8.stl" } },
+    { "id": "v9", "stl": { "print-layout": "pi-pico-case-print-v9.stl" } },
+    { "id": "v9.1", "stl": { "print-layout": "pi-pico-case-print-v9-1.stl" } },
+    { "id": "v9.2", "stl": { "print-layout": "pi-pico-case-print-v9-2.stl" } },
+    { "id": "v9.3", "stl": { "print-layout": "pi-pico-case-print-v9-3.stl" } },
+    { "id": "v9.4", "stl": { "print-layout": "pi-pico-case-print-v9-4.stl" } },
+    { "id": "v9.5", "stl": { "print-layout": "pi-pico-case-print-v9-5.stl" } },
+    { "id": "v9.6", "stl": { "print-layout": "pi-pico-case-print-v9-6.stl" } },
+    { "id": "v9.7", "default": true, "stl": { "print-layout": "pi-pico-case-print-v9-7.stl" } }
   ]
 }

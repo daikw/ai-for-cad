@@ -21,6 +21,8 @@ STL・manifest を fetch するため `file://` では動かない。必ず HTTP
 | 機能 | 説明 |
 |------|------|
 | PROJECT | `viewer/projects.json` に列挙されたプロジェクトを切り替える |
+| BRANCH | プロジェクトの `branches`（枝）を切り替える（1 枝しかない、または未定義のプロジェクトでは非表示） |
+| VERSION | manifest の `versions`（版）を切り替える（1 版しかない、または未定義の manifest では非表示） |
 | SCENE | manifest の `scenes` を切り替える（1 シーンしかない、または未定義のプロジェクトでは非表示） |
 | 分解表示 | 各部品・ゴーストの `explode` ベクトル方向にスライダーで分解する |
 | 断面クリップ | manifest の `clip.axis` 方向にスイープする断面 |
@@ -90,12 +92,48 @@ STL・manifest を fetch するため `file://` では動かない。必ず HTTP
   spherical-drone の docked シーンはこれを使って、drone group（機体一式 + そのゴースト）を
   ステーションのポート A 位置へオフセットしつつ、分解時にファンネルから持ち上げる。
 
+## 枝（branch）とバージョン（version）
+
+`docs/model-versioning.md` の「枝＝並存する別解」「バージョン＝古い方を置き換える改善版」
+という区別に対応して、ビューアも 2 段階で切り替えられる。**枝は `projects.json` の
+プロジェクトエントリ側、バージョンは manifest（`viewer.json`）側**で宣言する — この対応が
+崩れないようにする（枝を manifest 側で表現したり、バージョンをプロジェクトエントリの
+枝として表現したりしない）。
+
+### 枝（`viewer/projects.json`）
+
+```jsonc
+{ "id": "parts-tray", "title": "Parts Tray", "branches": [
+  { "id": "b1-uniform-cells", "label": "b1 — uniform cells", "manifest": "../projects/parts-tray/b1-uniform-cells/viewer.json" },
+  { "id": "b2-edge-joinery", "label": "b2 — edge joinery", "manifest": "../projects/parts-tray/b2-edge-joinery/viewer.json" }
+] }
+```
+
+`branches` を持たないプロジェクトエントリは従来どおり `manifest` を直接持つ（単枝モデルは
+今まで通りフラットのままでよい）。`branches` が 1 件だけ、または未定義の場合は BRANCH
+フィールドセットごと非表示になる。先頭の枝がデフォルトで選択される（`default: true` で
+明示指定も可）。
+
+### バージョン（`projects/<name>/viewer.json`）
+
+```jsonc
+"versions": [
+  { "id": "v9.7", "default": true, "stl": { "print-layout": "pi-pico-case-print-v9-7.stl" } },
+  { "id": "v9",   "stl": { "print-layout": "pi-pico-case-print-v9.stl" } }
+]
+```
+
+`stl` は `parts[].id` → 差し替え STL ファイル名のマップ。バージョン切替時はそのパーツの
+geometry だけを再ロードし、位置・色・シーン構成など他の manifest 定義は変化しない。
+`versions` が 1 件だけ、または未定義の manifest では VERSION フィールドセットごと非表示になる。
+
 ## 新しいプロジェクトを追加する
 
 1. STL をエクスポートする: `projects/<name>/stl/*.stl`
 2. `projects/<name>/viewer.json` を上記スキーマで書く（`scenes` は 1 シーンしか無いなら省略してよい）
-3. `viewer/projects.json` の `projects` 配列に 1 行追加する:
+3. `viewer/projects.json` の `projects` 配列に 1 行追加する（単枝モデル）:
    ```jsonc
    { "id": "<name>", "title": "<表示名>", "manifest": "../projects/<name>/viewer.json" }
    ```
+   2 本目の枝が生えたら `branches` 配列に切り替える（上記「枝とバージョン」参照）。
 4. `viewer/serve.sh` を起動し、PROJECT ドロップダウンで選んで確認する
