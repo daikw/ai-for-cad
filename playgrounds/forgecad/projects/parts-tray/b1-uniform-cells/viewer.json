@@ -1,0 +1,11 @@
+{
+  "title": "parts-tray b1 — uniform cells viewer",
+  "subtitle": "square-100 + rect-100x50 trays laid out as one print-set STL",
+  "stlBase": "../projects/parts-tray/b1-uniform-cells",
+  "up": "z",
+  "clip": { "axis": "y", "min": -60, "max": 118 },
+  "camera": { "target": [0, 29, 10], "dist": 320 },
+  "parts": [
+    { "id": "print-set", "name": "parts-trays-print-set", "stl": "parts-trays-print-set.stl", "color": "#d7d1c2", "pos": [0, 0, 0] }
+  ]
+}

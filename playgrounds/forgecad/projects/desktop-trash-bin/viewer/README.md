@@ -32,3 +32,13 @@ STLとPNGをfetchするため、`file://` ではなくHTTPで配信する。
 - `window-frames`
 - `wave-bars`
 - `corner-posts`
+
+## リポジトリ横断ビューアでも見られる
+
+この幾何形状は、リポジトリルートの共有ビューアからも確認できる
+（PROJECT ドロップダウンで「Desktop Trash Bin」を選択、SCENE でパターン切り替え）。
+
+```sh
+viewer/serve.sh
+# -> http://localhost:8642/viewer/
+```

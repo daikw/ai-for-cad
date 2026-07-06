@@ -1,0 +1,11 @@
+{
+  "title": "parts-tray b2 — edge joinery viewer",
+  "subtitle": "200x150x10 tray, varied cells + repeatable male/female edge connectors",
+  "stlBase": "../projects/parts-tray/b2-edge-joinery",
+  "up": "z",
+  "clip": { "axis": "y", "min": -85, "max": 85 },
+  "camera": { "target": [0, 0, 5], "dist": 480 },
+  "parts": [
+    { "id": "tray-v2", "name": "parts-tray-v2", "stl": "parts-tray-v2.stl", "color": "#d9d2c3", "pos": [0, 0, 0] }
+  ]
+}

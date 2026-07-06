@@ -1,6 +1,10 @@
 {
   "projects": [
     { "id": "spherical-drone", "title": "Spherical Drone", "manifest": "../projects/spherical-drone/viewer.json" },
-    { "id": "handy-fdm-mini", "title": "Handy FDM Mini", "manifest": "../projects/handy-fdm-mini/viewer.json" }
+    { "id": "handy-fdm-mini", "title": "Handy FDM Mini", "manifest": "../projects/handy-fdm-mini/viewer.json" },
+    { "id": "parts-tray-b1", "title": "Parts Tray b1 — uniform cells", "manifest": "../projects/parts-tray/b1-uniform-cells/viewer.json" },
+    { "id": "parts-tray-b2", "title": "Parts Tray b2 — edge joinery", "manifest": "../projects/parts-tray/b2-edge-joinery/viewer.json" },
+    { "id": "desktop-trash-bin", "title": "Desktop Trash Bin", "manifest": "../projects/desktop-trash-bin/viewer.json" },
+    { "id": "pi-pico-case", "title": "Pi Pico Case (v9.7)", "manifest": "../projects/pi-pico-case/viewer.json" }
   ]
 }

@@ -1,0 +1,28 @@
+{
+  "title": "Desktop Trash Bin — side decoration patterns",
+  "subtitle": "W142 x D92 x H96 sweep box; 7 side-decoration patterns + bed print layout",
+  "stlBase": "../projects/desktop-trash-bin",
+  "up": "z",
+  "clip": { "axis": "y", "min": -60, "max": 60 },
+  "camera": { "target": [0, 0, 48], "dist": 350 },
+  "parts": [
+    { "id": "body-vertical-ribs", "name": "vertical-ribs", "stl": "desktop-trash-bin-vertical-ribs.stl", "color": "#9fb8aa", "pos": [0, 0, 0], "group": "vertical-ribs" },
+    { "id": "body-horizontal-rails", "name": "horizontal-rails", "stl": "desktop-trash-bin-horizontal-rails.stl", "color": "#9fb8aa", "pos": [0, 0, 0], "group": "horizontal-rails" },
+    { "id": "body-diagonal-slashes", "name": "diagonal-slashes", "stl": "desktop-trash-bin-diagonal-slashes.stl", "color": "#9fb8aa", "pos": [0, 0, 0], "group": "diagonal-slashes" },
+    { "id": "body-dot-grid", "name": "dot-grid", "stl": "desktop-trash-bin-dot-grid.stl", "color": "#9fb8aa", "pos": [0, 0, 0], "group": "dot-grid" },
+    { "id": "body-window-frames", "name": "window-frames", "stl": "desktop-trash-bin-window-frames.stl", "color": "#9fb8aa", "pos": [0, 0, 0], "group": "window-frames" },
+    { "id": "body-wave-bars", "name": "wave-bars", "stl": "desktop-trash-bin-wave-bars.stl", "color": "#9fb8aa", "pos": [0, 0, 0], "group": "wave-bars" },
+    { "id": "body-corner-posts", "name": "corner-posts", "stl": "desktop-trash-bin-corner-posts.stl", "color": "#9fb8aa", "pos": [0, 0, 0], "group": "corner-posts" },
+    { "id": "body-print-layout", "name": "print-layout", "stl": "desktop-trash-bin-print-layout.stl", "color": "#9fb8aa", "pos": [0, 0, 0], "group": "print-layout" }
+  ],
+  "scenes": [
+    { "id": "vertical-ribs", "label": "vertical-ribs", "default": true, "groups": ["vertical-ribs"] },
+    { "id": "horizontal-rails", "label": "horizontal-rails", "groups": ["horizontal-rails"] },
+    { "id": "diagonal-slashes", "label": "diagonal-slashes", "groups": ["diagonal-slashes"] },
+    { "id": "dot-grid", "label": "dot-grid", "groups": ["dot-grid"] },
+    { "id": "window-frames", "label": "window-frames", "groups": ["window-frames"] },
+    { "id": "wave-bars", "label": "wave-bars", "groups": ["wave-bars"] },
+    { "id": "corner-posts", "label": "corner-posts", "groups": ["corner-posts"] },
+    { "id": "print-layout", "label": "print-layout (bed export)", "groups": ["print-layout"] }
+  ]
+}

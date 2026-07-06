@@ -1,0 +1,14 @@
+{
+  "title": "Pi Pico Case (v9.7)",
+  "subtitle": "current v9.7 print-layout export: case + lid side by side on the bed",
+  "stlBase": "../projects/pi-pico-case",
+  "up": "z",
+  "clip": { "axis": "y", "min": -20, "max": 60 },
+  "camera": { "target": [0, 15, 4], "dist": 190 },
+  "parts": [
+    { "id": "print-layout-v9-7", "name": "pi-pico-case-print-v9.7", "stl": "pi-pico-case-print-v9-7.stl", "color": "#3a86ff", "pos": [0, 0, 0] }
+  ],
+  "scenes": [
+    { "id": "print-layout-v97", "label": "v9.7 print layout (case + lid, current)", "default": true }
+  ]
+}
