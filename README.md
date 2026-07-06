@@ -23,3 +23,4 @@ Branch (`b<N>`) = coexisting alternative take on the same concept. Version (`v<N
 | [parts-tray](./projects/parts-tray/) | [b1-uniform-cells](./projects/parts-tray/b1-uniform-cells/) | v1 | standalone trays, uniform cells (ex-`parts-trays`) |
 | [parts-tray](./projects/parts-tray/) | [b2-edge-joinery](./projects/parts-tray/b2-edge-joinery/) | v1 | varied cells + edge connectors (ex-`parts-tray-v2`) |
 | [palm-uav](./projects/palm-uav/) | — | — | palm-sized 1S micro quadcopter; HLD drafted, model not started |
+| [palm-agv](./projects/palm-agv/) | — | — | palm-sized differential-drive indoor AGV; HLD drafted, model not started |
