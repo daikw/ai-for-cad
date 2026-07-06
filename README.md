@@ -4,5 +4,5 @@ CAD experiments and print artifacts.
 
 ## Directory Layout
 
-- `prints/<slug>/` — one-off printable artifacts, including ForgeCAD source, STL/G-code, renders, viewer files, and print snapshots.
-- `<project-name>/` — larger or ongoing model projects that are expected to evolve across multiple sessions.
+- `projects/<slug>/` — printable artifacts and model projects, including ForgeCAD source, STL/G-code, renders, viewer files, and print snapshots (one-off prints and larger ongoing projects alike).
+- `printers/<slug>/` — material about the physical printer devices themselves (e.g. security audits), as opposed to what they printed.

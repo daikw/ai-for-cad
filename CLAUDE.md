@@ -1,6 +1,6 @@
 # forgecad-experiments
 
-ForgeCAD モデリング実験リポジトリ。各サブディレクトリが 1 プロジェクト（spherical-drone, pi-pico-case, ...）。
+ForgeCAD モデリング実験リポジトリ。`projects/` 配下の各サブディレクトリが 1 プロジェクト（spherical-drone, pi-pico-case, ...）。`printers/` は印刷成果物ではなくプリンタ機器自体に関する資料（セキュリティ監査など）を置く。
 
 ## モデリングの完了条件
 
