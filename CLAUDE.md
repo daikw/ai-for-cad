@@ -1,6 +1,13 @@
 # forgecad-experiments
 
-ForgeCAD モデリング実験リポジトリ。`projects/` 配下の各サブディレクトリが 1 プロジェクト（spherical-drone, pi-pico-case, ...）。`printers/` は印刷成果物ではなくプリンタ機器自体に関する資料（セキュリティ監査など）を置く。
+ForgeCAD モデリング実験リポジトリ。`projects/` 配下の各サブディレクトリが 1 モデル（spherical-drone, pi-pico-case, ...）。`printers/` は印刷成果物ではなくプリンタ機器自体に関する資料（セキュリティ監査など）を置く。
+
+## バージョン管理方針（docs/model-versioning.md が正本）
+
+- **枝**（並存する別解）はディレクトリ: `projects/<model>/b<N>-<slug>/`。枝が 1 本のうちはフラット
+- **バージョン**（置換する改善版）は同一ディレクトリで in-place。CHANGELOG.md に `## v<N>` 見出しで記録し、印刷した版の STL/G-code は `-v<N>` サフィックスで保存
+- パラメータ違いだけの変種は `Param.choice` + `variant-*.forge.js`。ディレクトリを増やさない
+- 新モデル追加・派生時は README.md の Models 表と `viewer/projects.json` も更新する
 
 ## モデリングの完了条件
 
