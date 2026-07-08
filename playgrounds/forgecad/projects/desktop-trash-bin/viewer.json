@@ -3,6 +3,7 @@
   "subtitle": "W142 x D92 x H96 sweep box; 7 side-decoration patterns + bed print layout",
   "stlBase": "../playgrounds/forgecad/projects/desktop-trash-bin",
   "up": "z",
+  "provenance": { "aiModel": "Claude (Claude Code)", "skills": ["forgecad-high-level-spec", "forgecad-lld", "forgecad-make-a-model", "forgecad-verify"], "dsl": "forgecad" },
   "clip": { "axis": "y", "min": -60, "max": 60 },
   "camera": { "target": [0, 0, 48], "dist": 350 },
   "parts": [

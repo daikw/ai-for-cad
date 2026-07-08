@@ -3,6 +3,7 @@
   "subtitle": "print-layout export: case + lid side by side on the bed. Select VERSION to compare v5 - v9.7",
   "stlBase": "../playgrounds/forgecad/projects/pi-pico-case",
   "up": "z",
+  "provenance": { "aiModel": "Claude (Claude Code)", "skills": ["forgecad-high-level-spec", "forgecad-lld", "forgecad-make-a-model", "forgecad-verify"], "dsl": "forgecad" },
   "clip": { "axis": "y", "min": -20, "max": 60 },
   "camera": { "target": [0, 15, 4], "dist": 190 },
   "parts": [
