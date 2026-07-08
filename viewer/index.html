@@ -13,6 +13,10 @@
   canvas { display: block; }
   h1 { font-size: 14px; margin: 0 0 2px; }
   .sub { color: #8b97a4; font-size: 11px; margin-bottom: 14px; }
+  #provenance { display: flex; flex-wrap: wrap; gap: 4px; margin: -8px 0 14px; }
+  #provenance.hidden { display: none; }
+  .badge { font-size: 10px; padding: 1px 7px; border-radius: 9px; border: 1px solid #3a4350; background: #2b323c; color: #9fb4c8; white-space: nowrap; }
+  .badge.model { border-color: #4a6f96; color: #9cc3ea; }
   fieldset { border: 1px solid #3a4350; border-radius: 6px; margin: 0 0 12px; padding: 8px 10px; }
   legend { color: #9fb4c8; padding: 0 4px; font-size: 11px; letter-spacing: 0.06em; }
   label { display: flex; align-items: center; gap: 6px; padding: 2px 0; cursor: pointer; }
@@ -41,6 +45,7 @@
   <div id="panel">
     <h1 id="viewer-title">ai-for-cad viewer</h1>
     <div class="sub" id="viewer-subtitle">プロジェクトのアセンブリを manifest から読み込んで確認</div>
+    <div id="provenance" class="hidden"></div>
 
     <fieldset>
       <legend>PROJECT</legend>
@@ -391,6 +396,25 @@ document.getElementById("reset-cam").addEventListener("click", () => {
   fitCamera(sceneDef);
 });
 
+// ---- provenance badges ------------------------------------------------------
+// manifest.provenance = { aiModel, skills: [...], dsl, date } — all optional.
+const provenanceEl = document.getElementById("provenance");
+function renderProvenance(p) {
+  provenanceEl.innerHTML = "";
+  const badges = [];
+  if (p?.aiModel) badges.push({ text: p.aiModel, cls: "model" });
+  if (p?.dsl) badges.push({ text: `dsl: ${p.dsl}` });
+  for (const s of p?.skills || []) badges.push({ text: s });
+  if (p?.date) badges.push({ text: p.date });
+  for (const b of badges) {
+    const span = document.createElement("span");
+    span.className = b.cls ? `badge ${b.cls}` : "badge";
+    span.textContent = b.text;
+    provenanceEl.appendChild(span);
+  }
+  provenanceEl.classList.toggle("hidden", badges.length === 0);
+}
+
 function reportError(err) {
   status.textContent = `読み込み失敗: ${err.message} — viewer/serve.sh で HTTP 配信していますか？（file:// では STL/manifest を fetch できません）`;
   console.error(err);
@@ -405,6 +429,7 @@ async function selectBranch(branchEntry) {
     manifest = await loadManifest(branchEntry.manifest);
     document.getElementById("viewer-title").textContent = manifest.title || "";
     document.getElementById("viewer-subtitle").textContent = manifest.subtitle || "";
+    renderProvenance(manifest.provenance);
     populateVersionSelect();
     scenes = resolveScenes(manifest);
     populateSceneSelect();
