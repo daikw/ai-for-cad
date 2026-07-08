@@ -29,6 +29,10 @@
   button { background: #2f3742; color: inherit; border: 1px solid #3a4350; border-radius: 4px; padding: 4px 10px; cursor: pointer; }
   button:hover { background: #39434f; }
   fieldset.hidden { display: none; }
+  label.part.hover { background: #2f3742; border-radius: 3px; }
+  label.part .part-name.has-desc { text-decoration: underline dotted #55606e; text-underline-offset: 2px; }
+  #tooltip { position: fixed; z-index: 10; max-width: 260px; padding: 6px 9px; background: #1c2129; border: 1px solid #4a5563; border-radius: 5px; font-size: 11px; color: #c9d4de; pointer-events: none; }
+  #tooltip.hidden { display: none; }
 </style>
 <!-- three.js: exact-version pinned CDN imports (no install, no lockfile churn) -->
 <script type="importmap">
@@ -85,6 +89,7 @@
   </div>
   <div id="view"><div id="status">loading…</div></div>
 </div>
+<div id="tooltip" class="hidden"></div>
 
 <script type="module">
 import * as THREE from "three";
@@ -272,6 +277,8 @@ async function buildScene(sceneId) {
   root.clear();
   partList.innerHTML = "";
   entries = [];
+  hoveredEntry = null; // old meshes are gone; don't restore materials on them
+  hideTip();
   status.textContent = "loading…";
 
   const offsets = sceneDef.offsets || {};
@@ -293,7 +300,13 @@ async function buildScene(sceneId) {
     const lift = lifts[def.group];
     if (lift) dir.add(new THREE.Vector3(...lift));
 
-    entries.push({ name: def.name, object: mesh, basePos: base, explodeDir: dir, ghost: false, color: def.color });
+    entries.push({
+      id: def.id, name: def.name, group: def.group ?? null,
+      object: mesh, basePos: base, baseQuat: mesh.quaternion.clone(),
+      sceneOffset: new THREE.Vector3(...offset), explodeDir: dir,
+      ghost: false, color: def.color, baseColor: new THREE.Color(def.color),
+      description: def.description ?? null, labelEl: null,
+    });
   }
 
   for (const def of manifest.ghosts || []) {
@@ -311,7 +324,11 @@ async function buildScene(sceneId) {
     const lift = lifts[def.group];
     if (lift) dir.add(new THREE.Vector3(...lift));
 
-    entries.push({ name: def.id || def.type, object: mesh, basePos: base, explodeDir: dir, ghost: true });
+    entries.push({
+      id: def.id || def.type, name: def.id || def.type, group: def.group ?? null,
+      object: mesh, basePos: base, baseQuat: mesh.quaternion.clone(),
+      sceneOffset: new THREE.Vector3(...offset), explodeDir: dir, ghost: true,
+    });
   }
 
   // part list UI
@@ -326,7 +343,22 @@ async function buildScene(sceneId) {
     const sw = document.createElement("span");
     sw.className = "sw";
     sw.style.background = e.color || "#888888";
-    label.append(cb, sw, document.createTextNode(e.name));
+    const nameEl = document.createElement("span");
+    nameEl.className = "part-name" + (e.description ? " has-desc" : "");
+    nameEl.textContent = e.name;
+    label.append(cb, sw, nameEl);
+    label.addEventListener("mouseenter", () => {
+      setHighlight(e);
+      if (e.description) {
+        const r = label.getBoundingClientRect();
+        showTip(e.description, r.right + 10, r.top);
+      }
+    });
+    label.addEventListener("mouseleave", () => {
+      setHighlight(null);
+      hideTip();
+    });
+    e.labelEl = label;
     partList.appendChild(label);
   }
 
@@ -353,6 +385,79 @@ function fitCamera(sceneDef) {
   camera.position.set(target.x + dist * 0.62, target.y - dist * 0.72, target.z + dist * 0.42);
   controls.target.copy(target);
   controls.update();
+}
+
+// ---- hover highlight + description tooltip ---------------------------------
+// Highlight = self-colored emissive on the target, dimmed base color on the
+// rest. Material properties only — no mesh/material churn, no transparency
+// (which would break depth sorting).
+const tooltipEl = document.getElementById("tooltip");
+let hoveredEntry = null;
+function setHighlight(target) {
+  if (target === hoveredEntry) return;
+  hoveredEntry?.labelEl?.classList.remove("hover");
+  hoveredEntry = target;
+  target?.labelEl?.classList.add("hover");
+  for (const e of entries) {
+    if (e.ghost) continue; // ghost materials are transparent; leave them alone
+    const mat = e.object.material;
+    if (!target) {
+      mat.color.copy(e.baseColor);
+      mat.emissive.setHex(0x000000);
+    } else if (e === target) {
+      mat.color.copy(e.baseColor);
+      mat.emissive.copy(e.baseColor).multiplyScalar(0.35);
+    } else {
+      mat.color.copy(e.baseColor).multiplyScalar(0.45);
+      mat.emissive.setHex(0x000000);
+    }
+  }
+}
+function showTip(text, x, y) {
+  tooltipEl.textContent = text;
+  tooltipEl.style.left = `${x}px`;
+  tooltipEl.style.top = `${y}px`;
+  tooltipEl.classList.remove("hidden");
+}
+function hideTip() {
+  tooltipEl.classList.add("hidden");
+}
+
+// 3D-side hover: pointermove only records coordinates; the render loop
+// raycasts at most once per frame (dense STL meshes make per-event raycasts
+// stutter). three.js early-outs on bounding spheres so a dozen parts is cheap;
+// if a huge STL ever hurts, three-mesh-bvh is the escape hatch (new dependency).
+const raycaster = new THREE.Raycaster();
+const pointerNdc = new THREE.Vector2();
+let pointerClient = { x: 0, y: 0 };
+let pointerDirty = false;
+let pointerDown = false;
+renderer.domElement.addEventListener("pointermove", (ev) => {
+  const r = renderer.domElement.getBoundingClientRect();
+  pointerNdc.set(((ev.clientX - r.left) / r.width) * 2 - 1, -((ev.clientY - r.top) / r.height) * 2 + 1);
+  pointerClient = { x: ev.clientX, y: ev.clientY };
+  pointerDirty = true;
+});
+renderer.domElement.addEventListener("pointerdown", () => {
+  pointerDown = true;
+  hideTip();
+});
+addEventListener("pointerup", () => (pointerDown = false));
+renderer.domElement.addEventListener("pointerleave", () => {
+  setHighlight(null);
+  hideTip();
+});
+
+function pickHover() {
+  if (!pointerDirty || pointerDown) return;
+  pointerDirty = false;
+  raycaster.setFromCamera(pointerNdc, camera);
+  const objs = entries.filter((e) => !e.ghost && e.object.visible).map((e) => e.object);
+  const hit = raycaster.intersectObjects(objs, false)[0];
+  const entry = hit ? entries.find((e) => e.object === hit.object) : null;
+  setHighlight(entry);
+  if (entry?.description) showTip(entry.description, pointerClient.x + 14, pointerClient.y + 14);
+  else hideTip();
 }
 
 // ---- UI wiring ---------------------------------------------------------------
@@ -482,6 +587,7 @@ addEventListener("resize", resize);
 resize();
 
 renderer.setAnimationLoop(() => {
+  pickHover();
   controls.update();
   renderer.render(scene, camera);
 });
