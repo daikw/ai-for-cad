@@ -1,0 +1,61 @@
+{
+  "title": "oldham-coupling",
+  "subtitle": "3ピース オルダムカップリング — 平行ミスアライメント 1mm を吸収して 1:1 でトルク伝達",
+  "stlBase": "../playgrounds/fusion360/projects/oldham-coupling/exports",
+  "up": "z",
+  "clip": { "axis": "y", "min": -16, "max": 16 },
+  "camera": { "target": [0.5, 0, 0], "dist": 170 },
+  "provenance": {
+    "aiModel": "Claude Fable 5",
+    "skills": ["fusion360"],
+    "dsl": "adsk-python (Fusion MCP)",
+    "date": "2026-07"
+  },
+  "parts": [
+    {
+      "id": "HubDrive", "name": "HubDrive", "stl": "hub.stl", "color": "#7fb3d5",
+      "pos": [0, 0, -19.3], "explode": [0, 0, -1],
+      "description": "駆動ハブ。X方向スロットがディスク下タングと摺動嵌合（fit_cl 0.25mm）。軸A = 原点"
+    },
+    {
+      "id": "HubDriven", "name": "HubDriven", "stl": "hub.stl", "color": "#7fd5a3",
+      "pos": [1, 0, 19.3], "rot": [{ "axis": "x", "deg": 180 }, { "axis": "z", "deg": 90 }],
+      "explode": [0, 0, 1],
+      "description": "従動ハブ（駆動側と同一部品を反転）。軸B = X+1mm、スロットは Y 方向"
+    },
+    {
+      "id": "Disc", "name": "Disc", "stl": "disc.stl", "color": "#e8c46b",
+      "pos": [1, 0, 0],
+      "description": "中央ディスク。直交タング×2 が両ハブのスロットに嵌り、軸ズレを吸収する。中心は半径 e/2 の円軌道を 2θ で公転"
+    },
+    {
+      "id": "ShaftDrive", "name": "ShaftDrive", "stl": "shaft.stl", "color": "#9aa4b0",
+      "pos": [0, 0, -9.6], "rot": [{ "axis": "x", "deg": 180 }], "explode": [0, 0, -2],
+      "description": "駆動軸（φ6 Dカット、bore_cl 0.15mm）"
+    },
+    {
+      "id": "ShaftDriven", "name": "ShaftDriven", "stl": "shaft.stl", "color": "#9aa4b0",
+      "pos": [1, 0, 9.6], "explode": [0, 0, 2],
+      "description": "従動軸（φ6 Dカット）。misalign=1mm 分 +X にオフセット"
+    }
+  ],
+  "motions": [
+    {
+      "id": "transmit",
+      "label": "回転伝達 — 1mm 軸ズレ吸収",
+      "loop": true,
+      "durationMs": 4000,
+      "tracks": [
+        { "part": "HubDrive", "rotate": { "axis": "z", "degFrom": 0, "degTo": 360 } },
+        { "part": "ShaftDrive", "rotate": { "axis": "z", "degFrom": 0, "degTo": 360 } },
+        { "part": "HubDriven", "rotate": { "axis": "z", "degFrom": 0, "degTo": 360 } },
+        { "part": "ShaftDriven", "rotate": { "axis": "z", "degFrom": 0, "degTo": 360 } },
+        {
+          "part": "Disc",
+          "rotate": { "axis": "z", "degFrom": 0, "degTo": 360 },
+          "orbit": { "axis": "z", "center": [0.5, 0, 0], "degFrom": 0, "degTo": 720 }
+        }
+      ]
+    }
+  ]
+}

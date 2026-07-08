@@ -1,4 +1,4 @@
-# forgecad-experiments assembly viewer
+# ai-for-cad assembly viewer
 
 `playgrounds/<toolchain>/projects/<name>/stl/` の印刷部品 + 手書きのゴースト部品（電装・フレーム等）を
 ブラウザで確認する、プロジェクト横断の静的ビューア。ビルド不要、依存は CDN の
@@ -28,6 +28,9 @@ STL・manifest を fetch するため `file://` では動かない。必ず HTTP
 | 断面クリップ | manifest の `clip.axis` 方向にスイープする断面 |
 | ゴースト | 電装・フレーム・モータ等、購入部品のプリミティブ代替表示 |
 | PARTS | 印刷部品ごとの表示切替（色スウォッチ付き） |
+| MOTION | manifest の `motions` を再生する（未定義の manifest では非表示。再生中は分解表示が無効） |
+| provenance | manifest の `provenance`（AI モデル / スキル / DSL / 日付）をバッジ表示する |
+| ホバー強調 | PARTS 行または 3D メッシュのホバーで該当部品を強調（他は減光）。`description` があればチップ表示 |
 
 ## manifest スキーマ（`playgrounds/<toolchain>/projects/<name>/viewer.json`）
 
@@ -40,6 +43,13 @@ STL・manifest を fetch するため `file://` では動かない。必ず HTTP
   "clip": { "axis": "y", "min": -120, "max": 120 },  // 断面クリップのスイープ範囲
   "camera": { "target": [0, 0, 60], "dist": 950 },   // デフォルトカメラ（scene 側で上書き可）
 
+  "provenance": {                 // 省略可。何で作ったかのバッジ表示（全フィールド任意）
+    "aiModel": "Claude Fable 5",
+    "skills": ["forgecad-high-level-spec", "forgecad-verify"],
+    "dsl": "forgecad",
+    "date": "2026-07"
+  },
+
   "parts": [
     {
       "id": "CenterDeck", "name": "CenterDeck", "stl": "center-deck.stl",
@@ -47,7 +57,8 @@ STL・manifest を fetch するため `file://` では動かない。必ず HTTP
       "pos": [0, 0, 0],                // 省略時 [0,0,0]
       "rot": [{ "axis": "x", "deg": 90 }],  // 省略可。下記「回転」参照
       "explode": [0, 0, 1],           // 分解方向（省略時 [0,0,0]）
-      "group": "drone"                 // scenes のグループフィルタ・offset/lift のキー
+      "group": "drone",                // scenes のグループフィルタ・offset/lift のキー
+      "description": "…"              // 省略可。ホバー時のチップに表示する説明
     }
   ],
 
@@ -64,6 +75,21 @@ STL・manifest を fetch するため `file://` では動かない。必ず HTTP
       "offsets": { "drone": [175, 0, 113.1] },   // group ごとの平行移動
       "explodeLift": { "drone": [0, 0, 1.2] },   // group ごとに explode ベクトルへ加算する追加分解方向
       "camera": { "target": [0, 0, 60], "dist": 950 }
+    }
+  ],
+
+  "motions": [   // 省略可。下記「モーション」参照
+    {
+      "id": "transmit", "label": "回転伝達", "loop": true, "durationMs": 4000,
+      "easing": "linear",                        // モーション既定（track 側で上書き可）
+      "tracks": [
+        {
+          "part": "HubDrive",                    // parts[].id / ghosts[].id、または "group": "…" で一括指定
+          "rotate": { "axis": "z", "degFrom": 0, "degTo": 360, "pivot": [0, 0, -19.3] },  // pivot 省略時はその部品の basePos（その場スピン）
+          "orbit": { "axis": "z", "center": [0.5, 0, 0], "degFrom": 0, "degTo": 720 },   // 位置のみ center 周りに公転（姿勢は回らない）
+          "translate": { "from": [0, 0, 0], "to": [0, 0, 10] }
+        }
+      ]
     }
   ]
 }
@@ -91,6 +117,34 @@ STL・manifest を fetch するため `file://` では動かない。必ず HTTP
 - `offsets`/`explodeLift` はシーンごとに group 単位で適用される平行移動・追加分解ベクトル。
   spherical-drone の docked シーンはこれを使って、drone group（機体一式 + そのゴースト）を
   ステーションのポート A 位置へオフセットしつつ、分解時にファンネルから持ち上げる。
+
+### モーション
+
+アセンブリが特定シナリオで動く様子を、宣言的な `motions` 定義で再生する。
+
+- 1 track には `rotate` / `orbit` / `translate` を任意に併記でき、**rotate → orbit → translate
+  の固定順**で合成する。姿勢は毎フレーム `basePos`/初期姿勢から絶対計算するので累積誤差が出ない。
+- `rotate.pivot` / `orbit.center` は `pos` と同じ manifest 座標で書く。シーンの `offsets` は
+  適用時に自動加算されるので、offset 付きシーンでもモーション定義を書き直す必要はない。
+- `easing` は `linear` / `easeIn` / `easeOut` / `easeInOut`（cubic）。**ループする回転は
+  `linear` にする**こと（他だと周回境界で角速度が不連続になる）。
+- **再生中は分解表示（explode）が無効になる**。pivot/center は組立状態の座標で書かれるため、
+  分解状態で回すと部品が誤った軸を公転するのを防ぐ。停止すると explode 値・全部品の位置姿勢が復帰する。
+- `loop: false` のモーションは終端姿勢で停止し、ボタンが「↺ リセット」になる。
+
+実例（oldham-coupling）: オルダムカップリングの中央ディスクは「自軸スピン θ + 軸間中点を
+中心とする半径 e/2 の円軌道を 2θ で公転」という運動をする。これは `rotate`（pivot 省略 =
+その場スピン 0→360°）と `orbit`（center = 軸中点、0→720°）の合成でちょうど表現できる:
+
+```jsonc
+"tracks": [
+  { "part": "HubDrive",  "rotate": { "axis": "z", "degFrom": 0, "degTo": 360 } },
+  { "part": "HubDriven", "rotate": { "axis": "z", "degFrom": 0, "degTo": 360 } },
+  { "part": "Disc",
+    "rotate": { "axis": "z", "degFrom": 0, "degTo": 360 },
+    "orbit":  { "axis": "z", "center": [0.5, 0, 0], "degFrom": 0, "degTo": 720 } }
+]
+```
 
 ## 枝（branch）とバージョン（version）
 
@@ -130,7 +184,7 @@ geometry だけを再ロードし、位置・色・シーン構成など他の m
 ## 新しいプロジェクトを追加する
 
 1. STL をエクスポートする: `playgrounds/<toolchain>/projects/<name>/stl/*.stl`
-2. `playgrounds/<toolchain>/projects/<name>/viewer.json` を上記スキーマで書く（`scenes` は 1 シーンしか無いなら省略してよい）
+2. `playgrounds/<toolchain>/projects/<name>/viewer.json` を上記スキーマで書く（`scenes` は 1 シーンしか無いなら省略してよい）。`provenance` で AI モデル / スキル / DSL を明示し、機構が動くモデルなら `motions` も書く
 3. `viewer/projects.json` の `projects` 配列に 1 行追加する（単枝モデル）:
    ```jsonc
    { "id": "<name>", "title": "<表示名>", "manifest": "../playgrounds/<toolchain>/projects/<name>/viewer.json" }

@@ -7,6 +7,7 @@
       { "id": "b2-edge-joinery", "label": "b2 — edge joinery", "manifest": "../playgrounds/forgecad/projects/parts-tray/b2-edge-joinery/viewer.json" }
     ] },
     { "id": "desktop-trash-bin", "title": "Desktop Trash Bin", "manifest": "../playgrounds/forgecad/projects/desktop-trash-bin/viewer.json" },
-    { "id": "pi-pico-case", "title": "Pi Pico Case", "manifest": "../playgrounds/forgecad/projects/pi-pico-case/viewer.json" }
+    { "id": "pi-pico-case", "title": "Pi Pico Case", "manifest": "../playgrounds/forgecad/projects/pi-pico-case/viewer.json" },
+    { "id": "oldham-coupling", "title": "Oldham Coupling", "manifest": "../playgrounds/fusion360/projects/oldham-coupling/viewer.json" }
   ]
 }

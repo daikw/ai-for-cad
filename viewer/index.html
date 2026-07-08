@@ -71,6 +71,12 @@
       <select id="scene-select"></select>
     </fieldset>
 
+    <fieldset id="motion-fieldset" class="hidden">
+      <legend>MOTION</legend>
+      <select id="motion-select"></select>
+      <div class="row" style="margin-top:6px"><button id="motion-play">▶ 再生</button></div>
+    </fieldset>
+
     <fieldset>
       <legend>VIEW</legend>
       <div class="row"><span>分解表示</span><span class="val" id="explode-val">0</span></div>
@@ -274,6 +280,7 @@ function inGroup(entryGroup, groups) {
 
 async function buildScene(sceneId) {
   const sceneDef = scenes.find((s) => s.id === sceneId) || scenes[0];
+  stopMotion(); // entries are about to be rebuilt
   root.clear();
   partList.innerHTML = "";
   entries = [];
@@ -460,6 +467,128 @@ function pickHover() {
   else hideTip();
 }
 
+// ---- assembly motions -------------------------------------------------------
+// manifest.motions[] = { id, label, loop, durationMs, easing, tracks: [{
+//   part | group,                       // target: parts[].id / ghosts[].id or a group name
+//   rotate:    { axis, degFrom, degTo, pivot? },  // pivot defaults to the part's basePos (spin in place)
+//   orbit:     { axis, center, degFrom, degTo },  // revolve position around center; orientation untouched
+//   translate: { from, to },
+//   easing?,                            // per-track override
+// }] }
+// Poses are recomputed every frame from basePos/baseQuat (absolute, no drift).
+// pivot/center are written in manifest coordinates (same frame as "pos");
+// the per-entry scene offset is added at apply time.
+const motionFieldset = document.getElementById("motion-fieldset");
+const motionSelect = document.getElementById("motion-select");
+const motionButton = document.getElementById("motion-play");
+const EASING = {
+  linear: (u) => u,
+  easeIn: (u) => u * u * u,
+  easeOut: (u) => 1 - (1 - u) ** 3,
+  easeInOut: (u) => (u < 0.5 ? 4 * u ** 3 : 1 - (-2 * u + 2) ** 3 / 2),
+};
+let activeMotion = null; // { def, startTime } | null
+let motionEnded = false; // a loop:false motion finished and holds its end pose
+let savedExplodeValue = "0";
+
+function populateMotionSelect() {
+  motionSelect.innerHTML = "";
+  const motions = Array.isArray(manifest.motions) ? manifest.motions : [];
+  for (const m of motions) {
+    const opt = document.createElement("option");
+    opt.value = m.id;
+    opt.textContent = m.label || m.id;
+    motionSelect.appendChild(opt);
+  }
+  motionFieldset.classList.toggle("hidden", motions.length === 0);
+}
+
+function resolveTargets(track) {
+  if (track.part) return entries.filter((e) => e.id === track.part);
+  if (track.group) return entries.filter((e) => e.group === track.group);
+  return [];
+}
+
+function startMotion(def) {
+  // Pivots/centers are authored for the assembled state — exploding while a
+  // motion runs would revolve parts around the wrong axes, so park explode.
+  savedExplodeValue = explodeInput.value;
+  explodeInput.value = "0";
+  applyExplode();
+  explodeInput.disabled = true;
+  for (const track of def.tracks || []) {
+    if (resolveTargets(track).length === 0) console.warn(`motion "${def.id}": no entry matches`, track);
+  }
+  activeMotion = { def, startTime: null };
+  motionEnded = false;
+  motionButton.textContent = "■ 停止";
+}
+
+function stopMotion() {
+  if (!activeMotion && !motionEnded) return;
+  activeMotion = null;
+  motionEnded = false;
+  explodeInput.disabled = false;
+  explodeInput.value = savedExplodeValue;
+  applyExplode(); // restores positions; orientations restored below
+  for (const e of entries) e.object.quaternion.copy(e.baseQuat);
+  motionButton.textContent = "▶ 再生";
+}
+
+function applyMotion(time) {
+  const m = activeMotion.def;
+  if (activeMotion.startTime === null) activeMotion.startTime = time;
+  let u = (time - activeMotion.startTime) / (m.durationMs || 3000);
+  let done = false;
+  if (m.loop) u %= 1;
+  else if (u >= 1) ((u = 1), (done = true));
+
+  for (const track of m.tracks || []) {
+    const v = (EASING[track.easing || m.easing] || EASING.linear)(u);
+    for (const e of resolveTargets(track)) {
+      const pos = e.basePos.clone();
+      const quat = e.baseQuat.clone();
+      if (track.rotate) {
+        const r = track.rotate;
+        const ang = THREE.MathUtils.degToRad(r.degFrom + (r.degTo - r.degFrom) * v);
+        const q = new THREE.Quaternion().setFromAxisAngle(AXIS_VEC[r.axis], ang);
+        const pivot = r.pivot ? new THREE.Vector3(...r.pivot).add(e.sceneOffset) : e.basePos;
+        pos.sub(pivot).applyQuaternion(q).add(pivot);
+        quat.premultiply(q); // same world-frame convention as buildQuat
+      }
+      if (track.orbit) {
+        const o = track.orbit;
+        const ang = THREE.MathUtils.degToRad(o.degFrom + (o.degTo - o.degFrom) * v);
+        const q = new THREE.Quaternion().setFromAxisAngle(AXIS_VEC[o.axis], ang);
+        const center = new THREE.Vector3(...o.center).add(e.sceneOffset);
+        pos.sub(center).applyQuaternion(q).add(center); // position only
+      }
+      if (track.translate) {
+        pos.add(new THREE.Vector3().lerpVectors(new THREE.Vector3(...track.translate.from), new THREE.Vector3(...track.translate.to), v));
+      }
+      e.object.position.copy(pos);
+      e.object.quaternion.copy(quat);
+    }
+  }
+  if (done) {
+    // Hold the end pose (explode stays parked); the button turns into a reset.
+    activeMotion = null;
+    motionEnded = true;
+    motionButton.textContent = "↺ リセット";
+  }
+}
+
+motionButton.addEventListener("click", () => {
+  if (activeMotion || motionEnded) {
+    stopMotion();
+    return;
+  }
+  const motions = Array.isArray(manifest.motions) ? manifest.motions : [];
+  const def = motions.find((m) => m.id === motionSelect.value);
+  if (def) startMotion(def);
+});
+motionSelect.addEventListener("change", stopMotion);
+
 // ---- UI wiring ---------------------------------------------------------------
 const explodeInput = document.getElementById("explode");
 function applyExplode() {
@@ -538,6 +667,7 @@ async function selectBranch(branchEntry) {
     populateVersionSelect();
     scenes = resolveScenes(manifest);
     populateSceneSelect();
+    populateMotionSelect();
     applyClip();
     await buildScene(sceneSelect.value);
   } catch (err) {
@@ -586,7 +716,8 @@ function resize() {
 addEventListener("resize", resize);
 resize();
 
-renderer.setAnimationLoop(() => {
+renderer.setAnimationLoop((time) => {
+  if (activeMotion) applyMotion(time);
   pickHover();
   controls.update();
   renderer.render(scene, camera);
