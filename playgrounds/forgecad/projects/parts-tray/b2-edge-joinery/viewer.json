@@ -1,6 +1,5 @@
 {
-  "title": "parts-tray b2 — edge joinery viewer",
-  "subtitle": "200x150x10 tray, varied cells + repeatable male/female edge connectors",
+  "title": "parts-tray b2 — edge joinery",
   "stlBase": "../playgrounds/forgecad/projects/parts-tray/b2-edge-joinery",
   "up": "z",
   "provenance": { "aiModel": "Claude (Claude Code)", "skills": ["forgecad-high-level-spec", "forgecad-lld", "forgecad-make-a-model", "forgecad-verify"], "dsl": "forgecad" },

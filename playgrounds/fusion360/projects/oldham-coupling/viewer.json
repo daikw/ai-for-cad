@@ -1,6 +1,5 @@
 {
   "title": "oldham-coupling",
-  "subtitle": "3ピース オルダムカップリング — 平行ミスアライメント 1mm を吸収して 1:1 でトルク伝達",
   "stlBase": "../playgrounds/fusion360/projects/oldham-coupling/exports",
   "up": "z",
   "clip": { "axis": "y", "min": -16, "max": 16 },

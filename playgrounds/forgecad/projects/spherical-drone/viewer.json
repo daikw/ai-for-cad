@@ -1,6 +1,5 @@
 {
-  "title": "spherical-drone viewer",
-  "subtitle": "stl/ の印刷部品 + ゴースト部品でアセンブリを確認",
+  "title": "spherical-drone",
   "stlBase": "../playgrounds/forgecad/projects/spherical-drone/stl",
   "up": "z",
   "provenance": { "aiModel": "Claude (Claude Code)", "skills": ["forgecad-high-level-spec", "forgecad-lld", "forgecad-make-a-model", "forgecad-verify"], "dsl": "forgecad" },

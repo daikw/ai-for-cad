@@ -1,6 +1,5 @@
 {
-  "title": "Desktop Trash Bin — side decoration patterns",
-  "subtitle": "W142 x D92 x H96 sweep box; 7 side-decoration patterns + bed print layout",
+  "title": "desktop-trash-bin",
   "stlBase": "../playgrounds/forgecad/projects/desktop-trash-bin",
   "up": "z",
   "provenance": { "aiModel": "Claude (Claude Code)", "skills": ["forgecad-high-level-spec", "forgecad-lld", "forgecad-make-a-model", "forgecad-verify"], "dsl": "forgecad" },

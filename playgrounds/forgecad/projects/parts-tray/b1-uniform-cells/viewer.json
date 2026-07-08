@@ -1,6 +1,5 @@
 {
-  "title": "parts-tray b1 — uniform cells viewer",
-  "subtitle": "square-100 + rect-100x50 trays laid out as one print-set STL",
+  "title": "parts-tray b1 — uniform cells",
   "stlBase": "../playgrounds/forgecad/projects/parts-tray/b1-uniform-cells",
   "up": "z",
   "provenance": { "aiModel": "Claude (Claude Code)", "skills": ["forgecad-high-level-spec", "forgecad-lld", "forgecad-make-a-model", "forgecad-verify"], "dsl": "forgecad" },

@@ -13,6 +13,8 @@
   canvas { display: block; }
   h1 { font-size: 14px; margin: 0 0 2px; }
   .sub { color: #8b97a4; font-size: 11px; margin-bottom: 14px; }
+  #titlebar { display: flex; justify-content: space-between; align-items: baseline; gap: 8px; }
+  #lang-toggle { font-size: 10px; padding: 1px 7px; flex: none; }
   #provenance { display: flex; flex-wrap: wrap; gap: 4px; margin: -8px 0 14px; }
   #provenance.hidden { display: none; }
   .badge { font-size: 10px; padding: 1px 7px; border-radius: 9px; border: 1px solid #3a4350; background: #2b323c; color: #9fb4c8; white-space: nowrap; }
@@ -47,8 +49,11 @@
 <body>
 <div id="app">
   <div id="panel">
-    <h1 id="viewer-title">ai-for-cad viewer</h1>
-    <div class="sub" id="viewer-subtitle">プロジェクトのアセンブリを manifest から読み込んで確認</div>
+    <div id="titlebar">
+      <h1>ai-for-cad viewer</h1>
+      <button id="lang-toggle">EN</button>
+    </div>
+    <div class="sub" id="viewer-subtitle"></div>
     <div id="provenance" class="hidden"></div>
 
     <fieldset>
@@ -79,12 +84,12 @@
 
     <fieldset>
       <legend>VIEW</legend>
-      <div class="row"><span>分解表示</span><span class="val" id="explode-val">0</span></div>
+      <div class="row"><span id="explode-label">分解表示</span><span class="val" id="explode-val">0</span></div>
       <input type="range" id="explode" min="0" max="100" value="0" />
-      <div class="row"><span>断面クリップ (<span id="clip-axis-label">Y</span>)</span><span class="val" id="clip-val">off</span></div>
+      <div class="row"><span><span id="clip-label">断面クリップ</span> (<span id="clip-axis-label">Y</span>)</span><span class="val" id="clip-val">off</span></div>
       <input type="range" id="clip" min="0" max="100" value="0" />
-      <label><input type="checkbox" id="ghosts" checked /> ゴースト部品</label>
-      <label><input type="checkbox" id="grid" checked /> グリッド</label>
+      <label><input type="checkbox" id="ghosts" checked /> <span id="ghosts-label">ゴースト部品</span></label>
+      <label><input type="checkbox" id="grid" checked /> <span id="grid-label">グリッド</span></label>
       <div class="row" style="margin-top:6px"><button id="reset-cam">カメラリセット</button></div>
     </fieldset>
 
@@ -103,6 +108,26 @@ import { OrbitControls } from "three/addons/controls/OrbitControls.js";
 import { STLLoader } from "three/addons/loaders/STLLoader.js";
 
 THREE.Object3D.DEFAULT_UP = new THREE.Vector3(0, 0, 1); // CAD: Z-up
+
+// ---- i18n -------------------------------------------------------------------
+// UI chrome only; manifest content (titles, descriptions) stays as authored.
+const I18N = {
+  ja: {
+    tips: "パーツにホバーで強調表示 / MOTION で機構を再生",
+    explode: "分解表示", clip: "断面クリップ", ghosts: "ゴースト部品", grid: "グリッド",
+    resetCam: "カメラリセット", play: "▶ 再生", stop: "■ 停止", reset: "↺ リセット",
+    controls: "drag: orbit / wheel: zoom / 右drag: pan",
+    loadError: (msg) => `読み込み失敗: ${msg} — viewer/serve.sh で HTTP 配信していますか？（file:// では STL/manifest を fetch できません）`,
+  },
+  en: {
+    tips: "Hover a part to highlight it / play mechanisms via MOTION",
+    explode: "Explode", clip: "Section clip", ghosts: "Ghost parts", grid: "Grid",
+    resetCam: "Reset camera", play: "▶ Play", stop: "■ Stop", reset: "↺ Reset",
+    controls: "drag: orbit / wheel: zoom / right-drag: pan",
+    loadError: (msg) => `Load failed: ${msg} — is viewer/serve.sh serving over HTTP? (file:// cannot fetch STL/manifests)`,
+  },
+};
+let lang = localStorage.getItem("viewer-lang") || (navigator.language?.startsWith("ja") ? "ja" : "en");
 
 // ---- rotation helper -----------------------------------------------------
 // Manifest "rot" is an ordered array of {axis, deg} world-frame steps, applied
@@ -382,7 +407,13 @@ async function buildScene(sceneId) {
   if (versions.length > 1 && currentVersionId) midParts.push(currentVersionId);
   if (scenes.length > 1) midParts.push(sceneDef.label || sceneDef.id);
   const mid = midParts.length > 0 ? midParts.join(" / ") : (sceneDef.label || sceneDef.id);
-  status.textContent = `${manifest.title} / ${mid} — ${partCount} parts, ${Math.round(tris).toLocaleString()} tris — drag: orbit / wheel: zoom / 右drag: pan`;
+  lastStatus = `${manifest.title} / ${mid} — ${partCount} parts, ${Math.round(tris).toLocaleString()} tris`;
+  updateStatus();
+}
+
+let lastStatus = null;
+function updateStatus() {
+  if (lastStatus) status.textContent = `${lastStatus} — ${I18N[lang].controls}`;
 }
 
 function fitCamera(sceneDef) {
@@ -521,7 +552,7 @@ function startMotion(def) {
   }
   activeMotion = { def, startTime: null };
   motionEnded = false;
-  motionButton.textContent = "■ 停止";
+  motionButton.textContent = I18N[lang].stop;
 }
 
 function stopMotion() {
@@ -532,7 +563,7 @@ function stopMotion() {
   explodeInput.value = savedExplodeValue;
   applyExplode(); // restores positions; orientations restored below
   for (const e of entries) e.object.quaternion.copy(e.baseQuat);
-  motionButton.textContent = "▶ 再生";
+  motionButton.textContent = I18N[lang].play;
 }
 
 function applyMotion(time) {
@@ -574,7 +605,7 @@ function applyMotion(time) {
     // Hold the end pose (explode stays parked); the button turns into a reset.
     activeMotion = null;
     motionEnded = true;
-    motionButton.textContent = "↺ リセット";
+    motionButton.textContent = I18N[lang].reset;
   }
 }
 
@@ -650,9 +681,28 @@ function renderProvenance(p) {
 }
 
 function reportError(err) {
-  status.textContent = `読み込み失敗: ${err.message} — viewer/serve.sh で HTTP 配信していますか？（file:// では STL/manifest を fetch できません）`;
+  status.textContent = I18N[lang].loadError(err.message);
   console.error(err);
 }
+
+// ---- language toggle --------------------------------------------------------
+function applyLang() {
+  const s = I18N[lang];
+  document.getElementById("lang-toggle").textContent = lang === "ja" ? "EN" : "JA";
+  document.getElementById("viewer-subtitle").textContent = s.tips;
+  document.getElementById("explode-label").textContent = s.explode;
+  document.getElementById("clip-label").textContent = s.clip;
+  document.getElementById("ghosts-label").textContent = s.ghosts;
+  document.getElementById("grid-label").textContent = s.grid;
+  document.getElementById("reset-cam").textContent = s.resetCam;
+  motionButton.textContent = activeMotion ? s.stop : motionEnded ? s.reset : s.play;
+  updateStatus();
+}
+document.getElementById("lang-toggle").addEventListener("click", () => {
+  lang = lang === "ja" ? "en" : "ja";
+  localStorage.setItem("viewer-lang", lang);
+  applyLang();
+});
 
 // ---- project / branch / version switching --------------------------------
 let projects = [];
@@ -661,8 +711,6 @@ async function selectBranch(branchEntry) {
   try {
     currentBranch = branchEntry;
     manifest = await loadManifest(branchEntry.manifest);
-    document.getElementById("viewer-title").textContent = manifest.title || "";
-    document.getElementById("viewer-subtitle").textContent = manifest.subtitle || "";
     renderProvenance(manifest.provenance);
     populateVersionSelect();
     scenes = resolveScenes(manifest);
@@ -723,6 +771,7 @@ renderer.setAnimationLoop((time) => {
   renderer.render(scene, camera);
 });
 
+applyLang();
 init().catch(reportError);
 </script>
 </body>

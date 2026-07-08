@@ -1,6 +1,5 @@
 {
-  "title": "handy-fdm-mini viewer",
-  "subtitle": "stl/ の印刷部品 + フレーム/レール/モータ/ベッドのゴーストでアセンブリを確認",
+  "title": "handy-fdm-mini",
   "stlBase": "../playgrounds/forgecad/projects/handy-fdm-mini/stl",
   "up": "z",
   "provenance": { "aiModel": "Claude (Claude Code)", "skills": ["forgecad-high-level-spec", "forgecad-lld", "forgecad-make-a-model", "forgecad-verify"], "dsl": "forgecad" },

@@ -31,13 +31,13 @@ STL・manifest を fetch するため `file://` では動かない。必ず HTTP
 | MOTION | manifest の `motions` を再生する（未定義の manifest では非表示。再生中は分解表示が無効） |
 | provenance | manifest の `provenance`（AI モデル / スキル / DSL / 日付）をバッジ表示する |
 | ホバー強調 | PARTS 行または 3D メッシュのホバーで該当部品を強調（他は減光）。`description` があればチップ表示 |
+| 言語切替 | パネル右上の EN/JA ボタンで UI 言語を切り替える（初期値はブラウザ言語、localStorage に保存）。manifest 由来のテキストは切替対象外 |
 
 ## manifest スキーマ（`playgrounds/<toolchain>/projects/<name>/viewer.json`）
 
 ```jsonc
 {
-  "title": "…",                 // パネル見出し・status 表示に使う
-  "subtitle": "…",               // パネル副題
+  "title": "…",                 // status 行の表示に使う（パネル見出しは "ai-for-cad viewer" 固定）
   "stlBase": "../playgrounds/<toolchain>/projects/<name>/stl",  // STL fetch のベースパス（/viewer/index.html からの相対パス）
   "up": "z",                      // 現状 CAD Z-up 固定（THREE.Object3D.DEFAULT_UP）
   "clip": { "axis": "y", "min": -120, "max": 120 },  // 断面クリップのスイープ範囲
