@@ -7,7 +7,7 @@ AI-for-CAD 実験リポジトリ。`playgrounds/<toolchain>/` がエージェン
 - **枝**（並存する別解）はディレクトリ: `.../projects/<model>/b<N>-<slug>/`。枝が 1 本のうちはフラット
 - **バージョン**（置換する改善版）は同一ディレクトリで in-place。CHANGELOG.md に `## v<N>` 見出しで記録し、印刷した版の STL/G-code は `-v<N>` サフィックスで保存
 - パラメータ違いだけの変種は `Param.choice` + `variant-*.forge.js`。ディレクトリを増やさない
-- 新モデル追加・派生時は README.md の Models 表と `viewer/projects.json` も更新する。viewer.json には `provenance`（aiModel / skills / dsl）を書く
+- 新モデル追加・派生時は `viewer/projects.json` も更新する（README にモデル一覧表は置かない）。viewer.json には `provenance`（aiModel / skills / dsl）を書く
 
 ## ForgeCAD（playgrounds/forgecad/）
 

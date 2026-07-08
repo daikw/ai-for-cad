@@ -17,21 +17,6 @@ multi-tool workspace.
 
 ## Models
 
-Branch (`b<N>`) = coexisting alternative take on the same concept. Version (`v<N>`) = in-place improvement that supersedes the previous one (history in each project's CHANGELOG). Full rules: [docs/model-versioning.md](./docs/model-versioning.md).
+The model list lives in [`viewer/projects.json`](./viewer/projects.json) (everything the viewer can show) and the `projects/` directory of each playground. Branch (`b<N>`) = coexisting alternative take on the same concept. Version (`v<N>`) = in-place improvement that supersedes the previous one (history in each project's CHANGELOG). Full rules: [docs/model-versioning.md](./docs/model-versioning.md).
 
-| Model | Toolchain | Branch | Version | Notes |
-|---|---|---|---|---|
-| [spherical-drone](./playgrounds/forgecad/projects/spherical-drone/) | forgecad | — | v1 | geodesic-cage drone + dock station; checks ALL PASS |
-| [handy-fdm-mini](./playgrounds/forgecad/projects/handy-fdm-mini/) | forgecad | — | v1 | one-hand-carry FDM printer structure; checks ALL PASS |
-| [pi-pico-case](./playgrounds/forgecad/projects/pi-pico-case/) | forgecad | — | v9.7 | reference example of version history (CHANGELOG + per-version print STLs) |
-| [desktop-trash-bin](./playgrounds/forgecad/projects/desktop-trash-bin/) | forgecad | — | v1 | 7 decoration patterns as parametric variants |
-| [parts-tray](./playgrounds/forgecad/projects/parts-tray/) | forgecad | [b1-uniform-cells](./playgrounds/forgecad/projects/parts-tray/b1-uniform-cells/) | v1 | standalone trays, uniform cells |
-| [parts-tray](./playgrounds/forgecad/projects/parts-tray/) | forgecad | [b2-edge-joinery](./playgrounds/forgecad/projects/parts-tray/b2-edge-joinery/) | v1 | varied cells + edge connectors |
-| [palm-uav](./playgrounds/forgecad/projects/palm-uav/) | forgecad | — | — | palm-sized 1S micro quadcopter; HLD drafted, model not started |
-| [palm-agv](./playgrounds/forgecad/projects/palm-agv/) | forgecad | — | — | palm-sized differential-drive indoor AGV; HLD drafted, model not started |
-| [spacer](./playgrounds/forgecad/projects/spacer/) | forgecad | — | v4 | parametric cylindrical spacer; v1–v4 history in CHANGELOG |
-| [oldham-coupling](./playgrounds/fusion360/projects/oldham-coupling/) | fusion360 | — | v1 | 3-piece flexible coupling (adsk scripts via Fusion MCP); viewer motion demo |
-| [desk-hook](./playgrounds/qcad/projects/desk-hook/) | qcad | — | v1 | desk headphone hook, 2D profile for 15mm extrusion |
-| [fdm-printer-2d](./playgrounds/qcad/projects/fdm-printer-2d/) | qcad | — | v1 | 2D concept drawing |
-
-Adding or deriving a model: update this table and `viewer/projects.json`.
+Adding or deriving a model: update `viewer/projects.json`.
