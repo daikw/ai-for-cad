@@ -1,7 +1,7 @@
 {
   "title": "parts-tray b1 — uniform cells viewer",
   "subtitle": "square-100 + rect-100x50 trays laid out as one print-set STL",
-  "stlBase": "../projects/parts-tray/b1-uniform-cells",
+  "stlBase": "../playgrounds/forgecad/projects/parts-tray/b1-uniform-cells",
   "up": "z",
   "clip": { "axis": "y", "min": -60, "max": 118 },
   "camera": { "target": [0, 29, 10], "dist": 320 },

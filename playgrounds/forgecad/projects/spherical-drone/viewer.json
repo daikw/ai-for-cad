@@ -1,7 +1,7 @@
 {
   "title": "spherical-drone viewer",
   "subtitle": "stl/ の印刷部品 + ゴースト部品でアセンブリを確認",
-  "stlBase": "../projects/spherical-drone/stl",
+  "stlBase": "../playgrounds/forgecad/projects/spherical-drone/stl",
   "up": "z",
   "clip": { "axis": "y", "min": -110, "max": 110 },
   "camera": { "target": [0, 0, 60], "dist": 950 },

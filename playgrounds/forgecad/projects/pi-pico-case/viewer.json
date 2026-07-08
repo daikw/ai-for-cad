@@ -1,7 +1,7 @@
 {
   "title": "Pi Pico Case",
   "subtitle": "print-layout export: case + lid side by side on the bed. Select VERSION to compare v5 - v9.7",
-  "stlBase": "../projects/pi-pico-case",
+  "stlBase": "../playgrounds/forgecad/projects/pi-pico-case",
   "up": "z",
   "clip": { "axis": "y", "min": -20, "max": 60 },
   "camera": { "target": [0, 15, 4], "dist": 190 },

@@ -1,7 +1,7 @@
 {
   "title": "handy-fdm-mini viewer",
   "subtitle": "stl/ の印刷部品 + フレーム/レール/モータ/ベッドのゴーストでアセンブリを確認",
-  "stlBase": "../projects/handy-fdm-mini/stl",
+  "stlBase": "../playgrounds/forgecad/projects/handy-fdm-mini/stl",
   "up": "z",
   "clip": { "axis": "y", "min": -120, "max": 120 },
   "camera": { "target": [0, 0, 120], "dist": 750 },
