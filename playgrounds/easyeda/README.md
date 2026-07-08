@@ -1,0 +1,21 @@
+# easyeda playground
+
+EasyEDA Pro を AI エージェントから操作する実験場。回路図設計ベンチの本体は
+[benchmarks/arduino-uno-compat](../../benchmarks/arduino-uno-compat/) にある。
+
+## レイアウト
+
+- `docs/` — スキル台帳（[EASYEDA_SKILLS.md](./docs/EASYEDA_SKILLS.md)）と
+  拡張セットアップ手順（[EASYEDA_EXTENSIONS.md](./docs/EASYEDA_EXTENSIONS.md)）
+- `easyeda-repos.json` — 外部リポジトリのマニフェスト（name / repo / priority / purpose）
+- `scripts/` — マニフェスト駆動の fetch・状態確認・ローカルサービス起動スクリプト
+- `extensions/`, `tools/` — 外部クローン（計 ~3.8GB）。**git 管理外**。以下で再取得:
+
+  ```sh
+  ./scripts/fetch-easyeda-repos.sh
+  ```
+
+- `build-logs/` — 各クローンの npm ci / build ログ（取得時点の記録として同梱）
+
+ドキュメント内のパス表記は移行元（リポジトリ直下に `easyeda/` があった構成）の
+名残がありうる。スクリプトはこのディレクトリを root として動くよう修正済み。

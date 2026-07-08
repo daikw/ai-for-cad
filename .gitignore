@@ -1,3 +1,8 @@
 .claude/
 .codex/
+.agents/
 .playwright-mcp/
+
+# vendored clones (~3.8GB) — re-fetch with playgrounds/easyeda/scripts/fetch-easyeda-repos.sh
+playgrounds/easyeda/extensions/
+playgrounds/easyeda/tools/

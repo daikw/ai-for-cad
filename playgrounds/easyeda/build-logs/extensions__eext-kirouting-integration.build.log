@@ -1,0 +1,8 @@
+
+> kirouting-integration@1.0.0 build
+> npm run compile && ts-node ./build/packaged.ts
+
+
+> kirouting-integration@1.0.0 compile
+> rimraf ./dist/ && ts-node ./config/esbuild.prod.ts
+

@@ -1,0 +1,8 @@
+
+> pro-api-sdk@1.1.1 build
+> npm run compile && ts-node ./build/packaged.ts
+
+
+> pro-api-sdk@1.1.1 compile
+> rimraf ./dist/ && ts-node ./config/esbuild.prod.ts
+

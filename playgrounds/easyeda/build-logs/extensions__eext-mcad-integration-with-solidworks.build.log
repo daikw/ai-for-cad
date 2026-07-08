@@ -1,0 +1,8 @@
+
+> mcad-solidworks-sync@1.0.7 build
+> npm run compile && ts-node ./build/packaged.ts
+
+
+> mcad-solidworks-sync@1.0.7 compile
+> rimraf ./dist/ && ts-node ./config/esbuild.prod.ts
+

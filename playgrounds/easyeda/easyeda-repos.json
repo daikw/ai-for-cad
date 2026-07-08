@@ -1,0 +1,144 @@
+{
+  "extensions": [
+    {
+      "name": "eext-run-api-gateway",
+      "repo": "https://github.com/easyeda/eext-run-api-gateway.git",
+      "priority": "required",
+      "purpose": "EasyEDA-side WebSocket API gateway used by easyeda-api-skill"
+    },
+    {
+      "name": "eext-api-debug-tool",
+      "repo": "https://github.com/easyeda/eext-api-debug-tool.git",
+      "priority": "required",
+      "purpose": "EasyEDA API debug tool extension"
+    },
+    {
+      "name": "eext-easyeda-api-agent",
+      "repo": "https://github.com/easyeda/eext-easyeda-api-agent.git",
+      "priority": "ai",
+      "purpose": "In-app LLM assistant for invoking EasyEDA APIs"
+    },
+    {
+      "name": "eext-ai-library-builder",
+      "repo": "https://github.com/easyeda/eext-ai-library-builder.git",
+      "priority": "ai",
+      "purpose": "AI-assisted symbol and footprint library builder"
+    },
+    {
+      "name": "eext-ai-symbol-builder",
+      "repo": "https://github.com/easyeda/eext-ai-symbol-builder.git",
+      "priority": "ai",
+      "purpose": "AI symbol builder"
+    },
+    {
+      "name": "eext-ai-device-standardization",
+      "repo": "https://github.com/easyeda/eext-ai-device-standardization.git",
+      "priority": "ai",
+      "purpose": "AI component, symbol, and footprint matching"
+    },
+    {
+      "name": "eext-chat-with-ai-kimi",
+      "repo": "https://github.com/easyeda/eext-chat-with-ai-kimi.git",
+      "priority": "ai",
+      "purpose": "Kimi assistant for component queries and netlist analysis"
+    },
+    {
+      "name": "eext-knowledge-base",
+      "repo": "https://github.com/easyeda/eext-knowledge-base.git",
+      "priority": "ai",
+      "purpose": "Local embedding/RAG knowledge base"
+    },
+    {
+      "name": "eext-datasheet-helper",
+      "repo": "https://github.com/easyeda/eext-datasheet-helper.git",
+      "priority": "ai",
+      "purpose": "Local OCR-based datasheet helper"
+    },
+    {
+      "name": "eext-docs-generator",
+      "repo": "https://github.com/easyeda/eext-docs-generator.git",
+      "priority": "ai",
+      "purpose": "LLM-based project documentation generator"
+    },
+    {
+      "name": "eext-netlist-explorer",
+      "repo": "https://github.com/easyeda/eext-netlist-explorer.git",
+      "priority": "verification",
+      "purpose": "Schematic netlist analysis and topology views"
+    },
+    {
+      "name": "eext-jlc-order-dfm-checker",
+      "repo": "https://github.com/easyeda/eext-jlc-order-dfm-checker.git",
+      "priority": "verification",
+      "purpose": "JLC order and DFM checks"
+    },
+    {
+      "name": "eext-freerouting-intergration",
+      "repo": "https://github.com/easyeda/eext-freerouting-intergration.git",
+      "priority": "autorouter",
+      "purpose": "Freerouting bridge"
+    },
+    {
+      "name": "eext-kirouting-integration",
+      "repo": "https://github.com/easyeda/eext-kirouting-integration.git",
+      "priority": "autorouter",
+      "purpose": "KiRouting bridge"
+    },
+    {
+      "name": "mcad-integration-with-fusion360",
+      "repo": "https://github.com/easyeda/mcad-integration-with-fusion360.git",
+      "priority": "mcad",
+      "purpose": "Fusion360 integration"
+    },
+    {
+      "name": "eext-mcad-integration-with-freecad",
+      "repo": "https://github.com/easyeda/eext-mcad-integration-with-freecad.git",
+      "priority": "mcad",
+      "purpose": "FreeCAD integration"
+    },
+    {
+      "name": "eext-mcad-integration-with-solidworks",
+      "repo": "https://github.com/easyeda/eext-mcad-integration-with-solidworks.git",
+      "priority": "mcad",
+      "purpose": "SolidWorks integration"
+    },
+    {
+      "name": "eext-pcb-render-with-blender",
+      "repo": "https://github.com/easyeda/eext-pcb-render-with-blender.git",
+      "priority": "mcad",
+      "purpose": "PCB rendering in Blender"
+    },
+    {
+      "name": "eext-generate-schematic-from-netlist",
+      "repo": "https://github.com/easyeda/eext-generate-schematic-from-netlist.git",
+      "priority": "workflow",
+      "purpose": "Generate schematics from imported netlists"
+    },
+    {
+      "name": "eext-batch-place-components",
+      "repo": "https://github.com/easyeda/eext-batch-place-components.git",
+      "priority": "workflow",
+      "purpose": "Batch-place components from coordinate files"
+    }
+  ],
+  "tools": [
+    {
+      "name": "pro-api-sdk",
+      "repo": "https://github.com/easyeda/pro-api-sdk.git",
+      "priority": "required",
+      "purpose": "EasyEDA Pro extension SDK"
+    },
+    {
+      "name": "extension-dev-mcp-tools",
+      "repo": "https://github.com/easyeda/extension-dev-mcp-tools.git",
+      "priority": "required",
+      "purpose": "MCP server for automated extension import/debug/log collection"
+    },
+    {
+      "name": "easyeda-pcb-router",
+      "repo": "https://github.com/easyeda/easyeda-pcb-router.git",
+      "priority": "autorouter",
+      "purpose": "CLI client for PCB autorouter based on Freerouting"
+    }
+  ]
+}
