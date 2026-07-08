@@ -1,0 +1,31 @@
+{
+  "title": "arduino-uno-compat case",
+  "stlBase": "../benchmarks/arduino-uno-compat/case.v1",
+  "up": "z",
+  "clip": { "axis": "y", "min": -10, "max": 62 },
+  "camera": { "target": [34, 27, 5], "dist": 280 },
+  "provenance": {
+    "aiModel": "Claude Fable 5",
+    "skills": ["fusion360"],
+    "dsl": "adsk-python (Fusion MCP)",
+    "date": "2026-07"
+  },
+  "parts": [
+    {
+      "id": "CaseBottom", "name": "CASE_BOTTOM", "stl": "CASE_BOTTOM.stl", "color": "#5b6a7a",
+      "explode": [0, 0, -1],
+      "description": "下ケース。スタンドオフ 4 本で PCB を支持、左壁に USB-C / DC ジャック開口。干渉解析 0 件"
+    },
+    {
+      "id": "CaseLid", "name": "CASE_LID", "stl": "CASE_LID.stl", "color": "#9db1c5",
+      "explode": [0, 0, 1.5],
+      "description": "蓋。スカート嵌合（クリアランス 0.25mm/片側）、ピンヘッダ用スロット付き"
+    }
+  ],
+  "ghosts": [
+    {
+      "id": "uno-pcb", "type": "box", "size": [68.58, 53.34, 1.6],
+      "color": "#2e7d4f", "opacity": 0.5, "pos": [34.29, 26.67, 0.8], "explode": [0, 0, 0.5]
+    }
+  ]
+}

@@ -8,6 +8,7 @@
     ] },
     { "id": "desktop-trash-bin", "title": "Desktop Trash Bin", "manifest": "../playgrounds/forgecad/projects/desktop-trash-bin/viewer.json" },
     { "id": "pi-pico-case", "title": "Pi Pico Case", "manifest": "../playgrounds/forgecad/projects/pi-pico-case/viewer.json" },
-    { "id": "oldham-coupling", "title": "Oldham Coupling", "manifest": "../playgrounds/fusion360/projects/oldham-coupling/viewer.json" }
+    { "id": "oldham-coupling", "title": "Oldham Coupling", "manifest": "../playgrounds/fusion360/projects/oldham-coupling/viewer.json" },
+    { "id": "arduino-uno-compat", "title": "Arduino UNO Case (benchmark)", "manifest": "../benchmarks/arduino-uno-compat/case.v1/viewer.json" }
   ]
 }
