@@ -2,6 +2,7 @@
   "name": "palm-uav",
   "title": "Palm UAV",
   "started": "2026-07-06",
+  "toolchain": "forgecad",
   "category": "robotics",
   "tags": [
     "forgecad",

@@ -2,6 +2,7 @@
   "name": "desktop-trash-bin",
   "title": "Desktop Trash Bin",
   "started": "2026-06-22",
+  "toolchain": "forgecad",
   "category": "utility",
   "tags": [
     "forgecad",

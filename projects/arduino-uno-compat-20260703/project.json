@@ -2,6 +2,10 @@
   "name": "arduino-uno-compat",
   "title": "Arduino UNO Compat",
   "started": "2026-07-03",
+  "toolchains": [
+    "fusion360",
+    "easyeda"
+  ],
   "category": "enclosure",
   "tags": [
     "benchmark",
@@ -20,7 +24,34 @@
     "dsl": "adsk-python / EasyEDA API",
     "date": "2026-07"
   },
-  "viewer": {
-    "manifest": "case.v1/viewer.json"
-  }
+  "viewers": [
+    {
+      "id": "case",
+      "title": "Arduino UNO Case (fusion360)",
+      "toolchain": "fusion360",
+      "manifest": "case.v1/viewer.json",
+      "provenance": {
+        "aiModel": "Claude Fable 5",
+        "skills": [
+          "fusion360"
+        ],
+        "dsl": "adsk-python (Fusion MCP)",
+        "date": "2026-07"
+      }
+    },
+    {
+      "id": "pcb",
+      "title": "Arduino UNO PCB (easyeda)",
+      "toolchain": "easyeda",
+      "manifest": "viewer-easyeda.json",
+      "provenance": {
+        "aiModel": "Claude Fable 5",
+        "skills": [
+          "easyeda-api"
+        ],
+        "dsl": "EasyEDA API (WebSocket bridge)",
+        "date": "2026-07"
+      }
+    }
+  ]
 }

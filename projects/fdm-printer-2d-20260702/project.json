@@ -2,6 +2,7 @@
   "name": "fdm-printer-2d",
   "title": "FDM Printer (2D)",
   "started": "2026-07-02",
+  "toolchain": "qcad",
   "category": "machine",
   "tags": [
     "qcad",

@@ -2,6 +2,7 @@
   "name": "spacer",
   "title": "Spacer",
   "started": "2026-07-06",
+  "toolchain": "forgecad",
   "category": "utility",
   "tags": [
     "forgecad",

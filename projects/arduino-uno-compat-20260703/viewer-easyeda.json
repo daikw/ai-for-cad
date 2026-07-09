@@ -1,0 +1,21 @@
+{
+  "title": "arduino-uno-compat pcb",
+  "stlBase": "../projects/arduino-uno-compat-20260703",
+  "up": "z",
+  "clip": { "axis": "y", "min": -56, "max": 1 },
+  "camera": { "target": [34, -27, 3], "dist": 210 },
+  "parts": [
+    {
+      "id": "Pcb3d", "name": "PCB assembly (OBJ)",
+      "obj": "pcb/arduino-uno-compat-pcb.obj", "mtl": "pcb/arduino-uno-compat-pcb.mtl",
+      "description": "EasyEDA の PCB アートワークから部品モデル・via・シルク・信号層配線込みでエクスポートした 3D"
+    }
+  ],
+  "images": [
+    {
+      "id": "schematic", "name": "schematic (PNG)", "src": "schematic/schematic.png", "width": 250,
+      "pos": [210, -27, 0],
+      "description": "EasyEDA ベンチで設計した回路図（40 部品・162 配線・ERC 0）"
+    }
+  ]
+}

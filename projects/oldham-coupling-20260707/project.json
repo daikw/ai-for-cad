@@ -2,6 +2,7 @@
   "name": "oldham-coupling",
   "title": "Oldham Coupling",
   "started": "2026-07-07",
+  "toolchain": "fusion360",
   "category": "mechanism",
   "tags": [
     "fusion360",

@@ -20,7 +20,7 @@ STL・manifest を fetch するため `file://` では動かない。必ず HTTP
 
 | 機能 | 説明 |
 |------|------|
-| PROJECT | プロジェクトを切り替える。CATEGORY セレクトと検索ボックス（title / tags / summary の部分一致、AND 条件）で絞り込める |
+| PROJECT | プロジェクトを切り替える。toolchain セレクトと検索ボックス（title / category / tags / summary の部分一致、AND 条件）で絞り込める。toolchain が複数あるプロジェクトは toolchain ごとに別項目として並ぶ |
 | BRANCH | プロジェクトの `branches`（枝）を切り替える（1 枝しかない、または未定義のプロジェクトでは非表示） |
 | VERSION | manifest の `versions`（版）を切り替える（1 版しかない、または未定義の manifest では非表示） |
 | SCENE | manifest の `scenes` を切り替える（1 シーンしかない、または未定義のプロジェクトでは非表示） |
@@ -44,13 +44,30 @@ STL・manifest を fetch するため `file://` では動かない。必ず HTTP
   "name": "spherical-drone",           // プロジェクト slug（ドロップダウンの内部 ID）
   "title": "Spherical Drone",          // 表示名
   "started": "2026-06-10",             // 開始日（ディレクトリ名のサフィックスと一致させる）
-  "category": "robotics",              // 単一値。CATEGORY セレクトの選択肢になる
+  "toolchain": "forgecad",             // 単一値。toolchain セレクトの選択肢になる
+  "category": "robotics",              // 分類メタ（検索対象。フィルタ軸は toolchain）
   "tags": ["forgecad", "3d-print"],    // 複数可。検索対象
   "summary": "…",                      // 一行説明。検索対象
   "provenance": { "aiModel": "…", "skills": ["…"], "dsl": "…", "date": "…" },  // バッジ表示
   "viewer": { "manifest": "viewer.json" }   // ビューア登録。パスはプロジェクトディレクトリ相対
   // 枝がある場合: "viewer": { "branches": [{ "id", "label", "manifest" }] }
   // "viewer" が無いプロジェクト（HLD のみ等）はカタログには載るがドロップダウンに出ない
+}
+```
+
+toolchain を複数使うプロジェクトは **`viewers` 配列で toolchain ごとに独立した項目として
+登録する（マージしない）**。各エントリは自分の title / toolchain / manifest / provenance を持つ:
+
+```jsonc
+{
+  "name": "arduino-uno-compat",
+  "toolchains": ["fusion360", "easyeda"],
+  "viewers": [
+    { "id": "case", "title": "Arduino UNO Case (fusion360)", "toolchain": "fusion360",
+      "manifest": "case.v1/viewer.json", "provenance": { "…": "…" } },
+    { "id": "pcb", "title": "Arduino UNO PCB (easyeda)", "toolchain": "easyeda",
+      "manifest": "viewer-easyeda.json", "provenance": { "…": "…" } }
+  ]
 }
 ```
 
@@ -72,6 +89,8 @@ STL・manifest を fetch するため `file://` では動かない。必ず HTTP
   },
 
   "parts": [
+    // STL の代わりに "obj": "…", "mtl": "…" でマルチマテリアル OBJ も置ける
+    // （EasyEDA の部品込み PCB 3D など。OBJ は自前マテリアル持ちなのでホバー強調の対象外）
     {
       "id": "CenterDeck", "name": "CenterDeck", "stl": "center-deck.stl",
       "color": "#4a505a",             // CSS hex 文字列

@@ -2,6 +2,7 @@
   "name": "handy-fdm-mini",
   "title": "Handy FDM Mini",
   "started": "2026-07-02",
+  "toolchain": "forgecad",
   "category": "machine",
   "tags": [
     "forgecad",

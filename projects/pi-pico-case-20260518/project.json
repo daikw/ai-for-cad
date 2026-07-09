@@ -2,6 +2,7 @@
   "name": "pi-pico-case",
   "title": "Pi Pico Case",
   "started": "2026-05-18",
+  "toolchain": "forgecad",
   "category": "enclosure",
   "tags": [
     "forgecad",

@@ -2,6 +2,7 @@
   "name": "desk-hook",
   "title": "Desk Hook (2D)",
   "started": "2026-07-02",
+  "toolchain": "qcad",
   "category": "utility",
   "tags": [
     "qcad",
