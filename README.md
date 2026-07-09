@@ -6,7 +6,7 @@ multi-tool workspace.
 
 ## Directory Layout
 
-- `playgrounds/<toolchain>/` — one experiment area per agent-skill family:
+- `playgrounds/<toolchain>/` — one experiment area per agent-skill family. Each holds the committed source of truth for its agent skills under `skills/` — run `scripts/sync-skills.sh` after cloning to copy them into the (gitignored) `.claude/` / `.codex/` / `.agents/` harness dirs:
   - [`forgecad/`](./playgrounds/forgecad/) — ForgeCAD (code-CAD DSL). `projects/` holds the models, `lib/forge-verify/` the numeric verification library.
   - [`fusion360/`](./playgrounds/fusion360/) — Autodesk Fusion 360 driven via MCP + `adsk` Python scripts, and the research behind the fusion360 agent skill.
   - [`easyeda/`](./playgrounds/easyeda/) — EasyEDA Pro (EDA). Vendored extensions/tools are gitignored; see its [README](./playgrounds/easyeda/README.md).

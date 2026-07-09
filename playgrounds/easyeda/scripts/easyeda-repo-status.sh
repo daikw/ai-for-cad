@@ -10,7 +10,9 @@ import json
 import sys
 
 manifest = json.load(open(sys.argv[1]))
-for kind in ("extensions", "tools"):
+for kind in ("extensions", "tools", "skills"):
+    if kind not in manifest:
+        continue
     for item in manifest[kind]:
         print(f"{kind}\t{item['name']}")
 PY

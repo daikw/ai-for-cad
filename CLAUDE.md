@@ -15,7 +15,12 @@ AI-for-CAD 実験リポジトリ。`playgrounds/<toolchain>/` がエージェン
 - 質量・重心などの物理予算は `suite.budget()` でチェックに含める。予算超過は理由付き WAIVED として毎回表示させ、黙って通さない
 - 未実測のプレースホルダ寸法は `suite.waived()` で常時可視化する
 - boolean 多用や数値取得の前に `playgrounds/forgecad/lib/forge-verify/kernel-pitfalls.md` を読む。数値（体積・質量・干渉・エンベロープ）は occt でのみ取得する（manifold は表示用）。エンベロープ検査は boundingBox ではなく「外側殻との intersection 体積 = 0」で行う
-- 設計〜検証は `.claude/skills/` の forgecad-high-level-spec → forgecad-lld → forgecad-make-a-model → forgecad-verify の順で使う
+- 設計〜検証は forgecad-high-level-spec → forgecad-lld → forgecad-make-a-model → forgecad-verify の順で使う
+
+## スキルの正本と同期
+
+- スキルの正本は `playgrounds/<toolchain>/skills/`（git 管理）。`.claude/.codex/.agents` はコピーで、`scripts/sync-skills.sh` で同期する（clone 直後とスキル編集後に実行）
+- easyeda 系 3 スキルは第三者リポジトリ由来のため commit しない。`playgrounds/easyeda/scripts/fetch-easyeda-repos.sh` が `playgrounds/easyeda/skills/` に取得する（sync-skills.sh の同期対象に含まれる）
 
 ## その他の playground
 

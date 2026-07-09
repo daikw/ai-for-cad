@@ -140,5 +140,25 @@
       "priority": "autorouter",
       "purpose": "CLI client for PCB autorouter based on Freerouting"
     }
+  ],
+  "skills": [
+    {
+      "name": "easyeda-api",
+      "repo": "https://github.com/easyeda/easyeda-api-skill.git",
+      "priority": "required",
+      "purpose": "EasyEDA API reference plus WebSocket bridge skill (third-party; not committed here)"
+    },
+    {
+      "name": "extension-dev-skill",
+      "repo": "https://github.com/easyeda/extension-dev-skill.git",
+      "priority": "required",
+      "purpose": "Recipes and standards for building/debugging EasyEDA Pro extensions (third-party)"
+    },
+    {
+      "name": "easyeda-pro-claude-skill",
+      "repo": "https://github.com/v0id-byte/easyeda-pro-claude-skill.git",
+      "priority": "ai",
+      "purpose": "Community netlist-first verification discipline for EasyEDA Pro (third-party)"
+    }
   ]
 }
