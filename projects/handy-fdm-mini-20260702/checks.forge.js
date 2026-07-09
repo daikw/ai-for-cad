@@ -4,7 +4,7 @@
 // trustworthy on occt (manifold drops union operands in difference()); the
 // guard below fails loudly on any other backend.
 
-const { createSuite, requireBackend } = require("../../lib/forge-verify/verify.js");
+const { createSuite, requireBackend } = require("../../playgrounds/forgecad/lib/forge-verify/verify.js");
 requireBackend(getActiveBackend, "occt"); // see lib/forge-verify/kernel-pitfalls.md
 
 const {

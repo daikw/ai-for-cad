@@ -1,6 +1,6 @@
 {
   "title": "oldham-coupling",
-  "stlBase": "../playgrounds/fusion360/projects/oldham-coupling/exports",
+  "stlBase": "../projects/oldham-coupling-20260707/exports",
   "up": "z",
   "clip": { "axis": "y", "min": -16, "max": 16 },
   "camera": { "target": [0.5, 0, 0], "dist": 170 },

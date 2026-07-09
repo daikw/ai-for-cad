@@ -1,6 +1,6 @@
 # ai-for-cad assembly viewer
 
-`playgrounds/<toolchain>/projects/<name>/stl/` の印刷部品 + 手書きのゴースト部品（電装・フレーム等）を
+`projects/<name>-<YYYYMMDD>/stl/` の印刷部品 + 手書きのゴースト部品（電装・フレーム等）を
 ブラウザで確認する、プロジェクト横断の静的ビューア。ビルド不要、依存は CDN の
 three.js（0.170.0 固定）のみ。各プロジェクトは JSON manifest 1 本で完結し、
 index.html 側にプロジェクト固有の定数は一切置かない。
@@ -13,8 +13,8 @@ viewer/serve.sh          # リポジトリルートから起動。= python3 -m h
 ```
 
 STL・manifest を fetch するため `file://` では動かない。必ず HTTP で配信する
-（`viewer/serve.sh` はリポジトリルートをサーブするので、`../playgrounds/<toolchain>/projects/<name>/stl/*.stl`
-や `../playgrounds/<toolchain>/projects/<name>/viewer.json` を相対パスで取得できる）。
+（`viewer/serve.sh` はリポジトリルートをサーブするので、`../projects/<name>-<YYYYMMDD>/stl/*.stl`
+や `../projects/<name>-<YYYYMMDD>/viewer.json` を相対パスで取得できる）。
 
 ## 機能
 
@@ -33,12 +33,12 @@ STL・manifest を fetch するため `file://` では動かない。必ず HTTP
 | ホバー強調 | PARTS 行または 3D メッシュのホバーで該当部品を強調（他は減光）。`description` があればチップ表示 |
 | 言語切替 | パネル右上の EN/JA ボタンで UI 言語を切り替える（初期値はブラウザ言語、localStorage に保存）。manifest 由来のテキストは切替対象外 |
 
-## manifest スキーマ（`playgrounds/<toolchain>/projects/<name>/viewer.json`）
+## manifest スキーマ（`projects/<name>-<YYYYMMDD>/viewer.json`）
 
 ```jsonc
 {
   "title": "…",                 // status 行の表示に使う（パネル見出しは "ai-for-cad viewer" 固定）
-  "stlBase": "../playgrounds/<toolchain>/projects/<name>/stl",  // STL fetch のベースパス（/viewer/index.html からの相対パス）
+  "stlBase": "../projects/<name>-<YYYYMMDD>/stl",  // STL fetch のベースパス（/viewer/index.html からの相対パス）
   "up": "z",                      // 現状 CAD Z-up 固定（THREE.Object3D.DEFAULT_UP）
   "clip": { "axis": "y", "min": -120, "max": 120 },  // 断面クリップのスイープ範囲
   "camera": { "target": [0, 0, 60], "dist": 950 },   // デフォルトカメラ（scene 側で上書き可）
@@ -158,8 +158,8 @@ STL・manifest を fetch するため `file://` では動かない。必ず HTTP
 
 ```jsonc
 { "id": "parts-tray", "title": "Parts Tray", "branches": [
-  { "id": "b1-uniform-cells", "label": "b1 — uniform cells", "manifest": "../playgrounds/forgecad/projects/parts-tray/b1-uniform-cells/viewer.json" },
-  { "id": "b2-edge-joinery", "label": "b2 — edge joinery", "manifest": "../playgrounds/forgecad/projects/parts-tray/b2-edge-joinery/viewer.json" }
+  { "id": "b1-uniform-cells", "label": "b1 — uniform cells", "manifest": "../projects/parts-tray-20260706/b1-uniform-cells/viewer.json" },
+  { "id": "b2-edge-joinery", "label": "b2 — edge joinery", "manifest": "../projects/parts-tray-20260706/b2-edge-joinery/viewer.json" }
 ] }
 ```
 
@@ -168,7 +168,7 @@ STL・manifest を fetch するため `file://` では動かない。必ず HTTP
 フィールドセットごと非表示になる。先頭の枝がデフォルトで選択される（`default: true` で
 明示指定も可）。
 
-### バージョン（`playgrounds/<toolchain>/projects/<name>/viewer.json`）
+### バージョン（`projects/<name>-<YYYYMMDD>/viewer.json`）
 
 ```jsonc
 "versions": [
@@ -183,11 +183,11 @@ geometry だけを再ロードし、位置・色・シーン構成など他の m
 
 ## 新しいプロジェクトを追加する
 
-1. STL をエクスポートする: `playgrounds/<toolchain>/projects/<name>/stl/*.stl`
-2. `playgrounds/<toolchain>/projects/<name>/viewer.json` を上記スキーマで書く（`scenes` は 1 シーンしか無いなら省略してよい）。`provenance` で AI モデル / スキル / DSL を明示し、機構が動くモデルなら `motions` も書く
+1. STL をエクスポートする: `projects/<name>-<YYYYMMDD>/stl/*.stl`
+2. `projects/<name>-<YYYYMMDD>/viewer.json` を上記スキーマで書く（`scenes` は 1 シーンしか無いなら省略してよい）。`provenance` で AI モデル / スキル / DSL を明示し、機構が動くモデルなら `motions` も書く
 3. `viewer/projects.json` の `projects` 配列に 1 行追加する（単枝モデル）:
    ```jsonc
-   { "id": "<name>", "title": "<表示名>", "manifest": "../playgrounds/<toolchain>/projects/<name>/viewer.json" }
+   { "id": "<name>", "title": "<表示名>", "manifest": "../projects/<name>-<YYYYMMDD>/viewer.json" }
    ```
    2 本目の枝が生えたら `branches` 配列に切り替える（上記「枝とバージョン」参照）。
 4. `viewer/serve.sh` を起動し、PROJECT ドロップダウンで選んで確認する

@@ -1,10 +1,10 @@
 # ai-for-cad
 
-AI-for-CAD 実験リポジトリ。`playgrounds/<toolchain>/` がエージェントスキルファミリーごとの実験場（forgecad / fusion360 / easyeda / qcad）、`benchmarks/` が同一お題のツール横断比較、`viewer/` が全 playground 共有の成果物ビューア。モデルは `playgrounds/<toolchain>/projects/<model>/` に置く。
+AI-for-CAD 実験リポジトリ。CAD プロジェクトは全ツールチェーン共通で `projects/<name>-<YYYYMMDD>/`（日付 = プロジェクト開始日）に置く。`playgrounds/<toolchain>/` はスキル・ツール・ライブラリ・研究の置き場（成果物プロジェクトは置かない）。`viewer/` が共有の成果物ビューア。
 
 ## バージョン管理方針（docs/model-versioning.md が正本）
 
-- **枝**（並存する別解）はディレクトリ: `.../projects/<model>/b<N>-<slug>/`。枝が 1 本のうちはフラット
+- **枝**（並存する別解）はディレクトリ: `projects/<name>-<ts>/b<N>-<slug>/`。枝が 1 本のうちはフラット
 - **バージョン**（置換する改善版）は同一ディレクトリで in-place。CHANGELOG.md に `## v<N>` 見出しで記録し、印刷した版の STL/G-code は `-v<N>` サフィックスで保存
 - パラメータ違いだけの変種は `Param.choice` + `variant-*.forge.js`。ディレクトリを増やさない
 - 新モデル追加・派生時は `viewer/projects.json` も更新する（README にモデル一覧表は置かない）。viewer.json には `provenance`（aiModel / skills / dsl）を書く
@@ -26,4 +26,4 @@ AI-for-CAD 実験リポジトリ。`playgrounds/<toolchain>/` がエージェン
 
 - **fusion360**: Fusion MCP + `adsk` Python スクリプト駆動。API 内部単位は cm。検証は見た目でなくエクスポート/数値で行う（fusion360 スキル参照）
 - **easyeda**: 外部クローン（extensions/ tools/ 計 ~3.8GB）は git 管理外。`playgrounds/easyeda/scripts/fetch-easyeda-repos.sh` で再取得
-- **qcad**: 2D 作図 → DXF 生成 → PNG 目視検証（daikw:qcad スキル参照）
+- **qcad**: 2D 作図 → DXF 生成 → PNG 目視検証（グローバルの daikw:qcad スキル参照。repo 内に専用 playground 資産はない）

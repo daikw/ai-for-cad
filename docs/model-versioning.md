@@ -7,17 +7,19 @@
 
 ### 1. モデル（コンセプト）
 
-「何を作るか」の単位。`playgrounds/<dsl>/projects/<model>/` が 1 モデル。
-例: parts-tray（部品仕分けトレイ）、pi-pico-case、spherical-drone。
+「何を作るか」の単位。`projects/<model>-<YYYYMMDD>/` が 1 モデル。サフィックスの日付は
+プロジェクト開始日（初コミット日または初作業日）で、以後変えない — 枝やバージョンが
+進んでもディレクトリ名は据え置く。
+例: parts-tray-20260706、pi-pico-case-20260518、spherical-drone-20260610。
 
 ### 2. 枝（branch, `b<N>-<slug>`）
 
 同一コンセプトに対する**別解**。設計アプローチや割り切りが違い、どちらも
 生き続けうる（新しい枝が古い枝を廃止しない）。
 
-- ディレクトリで分ける: `playgrounds/<dsl>/projects/<model>/b<N>-<slug>/`
+- ディレクトリで分ける: `projects/<model>-<YYYYMMDD>/b<N>-<slug>/`
 - `<N>` は枝番（生えた順の連番）、`<slug>` は特徴を表す kebab-case
-- **枝が 1 本しかないモデルはフラットのまま**（`playgrounds/<dsl>/projects/<model>/` ＝暗黙の b1）。
+- **枝が 1 本しかないモデルはフラットのまま**（`projects/<model>-<YYYYMMDD>/` ＝暗黙の b1）。
   2 本目が生えた時点で初めて `b1-<slug>/` に掘り下げる
 - 例: `parts-tray/b1-uniform-cells`（均一セル・単体トレイ）と
   `parts-tray/b2-edge-joinery`（可変セル＋エッジ連結）。目的が少し違うので並存
@@ -54,7 +56,7 @@
 
 | 対象 | 形式 | 例 |
 |---|---|---|
-| モデル | `playgrounds/<dsl>/projects/<model>/` | `playgrounds/forgecad/projects/parts-tray/` |
+| モデル | `projects/<model>-<YYYYMMDD>/` | `projects/parts-tray-20260706/` |
 | 枝 | `b<N>-<slug>/`（2 本目から） | `b2-edge-joinery/` |
 | バージョン | CHANGELOG 見出し `v<N>` / `v<N>.<M>` | `## v9.7 (2026-05-26)` |
 | 印刷成果物 | `<name>-print-v<N>.stl` | `pi-pico-case-print-v9.stl` |

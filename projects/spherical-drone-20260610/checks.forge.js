@@ -3,7 +3,7 @@
 // not interfere, or a bounding-box/derived dimension. suite.summary() throws
 // on any failed check, so CI-style usage is just the exit code.
 
-const { createSuite, requireBackend } = require("../../lib/forge-verify/verify.js");
+const { createSuite, requireBackend } = require("../../playgrounds/forgecad/lib/forge-verify/verify.js");
 requireBackend(getActiveBackend, "occt"); // manifold drops union operands in difference() — see CHANGELOG.md
 
 const { DRONE, STATION } = require("./dims.js");

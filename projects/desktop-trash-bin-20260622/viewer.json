@@ -1,6 +1,6 @@
 {
   "title": "desktop-trash-bin",
-  "stlBase": "../playgrounds/forgecad/projects/desktop-trash-bin",
+  "stlBase": "../projects/desktop-trash-bin-20260622",
   "up": "z",
   "provenance": { "aiModel": "Claude (Claude Code)", "skills": ["forgecad-high-level-spec", "forgecad-lld", "forgecad-make-a-model", "forgecad-verify"], "dsl": "forgecad" },
   "clip": { "axis": "y", "min": -60, "max": 60 },

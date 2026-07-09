@@ -1,7 +1,7 @@
 # easyeda playground
 
 EasyEDA Pro を AI エージェントから操作する実験場。回路図設計ベンチの本体は
-[benchmarks/arduino-uno-compat](../../benchmarks/arduino-uno-compat/) にある。
+[projects/arduino-uno-compat-20260703](../../projects/arduino-uno-compat-20260703/) にある。
 
 ## レイアウト
 

@@ -1,6 +1,6 @@
 {
   "title": "arduino-uno-compat case",
-  "stlBase": "../benchmarks/arduino-uno-compat/case.v1",
+  "stlBase": "../projects/arduino-uno-compat-20260703/case.v1",
   "up": "z",
   "clip": { "axis": "y", "min": -10, "max": 62 },
   "camera": { "target": [34, 27, 5], "dist": 280 },
