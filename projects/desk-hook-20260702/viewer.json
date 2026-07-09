@@ -1,0 +1,25 @@
+{
+  "title": "desk-hook",
+  "stlBase": "../projects/desk-hook-20260702",
+  "up": "z",
+  "camera": { "target": [-20, -24, 0], "dist": 260, "top": true },
+  "provenance": {
+    "aiModel": "Claude (Claude Code)",
+    "skills": ["qcad"],
+    "dsl": "qcad-js (dxf)",
+    "date": "2026-07"
+  },
+  "drawings": [
+    {
+      "id": "profile", "name": "profile (DXF)", "dxf": "desk-hook.dxf", "color": "#e8eef4",
+      "description": "机天板に掛けるヘッドホンフックの 2D 外形。肉厚 6mm、15mm 押し出し想定"
+    }
+  ],
+  "images": [
+    {
+      "id": "render", "name": "render (PNG)", "src": "desk-hook.png", "width": 110,
+      "pos": [80, -24, 0],
+      "description": "QCAD 出力の PNG レンダリング"
+    }
+  ]
+}

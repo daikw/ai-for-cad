@@ -1,0 +1,25 @@
+{
+  "title": "fdm-printer-2d",
+  "stlBase": "../projects/fdm-printer-2d-20260702",
+  "up": "z",
+  "camera": { "target": [380, 400, 0], "dist": 1600, "top": true },
+  "provenance": {
+    "aiModel": "Claude (Claude Code)",
+    "skills": ["qcad"],
+    "dsl": "qcad-js (dxf)",
+    "date": "2026-07"
+  },
+  "drawings": [
+    {
+      "id": "concept", "name": "concept (DXF)", "dxf": "fdm-printer.dxf", "color": "#e8eef4",
+      "description": "FDM プリンタの 2D コンセプト図"
+    }
+  ],
+  "images": [
+    {
+      "id": "render", "name": "render (PNG)", "src": "fdm-printer.png", "width": 700,
+      "pos": [1200, 400, 0],
+      "description": "QCAD 出力の PNG レンダリング"
+    }
+  ]
+}

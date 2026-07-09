@@ -32,6 +32,7 @@ STL・manifest を fetch するため `file://` では動かない。必ず HTTP
 | provenance | manifest の `provenance`（AI モデル / スキル / DSL / 日付）をバッジ表示する |
 | ホバー強調 | PARTS 行または 3D メッシュのホバーで該当部品を強調（他は減光）。`description` があればチップ表示 |
 | 言語切替 | パネル右上の EN/JA ボタンで UI 言語を切り替える（初期値はブラウザ言語、localStorage に保存）。manifest 由来のテキストは切替対象外 |
+| 2D 図面 | manifest の `drawings`（DXF）を線描画、`images`（PNG 等）を平面表示する。2D CAD・回路図用 |
 
 ## manifest スキーマ（`projects/<name>-<YYYYMMDD>/viewer.json`）
 
@@ -41,7 +42,7 @@ STL・manifest を fetch するため `file://` では動かない。必ず HTTP
   "stlBase": "../projects/<name>-<YYYYMMDD>/stl",  // STL fetch のベースパス（/viewer/index.html からの相対パス）
   "up": "z",                      // 現状 CAD Z-up 固定（THREE.Object3D.DEFAULT_UP）
   "clip": { "axis": "y", "min": -120, "max": 120 },  // 断面クリップのスイープ範囲
-  "camera": { "target": [0, 0, 60], "dist": 950 },   // デフォルトカメラ（scene 側で上書き可）
+  "camera": { "target": [0, 0, 60], "dist": 950 },   // デフォルトカメラ（scene 側で上書き可）。"top": true で真上ビュー（2D 図面向け）
 
   "provenance": {                 // 省略可。何で作ったかのバッジ表示（全フィールド任意）
     "aiModel": "Claude Fable 5",
@@ -76,6 +77,16 @@ STL・manifest を fetch するため `file://` では動かない。必ず HTTP
       "explodeLift": { "drone": [0, 0, 1.2] },   // group ごとに explode ベクトルへ加算する追加分解方向
       "camera": { "target": [0, 0, 60], "dist": 950 }
     }
+  ],
+
+  "drawings": [   // 省略可。2D DXF を XY 平面に線描画する（2D CAD プロジェクト用）
+    // 対応エンティティ: LINE / CIRCLE / ARC / LWPOLYLINE（bulge 非対応 — QCAD は丸めを ARC で出すので実用上足りる）
+    // TEXT や寸法などその他のエンティティは無視される
+    { "id": "profile", "name": "profile (DXF)", "dxf": "desk-hook.dxf", "color": "#e8eef4", "pos": [0, 0, 0], "description": "…" }
+  ],
+
+  "images": [     // 省略可。PNG/JPG を width 指定の平面として表示する（レンダ画像・回路図など）
+    { "id": "render", "name": "render (PNG)", "src": "desk-hook.png", "width": 110, "pos": [80, -24, 0], "rot": [], "description": "…" }
   ],
 
   "motions": [   // 省略可。下記「モーション」参照

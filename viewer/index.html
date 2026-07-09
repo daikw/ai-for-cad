@@ -208,6 +208,82 @@ async function loadGeo(url) {
   return geoCache.get(url);
 }
 
+// ---- 2D drawings (DXF) ------------------------------------------------------
+// Minimal DXF reader for QCAD/dxflib output: LINE, CIRCLE, ARC, LWPOLYLINE
+// (bulge ignored — QCAD emits rounded corners as ARC entities). Everything
+// else (TEXT, DIMENSION, ...) is skipped. Returns a BufferGeometry of 2D
+// line segments in the drawing's XY plane (Z = 0).
+const dxfCache = new Map();
+async function loadDxfGeometry(url) {
+  if (!dxfCache.has(url)) {
+    dxfCache.set(
+      url,
+      fetch(url)
+        .then((r) => {
+          if (!r.ok) throw new Error(`dxf fetch failed: ${r.status} ${url}`);
+          return r.text();
+        })
+        .then(buildDxfGeometry),
+    );
+  }
+  return dxfCache.get(url);
+}
+
+function buildDxfGeometry(text) {
+  const rows = text.split(/\r?\n/);
+  const pts = [];
+  const seg = (x1, y1, x2, y2) => pts.push(x1, y1, 0, x2, y2, 0);
+  const arcSeg = (cx, cy, r, a0, a1) => {
+    if (a1 <= a0) a1 += 360;
+    const n = Math.max(8, Math.ceil((a1 - a0) / 6));
+    for (let k = 0; k < n; k++) {
+      const t0 = ((a0 + ((a1 - a0) * k) / n) * Math.PI) / 180;
+      const t1 = ((a0 + ((a1 - a0) * (k + 1)) / n) * Math.PI) / 180;
+      seg(cx + r * Math.cos(t0), cy + r * Math.sin(t0), cx + r * Math.cos(t1), cy + r * Math.sin(t1));
+    }
+  };
+  let ent = null; // { type, attrs: { groupCode: [values...] } }
+  const flush = () => {
+    if (!ent) return;
+    const a = ent.attrs;
+    const f = (c) => parseFloat(a[c]?.[0]);
+    if (ent.type === "LINE" && a[10] && a[11]) seg(f(10), f(20), f(11), f(21));
+    else if (ent.type === "CIRCLE" && a[10]) arcSeg(f(10), f(20), f(40), 0, 360);
+    else if (ent.type === "ARC" && a[10]) arcSeg(f(10), f(20), f(40), f(50), f(51));
+    else if (ent.type === "LWPOLYLINE" && a[10]) {
+      const xs = a[10].map(Number), ys = a[20].map(Number);
+      for (let k = 0; k + 1 < xs.length; k++) seg(xs[k], ys[k], xs[k + 1], ys[k + 1]);
+      if (a[70] && (parseInt(a[70][0], 10) & 1) && xs.length > 2) seg(xs[xs.length - 1], ys[ys.length - 1], xs[0], ys[0]);
+    }
+    ent = null;
+  };
+  let inEntities = false;
+  for (let i = 0; i + 1 < rows.length; i += 2) {
+    const code = rows[i].trim();
+    const val = rows[i + 1].trim();
+    if (!inEntities) {
+      if (code === "2" && val === "ENTITIES") inEntities = true;
+      continue;
+    }
+    if (code === "0") {
+      flush();
+      if (val === "ENDSEC") {
+        inEntities = false;
+        continue;
+      }
+      ent = { type: val, attrs: {} };
+    } else if (ent) {
+      (ent.attrs[code] ??= []).push(val);
+    }
+  }
+  flush();
+  const geo = new THREE.BufferGeometry();
+  geo.setAttribute("position", new THREE.Float32BufferAttribute(pts, 3));
+  return geo;
+}
+
+const textureLoader = new THREE.TextureLoader();
+
 // ---- manifest-driven state ---------------------------------------------------
 const partList = document.getElementById("part-list");
 const sceneFieldset = document.getElementById("scene-fieldset");
@@ -341,6 +417,53 @@ async function buildScene(sceneId) {
     });
   }
 
+  for (const def of manifest.drawings || []) {
+    if (!inGroup(def.group, sceneDef.groups)) continue;
+    const geo = await loadDxfGeometry(`${manifest.stlBase}/${def.dxf}`);
+    const obj = new THREE.LineSegments(geo, new THREE.LineBasicMaterial({ color: def.color || "#dfe5ec" }));
+
+    const offset = offsets[def.group] || [0, 0, 0];
+    const base = new THREE.Vector3(...(def.pos || [0, 0, 0])).add(new THREE.Vector3(...offset));
+    obj.position.copy(base);
+    root.add(obj);
+
+    entries.push({
+      id: def.id, name: def.name || def.id, group: def.group ?? null,
+      object: obj, basePos: base, baseQuat: obj.quaternion.clone(),
+      sceneOffset: new THREE.Vector3(...offset),
+      explodeDir: new THREE.Vector3(...(def.explode || [0, 0, 0])),
+      ghost: false, color: def.color || "#dfe5ec", baseColor: new THREE.Color(def.color || "#dfe5ec"),
+      description: def.description ?? null, labelEl: null,
+    });
+  }
+
+  for (const def of manifest.images || []) {
+    if (!inGroup(def.group, sceneDef.groups)) continue;
+    const tex = await textureLoader.loadAsync(`${manifest.stlBase}/${def.src}`);
+    tex.colorSpace = THREE.SRGBColorSpace;
+    const w = def.width || 100;
+    const h = w * (tex.image.height / tex.image.width);
+    const mesh = new THREE.Mesh(
+      new THREE.PlaneGeometry(w, h), // XY plane, Z normal — lies flat in the Z-up scene
+      new THREE.MeshBasicMaterial({ map: tex, side: THREE.DoubleSide }),
+    );
+
+    const offset = offsets[def.group] || [0, 0, 0];
+    const base = new THREE.Vector3(...(def.pos || [0, 0, 0])).add(new THREE.Vector3(...offset));
+    mesh.position.copy(base);
+    mesh.quaternion.copy(buildQuat(def.rot));
+    root.add(mesh);
+
+    entries.push({
+      id: def.id, name: def.name || def.id, group: def.group ?? null,
+      object: mesh, basePos: base, baseQuat: mesh.quaternion.clone(),
+      sceneOffset: new THREE.Vector3(...offset),
+      explodeDir: new THREE.Vector3(...(def.explode || [0, 0, 0])),
+      ghost: false, color: "#ffffff", baseColor: new THREE.Color("#ffffff"),
+      description: def.description ?? null, labelEl: null,
+    });
+  }
+
   for (const def of manifest.ghosts || []) {
     if (!inGroup(def.group, sceneDef.groups)) continue;
     const geo = buildGhostGeometry(def);
@@ -398,7 +521,7 @@ async function buildScene(sceneId) {
   applyGhostVisibility();
   fitCamera(sceneDef);
   const partCount = entries.filter((e) => !e.ghost).length;
-  const tris = entries.filter((e) => !e.ghost).reduce((n, e) => n + (e.object.geometry?.attributes.position.count ?? 0) / 3, 0);
+  const tris = entries.filter((e) => !e.ghost && e.object.isMesh).reduce((n, e) => n + (e.object.geometry?.attributes.position.count ?? 0) / 3, 0);
   // Mid segment surfaces whichever of branch/version/scene actually varies for
   // this project; single-branch, single-version, single-scene projects collapse
   // back to the plain "title / scene" status line from before branches/versions existed.
@@ -420,7 +543,12 @@ function fitCamera(sceneDef) {
   const camDef = sceneDef.camera || manifest.camera || { target: [0, 0, 0], dist: 600 };
   const target = new THREE.Vector3(...camDef.target);
   const dist = camDef.dist;
-  camera.position.set(target.x + dist * 0.62, target.y - dist * 0.72, target.z + dist * 0.42);
+  if (camDef.top) {
+    // top-down view for 2D drawings; tiny Y offset keeps OrbitControls off the pole
+    camera.position.set(target.x, target.y - dist * 0.02, target.z + dist);
+  } else {
+    camera.position.set(target.x + dist * 0.62, target.y - dist * 0.72, target.z + dist * 0.42);
+  }
   controls.target.copy(target);
   controls.update();
 }
@@ -439,15 +567,16 @@ function setHighlight(target) {
   for (const e of entries) {
     if (e.ghost) continue; // ghost materials are transparent; leave them alone
     const mat = e.object.material;
+    // Line/image materials have no emissive; they highlight by dimming alone.
     if (!target) {
       mat.color.copy(e.baseColor);
-      mat.emissive.setHex(0x000000);
+      mat.emissive?.setHex(0x000000);
     } else if (e === target) {
       mat.color.copy(e.baseColor);
-      mat.emissive.copy(e.baseColor).multiplyScalar(0.35);
+      mat.emissive?.copy(e.baseColor).multiplyScalar(0.35);
     } else {
       mat.color.copy(e.baseColor).multiplyScalar(0.45);
-      mat.emissive.setHex(0x000000);
+      mat.emissive?.setHex(0x000000);
     }
   }
 }
@@ -490,7 +619,7 @@ function pickHover() {
   if (!pointerDirty || pointerDown) return;
   pointerDirty = false;
   raycaster.setFromCamera(pointerNdc, camera);
-  const objs = entries.filter((e) => !e.ghost && e.object.visible).map((e) => e.object);
+  const objs = entries.filter((e) => !e.ghost && e.object.visible && e.object.isMesh).map((e) => e.object);
   const hit = raycaster.intersectObjects(objs, false)[0];
   const entry = hit ? entries.find((e) => e.object === hit.object) : null;
   setHighlight(entry);

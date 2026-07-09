@@ -9,6 +9,8 @@
     { "id": "desktop-trash-bin", "title": "Desktop Trash Bin", "manifest": "../projects/desktop-trash-bin-20260622/viewer.json" },
     { "id": "pi-pico-case", "title": "Pi Pico Case", "manifest": "../projects/pi-pico-case-20260518/viewer.json" },
     { "id": "oldham-coupling", "title": "Oldham Coupling", "manifest": "../projects/oldham-coupling-20260707/viewer.json" },
-    { "id": "arduino-uno-compat", "title": "Arduino UNO Case (benchmark)", "manifest": "../projects/arduino-uno-compat-20260703/case.v1/viewer.json" }
+    { "id": "arduino-uno-compat", "title": "Arduino UNO Case (benchmark)", "manifest": "../projects/arduino-uno-compat-20260703/case.v1/viewer.json" },
+    { "id": "desk-hook", "title": "Desk Hook (2D)", "manifest": "../projects/desk-hook-20260702/viewer.json" },
+    { "id": "fdm-printer-2d", "title": "FDM Printer (2D)", "manifest": "../projects/fdm-printer-2d-20260702/viewer.json" }
   ]
 }
