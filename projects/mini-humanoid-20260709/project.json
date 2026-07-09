@@ -1,0 +1,30 @@
+{
+  "name": "mini-humanoid",
+  "title": "Mini Humanoid 300mm",
+  "started": "2026-07-09",
+  "toolchain": "forgecad",
+  "category": "robotics",
+  "tags": [
+    "forgecad",
+    "humanoid",
+    "17dof",
+    "xl330",
+    "verified"
+  ],
+  "summary": "全高300mm・17DoFのホビーヒューマノイド。XL330-M288-T×17、OpenRB-150+2S LiPo。checks 34 PASS / 6 waived、総質量646.96g（予算800g）",
+  "provenance": {
+    "aiModel": "Claude Fable 5",
+    "skills": [
+      "chatgpt-web",
+      "forgecad-high-level-spec",
+      "forgecad-lld",
+      "forgecad-make-a-model",
+      "forgecad-verify"
+    ],
+    "dsl": "forgecad",
+    "referenceImages": "refs/ (ChatGPT 生成 3 枚)"
+  },
+  "viewer": {
+    "manifest": "viewer.json"
+  }
+}

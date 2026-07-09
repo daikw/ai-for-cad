@@ -11,6 +11,7 @@
     "../projects/palm-agv-20260706/project.json",
     "../projects/parts-tray-20260706/project.json",
     "../projects/spacer-20260706/project.json",
-    "../projects/oldham-coupling-20260707/project.json"
+    "../projects/oldham-coupling-20260707/project.json",
+    "../projects/mini-humanoid-20260709/project.json"
   ]
 }

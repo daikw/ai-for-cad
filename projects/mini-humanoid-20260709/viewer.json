@@ -1,0 +1,15 @@
+{
+  "title": "mini-humanoid",
+  "stlBase": "../projects/mini-humanoid-20260709/exports",
+  "up": "z",
+  "camera": { "target": [0, 0, 150], "dist": 550 },
+  "parts": [
+    {
+      "id": "MiniHumanoid",
+      "name": "mini-humanoid 300mm / 17 DoF",
+      "stl": "mini-humanoid.stl",
+      "color": "#d9d5cc",
+      "description": "全高300mm・17DoF（脚5×2+腕3×2+首1）。XL330-M288-T×17、胴体にOpenRB-150+2S LiPo。checks.forge.js 34 PASS / 6 waived (--backend occt)"
+    }
+  ]
+}
