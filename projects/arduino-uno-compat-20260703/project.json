@@ -1,0 +1,26 @@
+{
+  "name": "arduino-uno-compat",
+  "title": "Arduino UNO Compat",
+  "started": "2026-07-03",
+  "category": "enclosure",
+  "tags": [
+    "benchmark",
+    "fusion360",
+    "easyeda",
+    "eda",
+    "3d-print"
+  ],
+  "summary": "Arduino UNO R3 互換機: EasyEDA vs Fusion Electronics 回路図ベンチ + Fusion 製ケース",
+  "provenance": {
+    "aiModel": "Claude Fable 5",
+    "skills": [
+      "fusion360",
+      "easyeda-api"
+    ],
+    "dsl": "adsk-python / EasyEDA API",
+    "date": "2026-07"
+  },
+  "viewer": {
+    "manifest": "case.v1/viewer.json"
+  }
+}

@@ -3,12 +3,6 @@
   "stlBase": "../projects/desk-hook-20260702",
   "up": "z",
   "camera": { "target": [-20, -24, 0], "dist": 260, "top": true },
-  "provenance": {
-    "aiModel": "Claude (Claude Code)",
-    "skills": ["qcad"],
-    "dsl": "qcad-js (dxf)",
-    "date": "2026-07"
-  },
   "drawings": [
     {
       "id": "profile", "name": "profile (DXF)", "dxf": "desk-hook.dxf", "color": "#e8eef4",

@@ -1,0 +1,24 @@
+{
+  "name": "oldham-coupling",
+  "title": "Oldham Coupling",
+  "started": "2026-07-07",
+  "category": "mechanism",
+  "tags": [
+    "fusion360",
+    "adsk",
+    "motion",
+    "3d-print"
+  ],
+  "summary": "3ピース オルダムカップリング。平行ミスアライメント 1mm を吸収して 1:1 伝達",
+  "provenance": {
+    "aiModel": "Claude Fable 5",
+    "skills": [
+      "fusion360"
+    ],
+    "dsl": "adsk-python (Fusion MCP)",
+    "date": "2026-07"
+  },
+  "viewer": {
+    "manifest": "viewer.json"
+  }
+}

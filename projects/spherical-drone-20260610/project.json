@@ -1,0 +1,25 @@
+{
+  "name": "spherical-drone",
+  "title": "Spherical Drone",
+  "started": "2026-06-10",
+  "category": "robotics",
+  "tags": [
+    "forgecad",
+    "3d-print",
+    "assembly"
+  ],
+  "summary": "ジオデシックケージドローン + ドックステーション",
+  "provenance": {
+    "aiModel": "Claude (Claude Code)",
+    "skills": [
+      "forgecad-high-level-spec",
+      "forgecad-lld",
+      "forgecad-make-a-model",
+      "forgecad-verify"
+    ],
+    "dsl": "forgecad"
+  },
+  "viewer": {
+    "manifest": "viewer.json"
+  }
+}

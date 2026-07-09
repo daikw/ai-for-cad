@@ -1,0 +1,36 @@
+{
+  "name": "parts-tray",
+  "title": "Parts Tray",
+  "started": "2026-07-06",
+  "category": "utility",
+  "tags": [
+    "forgecad",
+    "3d-print",
+    "branches"
+  ],
+  "summary": "部品仕分けトレイ。b1 = 均一セル / b2 = 可変セル + エッジ連結",
+  "provenance": {
+    "aiModel": "Claude (Claude Code)",
+    "skills": [
+      "forgecad-high-level-spec",
+      "forgecad-lld",
+      "forgecad-make-a-model",
+      "forgecad-verify"
+    ],
+    "dsl": "forgecad"
+  },
+  "viewer": {
+    "branches": [
+      {
+        "id": "b1-uniform-cells",
+        "label": "b1 — uniform cells",
+        "manifest": "b1-uniform-cells/viewer.json"
+      },
+      {
+        "id": "b2-edge-joinery",
+        "label": "b2 — edge joinery",
+        "manifest": "b2-edge-joinery/viewer.json"
+      }
+    ]
+  }
+}

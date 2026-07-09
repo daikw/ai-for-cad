@@ -20,7 +20,7 @@ STL・manifest を fetch するため `file://` では動かない。必ず HTTP
 
 | 機能 | 説明 |
 |------|------|
-| PROJECT | `viewer/projects.json` に列挙されたプロジェクトを切り替える |
+| PROJECT | プロジェクトを切り替える。CATEGORY セレクトと検索ボックス（title / tags / summary の部分一致、AND 条件）で絞り込める |
 | BRANCH | プロジェクトの `branches`（枝）を切り替える（1 枝しかない、または未定義のプロジェクトでは非表示） |
 | VERSION | manifest の `versions`（版）を切り替える（1 版しかない、または未定義の manifest では非表示） |
 | SCENE | manifest の `scenes` を切り替える（1 シーンしかない、または未定義のプロジェクトでは非表示） |
@@ -34,11 +34,31 @@ STL・manifest を fetch するため `file://` では動かない。必ず HTTP
 | 言語切替 | パネル右上の EN/JA ボタンで UI 言語を切り替える（初期値はブラウザ言語、localStorage に保存）。manifest 由来のテキストは切替対象外 |
 | 2D 図面 | manifest の `drawings`（DXF）を線描画、`images`（PNG 等）を平面表示する。2D CAD・回路図用 |
 
+## プロジェクトメタデータ（`projects/<name>-<YYYYMMDD>/project.json`）
+
+プロジェクトのメタ情報の正本。`viewer/projects.json` は project.json への相対パスの
+配列だけを持つ薄いインデックスで、title・カテゴリ・provenance はすべてこちらに書く。
+
+```jsonc
+{
+  "name": "spherical-drone",           // プロジェクト slug（ドロップダウンの内部 ID）
+  "title": "Spherical Drone",          // 表示名
+  "started": "2026-06-10",             // 開始日（ディレクトリ名のサフィックスと一致させる）
+  "category": "robotics",              // 単一値。CATEGORY セレクトの選択肢になる
+  "tags": ["forgecad", "3d-print"],    // 複数可。検索対象
+  "summary": "…",                      // 一行説明。検索対象
+  "provenance": { "aiModel": "…", "skills": ["…"], "dsl": "…", "date": "…" },  // バッジ表示
+  "viewer": { "manifest": "viewer.json" }   // ビューア登録。パスはプロジェクトディレクトリ相対
+  // 枝がある場合: "viewer": { "branches": [{ "id", "label", "manifest" }] }
+  // "viewer" が無いプロジェクト（HLD のみ等）はカタログには載るがドロップダウンに出ない
+}
+```
+
 ## manifest スキーマ（`projects/<name>-<YYYYMMDD>/viewer.json`）
 
 ```jsonc
 {
-  "title": "…",                 // status 行の表示に使う（パネル見出しは "ai-for-cad viewer" 固定）
+  "title": "…",                 // status 行の表示に使う（パネル見出しは "ai-for-cad viewer" 固定。メタ情報は project.json 側）
   "stlBase": "../projects/<name>-<YYYYMMDD>/stl",  // STL fetch のベースパス（/viewer/index.html からの相対パス）
   "up": "z",                      // 現状 CAD Z-up 固定（THREE.Object3D.DEFAULT_UP）
   "clip": { "axis": "y", "min": -120, "max": 120 },  // 断面クリップのスイープ範囲
@@ -160,24 +180,22 @@ STL・manifest を fetch するため `file://` では動かない。必ず HTTP
 ## 枝（branch）とバージョン（version）
 
 `docs/model-versioning.md` の「枝＝並存する別解」「バージョン＝古い方を置き換える改善版」
-という区別に対応して、ビューアも 2 段階で切り替えられる。**枝は `projects.json` の
-プロジェクトエントリ側、バージョンは manifest（`viewer.json`）側**で宣言する — この対応が
-崩れないようにする（枝を manifest 側で表現したり、バージョンをプロジェクトエントリの
-枝として表現したりしない）。
+という区別に対応して、ビューアも 2 段階で切り替えられる。**枝は `project.json` の
+`viewer.branches` 側、バージョンは manifest（`viewer.json`）側**で宣言する — この対応が
+崩れないようにする（枝を manifest 側で表現したり、バージョンを枝として表現したりしない）。
 
-### 枝（`viewer/projects.json`）
+### 枝（`project.json` の `viewer`）
 
 ```jsonc
-{ "id": "parts-tray", "title": "Parts Tray", "branches": [
-  { "id": "b1-uniform-cells", "label": "b1 — uniform cells", "manifest": "../projects/parts-tray-20260706/b1-uniform-cells/viewer.json" },
-  { "id": "b2-edge-joinery", "label": "b2 — edge joinery", "manifest": "../projects/parts-tray-20260706/b2-edge-joinery/viewer.json" }
+"viewer": { "branches": [
+  { "id": "b1-uniform-cells", "label": "b1 — uniform cells", "manifest": "b1-uniform-cells/viewer.json" },
+  { "id": "b2-edge-joinery", "label": "b2 — edge joinery", "manifest": "b2-edge-joinery/viewer.json" }
 ] }
 ```
 
-`branches` を持たないプロジェクトエントリは従来どおり `manifest` を直接持つ（単枝モデルは
-今まで通りフラットのままでよい）。`branches` が 1 件だけ、または未定義の場合は BRANCH
-フィールドセットごと非表示になる。先頭の枝がデフォルトで選択される（`default: true` で
-明示指定も可）。
+単枝モデルは `viewer.manifest` を直接持つ（フラットのままでよい）。`branches` が 1 件だけ、
+または未定義の場合は BRANCH フィールドセットごと非表示になる。先頭の枝がデフォルトで
+選択される（`default: true` で明示指定も可）。manifest パスはプロジェクトディレクトリ相対。
 
 ### バージョン（`projects/<name>-<YYYYMMDD>/viewer.json`）
 
@@ -194,11 +212,12 @@ geometry だけを再ロードし、位置・色・シーン構成など他の m
 
 ## 新しいプロジェクトを追加する
 
-1. STL をエクスポートする: `projects/<name>-<YYYYMMDD>/stl/*.stl`
-2. `projects/<name>-<YYYYMMDD>/viewer.json` を上記スキーマで書く（`scenes` は 1 シーンしか無いなら省略してよい）。`provenance` で AI モデル / スキル / DSL を明示し、機構が動くモデルなら `motions` も書く
-3. `viewer/projects.json` の `projects` 配列に 1 行追加する（単枝モデル）:
+1. STL をエクスポートする: `projects/<name>-<YYYYMMDD>/stl/*.stl`（2D なら DXF/PNG）
+2. `projects/<name>-<YYYYMMDD>/project.json` を上記メタデータスキーマで書く（category / tags / summary / provenance / viewer 参照）
+3. `projects/<name>-<YYYYMMDD>/viewer.json` を manifest スキーマで書く（`scenes` は 1 シーンしか無いなら省略してよい。機構が動くモデルなら `motions` も書く）
+4. `viewer/projects.json` の `projects` 配列に project.json への相対パスを 1 行追加する:
    ```jsonc
-   { "id": "<name>", "title": "<表示名>", "manifest": "../projects/<name>-<YYYYMMDD>/viewer.json" }
+   "../projects/<name>-<YYYYMMDD>/project.json"
    ```
-   2 本目の枝が生えたら `branches` 配列に切り替える（上記「枝とバージョン」参照）。
-4. `viewer/serve.sh` を起動し、PROJECT ドロップダウンで選んで確認する
+   2 本目の枝が生えたら project.json の `viewer` を `branches` 形式に切り替える（上記「枝とバージョン」参照）。
+5. `viewer/serve.sh` を起動し、PROJECT ドロップダウンで選んで確認する

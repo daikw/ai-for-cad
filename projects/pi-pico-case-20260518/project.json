@@ -1,0 +1,25 @@
+{
+  "name": "pi-pico-case",
+  "title": "Pi Pico Case",
+  "started": "2026-05-18",
+  "category": "enclosure",
+  "tags": [
+    "forgecad",
+    "3d-print",
+    "versioned"
+  ],
+  "summary": "Raspberry Pi Pico ケース。v5〜v9.7 の版履歴リファレンス",
+  "provenance": {
+    "aiModel": "Claude (Claude Code)",
+    "skills": [
+      "forgecad-high-level-spec",
+      "forgecad-lld",
+      "forgecad-make-a-model",
+      "forgecad-verify"
+    ],
+    "dsl": "forgecad"
+  },
+  "viewer": {
+    "manifest": "viewer.json"
+  }
+}

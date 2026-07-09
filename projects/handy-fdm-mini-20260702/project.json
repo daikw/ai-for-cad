@@ -1,0 +1,25 @@
+{
+  "name": "handy-fdm-mini",
+  "title": "Handy FDM Mini",
+  "started": "2026-07-02",
+  "category": "machine",
+  "tags": [
+    "forgecad",
+    "3d-print",
+    "assembly"
+  ],
+  "summary": "片手で持ち運べる FDM プリンタの構造モデル",
+  "provenance": {
+    "aiModel": "Claude (Claude Code)",
+    "skills": [
+      "forgecad-high-level-spec",
+      "forgecad-lld",
+      "forgecad-make-a-model",
+      "forgecad-verify"
+    ],
+    "dsl": "forgecad"
+  },
+  "viewer": {
+    "manifest": "viewer.json"
+  }
+}

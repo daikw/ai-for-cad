@@ -1,16 +1,16 @@
 {
   "projects": [
-    { "id": "spherical-drone", "title": "Spherical Drone", "manifest": "../projects/spherical-drone-20260610/viewer.json" },
-    { "id": "handy-fdm-mini", "title": "Handy FDM Mini", "manifest": "../projects/handy-fdm-mini-20260702/viewer.json" },
-    { "id": "parts-tray", "title": "Parts Tray", "branches": [
-      { "id": "b1-uniform-cells", "label": "b1 — uniform cells", "manifest": "../projects/parts-tray-20260706/b1-uniform-cells/viewer.json" },
-      { "id": "b2-edge-joinery", "label": "b2 — edge joinery", "manifest": "../projects/parts-tray-20260706/b2-edge-joinery/viewer.json" }
-    ] },
-    { "id": "desktop-trash-bin", "title": "Desktop Trash Bin", "manifest": "../projects/desktop-trash-bin-20260622/viewer.json" },
-    { "id": "pi-pico-case", "title": "Pi Pico Case", "manifest": "../projects/pi-pico-case-20260518/viewer.json" },
-    { "id": "oldham-coupling", "title": "Oldham Coupling", "manifest": "../projects/oldham-coupling-20260707/viewer.json" },
-    { "id": "arduino-uno-compat", "title": "Arduino UNO Case (benchmark)", "manifest": "../projects/arduino-uno-compat-20260703/case.v1/viewer.json" },
-    { "id": "desk-hook", "title": "Desk Hook (2D)", "manifest": "../projects/desk-hook-20260702/viewer.json" },
-    { "id": "fdm-printer-2d", "title": "FDM Printer (2D)", "manifest": "../projects/fdm-printer-2d-20260702/viewer.json" }
+    "../projects/pi-pico-case-20260518/project.json",
+    "../projects/spherical-drone-20260610/project.json",
+    "../projects/desktop-trash-bin-20260622/project.json",
+    "../projects/handy-fdm-mini-20260702/project.json",
+    "../projects/desk-hook-20260702/project.json",
+    "../projects/fdm-printer-2d-20260702/project.json",
+    "../projects/arduino-uno-compat-20260703/project.json",
+    "../projects/palm-uav-20260706/project.json",
+    "../projects/palm-agv-20260706/project.json",
+    "../projects/parts-tray-20260706/project.json",
+    "../projects/spacer-20260706/project.json",
+    "../projects/oldham-coupling-20260707/project.json"
   ]
 }

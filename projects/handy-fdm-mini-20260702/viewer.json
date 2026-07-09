@@ -2,7 +2,6 @@
   "title": "handy-fdm-mini",
   "stlBase": "../projects/handy-fdm-mini-20260702/stl",
   "up": "z",
-  "provenance": { "aiModel": "Claude (Claude Code)", "skills": ["forgecad-high-level-spec", "forgecad-lld", "forgecad-make-a-model", "forgecad-verify"], "dsl": "forgecad" },
   "clip": { "axis": "y", "min": -120, "max": 120 },
   "camera": { "target": [0, 0, 120], "dist": 750 },
   "parts": [

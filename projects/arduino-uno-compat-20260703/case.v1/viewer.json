@@ -4,12 +4,6 @@
   "up": "z",
   "clip": { "axis": "y", "min": -10, "max": 62 },
   "camera": { "target": [34, 27, 5], "dist": 280 },
-  "provenance": {
-    "aiModel": "Claude Fable 5",
-    "skills": ["fusion360"],
-    "dsl": "adsk-python (Fusion MCP)",
-    "date": "2026-07"
-  },
   "parts": [
     {
       "id": "CaseBottom", "name": "CASE_BOTTOM", "stl": "CASE_BOTTOM.stl", "color": "#5b6a7a",

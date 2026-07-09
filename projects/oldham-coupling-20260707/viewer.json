@@ -4,12 +4,6 @@
   "up": "z",
   "clip": { "axis": "y", "min": -16, "max": 16 },
   "camera": { "target": [0.5, 0, 0], "dist": 170 },
-  "provenance": {
-    "aiModel": "Claude Fable 5",
-    "skills": ["fusion360"],
-    "dsl": "adsk-python (Fusion MCP)",
-    "date": "2026-07"
-  },
   "parts": [
     {
       "id": "HubDrive", "name": "HubDrive", "stl": "hub.stl", "color": "#7fb3d5",

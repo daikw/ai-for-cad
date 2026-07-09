@@ -2,7 +2,6 @@
   "title": "parts-tray b1 — uniform cells",
   "stlBase": "../projects/parts-tray-20260706/b1-uniform-cells",
   "up": "z",
-  "provenance": { "aiModel": "Claude (Claude Code)", "skills": ["forgecad-high-level-spec", "forgecad-lld", "forgecad-make-a-model", "forgecad-verify"], "dsl": "forgecad" },
   "clip": { "axis": "y", "min": -60, "max": 118 },
   "camera": { "target": [0, 29, 10], "dist": 320 },
   "parts": [

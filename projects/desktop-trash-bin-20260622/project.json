@@ -1,0 +1,25 @@
+{
+  "name": "desktop-trash-bin",
+  "title": "Desktop Trash Bin",
+  "started": "2026-06-22",
+  "category": "utility",
+  "tags": [
+    "forgecad",
+    "3d-print",
+    "variants"
+  ],
+  "summary": "卓上ゴミ箱。側面装飾 7 パターンのパラメトリック変種",
+  "provenance": {
+    "aiModel": "Claude (Claude Code)",
+    "skills": [
+      "forgecad-high-level-spec",
+      "forgecad-lld",
+      "forgecad-make-a-model",
+      "forgecad-verify"
+    ],
+    "dsl": "forgecad"
+  },
+  "viewer": {
+    "manifest": "viewer.json"
+  }
+}

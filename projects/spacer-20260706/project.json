@@ -1,0 +1,22 @@
+{
+  "name": "spacer",
+  "title": "Spacer",
+  "started": "2026-07-06",
+  "category": "utility",
+  "tags": [
+    "forgecad",
+    "step-export",
+    "versioned"
+  ],
+  "summary": "パラメトリック円筒スペーサ（OD12/ID6/H5）。v1〜v4 の反復は CHANGELOG 参照",
+  "provenance": {
+    "aiModel": "Claude Fable 5",
+    "skills": [
+      "fusion360"
+    ],
+    "dsl": "forgecad"
+  },
+  "viewer": {
+    "manifest": "viewer.json"
+  }
+}

@@ -2,7 +2,6 @@
   "title": "spherical-drone",
   "stlBase": "../projects/spherical-drone-20260610/stl",
   "up": "z",
-  "provenance": { "aiModel": "Claude (Claude Code)", "skills": ["forgecad-high-level-spec", "forgecad-lld", "forgecad-make-a-model", "forgecad-verify"], "dsl": "forgecad" },
   "clip": { "axis": "y", "min": -110, "max": 110 },
   "camera": { "target": [0, 0, 60], "dist": 950 },
   "parts": [

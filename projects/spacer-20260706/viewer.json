@@ -1,0 +1,13 @@
+{
+  "title": "spacer",
+  "stlBase": "../projects/spacer-20260706/exports",
+  "up": "z",
+  "clip": { "axis": "y", "min": -7, "max": 7 },
+  "camera": { "target": [0, 0, 2.5], "dist": 45 },
+  "parts": [
+    {
+      "id": "Spacer", "name": "spacer OD12/ID6/H5", "stl": "spacer_od12_id6_h5.stl", "color": "#9db1c5",
+      "description": "パラメトリック円筒スペーサ v4。公称寸法（公差補正なし）、体積検証 424.1mm³ ±0.5%"
+    }
+  ]
+}

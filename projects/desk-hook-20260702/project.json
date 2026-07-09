@@ -1,0 +1,22 @@
+{
+  "name": "desk-hook",
+  "title": "Desk Hook (2D)",
+  "started": "2026-07-02",
+  "category": "utility",
+  "tags": [
+    "qcad",
+    "2d",
+    "dxf"
+  ],
+  "summary": "机天板に掛けるヘッドホンフックの 2D プロファイル（15mm 押し出し想定）",
+  "provenance": {
+    "aiModel": "Claude (Claude Code)",
+    "skills": [
+      "qcad"
+    ],
+    "dsl": "qcad-js (dxf)"
+  },
+  "viewer": {
+    "manifest": "viewer.json"
+  }
+}

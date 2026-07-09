@@ -1,0 +1,22 @@
+{
+  "name": "fdm-printer-2d",
+  "title": "FDM Printer (2D)",
+  "started": "2026-07-02",
+  "category": "machine",
+  "tags": [
+    "qcad",
+    "2d",
+    "dxf"
+  ],
+  "summary": "FDM プリンタの 2D コンセプト図",
+  "provenance": {
+    "aiModel": "Claude (Claude Code)",
+    "skills": [
+      "qcad"
+    ],
+    "dsl": "qcad-js (dxf)"
+  },
+  "viewer": {
+    "manifest": "viewer.json"
+  }
+}

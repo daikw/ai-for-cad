@@ -25,6 +25,6 @@ and an un-versioned multi-tool workspace.
 
 ## Models
 
-The model list lives in [`viewer/projects.json`](./viewer/projects.json) (everything the viewer can show) and `projects/`. Branch (`b<N>`) = coexisting alternative take on the same concept. Version (`v<N>`) = in-place improvement that supersedes the previous one (history in each project's CHANGELOG). Full rules: [docs/model-versioning.md](./docs/model-versioning.md).
+Each project carries its metadata in a single `project.json` (title, category, tags, summary, provenance, viewer reference — schema in [viewer/README.md](./viewer/README.md)); [`viewer/projects.json`](./viewer/projects.json) is just an index of those files. Branch (`b<N>`) = coexisting alternative take on the same concept. Version (`v<N>`) = in-place improvement that supersedes the previous one (history in each project's CHANGELOG). Full rules: [docs/model-versioning.md](./docs/model-versioning.md).
 
-Adding or deriving a model: create `projects/<name>-<YYYYMMDD>/` (date = project start) and update `viewer/projects.json`.
+Adding or deriving a model: create `projects/<name>-<YYYYMMDD>/` (date = project start) with a `project.json`, and add its path to `viewer/projects.json`.

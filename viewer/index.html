@@ -25,6 +25,8 @@
   label.part .sw { width: 10px; height: 10px; border-radius: 2px; flex: none; }
   input[type="range"] { width: 100%; }
   select { width: 100%; background: #2b323c; color: inherit; border: 1px solid #3a4350; border-radius: 4px; padding: 4px; }
+  input[type="text"] { width: 100%; box-sizing: border-box; background: #2b323c; color: inherit; border: 1px solid #3a4350; border-radius: 4px; padding: 4px 6px; margin: 6px 0; font: inherit; }
+  input[type="text"]::placeholder { color: #6b7684; }
   .row { display: flex; justify-content: space-between; align-items: center; gap: 8px; padding: 2px 0; }
   .val { color: #8b97a4; font-variant-numeric: tabular-nums; }
   #status { position: absolute; left: 10px; bottom: 8px; color: #8b97a4; font-size: 11px; pointer-events: none; max-width: calc(100% - 20px); }
@@ -58,6 +60,8 @@
 
     <fieldset>
       <legend>PROJECT</legend>
+      <select id="category-select"></select>
+      <input type="text" id="project-search" />
       <select id="project-select"></select>
     </fieldset>
 
@@ -117,6 +121,9 @@ const I18N = {
     explode: "分解表示", clip: "断面クリップ", ghosts: "ゴースト部品", grid: "グリッド",
     resetCam: "カメラリセット", play: "▶ 再生", stop: "■ 停止", reset: "↺ リセット",
     controls: "drag: orbit / wheel: zoom / 右drag: pan",
+    allCategories: "カテゴリ: すべて",
+    searchPlaceholder: "絞り込み検索…",
+    noMatch: "該当プロジェクトなし",
     loadError: (msg) => `読み込み失敗: ${msg} — viewer/serve.sh で HTTP 配信していますか？（file:// では STL/manifest を fetch できません）`,
   },
   en: {
@@ -124,6 +131,9 @@ const I18N = {
     explode: "Explode", clip: "Section clip", ghosts: "Ghost parts", grid: "Grid",
     resetCam: "Reset camera", play: "▶ Play", stop: "■ Stop", reset: "↺ Reset",
     controls: "drag: orbit / wheel: zoom / right-drag: pan",
+    allCategories: "All categories",
+    searchPlaceholder: "Filter projects…",
+    noMatch: "No matching projects",
     loadError: (msg) => `Load failed: ${msg} — is viewer/serve.sh serving over HTTP? (file:// cannot fetch STL/manifests)`,
   },
 };
@@ -328,12 +338,14 @@ function populateSceneSelect() {
   sceneFieldset.classList.toggle("hidden", scenes.length <= 1);
 }
 
-// A project entry is either flat ({id,title,manifest}) or branched
-// ({id,title,branches:[{id,label,manifest}]}). Both resolve to the same
-// currentBranches shape so the rest of the app never special-cases branching.
-function resolveBranches(entry) {
-  if (Array.isArray(entry.branches) && entry.branches.length > 0) return entry.branches;
-  return [{ id: "__flat__", label: null, manifest: entry.manifest }];
+// project.json declares viewer.manifest (flat) or viewer.branches (branched),
+// with manifest paths relative to the project directory. Both resolve to the
+// same currentBranches shape (manifest resolved relative to /viewer/) so the
+// rest of the app never special-cases branching.
+function resolveBranches(project) {
+  const v = project.meta.viewer;
+  const list = Array.isArray(v.branches) && v.branches.length > 0 ? v.branches : [{ id: "__flat__", label: null, manifest: v.manifest }];
+  return list.map((b) => ({ ...b, manifest: project.baseDir + b.manifest }));
 }
 
 function populateBranchSelect() {
@@ -824,6 +836,9 @@ function applyLang() {
   document.getElementById("ghosts-label").textContent = s.ghosts;
   document.getElementById("grid-label").textContent = s.grid;
   document.getElementById("reset-cam").textContent = s.resetCam;
+  searchInput.placeholder = s.searchPlaceholder;
+  const allOpt = categorySelect.querySelector('option[value="__all__"]');
+  if (allOpt) allOpt.textContent = s.allCategories;
   motionButton.textContent = activeMotion ? s.stop : motionEnded ? s.reset : s.play;
   updateStatus();
 }
@@ -834,13 +849,20 @@ document.getElementById("lang-toggle").addEventListener("click", () => {
 });
 
 // ---- project / branch / version switching --------------------------------
-let projects = [];
+// projects.json is a thin index of ../projects/<dir>/project.json paths; each
+// project.json is the metadata source of truth (title, category, tags,
+// provenance, viewer manifest reference). Catalog entries without a "viewer"
+// field (e.g. HLD-only projects) are loaded but not listed.
+let projects = []; // { id, meta, baseDir }
+let currentProject = null;
+const categorySelect = document.getElementById("category-select");
+const searchInput = document.getElementById("project-search");
 
 async function selectBranch(branchEntry) {
   try {
     currentBranch = branchEntry;
     manifest = await loadManifest(branchEntry.manifest);
-    renderProvenance(manifest.provenance);
+    renderProvenance(currentProject?.meta.provenance || manifest.provenance);
     populateVersionSelect();
     scenes = resolveScenes(manifest);
     populateSceneSelect();
@@ -853,24 +875,90 @@ async function selectBranch(branchEntry) {
 }
 
 async function selectProject(entry) {
+  currentProject = entry;
   currentBranches = resolveBranches(entry);
   const dflt = populateBranchSelect();
   await selectBranch(dflt);
 }
 
+function filteredProjects() {
+  const cat = categorySelect.value;
+  const q = searchInput.value.trim().toLowerCase();
+  return projects.filter((p) => {
+    if (cat !== "__all__" && p.meta.category !== cat) return false;
+    if (!q) return true;
+    const hay = [p.meta.title, p.meta.name, p.meta.summary, ...(p.meta.tags || [])].join(" ").toLowerCase();
+    return hay.includes(q);
+  });
+}
+
+function populateCategorySelect() {
+  categorySelect.innerHTML = "";
+  const all = document.createElement("option");
+  all.value = "__all__";
+  all.textContent = I18N[lang].allCategories;
+  categorySelect.appendChild(all);
+  for (const cat of [...new Set(projects.map((p) => p.meta.category).filter(Boolean))].sort()) {
+    const opt = document.createElement("option");
+    opt.value = cat;
+    opt.textContent = cat;
+    categorySelect.appendChild(opt);
+  }
+}
+
+// Rebuild the project dropdown from the current filter. Keeps the current
+// selection when it survives the filter; returns the entry to show (or null).
+function populateProjectSelect() {
+  const list = filteredProjects();
+  const prev = projectSelect.value;
+  projectSelect.innerHTML = "";
+  for (const p of list) {
+    const opt = document.createElement("option");
+    opt.value = p.id;
+    opt.textContent = p.meta.title;
+    projectSelect.appendChild(opt);
+  }
+  if (list.length === 0) return null;
+  const keep = list.find((p) => p.id === prev) || list[0];
+  projectSelect.value = keep.id;
+  return keep;
+}
+
+function applyFilter() {
+  const entry = populateProjectSelect();
+  if (!entry) {
+    status.textContent = I18N[lang].noMatch;
+    return;
+  }
+  if (entry !== currentProject) selectProject(entry).catch(reportError);
+}
+
 async function init() {
   const res = await fetch("./projects.json");
   if (!res.ok) throw new Error(`projects.json fetch failed: ${res.status}`);
-  ({ projects } = await res.json());
-  for (const p of projects) {
-    const opt = document.createElement("option");
-    opt.value = p.id;
-    opt.textContent = p.title;
-    projectSelect.appendChild(opt);
-  }
+  const { projects: paths } = await res.json();
+  projects = (
+    await Promise.all(
+      paths.map(async (path) => {
+        const r = await fetch(path);
+        if (!r.ok) {
+          console.warn(`project.json fetch failed: ${r.status} ${path}`);
+          return null;
+        }
+        const meta = await r.json();
+        return { id: meta.name, meta, baseDir: path.slice(0, path.lastIndexOf("/") + 1) };
+      }),
+    )
+  )
+    .filter(Boolean)
+    .filter((p) => p.meta.viewer);
+  populateCategorySelect();
+  populateProjectSelect();
+  categorySelect.addEventListener("change", applyFilter);
+  searchInput.addEventListener("input", applyFilter);
   projectSelect.addEventListener("change", () => {
     const entry = projects.find((p) => p.id === projectSelect.value);
-    selectProject(entry);
+    if (entry) selectProject(entry).catch(reportError);
   });
   branchSelect.addEventListener("change", () => {
     const b = currentBranches.find((b) => b.id === branchSelect.value);
