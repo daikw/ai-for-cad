@@ -4,6 +4,9 @@
 .playwright-mcp/
 
 # vendored clones (~3.8GB incl. node_modules) — re-fetch with playgrounds/easyeda/scripts/fetch-easyeda-repos.sh
+# (third-party skills are ignored per-directory so our own skills stay committed)
 playgrounds/easyeda/extensions/
 playgrounds/easyeda/tools/
-playgrounds/easyeda/skills/
+playgrounds/easyeda/skills/easyeda-api/
+playgrounds/easyeda/skills/extension-dev-skill/
+playgrounds/easyeda/skills/easyeda-pro-claude-skill/
