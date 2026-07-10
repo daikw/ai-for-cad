@@ -56,6 +56,10 @@ const bbFootR = groupUnion["Leg R"].boundingBox();
 suite.expectNear("LLD-5a left sole on ground", bbFootL.min[2], 0, 0.1, "mm");
 suite.expectNear("LLD-5b right sole on ground", bbFootR.min[2], 0, 0.1, "mm");
 
+// --- 1b) head crown Z = 300 ± 1 (parts-ledger.md §E-3, tighter than LLD-1's
+// whole-assembly ±3 tolerance since this pins the head group in isolation) --
+suite.expectNear("LLD-1b Head group crown Z", groupUnion["Head"].boundingBox().max[2], 300, 1, "mm");
+
 // --- 2) envelope X170 x Y120 x Z305 (outside-shell method, not bbox) --------
 const outsideShell = difference(
   box(220, 180, 320).translate(0, 10, -6), // z∈[-6,314]
@@ -120,6 +124,22 @@ suite.expectNoOverlap("LLD-10e board vs battery", torsoS.board, torsoS.battery, 
 // --- 11) printability: largest part fits the bed ------------------------------
 suite.expectFitsBed("LLD-11 torso frame fits bed", torsoS.frameOnly, [220, 220, 250]);
 
+// --- 11b) printability: every printed part in every group fits the bed -------
+const BED = [220, 220, 250];
+const printedByGroup = {
+  "Leg L": legL.printed,
+  "Leg R": legR.printed,
+  "Arm L": armL.printed,
+  "Arm R": armR.printed,
+  Torso: torsoS.printed,
+  Head: headS.printed,
+};
+for (const [gname, shapes] of Object.entries(printedByGroup)) {
+  shapes.forEach((s, i) => {
+    suite.expectFitsBed(`LLD-11b ${gname} printed #${i} fits bed`, s, BED);
+  });
+}
+
 // --- 6) mass budget <= 800g ---------------------------------------------------
 const printedItems = [];
 const comItems = []; // { grams, at: [x,y,z] } for the CoM estimate
@@ -153,6 +173,19 @@ const bbBat = torsoS.battery.boundingBox();
 comItems.push({ grams: D.board.massG, at: [(bbBoard.min[0] + bbBoard.max[0]) / 2, (bbBoard.min[1] + bbBoard.max[1]) / 2, (bbBoard.min[2] + bbBoard.max[2]) / 2] });
 comItems.push({ grams: D.battery.massG, at: [(bbBat.min[0] + bbBat.max[0]) / 2, (bbBat.min[1] + bbBat.max[1]) / 2, (bbBat.min[2] + bbBat.max[2]) / 2] });
 comItems.push({ grams: D.mass.wiringFastenersG, at: [0, 0, 200] }); // wiring approx at torso center
+
+// --- 6b) per-part printed mass vs parts-ledger.md §-per-part budget ----------
+// (checked before the whole-assembly LLD-6 budget so a per-part overrun is
+// pinpointed instead of surfacing only as a total-mass failure)
+const partBudgetG = { Head: 45, Torso: 110, "Leg L": 55, "Leg R": 55, "Arm L": 25, "Arm R": 25 };
+console.log("--- per-part printed mass breakdown (parts-ledger.md budget) ---");
+for (const [gname, maxG] of Object.entries(partBudgetG)) {
+  const subtotal = printedItems
+    .filter((it) => it.name.startsWith(`${gname} printed`))
+    .reduce((acc, it) => acc + it.grams, 0);
+  console.log(`  ${gname}: ${subtotal.toFixed(2)}g (budget <= ${maxG}g)`);
+  suite.expectTrue(`LLD-6b ${gname} printed mass <= ${maxG}g`, subtotal <= maxG, `${subtotal.toFixed(2)}g`);
+}
 
 suite.budget("LLD-6 total mass", {
   items: [

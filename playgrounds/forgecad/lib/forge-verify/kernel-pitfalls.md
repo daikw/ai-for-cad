@@ -205,6 +205,38 @@ match: `requireBackend(getActiveBackend, 'occt')` in
 (`forgecad run foo.forge.js` without `--backend occt`) fail fast instead
 of silently producing pitfall-1/6-poisoned numbers.
 
+## 9. Selector-less `fillet()` silently skips edges past a broad-edge budget
+
+**Symptom**: `fillet(shape, r)` with no edge selector produces
+non-deterministic volumes — some edges stay sharp depending on
+`FORGECAD_BROAD_EDGE_FEATURE_BUDGET`, with no warning.
+
+**How to detect**: the same script reports different volumes across runs,
+or a "fillet all edges" call leaves visibly sharp edges in the render.
+
+**Countermeasure**: always pass an explicit selector, even when you mean
+"all edges" — e.g. `fillet(box(...), r, { convex: true })` (a box's 12
+edges are all convex). Observed on mini-humanoid's helmet (forgecad 0.9.4).
+
+## 10. Fillet ordering vs booleans differs per backend
+
+**Symptom** (truck, the backend `render 3d` is pinned to): `fillet()` after
+a multi-cutter `difference()` fails with "edge finish size is too large";
+follow-up partial fillets adjacent to existing fillet topology fail with
+"native tangent-chain propagation not yet supported"; occt tolerates both,
+so the script "works" under `--backend occt` but the render pipeline dies.
+Related: `shell({openFaces})` only accepts primitive-family shapes (box,
+cylinder, extrude) — a filleted shape can't be shelled, and shelling first
+then filleting rejects the open-boundary edges.
+
+**Countermeasure**: fillet the primitive FIRST, then run the (single-pass)
+difference; prefer one fillet call per shape over sequential partial
+fillets; for rounded open shells use fillet → oversized-cavity difference
+instead of `shell()`. Complex boolean results (multi-cutter difference)
+may only tolerate per-edge fillets via `selectEdges(...)` filtered to
+non-boundary edges. Observed on mini-humanoid torso/arm/head
+(forgecad 0.9.4).
+
 ## Checklist: before any boolean-heavy model
 
 - [ ] Every numbers-critical script (checks, export, BOM) starts with
