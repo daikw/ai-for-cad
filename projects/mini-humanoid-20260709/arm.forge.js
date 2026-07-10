@@ -105,15 +105,26 @@ const wristPlate = dark(box(18, 31, 3).translate(s * cX, 0, 132.5)); // z∈[132
 // fingertip rim self-intersects on the default (truck) backend that
 // `render 3d` uses (kernel-pitfalls #7: render subcommands ignore
 // --backend), so only the wrist rim is filleted.
-// Outer radius 8.2 (not a round 9): filletEdges() on this C-slot rim doesn't
-// just round the corner, it measurably bulges the whole rim outward (r=9
-// measured bbox x∈[-9.41,9.74] post-fillet, not ±9) — swept r=8.5/8.2/8.0/7.8
-// against the translated bbox and picked 8.2 for a real ~0.5mm margin over
-// the z<140 budget's |x|≥42.5 floor (cX-8.2 region measured at x_min=42.98).
+// Outer radius 8.8 (not a round 9): filletEdges() on this C-slot rim doesn't
+// just round the corner, it measurably bulges the whole rim outward and
+// asymmetrically (occt-measured post-fillet bbox at r=9 is x∈[-9.41,9.74],
+// not ±9 — the C-slot's Y offset breaks X symmetry, and mirroring the shape
+// in X doesn't fix it either, since a bbox range is invariant under mirroring
+// about its own center). Swept r=9/8.8/8.5/8.3 on the truck backend (the one
+// `render 3d` actually uses, kernel-pitfalls #7) — r≤8.5 throws "output must
+// be consistently oriented" on truck, so 8.8 is the smallest radius that
+// still fillets on both backends. Because the shape isn't mirrored per Side
+// (this file keeps geometry X-symmetric and only flips offsets via `s`, per
+// the file-header comment), the *same* asymmetric bulge lands on the outer
+// edge for one arm and the inner edge for the other: measured xmin=42.35 for
+// left at a nominal +0.3mm shift but only 42.32 for right at the mirrored
+// -0.3mm shift. Swept shift 0.5/0.6/0.7mm on the actual translated shape for
+// both signs and picked 0.6mm — left measures 42.95, right measures 42.62,
+// both comfortably clear of the z<140 budget's |x|≥42.5 floor.
 const clawBase = difference(
-  cylinder(22, 8.2),
-  cylinder(26, 5.5).translate(0, 0, -2),
-  box(8.2, 12, 26).translate(0, 6, -2)
+  cylinder(22, 8.8),
+  cylinder(26, 6.1).translate(0, 0, -2),
+  box(8.8, 12, 26).translate(0, 6, -2)
 );
 const clawTube = fillet(
   clawBase,
@@ -121,7 +132,7 @@ const clawTube = fillet(
   selectEdges(clawBase, { atZ: 22, tolerance: 1.5 }).filter((e) => !e.boundary)
 );
 const claw = clawTube
-  .translate(s * cX, 0, 114) // z∈[114,136], fingertip at z=114, |x| = cX±9 = [42.55,60.55] (budget: z<140 needs |x|≥42.5)
+  .translate(s * (cX + 0.6), 0, 114) // z∈[114,136], fingertip at z=114, measured |x|min: left 42.95, right 42.62 (budget: z<140 needs |x|≥42.5)
   .color(D.colors.claw)
   .material({ metalness: 0.05, roughness: 0.6 });
 

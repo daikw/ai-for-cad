@@ -72,11 +72,18 @@ const innerHelmet = helmetBlank(
 // so the visor's intersection with `conform` never dips into the curved
 // fillet region — that dip showed up as a visible shading seam across the
 // lower part of the window in an earlier draft.
-const faceCutW = Math.round(0.6 * outerW); // 43, ~60% of helmet width
-const faceCutH = 22;
-const faceBottomZ = 263; // top=285: chin gap 11, forehead gap 15 — matches ref-3's small-chin/big-dome look
-const faceCenterZ = faceBottomZ + faceCutH / 2;
-const faceCut = box(faceCutW, 16, faceCutH).translate(0, 26, faceBottomZ); // y∈[18,34] z∈[263,285], spans the ~2.3mm wall
+// v3: bigger visor with ROUNDED corners (ref-3: face ≈75% of head width,
+// large corner radius, wrapping slightly past the flat band into the front
+// corner curvature). The cutter is a roundedRect extruded through the wall
+// and rotated to point +Y — the v2 box cutter left sharp window corners.
+const faceCutW = 54; // ±27 > flat band's ±25: intentional wrap into the corner curvature
+const faceCutH = 26; // fills the [263,289] flat band exactly
+const faceBottomZ = 263;
+const faceCenterZ = faceBottomZ + faceCutH / 2; // 276
+const faceCut = roundedRect(faceCutW, faceCutH, 9)
+  .extrude(16)
+  .rotateX(-90)
+  .translate(0, 18, faceCenterZ); // y∈[18,34] z∈[263,289], spans the wall at every x across the window
 const neckPassage = cylinder(16, H.neckR + 1).translate(0, 0, 248); // z∈[248,264]
 
 const skull = difference(outerHelmet, innerHelmet, faceCut, neckPassage)
@@ -102,9 +109,11 @@ const conform = helmetBlank(
 // capped by conform's outer surface (~32.2) so the intersection is a thin
 // ~2.7mm conforming cap, not the solid interior of the (filled) conform
 // blank.
-const panelBottomZ = Math.max(263, faceCenterZ - (faceCutH + 4) / 2); // stay inside the flat band
 const facePanel = intersection(
-  box(faceCutW + 4, 4.5, faceCutH + 4).translate(0, 31.75, panelBottomZ),
+  roundedRect(faceCutW + 4, faceCutH + 4, 11)
+    .extrude(4.5)
+    .rotateX(-90)
+    .translate(0, 29.5, faceCenterZ), // y∈[29.5,34], capped by conform's outer surface (~32.2)
   conform
 )
   .color(D.colors.faceBlack)
@@ -112,7 +121,7 @@ const facePanel = intersection(
 
 // eyes poke 0.2mm proud of the panel's outer (recessed) surface (~32.2)
 // so they're actually visible from outside instead of buried in the panel
-const eyeL = cylinder(1.2, 2.6)
+const eyeL = cylinder(1.2, 3.0)
   .pointAlong([0, 1, 0])
   .translate(9, 31.2, faceCenterZ + 2)
   .color("#f2f5f7")
@@ -123,7 +132,7 @@ const eyeR = eyeL.translate(-18, 0, 0);
 // same flat band as the face window). Each pod overlaps the shell by 0.5mm
 // (~226mm³, intentional weld within the head group, well under the 500mm³
 // ledger guideline) instead of an exact-tangent contact.
-const EAR_R = 12; // Ø24, fits the [263,289] flat band (z 264-288) with margin
+const EAR_R = 13; // Ø26 (ref-3 wants ~Ø30; capped by the [263,289] flat band)
 const EAR_T = 2; // shallow "slight convex" bump — keeps x within the ±38 head budget
 const EAR_OVERLAP = 0.5; // weld into the shell (documented below)
 const EAR_FILLET = 0.5; // 2*0.5=1.0 < EAR_T=2, avoids the two rim fillets colliding

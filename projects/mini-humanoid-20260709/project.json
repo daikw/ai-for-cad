@@ -11,7 +11,7 @@
     "xl330",
     "verified"
   ],
-  "summary": "全高300mm・17DoFのホビーヒューマノイド。XL330-M288-T×17、OpenRB-150+2S LiPo。v2で外装作り込み（5並列）。checks 94 PASS / 6 waived、総質量665.47g（予算800g）",
+  "summary": "全高300mm・17DoFのホビーヒューマノイド。XL330-M288-T×17、OpenRB-150+2S LiPo。v3で単独デザインパス（絞りウエスト+テーパーシェル）。checks 97 PASS / 6 waived、総質量666.19g（予算800g）",
   "provenance": {
     "aiModel": "Claude Fable 5",
     "skills": [

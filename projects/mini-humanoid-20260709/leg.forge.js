@@ -118,14 +118,18 @@ const shinWallT = 2.5;
 // (2r=18<20) clears both kernels with margin, leaving a ~7mm flat band per
 // side — a clear stadium/oval read vs. v2.0's boxier r=4 corners.
 const shellCornerR = 9;
-const shinOuter = fillet(boxSpan([-16, 16], [-17, 15], shinShellZ), shellCornerR, {
-  parallel: [0, 0, 1],
-});
-const shinCavity = boxSpan(
-  [-16 + shinWallT, 16 - shinWallT],
-  [-17 + shinWallT, 15 - shinWallT],
-  [shinShellZ[0] - 2, shinShellZ[1] + 2], // open top & bottom (extends past the tube's own span)
-);
+// v3: tapered roundedRect extrude instead of a straight filleted box — the
+// calf widens toward the knee (32x32 -> 36x32), matching ref-1's organic
+// taper. scaleTop keeps this on the exact/extrude primitive path, so the
+// single cavity difference below stays kernel-safe on every backend
+// (fillet is illegal on tapered extrudes, so the roundness comes entirely
+// from the profile's corner radius).
+const shinOuter = roundedRect(32, 32, shellCornerR)
+  .extrude(shinShellZ[1] - shinShellZ[0], { scaleTop: [36 / 32, 1] })
+  .translate(0, -1, shinShellZ[0]);
+const shinCavity = roundedRect(32 - 2 * shinWallT, 32 - 2 * shinWallT, shellCornerR - 2)
+  .extrude(shinShellZ[1] - shinShellZ[0] + 4, { scaleTop: [36 / 32, 1] })
+  .translate(0, -1, shinShellZ[0] - 2); // open top & bottom
 const shinShell = white(difference(shinOuter, shinCavity));
 
 // --- knee & thigh (knee → hip pitch, axis-to-axis 50) -----------------------
@@ -148,14 +152,14 @@ const kneeBossR = dark(
 );
 
 const thighShellZ = [89, 109]; // clears knee top (87.25) and hip-pitch bottom (110.75)
-const thighOuter = fillet(boxSpan([-16, 16], [-17, 15], thighShellZ), shellCornerR, {
-  parallel: [0, 0, 1],
-});
-const thighCavity = boxSpan(
-  [-16 + shinWallT, 16 - shinWallT],
-  [-17 + shinWallT, 15 - shinWallT],
-  [thighShellZ[0] - 2, thighShellZ[1] + 2],
-);
+// v3: same tapered-extrude treatment, stronger flare toward the hip
+// (32x32 -> 38x32, x=±19 within the ±23 leg budget).
+const thighOuter = roundedRect(32, 32, shellCornerR)
+  .extrude(thighShellZ[1] - thighShellZ[0], { scaleTop: [38 / 32, 1] })
+  .translate(0, -1, thighShellZ[0]);
+const thighCavity = roundedRect(32 - 2 * shinWallT, 32 - 2 * shinWallT, shellCornerR - 2)
+  .extrude(thighShellZ[1] - thighShellZ[0] + 4, { scaleTop: [38 / 32, 1] })
+  .translate(0, -1, thighShellZ[0] - 2);
 const thighShell = white(difference(thighOuter, thighCavity));
 
 // --- hip --------------------------------------------------------------------
