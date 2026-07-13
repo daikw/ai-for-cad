@@ -6,7 +6,8 @@ description: >-
   (yaqwsx.github.io/jlcparts) with a bundled curl+jq CLI, fetching only
   per-subcategory shards instead of the full database. Use when selecting
   in-stock JLCPCB components for a PCB design, checking stock/price/class of
-  an LCSC part number, or drafting a BOM constrained to JLCPCB Basic parts.
+  an LCSC part number, drafting a BOM constrained to JLCPCB Basic parts, or
+  proposing next-board ideas scored against real stock (idea-scorecard mode).
   Not for placing orders or the final pre-order stock check (re-verify in
   EasyEDA Pro or jlcpcb.com right before ordering), and not for sourcing
   outside JLCPCB assembly (Digi-Key/Mouser etc.).
@@ -60,6 +61,14 @@ Preferred を含む）/ `--limit N`（既定 20）/ `--json`
 4. 必要数は「基板枚数 × 個数 + アトリション（チップ部品は数個多め）」で見る
 5. **発注直前に EasyEDA Pro / jlcpcb.com で在庫と区分を再確認**する
    （このスキルのデータは最大 24h + データ生成ラグの遅れがある）
+
+## ネタ出しモード（次基板の提案）
+
+「次に何を作るか」を聞かれたら、思いつきの列挙でなく
+[references/idea-scorecard.md](references/idea-scorecard.md) の 4 軸スコアカード
+（新規性 / 部品コスト / 設計資産の流用 / 在庫）で 3〜5 案を提案する。
+主要部品は提案前に `search` / `part` で在庫を裏取りし、C 番号付きで載せる。
+採用された案は pcb-design-brief に引き継ぐ。
 
 ## 注意点
 
