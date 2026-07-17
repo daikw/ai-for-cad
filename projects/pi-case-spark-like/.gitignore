@@ -1,0 +1,5 @@
+# third-party Pi4B model (license unclear) + derived meshes — regenerate with reference/fetch.sh
+reference/*.step
+reference/*.stl
+# duplicate downloads of the case STLs (md5-identical to the originals)
+* (1).stl

@@ -1,0 +1,11 @@
+{
+  "title": "pi-case-spark-like",
+  "stlBase": "../projects/pi-case-spark-like",
+  "up": "z",
+  "camera": { "target": [0, 0, 17], "dist": 280 },
+  "parts": [
+    { "id": "tray", "name": "tray", "stl": "dgx-pi4-tray.stl", "color": "#8a8a8a", "pos": [0, 0, 0] },
+    { "id": "rpi4b", "name": "Raspberry Pi 4B (fetch.sh required)", "stl": "reference/rpi4b-placed.stl", "color": "#0e7f4e", "pos": [0, 0, 0] },
+    { "id": "body", "name": "body", "stl": "dgx-pi4-body.stl", "color": "#c9a227", "pos": [0, 0, 0] }
+  ]
+}

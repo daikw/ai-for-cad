@@ -1,0 +1,28 @@
+{
+  "name": "pi-case-spark-like",
+  "title": "Pi4 Case (DGX Spark-like)",
+  "started": "2026-07-17",
+  "toolchain": "forgecad",
+  "category": "enclosure",
+  "tags": [
+    "forgecad",
+    "3d-print",
+    "raspberry-pi",
+    "fit-check",
+    "verified"
+  ],
+  "summary": "DGX Spark 風 Raspberry Pi 4 ケース候補（body + tray）。コミュニティ Pi4B STEP を組み付けた嵌合チェック済み: 17 PASS / 4 waived / 0 failed。USB/Ethernet は背面開口に面一で収まる。要判断: USB-C 電源が筐体内に埋まる",
+  "provenance": {
+    "aiModel": "Claude Fable 5",
+    "skills": [
+      "fusion360",
+      "forgecad",
+      "forgecad-verify"
+    ],
+    "dsl": "forgecad",
+    "notes": "case STLs authored on forgecad.io by the user; Pi4B model from github.com/multigamesystem/MGS-CAD-Files (reference/fetch.sh)"
+  },
+  "viewer": {
+    "manifest": "viewer.json"
+  }
+}
