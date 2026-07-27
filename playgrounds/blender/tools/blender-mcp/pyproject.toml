@@ -1,0 +1,38 @@
+[project]
+name = "ai-for-cad-blender-mcp"
+version = "0.1.0"
+description = "A minimal Blender MCP server for local CAD automation, rendering, and USD export."
+readme = "README.md"
+requires-python = ">=3.11"
+license = { text = "MIT" }
+authors = [{ name = "ai-for-cad contributors" }]
+dependencies = [
+    "mcp==1.2.0",
+    "httpx==0.27.2",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest==8.3.3",
+    "pytest-asyncio==0.24.0",
+    "ruff==0.6.9",
+]
+
+[project.scripts]
+ai-for-cad-blender-mcp = "blender_mcp.server:main"
+
+[build-system]
+requires = ["hatchling==1.25.0"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/blender_mcp"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+asyncio_default_fixture_loop_scope = "function"
+testpaths = ["tests"]

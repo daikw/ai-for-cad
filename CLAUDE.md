@@ -25,5 +25,6 @@ AI-for-CAD 実験リポジトリ。CAD プロジェクトは全ツールチェ�
 ## その他の playground
 
 - **fusion360**: Fusion MCP + `adsk` Python スクリプト駆動。API 内部単位は cm。検証は見た目でなくエクスポート/数値で行う（fusion360 スキル参照）
+- **blender**: Blender 5.1+ + ローカル MCP ブリッジ。実装・アドオン・検証は `playgrounds/blender/tools/blender-mcp/` に置く。`execute_bpy` は既定で無効にする
 - **easyeda**: 外部クローン（extensions/ tools/ 計 ~3.8GB）は git 管理外。`playgrounds/easyeda/scripts/fetch-easyeda-repos.sh` で再取得
 - **qcad**: 2D 作図 → DXF 生成 → PNG 目視検証（グローバルの daikw:qcad スキル参照。repo 内に専用 playground 資産はない）

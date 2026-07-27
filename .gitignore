@@ -10,3 +10,10 @@ playgrounds/easyeda/tools/
 playgrounds/easyeda/skills/easyeda-api/
 playgrounds/easyeda/skills/extension-dev-skill/
 playgrounds/easyeda/skills/easyeda-pro-claude-skill/
+
+# Blender MCP local Python state
+playgrounds/blender/tools/blender-mcp/.venv/
+playgrounds/blender/tools/blender-mcp/.pytest_cache/
+playgrounds/blender/tools/blender-mcp/.ruff_cache/
+playgrounds/blender/tools/blender-mcp/**/__pycache__/
+playgrounds/blender/tools/blender-mcp/**/*.pyc

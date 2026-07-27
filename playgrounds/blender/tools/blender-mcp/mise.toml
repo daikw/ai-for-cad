@@ -1,0 +1,20 @@
+[tools]
+uv = "0.11.20"
+
+[tasks.sync]
+description = "Create the local environment from the lockfile"
+run = "uv sync --locked --extra dev"
+
+[tasks.test]
+description = "Run MCP bridge unit tests"
+depends = ["sync"]
+run = "uv run pytest"
+
+[tasks.lint]
+description = "Run Python static checks"
+depends = ["sync"]
+run = "uv run ruff check src tests scripts"
+
+[tasks.test-blender]
+description = "Run the Blender add-on smoke test"
+run = "'/Applications/Blender.app/Contents/MacOS/Blender' --background --python tests/test_addon_offline.py"

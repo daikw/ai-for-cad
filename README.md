@@ -17,6 +17,7 @@ and an un-versioned multi-tool workspace.
   - [`forgecad/`](./playgrounds/forgecad/) — ForgeCAD (code-CAD DSL): 13 skills + `lib/forge-verify/` numeric verification library.
   - [`fusion360/`](./playgrounds/fusion360/) — Fusion 360 via MCP + `adsk` Python: skill + the research behind it.
   - [`easyeda/`](./playgrounds/easyeda/) — EasyEDA Pro (EDA): vendored third-party skills/extensions/tools (gitignored, re-fetchable); see its [README](./playgrounds/easyeda/README.md).
+  - [`blender/`](./playgrounds/blender/) — Blender 5.1+ via a local MCP bridge: scene operations, rendering, USD export and optional DGX transfer.
 - `viewer/` — shared cross-project viewer (three.js, static). Run
   `viewer/serve.sh` and open <http://localhost:8642/viewer/>. Shows STL
   assemblies, 2D DXF drawings and images, provenance (AI model / skills / DSL),
