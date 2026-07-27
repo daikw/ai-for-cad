@@ -5,6 +5,7 @@ USD エクスポート、任意の DGX/Isaac Sim ホストへの転送を扱う�
 
 ## レイアウト
 
+- `skills/blender/` — シーン制作ワークフロースキル（headless bpy 正本・視覚 judge ループ・並列モジュール編集）
 - `tools/blender-mcp/` — stdio MCP サーバー、Blender アドオン、セットアップスクリプト、テスト
 
 ## セットアップ
