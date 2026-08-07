@@ -1,0 +1,68 @@
+{
+  "schemaVersion": 1,
+  "status": "prepared-not-uploaded",
+  "slicer": {
+    "path": "/Applications/BambuStudio.app/Contents/MacOS/BambuStudio",
+    "version": "02.07.01.62",
+    "validatedVersion": "02.07.01.62",
+    "matchesValidatedVersion": true
+  },
+  "source": {
+    "path": "/Users/daikiwatanabe/ghq/github.com/daikw/ai-for-cad/playgrounds/3dp/.codex/print-jobs/2026-07-30-air-slides/stl/InsoleMinimal.stl",
+    "bytes": 1277384,
+    "sha256": "c5260b67b35a4b5d6c2373921f67913c9dfb7f69dc4ea23e08130d0f4bcc86fa"
+  },
+  "artifact": {
+    "path": "/Users/daikiwatanabe/ghq/github.com/daikw/ai-for-cad/playgrounds/3dp/.codex/print-jobs/2026-07-30-air-slides/insole-size-test-white.gcode.3mf",
+    "bytes": 2346378,
+    "sha256": "a6f49f55676b57366c71bfca5c3f6aa04c88ce2908c89c53b9487672174b47c6",
+    "plateGcodeMd5": "f73e964b34ac646bb989460ab81bfd2f"
+  },
+  "settings": {
+    "printerModel": "Bambu Lab H2D Pro",
+    "printerProfile": "Bambu Lab H2D Pro 0.4 nozzle",
+    "processProfile": "0.24mm Standard @BBL H2DP",
+    "bedType": "Textured PEI Plate",
+    "bedTemperatureC": 45,
+    "nozzleMapping": "nozzle_id=0,extruder_id=1,diameter_mm=0.4",
+    "filamentProfile": "Bambu PLA Basic @BBL H2DP",
+    "filamentType": "PLA",
+    "filamentColor": "#FFFFFF",
+    "layerHeightMm": 0.24,
+    "infill": "10%",
+    "walls": 2,
+    "supports": false,
+    "brim": "no_brim",
+    "scalePercent": 100
+  },
+  "slice": {
+    "modelTime": "2h 5m 53s",
+    "estimatedTime": "2h 11m 16s",
+    "estimatedSeconds": 7876,
+    "filamentWeightG": 79.22,
+    "filamentLengthM": 26.13936,
+    "layers": 59,
+    "maxZMm": 14.12,
+    "bbox": [
+      36.643950000000004,
+      108.73234000000001,
+      313.75494000000003,
+      211.26780000000002
+    ],
+    "supportFeatures": 0,
+    "brimFeatures": 0,
+    "bridgeFeatures": 256
+  },
+  "previews": {
+    "plate": "/Users/daikiwatanabe/ghq/github.com/daikw/ai-for-cad/playgrounds/3dp/.codex/print-jobs/2026-07-30-air-slides/insole-size-test-white.plate.png",
+    "top": "/Users/daikiwatanabe/ghq/github.com/daikw/ai-for-cad/playgrounds/3dp/.codex/print-jobs/2026-07-30-air-slides/insole-size-test-white.top.png"
+  },
+  "warnings": [
+    {
+      "message": "bed_temperature_too_high_than_filament",
+      "level": 3,
+      "code": "1000C001"
+    }
+  ],
+  "runtimeWarnings": []
+}

@@ -1,0 +1,68 @@
+{
+  "schemaVersion": 1,
+  "status": "prepared-not-uploaded",
+  "slicer": {
+    "path": "/Applications/BambuStudio.app/Contents/MacOS/BambuStudio",
+    "version": "02.07.01.62",
+    "validatedVersion": "02.07.01.62",
+    "matchesValidatedVersion": true
+  },
+  "source": {
+    "path": "/Users/daikiwatanabe/ghq/github.com/daikw/ai-for-cad/playgrounds/3dp/.codex/print-jobs/2026-07-31-airless-pingpong/stl/AirlessPingPingV3.99.stl",
+    "bytes": 5797684,
+    "sha256": "4b3003ea40227742cbc6e19e3eba57b37bb8484bc4150337f923f4e092f6e966"
+  },
+  "artifact": {
+    "path": "/Users/daikiwatanabe/ghq/github.com/daikw/ai-for-cad/playgrounds/3dp/.codex/print-jobs/2026-07-31-airless-pingpong/pingpong-2walls.gcode.3mf",
+    "bytes": 6227100,
+    "sha256": "21a2d359d814f5005025824d70b277b37e3a5fcb894f66b62579a2f4ceeb2985",
+    "plateGcodeMd5": "1698d120dd0626f851b67a42744463ca"
+  },
+  "settings": {
+    "printerModel": "Bambu Lab H2D Pro",
+    "printerProfile": "Bambu Lab H2D Pro 0.4 nozzle",
+    "processProfile": "0.20mm Standard @BBL H2DP",
+    "bedType": "Textured PEI Plate",
+    "bedTemperatureC": 30,
+    "nozzleMapping": "nozzle_id=1,extruder_id=2,diameter_mm=0.4",
+    "filamentProfile": "Generic TPU @BBL H2DP",
+    "filamentType": "TPU",
+    "filamentColor": "#898989",
+    "layerHeightMm": 0.2,
+    "infill": "15%",
+    "walls": 2,
+    "supports": true,
+    "brim": "no_brim",
+    "scalePercent": 100
+  },
+  "slice": {
+    "modelTime": "5h 7m 23s",
+    "estimatedTime": "5h 13m 37s",
+    "estimatedSeconds": 18817,
+    "filamentWeightG": null,
+    "filamentLengthM": null,
+    "layers": 200,
+    "maxZMm": 40,
+    "bbox": [
+      172.52020000000002,
+      157.21915,
+      284.16449,
+      271.55075000000005
+    ],
+    "supportFeatures": 1365,
+    "brimFeatures": 0,
+    "bridgeFeatures": 157
+  },
+  "previews": {
+    "plate": "/Users/daikiwatanabe/ghq/github.com/daikw/ai-for-cad/playgrounds/3dp/.codex/print-jobs/2026-07-31-airless-pingpong/pingpong-2walls.plate.png",
+    "top": "/Users/daikiwatanabe/ghq/github.com/daikw/ai-for-cad/playgrounds/3dp/.codex/print-jobs/2026-07-31-airless-pingpong/pingpong-2walls.top.png"
+  },
+  "warnings": [
+    {
+      "message": "bed_temperature_too_high_than_filament",
+      "level": 3,
+      "code": "1000C001"
+    }
+  ],
+  "runtimeWarnings": []
+}

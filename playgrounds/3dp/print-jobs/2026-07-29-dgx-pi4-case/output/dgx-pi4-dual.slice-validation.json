@@ -1,0 +1,102 @@
+{
+  "schemaVersion": 1,
+  "status": "prepared-dual-experimental-not-uploaded",
+  "slicer": {
+    "path": "/Applications/BambuStudio.app/Contents/MacOS/BambuStudio",
+    "version": "02.07.01.62",
+    "validatedVersion": "02.07.01.62",
+    "matchesValidatedVersion": true
+  },
+  "sources": [
+    {
+      "path": "/Users/daikiwatanabe/ghq/github.com/daikw/ai-for-cad/playgrounds/3dp/.codex/print-jobs/2026-07-29-dgx-pi4-case/dgx-pi4-body.stl",
+      "bytes": 626484,
+      "sha256": "0714441c7cc044b4ef643a98a4f3bc716783a650e86a32a5d54e3c2af1fd69e7"
+    },
+    {
+      "path": "/Users/daikiwatanabe/ghq/github.com/daikw/ai-for-cad/playgrounds/3dp/.codex/print-jobs/2026-07-29-dgx-pi4-case/dgx-pi4-tray-screw.stl",
+      "bytes": 1377084,
+      "sha256": "df16da13854107c49805fdfc1fc68c4fc4270644f109e13e75b5cca4fed73b58"
+    }
+  ],
+  "artifact": {
+    "path": "/Users/daikiwatanabe/ghq/github.com/daikw/ai-for-cad/playgrounds/3dp/.codex/print-jobs/2026-07-29-dgx-pi4-case/dgx-pi4-dual.gcode.3mf",
+    "bytes": 2090798,
+    "sha256": "3254f3747f260d861401f2b007ad359ad38c7001b2be79293b2422703501b60a",
+    "plateGcodeMd5": "138346aae4494ef50668b29a70d9a1ca"
+  },
+  "settings": {
+    "printerModel": "Bambu Lab H2D Pro",
+    "printerProfile": "Bambu Lab H2D Pro 0.4 nozzle",
+    "processProfile": "0.20mm Standard @BBL H2DP",
+    "bedType": "Textured PEI Plate",
+    "bedTemperatureC": 70,
+    "nozzleMapping": [
+      "<nozzle id=\"0\" extruder_id=\"1\" nozzle_diameter=\"0.4\" volume_type=\"Standard\"/>",
+      "<nozzle id=\"1\" extruder_id=\"2\" nozzle_diameter=\"0.4\" volume_type=\"Standard\"/>"
+    ],
+    "filamentMap": [
+      "1",
+      "2"
+    ],
+    "supportInterfaceFilament": "2",
+    "filamentProfiles": [
+      "Bambu PETG Basic @BBL H2DP 0.4 nozzle",
+      "Bambu PLA Basic @BBL H2DP"
+    ],
+    "filamentTypes": [
+      "PETG",
+      "PLA"
+    ],
+    "filamentColors": [
+      "#000000",
+      "#FFFFFF"
+    ],
+    "layerHeightMm": 0.2,
+    "infill": "15%",
+    "walls": 2,
+    "supports": true,
+    "brim": "no_brim",
+    "scalePercent": 100
+  },
+  "slice": {
+    "modelTime": "2h 54m 36s",
+    "estimatedTime": "3h 0m 4s",
+    "estimatedSeconds": 10804,
+    "filamentWeightG": null,
+    "filamentLengthM": null,
+    "layers": 152,
+    "maxZMm": 30.4,
+    "bbox": [
+      76.00007000000001,
+      110.82758000000001,
+      283.20000000000005,
+      280.59989
+    ],
+    "supportFeatures": 231,
+    "interfaceFeatures": 11,
+    "interfaceUsedG": 1.18,
+    "filamentUsageG": {
+      "1": 83.32,
+      "2": 1.18
+    },
+    "toolchanges": {
+      "t0": 8,
+      "t1": 6
+    },
+    "brimFeatures": 0,
+    "bridgeFeatures": 36
+  },
+  "previews": {
+    "plate": "/Users/daikiwatanabe/ghq/github.com/daikw/ai-for-cad/playgrounds/3dp/.codex/print-jobs/2026-07-29-dgx-pi4-case/dgx-pi4-dual.plate.png",
+    "top": "/Users/daikiwatanabe/ghq/github.com/daikw/ai-for-cad/playgrounds/3dp/.codex/print-jobs/2026-07-29-dgx-pi4-case/dgx-pi4-dual.top.png"
+  },
+  "warnings": [
+    {
+      "message": "bed_temperature_too_high_than_filament",
+      "level": 3,
+      "code": "1000C001"
+    }
+  ],
+  "runtimeWarnings": []
+}

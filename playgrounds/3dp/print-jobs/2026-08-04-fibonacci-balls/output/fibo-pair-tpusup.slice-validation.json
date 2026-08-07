@@ -1,0 +1,68 @@
+{
+  "schemaVersion": 1,
+  "status": "prepared-not-uploaded",
+  "slicer": {
+    "path": "/Applications/BambuStudio.app/Contents/MacOS/BambuStudio",
+    "version": "02.07.01.62",
+    "validatedVersion": "02.07.01.62",
+    "matchesValidatedVersion": true
+  },
+  "source": {
+    "path": "/Users/daikiwatanabe/ghq/github.com/daikw/ai-for-cad/playgrounds/3dp/.codex/print-jobs/2026-08-04-fibonacci-balls/stl/fibo-pair.stl",
+    "bytes": 7770084,
+    "sha256": "41e1b72f765c34bfbe62d76e180b9375c729986ce791b6dbc1d0c17b488434f0"
+  },
+  "artifact": {
+    "path": "/Users/daikiwatanabe/ghq/github.com/daikw/ai-for-cad/playgrounds/3dp/.codex/print-jobs/2026-08-04-fibonacci-balls/fibo-pair-tpusup.gcode.3mf",
+    "bytes": 5233166,
+    "sha256": "f6c42d0ebe2a4b6a944b9df9dc8253669c18dca0f3f3d961ed5dd6e1bc744039",
+    "plateGcodeMd5": "899e49f63569191960ebc863e4e53902"
+  },
+  "settings": {
+    "printerModel": "Bambu Lab H2D Pro",
+    "printerProfile": "Bambu Lab H2D Pro 0.4 nozzle",
+    "processProfile": "0.20mm Standard @BBL H2DP",
+    "bedType": "Textured PEI Plate",
+    "bedTemperatureC": 30,
+    "nozzleMapping": "nozzle_id=1,extruder_id=2,diameter_mm=0.4",
+    "filamentProfile": "Generic TPU @BBL H2DP",
+    "filamentType": "TPU",
+    "filamentColor": "#898989",
+    "layerHeightMm": 0.2,
+    "infill": "15%",
+    "walls": 3,
+    "supports": true,
+    "brim": "no_brim",
+    "scalePercent": 100
+  },
+  "slice": {
+    "modelTime": "1h 58m 10s",
+    "estimatedTime": "2h 4m 25s",
+    "estimatedSeconds": 7465,
+    "filamentWeightG": 13.11,
+    "filamentLengthM": 4.397,
+    "layers": 200,
+    "maxZMm": 40,
+    "bbox": [
+      145.50295,
+      157.96980000000002,
+      204.49842,
+      161.99471000000003
+    ],
+    "supportFeatures": 248,
+    "brimFeatures": 0,
+    "bridgeFeatures": 10
+  },
+  "previews": {
+    "plate": "/Users/daikiwatanabe/ghq/github.com/daikw/ai-for-cad/playgrounds/3dp/.codex/print-jobs/2026-08-04-fibonacci-balls/fibo-pair-tpusup.plate.png",
+    "top": "/Users/daikiwatanabe/ghq/github.com/daikw/ai-for-cad/playgrounds/3dp/.codex/print-jobs/2026-08-04-fibonacci-balls/fibo-pair-tpusup.top.png"
+  },
+  "warnings": [
+    {
+      "message": "bed_temperature_too_high_than_filament",
+      "level": 3,
+      "code": "1000C001"
+    }
+  ],
+  "runtimeWarnings": []
+}

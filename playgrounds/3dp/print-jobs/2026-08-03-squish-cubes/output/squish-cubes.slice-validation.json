@@ -1,0 +1,68 @@
+{
+  "schemaVersion": 1,
+  "status": "prepared-not-uploaded",
+  "slicer": {
+    "path": "/Applications/BambuStudio.app/Contents/MacOS/BambuStudio",
+    "version": "02.07.01.62",
+    "validatedVersion": "02.07.01.62",
+    "matchesValidatedVersion": true
+  },
+  "source": {
+    "path": "/Users/daikiwatanabe/ghq/github.com/daikw/ai-for-cad/playgrounds/3dp/.codex/print-jobs/2026-08-03-squish-cubes/squish-cubes.3mf",
+    "bytes": 36320,
+    "sha256": "c004460d7c550f7196e40a2e8de79973fdfe69f3ee7a8a3d2ecfc1f55cd60028"
+  },
+  "artifact": {
+    "path": "/Users/daikiwatanabe/ghq/github.com/daikw/ai-for-cad/playgrounds/3dp/.codex/print-jobs/2026-08-03-squish-cubes/squish-cubes.gcode.3mf",
+    "bytes": 564937,
+    "sha256": "8acb3559464cacd7c6c302ff5db339d5b61eeec39b1ccad88ce7919235a4486e",
+    "plateGcodeMd5": "051d4d624b0e89bf8c67618335df08c6"
+  },
+  "settings": {
+    "printerModel": "Bambu Lab H2D Pro",
+    "printerProfile": "Bambu Lab H2D Pro 0.4 nozzle",
+    "processProfile": "0.20mm Standard @BBL H2DP",
+    "bedType": "Textured PEI Plate",
+    "bedTemperatureC": 30,
+    "nozzleMapping": "nozzle_id=1,extruder_id=2,diameter_mm=0.4",
+    "filamentProfile": "Generic TPU @BBL H2DP",
+    "filamentType": "TPU",
+    "filamentColor": "#898989",
+    "layerHeightMm": 0.2,
+    "infill": "15%",
+    "walls": 2,
+    "supports": false,
+    "brim": "no_brim",
+    "scalePercent": 100
+  },
+  "slice": {
+    "modelTime": "2h 9m 58s",
+    "estimatedTime": "2h 16m 12s",
+    "estimatedSeconds": 8172,
+    "filamentWeightG": 29.15,
+    "filamentLengthM": 9.77312,
+    "layers": 79,
+    "maxZMm": 15.8,
+    "bbox": [
+      144.5,
+      129.50002,
+      205.49998000000002,
+      190.49998000000002
+    ],
+    "supportFeatures": 0,
+    "brimFeatures": 0,
+    "bridgeFeatures": 4
+  },
+  "previews": {
+    "plate": "/Users/daikiwatanabe/ghq/github.com/daikw/ai-for-cad/playgrounds/3dp/.codex/print-jobs/2026-08-03-squish-cubes/squish-cubes.plate.png",
+    "top": "/Users/daikiwatanabe/ghq/github.com/daikw/ai-for-cad/playgrounds/3dp/.codex/print-jobs/2026-08-03-squish-cubes/squish-cubes.top.png"
+  },
+  "warnings": [
+    {
+      "message": "bed_temperature_too_high_than_filament",
+      "level": 3,
+      "code": "1000C001"
+    }
+  ],
+  "runtimeWarnings": []
+}

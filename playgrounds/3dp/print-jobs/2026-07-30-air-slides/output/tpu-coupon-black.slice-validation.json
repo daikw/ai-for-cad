@@ -1,0 +1,68 @@
+{
+  "schemaVersion": 1,
+  "status": "prepared-not-uploaded",
+  "slicer": {
+    "path": "/Applications/BambuStudio.app/Contents/MacOS/BambuStudio",
+    "version": "02.07.01.62",
+    "validatedVersion": "02.07.01.62",
+    "matchesValidatedVersion": true
+  },
+  "source": {
+    "path": "/Users/daikiwatanabe/ghq/github.com/daikw/ai-for-cad/playgrounds/3dp/.codex/print-jobs/2026-07-30-air-slides/stl/tpu-coupon-30x20x6.stl",
+    "bytes": 684,
+    "sha256": "a3290e296ede5f2cfbf677fe1a5519da625f72edd07bae75f9de26258bc78f4e"
+  },
+  "artifact": {
+    "path": "/Users/daikiwatanabe/ghq/github.com/daikw/ai-for-cad/playgrounds/3dp/.codex/print-jobs/2026-07-30-air-slides/tpu-coupon-black.gcode.3mf",
+    "bytes": 54932,
+    "sha256": "9e92bee0a5e489d45f5e39ec399d6cb5513c281df346de69922e3ebd7be7837b",
+    "plateGcodeMd5": "d6a5c25f62dc93cf32538d1ea4aee28a"
+  },
+  "settings": {
+    "printerModel": "Bambu Lab H2D Pro",
+    "printerProfile": "Bambu Lab H2D Pro 0.4 nozzle",
+    "processProfile": "0.20mm Standard @BBL H2DP",
+    "bedType": "Textured PEI Plate",
+    "bedTemperatureC": 35,
+    "nozzleMapping": "nozzle_id=1,extruder_id=2,diameter_mm=0.4",
+    "filamentProfile": "Generic TPU @BBL H2DP",
+    "filamentType": "TPU",
+    "filamentColor": "#000000",
+    "layerHeightMm": 0.2,
+    "infill": "15%",
+    "walls": 2,
+    "supports": false,
+    "brim": "no_brim",
+    "scalePercent": 100
+  },
+  "slice": {
+    "modelTime": "9m 50s",
+    "estimatedTime": "16m 5s",
+    "estimatedSeconds": 965,
+    "filamentWeightG": 2.2,
+    "filamentLengthM": 0.73876,
+    "layers": 30,
+    "maxZMm": 6,
+    "bbox": [
+      160,
+      149.99999000000003,
+      190.00000000000003,
+      169.99999000000003
+    ],
+    "supportFeatures": 0,
+    "brimFeatures": 0,
+    "bridgeFeatures": 1
+  },
+  "previews": {
+    "plate": "/Users/daikiwatanabe/ghq/github.com/daikw/ai-for-cad/playgrounds/3dp/.codex/print-jobs/2026-07-30-air-slides/tpu-coupon-black.plate.png",
+    "top": "/Users/daikiwatanabe/ghq/github.com/daikw/ai-for-cad/playgrounds/3dp/.codex/print-jobs/2026-07-30-air-slides/tpu-coupon-black.top.png"
+  },
+  "warnings": [
+    {
+      "message": "bed_temperature_too_high_than_filament",
+      "level": 3,
+      "code": "1000C001"
+    }
+  ],
+  "runtimeWarnings": []
+}

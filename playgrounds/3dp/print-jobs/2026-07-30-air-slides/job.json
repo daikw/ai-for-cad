@@ -1,0 +1,67 @@
+{
+  "schema": "printjob/v1",
+  "slug": "2026-07-30-air-slides",
+  "printer": "bambu-h2d-pro",
+  "title": "Air Slides サンダル（サイズテスト2種 + TPU 導入実験。 本番は中止）",
+  "status": "aborted",
+  "source": {
+    "kind": "makerworld",
+    "url": "https://makerworld.com/en/models/1515698-air-slides-lightweight-breathable-summer-ready",
+    "license": "Standard Digital File License",
+    "notes": "重量 STL 一式は source/cache/（再DL可）。InsoleMinimal.stl は設計者のサイズテスト用 3MF から抽出変換",
+    "files": []
+  },
+  "prints": [
+    {
+      "artifact": "output/insole-size-test-white.gcode.3mf",
+      "result": "completed",
+      "amsSlots": "0",
+      "filament": "PLA Basic White 79.2g",
+      "estimatedTime": "2h 11m",
+      "resultNotes": "EU42=100%。フィット確認の結果インソールとしては大きい"
+    },
+    {
+      "artifact": "output/insole-size-test-eu41-white.gcode.3mf",
+      "result": "completed",
+      "amsSlots": "0",
+      "filament": "PLA Basic White 75.0g",
+      "estimatedTime": "2h 2m",
+      "resultNotes": "EU41=97.62%。インソールとしてフィット → 本番スケール確定（本番自体は中止）"
+    },
+    {
+      "artifact": "output/tpu-coupon-black.gcode.3mf",
+      "result": "completed",
+      "amsSlots": "255",
+      "filament": "Overture TPU 95A 2.2g",
+      "estimatedTime": "16m",
+      "resultNotes": "外部スプール手動フィードの初完走。投入プロトコル(ams_mapping2 {255,0}/use_ams:false)の実証。3回の失敗(マッピング形式バグ)を経て成功"
+    },
+    {
+      "artifact": "output/tpu-pla-bridge-test.gcode.3mf",
+      "result": "completed",
+      "amsSlots": "255,0",
+      "filament": "TPU 5.97g + PLA 0.23g",
+      "estimatedTime": "32m",
+      "resultNotes": "TPU本体+PLA界面サポートの初デュアル。界面は綺麗に剥離。TPUのプレート固着問題を発見"
+    },
+    {
+      "artifact": "output/tpu-pla-cantilever-fullpla.gcode.3mf",
+      "result": "aborted",
+      "resultNotes": "full-PLAサポート検証用にスライス(bed30°C)。のり/IPA調達待ちのままサンダル中止により未印刷"
+    }
+  ],
+  "evidence": [],
+  "links": {
+    "tickets": [],
+    "mrs": [
+      "https://gitlab.photosynth.dev/cto/lab-ops/-/merge_requests/42"
+    ],
+    "model": "https://makerworld.com/en/models/1515698"
+  },
+  "learnings": [
+    "サイズテストは PLA で刷る（設計者公式テストも PLA）",
+    "TPU は AMS 2 Pro 非対応。AMS HT 背面出口から右エクストルーダーへ手動フィード（外部スプール 255）",
+    "外部スプール投入は ams_mapping:[-1] + ams_mapping2:{ams_id:255,slot_id:0} + use_ams:false（{255,255} は Studio の無効マーカー）",
+    "TPU 大物の Textured PEI 直接接地は剥離困難 → full-PLA サポート or のり離型層"
+  ]
+}

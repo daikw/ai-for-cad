@@ -1,0 +1,68 @@
+{
+  "schemaVersion": 1,
+  "status": "prepared-not-uploaded",
+  "slicer": {
+    "path": "/Applications/BambuStudio.app/Contents/MacOS/BambuStudio",
+    "version": "02.07.01.62",
+    "validatedVersion": "02.07.01.62",
+    "matchesValidatedVersion": true
+  },
+  "source": {
+    "path": "/Users/daikiwatanabe/ghq/github.com/daikw/ai-for-cad/playgrounds/3dp/.codex/print-jobs/2026-07-29-dgx-pi4-case/dgx-pi4-tray-screw.stl",
+    "bytes": 1377084,
+    "sha256": "df16da13854107c49805fdfc1fc68c4fc4270644f109e13e75b5cca4fed73b58"
+  },
+  "artifact": {
+    "path": "/Users/daikiwatanabe/ghq/github.com/daikw/ai-for-cad/playgrounds/3dp/.codex/print-jobs/2026-07-29-dgx-pi4-case/tray-screw-petg.gcode.3mf",
+    "bytes": 757718,
+    "sha256": "0b68ae28039e84b1d9ceb16c727e8b8cc2be561146a20572001ac76bf83dd927",
+    "plateGcodeMd5": "4b3304a9b91e9260c6122681ac7eb640"
+  },
+  "settings": {
+    "printerModel": "Bambu Lab H2D Pro",
+    "printerProfile": "Bambu Lab H2D Pro 0.4 nozzle",
+    "processProfile": "0.20mm Standard @BBL H2DP",
+    "bedType": "Textured PEI Plate",
+    "bedTemperatureC": 70,
+    "nozzleMapping": "nozzle_id=0,extruder_id=1,diameter_mm=0.4",
+    "filamentProfile": "Bambu PETG Basic @BBL H2DP 0.4 nozzle",
+    "filamentType": "PETG",
+    "filamentColor": "#000000",
+    "layerHeightMm": 0.2,
+    "infill": "15%",
+    "walls": 2,
+    "supports": false,
+    "brim": "no_brim",
+    "scalePercent": 100
+  },
+  "slice": {
+    "modelTime": "53m 14s",
+    "estimatedTime": "58m 42s",
+    "estimatedSeconds": 3522,
+    "filamentWeightG": 24.31,
+    "filamentLengthM": 8.08392,
+    "layers": 48,
+    "maxZMm": 9.6,
+    "bbox": [
+      138.00006000000002,
+      126.58266,
+      212.00006000000002,
+      193.91599000000002
+    ],
+    "supportFeatures": 0,
+    "brimFeatures": 0,
+    "bridgeFeatures": 16
+  },
+  "previews": {
+    "plate": "/Users/daikiwatanabe/ghq/github.com/daikw/ai-for-cad/playgrounds/3dp/.codex/print-jobs/2026-07-29-dgx-pi4-case/tray-screw-petg.plate.png",
+    "top": "/Users/daikiwatanabe/ghq/github.com/daikw/ai-for-cad/playgrounds/3dp/.codex/print-jobs/2026-07-29-dgx-pi4-case/tray-screw-petg.top.png"
+  },
+  "warnings": [
+    {
+      "message": "bed_temperature_too_high_than_filament",
+      "level": 3,
+      "code": "1000C001"
+    }
+  ],
+  "runtimeWarnings": []
+}

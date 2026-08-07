@@ -1,0 +1,68 @@
+{
+  "schemaVersion": 1,
+  "status": "prepared-not-uploaded",
+  "slicer": {
+    "path": "/Applications/BambuStudio.app/Contents/MacOS/BambuStudio",
+    "version": "02.07.01.62",
+    "validatedVersion": "02.07.01.62",
+    "matchesValidatedVersion": true
+  },
+  "source": {
+    "path": "/Users/daikiwatanabe/ghq/github.com/daikw/ai-for-cad/playgrounds/3dp/.codex/print-jobs/2026-07-30-air-slides/stl/tpu-pla-cantilever-test.stl",
+    "bytes": 1284,
+    "sha256": "019cf1a413b37c64fc21395060bfb40183f477799ab19b75147a9535ef11bc99"
+  },
+  "artifact": {
+    "path": "/Users/daikiwatanabe/ghq/github.com/daikw/ai-for-cad/playgrounds/3dp/.codex/print-jobs/2026-08-03-pla-whisker-hunt/whisker-testA.gcode.3mf",
+    "bytes": 77654,
+    "sha256": "4f5db95bcfafc9e196896a3c783a3f72c6fbc51b8b3c9c95cb61dee44fc18723",
+    "plateGcodeMd5": "f755c316a1d54599eff331c4af607a77"
+  },
+  "settings": {
+    "printerModel": "Bambu Lab H2D Pro",
+    "printerProfile": "Bambu Lab H2D Pro 0.4 nozzle",
+    "processProfile": "0.20mm Standard @BBL H2DP",
+    "bedType": "Textured PEI Plate",
+    "bedTemperatureC": 30,
+    "nozzleMapping": "nozzle_id=1,extruder_id=2,diameter_mm=0.4",
+    "filamentProfile": "Generic TPU @BBL H2DP",
+    "filamentType": "TPU",
+    "filamentColor": "#898989",
+    "layerHeightMm": 0.2,
+    "infill": "15%",
+    "walls": 2,
+    "supports": true,
+    "brim": "no_brim",
+    "scalePercent": 100
+  },
+  "slice": {
+    "modelTime": "57m 57s",
+    "estimatedTime": "1h 4m 12s",
+    "estimatedSeconds": 3852,
+    "filamentWeightG": null,
+    "filamentLengthM": null,
+    "layers": 55,
+    "maxZMm": 11,
+    "bbox": [
+      155,
+      150.00001,
+      281.87789000000004,
+      269.26415000000003
+    ],
+    "supportFeatures": 39,
+    "brimFeatures": 0,
+    "bridgeFeatures": 2
+  },
+  "previews": {
+    "plate": "/Users/daikiwatanabe/ghq/github.com/daikw/ai-for-cad/playgrounds/3dp/.codex/print-jobs/2026-08-03-pla-whisker-hunt/whisker-testA.plate.png",
+    "top": "/Users/daikiwatanabe/ghq/github.com/daikw/ai-for-cad/playgrounds/3dp/.codex/print-jobs/2026-08-03-pla-whisker-hunt/whisker-testA.top.png"
+  },
+  "warnings": [
+    {
+      "message": "bed_temperature_too_high_than_filament",
+      "level": 3,
+      "code": "1000C001"
+    }
+  ],
+  "runtimeWarnings": []
+}

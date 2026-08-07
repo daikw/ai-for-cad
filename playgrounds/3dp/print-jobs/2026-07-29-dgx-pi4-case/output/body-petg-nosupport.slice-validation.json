@@ -1,0 +1,68 @@
+{
+  "schemaVersion": 1,
+  "status": "prepared-not-uploaded",
+  "slicer": {
+    "path": "/Applications/BambuStudio.app/Contents/MacOS/BambuStudio",
+    "version": "02.07.01.62",
+    "validatedVersion": "02.07.01.62",
+    "matchesValidatedVersion": true
+  },
+  "source": {
+    "path": "/Users/daikiwatanabe/ghq/github.com/daikw/ai-for-cad/playgrounds/3dp/.codex/print-jobs/2026-07-29-dgx-pi4-case/dgx-pi4-body.stl",
+    "bytes": 626484,
+    "sha256": "0714441c7cc044b4ef643a98a4f3bc716783a650e86a32a5d54e3c2af1fd69e7"
+  },
+  "artifact": {
+    "path": "/Users/daikiwatanabe/ghq/github.com/daikw/ai-for-cad/playgrounds/3dp/.codex/print-jobs/2026-07-29-dgx-pi4-case/body-petg-nosupport.gcode.3mf",
+    "bytes": 560587,
+    "sha256": "7d5297dfba4a1e3b37cfe59860dc5b23421af355a55d302328fb16107cac186c",
+    "plateGcodeMd5": "5bad8fcf4a1801807e2019c1ca1f6d7d"
+  },
+  "settings": {
+    "printerModel": "Bambu Lab H2D Pro",
+    "printerProfile": "Bambu Lab H2D Pro 0.4 nozzle",
+    "processProfile": "0.20mm Standard @BBL H2DP",
+    "bedType": "Textured PEI Plate",
+    "bedTemperatureC": 70,
+    "nozzleMapping": "nozzle_id=0,extruder_id=1,diameter_mm=0.4",
+    "filamentProfile": "Bambu PETG Basic @BBL H2DP 0.4 nozzle",
+    "filamentType": "PETG",
+    "filamentColor": "#000000",
+    "layerHeightMm": 0.2,
+    "infill": "15%",
+    "walls": 2,
+    "supports": false,
+    "brim": "no_brim",
+    "scalePercent": 100
+  },
+  "slice": {
+    "modelTime": "1h 20m 45s",
+    "estimatedTime": "1h 26m 13s",
+    "estimatedSeconds": 5173,
+    "filamentWeightG": 48,
+    "filamentLengthM": 15.96536,
+    "layers": 152,
+    "maxZMm": 30.4,
+    "bbox": [
+      124.99999000000001,
+      110.82758000000001,
+      224.99999000000003,
+      209.17374
+    ],
+    "supportFeatures": 0,
+    "brimFeatures": 0,
+    "bridgeFeatures": 20
+  },
+  "previews": {
+    "plate": "/Users/daikiwatanabe/ghq/github.com/daikw/ai-for-cad/playgrounds/3dp/.codex/print-jobs/2026-07-29-dgx-pi4-case/body-petg-nosupport.plate.png",
+    "top": "/Users/daikiwatanabe/ghq/github.com/daikw/ai-for-cad/playgrounds/3dp/.codex/print-jobs/2026-07-29-dgx-pi4-case/body-petg-nosupport.top.png"
+  },
+  "warnings": [
+    {
+      "message": "bed_temperature_too_high_than_filament",
+      "level": 3,
+      "code": "1000C001"
+    }
+  ],
+  "runtimeWarnings": []
+}

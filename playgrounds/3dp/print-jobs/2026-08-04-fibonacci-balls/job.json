@@ -1,0 +1,46 @@
+{
+  "schema": "printjob/v1",
+  "slug": "2026-08-04-fibonacci-balls",
+  "printer": "bambu-h2d-pro",
+  "title": "Fibonacci Spheres セル構造比較ペア（粗100穴 vs 細500穴・40mm）",
+  "status": "completed",
+  "source": {
+    "kind": "generated",
+    "url": "https://makerworld.com/en/models/522209-fibonacci-spheres-customizable-airless-balls",
+    "license": "CC BY-NC-ND (作者提供のパラメトリックカスタムで生成)",
+    "notes": "FibonacciSphere.scad から OpenSCAD 2026.06.12 でローカル生成 (coarse: cutoutCount=100,d=6 / fine: 500,d=2.4)。生成 STL とペア結合 STL は source/cache/（再生成可能）",
+    "files": []
+  },
+  "prints": [
+    {
+      "artifact": "output/fibo-pair-tpusup.gcode.3mf",
+      "result": "completed",
+      "amsSlots": "255",
+      "filament": "TPU 単色（サポート込み）",
+      "estimatedTime": "2h 4m",
+      "resultNotes": "93%でAI検知系の一時停止(0300-8003)→画面から再開して完走。TPU単色サポート採用で5h43m→2h04mに短縮。実物写真は evidence/"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "evidence/IMG_7926.JPG",
+      "caption": "完成品集合(細/粗メッシュ球・ピンポン球・ヒゲタワー)"
+    },
+    {
+      "path": "evidence/IMG_7927.JPG",
+      "caption": "別アングル(PLAサポート巣とヒゲタワー柱=ヒゲゼロ)"
+    }
+  ],
+  "links": {
+    "tickets": [
+      "https://gitlab.photosynth.dev/cto/lab-ops/-/work_items/27"
+    ],
+    "mrs": [],
+    "model": "https://makerworld.com/en/models/522209"
+  },
+  "learnings": [
+    "OpenSCAD(brew cask openscad@snapshot)でセル構造のパラメトリック生成がローカル化できた",
+    "球など切替多発形状は TPU 単色サポートの方が2-3倍速い（底キャップのみペンチ除去）",
+    "セル大=梁長=低剛性の仮説はこのペアで検証する（握り比べ結果は未記録）"
+  ]
+}

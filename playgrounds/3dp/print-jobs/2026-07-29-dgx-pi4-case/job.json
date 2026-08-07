@@ -1,0 +1,24 @@
+{
+  "schema": "printjob/v1",
+  "slug": "2026-07-29-dgx-pi4-case",
+  "printer": "bambu-h2d-pro",
+  "title": "DGX Pi4 ケース（別セッションのジョブ・機械移行）",
+  "status": "unknown",
+  "source": {
+    "kind": "repo",
+    "url": "",
+    "license": "",
+    "notes": "2026-08-07 のパイプライン移行時にバックフィル。経緯・結果は元セッションの検証 JSON / ログ参照",
+    "files": []
+  },
+  "prints": [],
+  "evidence": [],
+  "links": {
+    "tickets": [],
+    "mrs": [],
+    "model": ""
+  },
+  "learnings": [
+    "移行時バックフィルのため print 履歴は未記録（output/ の検証 JSON が一次資料）"
+  ]
+}

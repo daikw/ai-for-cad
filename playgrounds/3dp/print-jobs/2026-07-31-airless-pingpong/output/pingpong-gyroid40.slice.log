@@ -1,0 +1,14 @@
+command: /Applications/BambuStudio.app/Contents/MacOS/BambuStudio "--debug" "2" "--orient" "0" "--arrange" "1" "--ensure-on-bed" "--scale" "1" "--curr-bed-type" "Textured PEI Plate" "--load-settings" "/var/folders/y2/4nb6hjm17l7834tllh5c3dfc0000gp/T/h2dp-slice-4JJJB4/machine.json;/var/folders/y2/4nb6hjm17l7834tllh5c3dfc0000gp/T/h2dp-slice-4JJJB4/process.json" "--load-filaments" "/var/folders/y2/4nb6hjm17l7834tllh5c3dfc0000gp/T/h2dp-slice-4JJJB4/filament.json;/var/folders/y2/4nb6hjm17l7834tllh5c3dfc0000gp/T/h2dp-slice-4JJJB4/filament-interface.json" "--filament-map-mode" "Manual" "--extruder-nozzle-count" "1,1" "--extruder-nozzle-volume-type" "Standard,Standard" "--filament-map" "2,1" "--filament-nozzle-map" "1,1" "--filament-volume-map" "0,0" "--slice" "0" "--export-3mf" "/Users/daikiwatanabe/ghq/github.com/daikw/ai-for-cad/playgrounds/3dp/.codex/print-jobs/2026-07-31-airless-pingpong/pingpong-gyroid40.gcode.3mf" "/Users/daikiwatanabe/ghq/github.com/daikw/ai-for-cad/playgrounds/3dp/.codex/print-jobs/2026-07-31-airless-pingpong/stl/AirlessPingPingV3.99.stl"
+
+--- stdout ---
+[2026-08-03 14:41:59.640835] [0x00000001ee03de80] [trace]   Initializing StaticPrintConfigs
+[2026-08-03 14:41:59.653555] [0x00000001ee03de80] [warning] cli mode, Current BambuStudio Version 02.07.01.62
+[2026-08-03 14:42:00.040323] [0x000000017044b000] [warning] Detected missing Voronoi vertex, input polygons will be rotated back and forth.
+[2026-08-03 14:42:00.041017] [0x000000017044b000] [error]   Detected missing Voronoi vertex even after the rotation of input.
+[2026-08-03 14:42:01.039961] [0x00000001ee03de80] [error]   Invalid T command (T1001).
+[2026-08-03 14:42:02.426589] [0x00000001ee03de80] [error]   Invalid T command (T65535).
+[2026-08-03 14:42:02.426601] [0x00000001ee03de80] [error]   Invalid T command (T65279).
+
+--- stderr ---
+
+exit_status: 0

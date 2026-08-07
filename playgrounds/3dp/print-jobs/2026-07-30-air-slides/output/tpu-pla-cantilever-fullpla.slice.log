@@ -1,0 +1,12 @@
+command: /Applications/BambuStudio.app/Contents/MacOS/BambuStudio "--debug" "2" "--orient" "0" "--arrange" "1" "--ensure-on-bed" "--scale" "1" "--curr-bed-type" "Textured PEI Plate" "--load-settings" "/var/folders/y2/4nb6hjm17l7834tllh5c3dfc0000gp/T/h2dp-slice-Hsmds9/machine.json;/var/folders/y2/4nb6hjm17l7834tllh5c3dfc0000gp/T/h2dp-slice-Hsmds9/process.json" "--load-filaments" "/var/folders/y2/4nb6hjm17l7834tllh5c3dfc0000gp/T/h2dp-slice-Hsmds9/filament.json;/var/folders/y2/4nb6hjm17l7834tllh5c3dfc0000gp/T/h2dp-slice-Hsmds9/filament-interface.json" "--filament-map-mode" "Manual" "--extruder-nozzle-count" "1,1" "--extruder-nozzle-volume-type" "Standard,Standard" "--filament-map" "2,1" "--filament-nozzle-map" "1,1" "--filament-volume-map" "0,0" "--slice" "0" "--export-3mf" "/Users/daikiwatanabe/ghq/github.com/daikw/ai-for-cad/playgrounds/3dp/.codex/print-jobs/2026-07-30-air-slides/tpu-pla-cantilever-fullpla.gcode.3mf" "/Users/daikiwatanabe/ghq/github.com/daikw/ai-for-cad/playgrounds/3dp/.codex/print-jobs/2026-07-30-air-slides/stl/tpu-pla-cantilever-test.stl"
+
+--- stdout ---
+[2026-07-31 16:53:34.456736] [0x00000001ee03de80] [trace]   Initializing StaticPrintConfigs
+[2026-07-31 16:53:34.470263] [0x00000001ee03de80] [warning] cli mode, Current BambuStudio Version 02.07.01.62
+[2026-07-31 16:53:34.502650] [0x00000001ee03de80] [error]   Invalid T command (T1001).
+[2026-07-31 16:53:34.545835] [0x00000001ee03de80] [error]   Invalid T command (T65535).
+[2026-07-31 16:53:34.545849] [0x00000001ee03de80] [error]   Invalid T command (T65279).
+
+--- stderr ---
+
+exit_status: 0

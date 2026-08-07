@@ -1,0 +1,48 @@
+{
+  "schema": "printjob/v1",
+  "slug": "2026-07-31-airless-pingpong",
+  "printer": "bambu-h2d-pro",
+  "title": "エアレスピンポン球 (Airless Ping Pong Ball 3.0)",
+  "status": "completed",
+  "source": {
+    "kind": "makerworld",
+    "url": "https://makerworld.com/en/models/426056-airless-ping-pong-ball-3-0",
+    "license": "Standard Digital File License",
+    "notes": "原 STL とタグ付き生成 STL は source/cache/。タグ生成は gen-ball-with-tag.mjs",
+    "files": []
+  },
+  "prints": [
+    {
+      "artifact": "output/pingpong-grid15.gcode.3mf",
+      "result": "completed",
+      "amsSlots": "255,0",
+      "filament": "TPU 16.3g + PLA サポート",
+      "estimatedTime": "4h 55m",
+      "resultNotes": "完走。ただし PLA アイドル垂れ由来の白ヒゲが球内部まで混入（後日、吸湿が原因と判明）。'GRID 15' タグは薄肉シェルにインフィルが入らないため実質無意味だった"
+    },
+    {
+      "artifact": "output/pingpong-2walls.gcode.3mf",
+      "result": "aborted",
+      "amsSlots": "255,0",
+      "resultNotes": "壁2枚版はジオメトリが#1と同一(梁に2周しか入らない)と判明。ヒゲ対策検証として投入したが悪化(当時PLA未乾燥+予冷no-op)のため序盤で中断"
+    },
+    {
+      "artifact": "output/pingpong-gyroid15.gcode.3mf",
+      "result": "aborted",
+      "resultNotes": "スライスのみ。gyroid15/40はインフィル体積ゼロで#1と同一形状のため印刷せず"
+    }
+  ],
+  "evidence": [],
+  "links": {
+    "tickets": [
+      "https://gitlab.photosynth.dev/cto/lab-ops/-/work_items/27"
+    ],
+    "mrs": [],
+    "model": "https://makerworld.com/en/models/426056"
+  },
+  "learnings": [
+    "薄肉格子シェルはスライサのインフィル/壁数が効かない（パラメータ不感モデル）",
+    "デュアルの時間はツールチェンジ支配（~1分/回=プライムタワー捨て印刷+TPU垂れ対策）。タワー幅は時間に効かない",
+    "白ヒゲの支配因子は PLA の吸湿（2026-08-04 ヒゲタワー実験で確定）"
+  ]
+}

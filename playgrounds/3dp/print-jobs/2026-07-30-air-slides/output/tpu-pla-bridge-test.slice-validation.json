@@ -1,0 +1,68 @@
+{
+  "schemaVersion": 1,
+  "status": "prepared-not-uploaded",
+  "slicer": {
+    "path": "/Applications/BambuStudio.app/Contents/MacOS/BambuStudio",
+    "version": "02.07.01.62",
+    "validatedVersion": "02.07.01.62",
+    "matchesValidatedVersion": true
+  },
+  "source": {
+    "path": "/Users/daikiwatanabe/ghq/github.com/daikw/ai-for-cad/playgrounds/3dp/.codex/print-jobs/2026-07-30-air-slides/stl/tpu-pla-cantilever-test.stl",
+    "bytes": 1284,
+    "sha256": "019cf1a413b37c64fc21395060bfb40183f477799ab19b75147a9535ef11bc99"
+  },
+  "artifact": {
+    "path": "/Users/daikiwatanabe/ghq/github.com/daikw/ai-for-cad/playgrounds/3dp/.codex/print-jobs/2026-07-30-air-slides/tpu-pla-bridge-test.gcode.3mf",
+    "bytes": 67994,
+    "sha256": "ee4af779d172cb73830ffd4e0f02409c7f1b467f76136e007cda8ecab3d87db8",
+    "plateGcodeMd5": "2ced8a7bdd797fbe14bea0947fec0656"
+  },
+  "settings": {
+    "printerModel": "Bambu Lab H2D Pro",
+    "printerProfile": "Bambu Lab H2D Pro 0.4 nozzle",
+    "processProfile": "0.20mm Standard @BBL H2DP",
+    "bedType": "Textured PEI Plate",
+    "bedTemperatureC": 35,
+    "nozzleMapping": "nozzle_id=1,extruder_id=2,diameter_mm=0.4",
+    "filamentProfile": "Generic TPU @BBL H2DP",
+    "filamentType": "TPU",
+    "filamentColor": "#898989",
+    "layerHeightMm": 0.2,
+    "infill": "15%",
+    "walls": 2,
+    "supports": true,
+    "brim": "no_brim",
+    "scalePercent": 100
+  },
+  "slice": {
+    "modelTime": "31m 43s",
+    "estimatedTime": "37m 58s",
+    "estimatedSeconds": 2278,
+    "filamentWeightG": null,
+    "filamentLengthM": null,
+    "layers": 55,
+    "maxZMm": 11,
+    "bbox": [
+      155,
+      150.00001,
+      281.40421000000003,
+      269.22823
+    ],
+    "supportFeatures": 39,
+    "brimFeatures": 0,
+    "bridgeFeatures": 2
+  },
+  "previews": {
+    "plate": "/Users/daikiwatanabe/ghq/github.com/daikw/ai-for-cad/playgrounds/3dp/.codex/print-jobs/2026-07-30-air-slides/tpu-pla-bridge-test.plate.png",
+    "top": "/Users/daikiwatanabe/ghq/github.com/daikw/ai-for-cad/playgrounds/3dp/.codex/print-jobs/2026-07-30-air-slides/tpu-pla-bridge-test.top.png"
+  },
+  "warnings": [
+    {
+      "message": "bed_temperature_too_high_than_filament",
+      "level": 3,
+      "code": "1000C001"
+    }
+  ],
+  "runtimeWarnings": []
+}

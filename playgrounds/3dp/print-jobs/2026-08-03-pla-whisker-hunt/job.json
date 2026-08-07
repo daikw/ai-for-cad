@@ -1,0 +1,44 @@
+{
+  "schema": "printjob/v1",
+  "slug": "2026-08-03-pla-whisker-hunt",
+  "printer": "bambu-h2d-pro",
+  "title": "PLA ヒゲ撲滅実験（ヒゲタワー）",
+  "status": "completed",
+  "source": {
+    "kind": "generated",
+    "url": "",
+    "license": "",
+    "notes": "whisker tower v4 (30×20×18・2段チェッカーボード・平面視3mmオーバーラップ) をスクリプト生成。切替56回/1h11mでヒゲ再現条件を圧縮したテスト形状",
+    "files": []
+  },
+  "prints": [
+    {
+      "artifact": "output/whisker-testA.gcode.3mf",
+      "result": "aborted",
+      "resultNotes": "カンチレバー形状は切替頻度不足のためユーザー判断で中止（タワー形状に置換）"
+    },
+    {
+      "artifact": "output/whisker-tower-control.gcode.3mf",
+      "result": "completed",
+      "amsSlots": "255,0",
+      "estimatedTime": "1h 11m",
+      "resultNotes": "コールドプル+両AMS乾燥後、コントロール条件(ボール#1と同一パラメータ)でヒゲゼロ → 支配因子は PLA の吸湿と確定。1回目の投入はキャンセル痕エラーとTPU再フィード切れで失敗→wrapper修正+再フィードで完走"
+    }
+  ],
+  "evidence": [],
+  "links": {
+    "tickets": [
+      "https://gitlab.photosynth.dev/cto/lab-ops/-/work_items/27"
+    ],
+    "mrs": [
+      "https://gitlab.photosynth.dev/cto/lab-ops/-/merge_requests/42"
+    ],
+    "model": ""
+  },
+  "learnings": [
+    "『まず乾かせ』: デュアルジョブ前の両フィラメント乾燥を標準前処理に",
+    "予冷(pre_cooling_temperature)はラミング有効時のみ実行される（PLA既定はラミング無効=予冷no-op）",
+    "standby_temperature_delta 既定 -5 はアイドルノズルがほぼ印刷温度のまま（アンチ垂れノブ一式はスライサに温存、必要性は未証明）",
+    "キャンセル後は外部スプール TPU の再フィード必須（HMS 07FF-2000-0002-0002）"
+  ]
+}

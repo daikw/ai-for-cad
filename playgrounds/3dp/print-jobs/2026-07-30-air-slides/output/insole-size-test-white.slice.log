@@ -1,0 +1,55 @@
+command: /Applications/BambuStudio.app/Contents/MacOS/BambuStudio "--debug" "2" "--orient" "1" "--arrange" "1" "--ensure-on-bed" "--scale" "1" "--curr-bed-type" "Textured PEI Plate" "--load-settings" "/var/folders/y2/4nb6hjm17l7834tllh5c3dfc0000gp/T/h2dp-slice-11lu2T/machine.json;/var/folders/y2/4nb6hjm17l7834tllh5c3dfc0000gp/T/h2dp-slice-11lu2T/process.json" "--load-filaments" "/var/folders/y2/4nb6hjm17l7834tllh5c3dfc0000gp/T/h2dp-slice-11lu2T/filament.json" "--filament-map-mode" "Manual" "--extruder-nozzle-count" "1,1" "--extruder-nozzle-volume-type" "Standard,Standard" "--filament-map" "1" "--filament-nozzle-map" "1" "--filament-volume-map" "0" "--slice" "0" "--export-3mf" "/Users/daikiwatanabe/ghq/github.com/daikw/ai-for-cad/playgrounds/3dp/.codex/print-jobs/2026-07-30-air-slides/insole-size-test-white.gcode.3mf" "/Users/daikiwatanabe/ghq/github.com/daikw/ai-for-cad/playgrounds/3dp/.codex/print-jobs/2026-07-30-air-slides/stl/InsoleMinimal.stl"
+
+--- stdout ---
+[2026-07-30 14:25:39.578050] [0x00000001ee03de80] [trace]   Initializing StaticPrintConfigs
+[2026-07-30 14:25:39.590801] [0x00000001ee03de80] [warning] cli mode, Current BambuStudio Version 02.07.01.62
+                                      overhang, bottom, bothull, contour, A_laf, A_prj, unprintability
+orientation:-0.0000 -0.0000  1.0000, cost:21891.4,	0.0,	8.7,	0.0,	36358.7,	0.0,	23941.2
+orientation: 0.0512 -0.0000  0.9987, cost:0.0,	32837.1,	22460.8,	724.8,	13922.0,	0.0,	0.0
+orientation:0.0512 0.0000 0.9987, cost:0.0,	32837.1,	22460.8,	724.8,	13922.0,	0.0,	0.0
+orientation:0.0529 0.9986 0.0007, cost:2406.6,	76.1,	60.4,	34.9,	2895.7,	0.0,	22.8
+orientation:0.0679 0.9977 0.0009, cost:2395.2,	72.0,	69.3,	33.9,	2830.1,	0.0,	23.7
+orientation: 0.0064  0.0002 -1.0000, cost:21407.4,	158.7,	530.6,	50.4,	36438.5,	0.0,	91.5
+orientation:-0.0030 -1.0000  0.0000, cost:2439.8,	150.5,	110.4,	49.1,	3138.7,	0.0,	12.0
+orientation: 0.1628 -0.9867 -0.0005, cost:2434.0,	125.5,	102.2,	44.8,	2634.2,	0.0,	14.2
+orientation: 0.0001 -1.0000 -0.0002, cost:2459.5,	137.6,	127.0,	46.9,	3122.4,	0.0,	13.1
+orientation:0.0539 0.9985 0.0002, cost:2406.6,	76.1,	60.4,	34.9,	2895.7,	0.0,	22.8
+orientation: 0.0205 -0.9998 -0.0001, cost:2460.2,	151.3,	138.9,	49.2,	3025.5,	0.0,	12.0
+orientation:-0.0547 -0.0000 -0.9985, cost:21498.0,	103.0,	9543.9,	40.6,	13867.1,	0.0,	35.1
+orientation: 0.0015  0.0000 -1.0000, cost:21285.8,	415.6,	5314.5,	81.5,	36361.7,	0.0,	26.9
+orientation: 0.0906 -0.9959 -0.0002, cost:2366.2,	274.9,	1554.5,	66.3,	2892.3,	0.0,	5.5
+orientation:0.1175 0.9931 0.0002, cost:2271.8,	241.9,	1272.0,	62.2,	2826.3,	0.0,	6.0
+orientation: 0.0907 -0.9959  0.0004, cost:2364.9,	274.9,	1554.5,	66.3,	2892.3,	0.0,	5.5
+orientation: 0.1174  0.9931 -0.0005, cost:2271.8,	241.9,	1272.0,	62.2,	2826.3,	0.0,	6.0
+orientation:-0.0905  0.2426 -0.9659, cost:21164.3,	0.0,	1566.8,	0.0,	7784.3,	0.0,	369.6
+orientation:-0.0155 -0.0000 -0.9999, cost:21444.7,	126.5,	1596.4,	45.0,	14051.9,	0.0,	86.5
+orientation:-0.0558  0.0044 -0.9984, cost:21536.8,	30.5,	1116.0,	22.1,	13889.3,	0.0,	217.1
+orientation:-0.0058 -0.0001 -1.0000, cost:21430.9,	141.2,	1255.7,	47.5,	36210.8,	0.0,	86.6
+orientation:-0.0453 -0.0000 -0.9990, cost:21476.6,	99.4,	763.9,	39.9,	14204.4,	0.0,	125.1
+orientation:-0.0573  0.0101 -0.9983, cost:21541.9,	25.2,	1231.1,	20.1,	14050.4,	0.0,	220.2
+orientation:-0.7071 -0.0000  0.7071, cost:0.0,	0.0,	0.2,	0.0,	0.0,	0.0,	119.7
+orientation:-0.0000 -0.7071  0.7071, cost:0.0,	0.0,	0.2,	0.0,	251.9,	0.0,	124.5
+orientation: 0.7071 -0.0000  0.7071, cost:0.0,	0.0,	0.1,	0.0,	79.2,	0.0,	121.3
+orientation:-0.0000  0.7071  0.7071, cost:0.0,	0.0,	0.3,	0.8,	542.7,	0.0,	120.3
+orientation:-1.0000 -0.0000 -0.0000, cost:613.9,	102.5,	93.7,	40.5,	319.6,	0.0,	4.4
+orientation:-0.7071 -0.7071 -0.0000, cost:552.0,	86.7,	75.9,	37.2,	263.8,	0.0,	4.6
+orientation:-0.0000 -1.0000 -0.0000, cost:2458.2,	137.6,	127.0,	46.9,	3124.7,	0.0,	13.1
+orientation: 0.7071 -0.7071 -0.0000, cost:425.1,	72.3,	60.9,	34.0,	381.8,	0.0,	4.3
+orientation: 1.0000 -0.0000 -0.0000, cost:305.1,	61.2,	53.6,	31.3,	330.7,	0.0,	3.6
+orientation: 0.7071  0.7071 -0.0000, cost:737.7,	66.0,	64.8,	32.5,	260.9,	0.0,	8.0
+orientation:-0.0000  1.0000 -0.0000, cost:2442.5,	65.2,	53.5,	32.3,	3117.5,	0.0,	26.8
+orientation:-0.7071  0.7071 -0.0000, cost:883.2,	106.4,	92.8,	41.3,	367.7,	0.0,	6.0
+orientation:-0.7071 -0.0000 -0.7071, cost:900.2,	0.0,	0.0,	0.0,	79.2,	0.0,	1921.9
+orientation:-0.0000 -0.7071 -0.7071, cost:2262.0,	0.0,	0.0,	0.0,	542.7,	0.0,	4654.8
+orientation: 0.7071 -0.0000 -0.7071, cost:501.7,	0.4,	1.5,	2.6,	0.0,	0.0,	290.2
+orientation:-0.0000  0.7071 -0.7071, cost:2775.8,	0.0,	152.4,	0.0,	251.9,	0.0,	443.5
+orientation:-0.0000 -0.0000 -1.0000, cost:21361.6,	330.7,	5180.9,	72.7,	36358.7,	0.0,	31.5
+best: 0.051160 -0.000000  0.998690, costs:0.0,	32837.1,	22460.8,	724.8,	13922.0,	0.0,	0.0
+[2026-07-30 14:25:40.338468] [0x00000001ee03de80] [warning] tree support default to organic support
+[2026-07-30 14:25:40.375373] [0x00000001ee03de80] [error]   Invalid T command (T1001).
+[2026-07-30 14:25:40.816327] [0x00000001ee03de80] [error]   Invalid T command (T65535).
+[2026-07-30 14:25:40.816343] [0x00000001ee03de80] [error]   Invalid T command (T65279).
+
+--- stderr ---
+
+exit_status: 0

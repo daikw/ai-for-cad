@@ -1,0 +1,37 @@
+{
+  "schema": "printjob/v1",
+  "slug": "2026-08-03-squish-cubes",
+  "printer": "bambu-h2d-pro",
+  "title": "スキッシュキューブ 4 種（per-object インフィル 3MF）",
+  "status": "completed",
+  "source": {
+    "kind": "generated",
+    "url": "",
+    "license": "",
+    "notes": "gen-squish-cubes.mjs が production 拡張構造の 3MF を生成。project_settings.config 必須（欠けると BambuStudio CLI が segfault）。squish-cubes.3mf が入力正本",
+    "files": []
+  },
+  "prints": [
+    {
+      "artifact": "output/squish-cubes.gcode.3mf",
+      "result": "completed",
+      "amsSlots": "255",
+      "filament": "TPU 29.1g",
+      "estimatedTime": "2h 16m",
+      "resultNotes": "gyroid/grid × 15/40% を1プレート一括印刷。押出量解析で密度比2.3倍を確認。既知バグ: 全キューブのラベルが 'GY15' になった（3MFサブファイル間のオブジェクトID重複でメッシュが1つに解決された）。個体識別は重量順 GY15≈7.7g<GR15≈8.1g<GY40≈10.6g<GR40≈11.6g"
+    }
+  ],
+  "evidence": [],
+  "links": {
+    "tickets": [
+      "https://gitlab.photosynth.dev/cto/lab-ops/-/work_items/27"
+    ],
+    "mrs": [],
+    "model": ""
+  },
+  "learnings": [
+    "per-object 設定 3MF は CLI で自作可能（production 拡張 + サブファイル + project_settings.config 必須）",
+    "サブファイル間でオブジェクト ID を一意にしないとメッシュが 1 つに化ける（要修正: lab-ops#27 完了定義に含む）",
+    "スライス後はプレビュー PNG の目視確認を省略しない（本バグはレンダ確認で防げた）"
+  ]
+}

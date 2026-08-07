@@ -1,0 +1,29 @@
+{
+  "schema": "printjob/v1",
+  "slug": "2026-07-31-airless-tennis-ball",
+  "printer": "bambu-h2d-pro",
+  "title": "エアレステニスボール（スライスのみ・未印刷）",
+  "status": "prepared",
+  "source": {
+    "kind": "makerworld",
+    "url": "https://makerworld.com/en/models/253687-airless-tennis-ball-2-0-pickleball-wiffle",
+    "license": "Standard Digital File License",
+    "notes": "STL は source/cache/",
+    "files": []
+  },
+  "prints": [
+    {
+      "artifact": "output/tennis-ball-tpu-plasup.gcode.3mf",
+      "resultNotes": "full-PLAサポートで10h39m/103gと重く、材料節約のためピンポン球に方針転換。未投入"
+    }
+  ],
+  "evidence": [],
+  "links": {
+    "tickets": [],
+    "mrs": [],
+    "model": "https://makerworld.com/en/models/253687"
+  },
+  "learnings": [
+    "65mm球+full-PLAサポートは切替250回超で時間・材料が跳ね上がる"
+  ]
+}
