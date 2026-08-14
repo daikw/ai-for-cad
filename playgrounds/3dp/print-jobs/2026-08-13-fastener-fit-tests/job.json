@@ -158,9 +158,10 @@
       "sliceCommand": "node ~/.claude/skills/printing-with-bambu-h2d-pro/scripts/slice-h2d-pro.mjs --input <source/cache/...> --output output/holeprobes-mag13.gcode.3mf --filament pla-basic --process 0.20-standard --color \"#000000\" --infill 15 --walls 2 --supports off --brim no_brim  (source/slice-all.sh が全条件の正本)",
       "estimatedTime": "36m 24s",
       "filament": "PLA Basic Orange(FF6A13) AMS0-1 18.17g",
-      "result": "pending",
-      "resultNotes": "",
-      "amsSlots": "1"
+      "result": "completed",
+      "resultNotes": "完走(FINISH/100%/print_error 0)。実測 41m35s(12:21 RUNNING → 13:02 FINISH、見積 36m24s)。反り・剥がれなし",
+      "amsSlots": "1",
+      "submittedAt": "2026-08-14T03:21:23.938Z"
     },
     {
       "artifact": "output/cnck-holetest-m2.gcode.3mf",
@@ -168,9 +169,10 @@
       "sliceCommand": "node ~/.claude/skills/printing-with-bambu-h2d-pro/scripts/slice-h2d-pro.mjs --input <source/cache/...> --output output/cnck-holetest-m2.gcode.3mf --filament pla-basic --process 0.20-standard --color \"#000000\" --infill 15 --walls 2 --supports off --brim no_brim  (source/slice-all.sh が全条件の正本)",
       "estimatedTime": "40m 46s",
       "filament": "PLA Basic Orange(FF6A13) AMS0-1 16.63g",
-      "result": "pending",
-      "resultNotes": "",
-      "amsSlots": "1"
+      "result": "completed",
+      "resultNotes": "完走(FINISH/100%/print_error 0)。実測 44m53s(15:04 RUNNING → 15:49 FINISH、見積 40m46s)。反り・剥がれなし",
+      "amsSlots": "1",
+      "submittedAt": "2026-08-14T06:04:00Z"
     },
     {
       "artifact": "output/cnck-holetest-m2p5m3.gcode.3mf",
@@ -211,6 +213,16 @@
       "result": "pending",
       "resultNotes": "",
       "amsSlots": "1"
+    },
+    {
+      "artifact": "output/holeprobes-mag13b.gcode.3mf",
+      "sha256": "f1771b7ee17e958812fdfc64144540139a03cb0a0b195dd53b16d39afe8cacf4",
+      "sliceCommand": "source/gen-holeprobes.sh と同じ HoleProbes.scad を -D inner_d_start=12.5 -D inner_d_end=13.0 で生成し、slice-all.sh と同条件(COLOR=#FF6A13)でスライス",
+      "estimatedTime": "40m 19s",
+      "filament": "PLA Basic Orange(FF6A13) AMS0-1 21.04g",
+      "amsSlots": "1",
+      "result": "pending",
+      "resultNotes": "φ13.0-13.4 が全て緩かったため φ12.5-13.0 で再検証する追加クーポン。投入承認待ち"
     }
   ],
   "evidence": [
@@ -225,6 +237,34 @@
     {
       "path": "evidence/2026-08-14T01-26-55-mag13-baseline.jpg",
       "caption": "mag13-baseline"
+    },
+    {
+      "path": "evidence/2026-08-14T01-26-55-mag13-baseline.jpg",
+      "caption": "mag13 投入前のプレート(mag6 撤去済み・空)"
+    },
+    {
+      "path": "evidence/2026-08-14T04-03-12-mag13-complete.jpg",
+      "caption": "mag13-complete"
+    },
+    {
+      "path": "evidence/2026-08-14T04-03-12-mag13-complete.jpg",
+      "caption": "holeprobes-mag13 完了(φ13.0-13.4 の5チューブ)"
+    },
+    {
+      "path": "evidence/2026-08-14T06-02-44-m2-baseline.jpg",
+      "caption": "m2-baseline"
+    },
+    {
+      "path": "evidence/2026-08-14T06-49-21-m2-complete.jpg",
+      "caption": "m2-complete"
+    },
+    {
+      "path": "evidence/2026-08-14T06-02-44-m2-baseline.jpg",
+      "caption": "cnck-holetest-m2 投入前(プレート空)"
+    },
+    {
+      "path": "evidence/2026-08-14T06-49-21-m2-complete.jpg",
+      "caption": "cnck-holetest-m2 完了(L字ブラケット・水平/垂直両面に M2 下穴列)"
     }
   ],
   "links": {
@@ -237,6 +277,11 @@
     "CNC Kitchen の HoleTest は L 字形状で垂直面・水平面の両方に同径穴が並び、径ラベル刻印付き。プリント方向依存の穴精度差まで 1 個で見える",
     "同条件スライスの実測: 14 種スライス済み、うち実用セット 7 種を印刷対象に選定",
     "実機 AMS に黒が無く白95%/オレンジ100%のみ。印刷対象は #FF6A13 で再スライスした（slice-all.sh を COLOR/FORCE/ONLY 対応に改修）",
-    "bambu-h2d-remote submit は stage 成功後に最終 status 読みが Timed out することがある。status 再実行で RUNNING を確認できれば投入は成功している"
+    "bambu-h2d-remote submit は stage 成功後に最終 status 読みが Timed out することがある。status 再実行で RUNNING を確認できれば投入は成功している",
+    "Tailscale SSH の追加認証は数十分で切れる。submit が stage 前に落ちると投入されないので、submit 後は必ず status の subtask を見て実際に切り替わったか確認する",
+    "H2D Pro の見積に対する実測比は mag6 1.17 / mag13 1.14。この機体・この条件では見積 x1.15 で見ておくとよい",
+    "MAG-6 の最適ポケット径は φ6.3(公称+0.3)。MAG-13 は φ13.0-13.4 が全て緩く、公称+0.3 の当てはめが誤りだった。穴の縮み補正は径に比例しない絶対量なので、大径では公称以下から探す",
+    "MAG-13(φ13x2.4)は径に対し厚みが薄く側壁のグリップ長が足りないため、適正径でも横方向で抜ける。大径薄型は圧入で保持せず接着+座ぐりで受ける",
+    "見積に対する実測比は印刷が長いほど下がる(mag6 1.17 / mag13 1.14 / cnck-m2 1.10)。固定オーバーヘッドの寄与が薄まるため"
   ]
 }
