@@ -2,7 +2,7 @@
   "schema": "printjob/v1",
   "slug": "2026-08-13-fastener-fit-tests",
   "title": "締結キャリブレーション（ヒートインサート下穴・磁石ポケット）",
-  "status": "printing",
+  "status": "completed",
   "printer": "bambu-h2d-pro",
   "source": {
     "kind": "printables+generated",
@@ -202,8 +202,8 @@
       "sliceCommand": "node ~/.claude/skills/printing-with-bambu-h2d-pro/scripts/slice-h2d-pro.mjs --input <source/cache/...> --output output/cnck-holetest-m5.gcode.3mf --filament pla-basic --process 0.20-standard --color \"#000000\" --infill 15 --walls 2 --supports off --brim no_brim  (source/slice-all.sh が全条件の正本)",
       "estimatedTime": "53m 36s",
       "filament": "PLA Basic Orange(FF6A13) AMS0-1 23.33g",
-      "result": "pending",
-      "resultNotes": "merged-m5-m6-mag13b に集約したため単独では印刷しない",
+      "result": "completed",
+      "resultNotes": "merged-m5-m6-mag13b として集約印刷し完走。単独ではスライスのみ",
       "amsSlots": "1"
     },
     {
@@ -212,8 +212,8 @@
       "sliceCommand": "node ~/.claude/skills/printing-with-bambu-h2d-pro/scripts/slice-h2d-pro.mjs --input <source/cache/...> --output output/cnck-holetest-m6.gcode.3mf --filament pla-basic --process 0.20-standard --color \"#000000\" --infill 15 --walls 2 --supports off --brim no_brim  (source/slice-all.sh が全条件の正本)",
       "estimatedTime": "1h 7m 53s",
       "filament": "PLA Basic Orange(FF6A13) AMS0-1 33.35g",
-      "result": "pending",
-      "resultNotes": "merged-m5-m6-mag13b に集約したため単独では印刷しない",
+      "result": "completed",
+      "resultNotes": "merged-m5-m6-mag13b として集約印刷し完走。単独ではスライスのみ",
       "amsSlots": "1"
     },
     {
@@ -223,8 +223,8 @@
       "estimatedTime": "40m 19s",
       "filament": "PLA Basic Orange(FF6A13) AMS0-1 21.04g",
       "amsSlots": "1",
-      "result": "pending",
-      "resultNotes": "merged-m5-m6-mag13b に集約したため単独では印刷しない"
+      "result": "completed",
+      "resultNotes": "merged-m5-m6-mag13b として集約印刷し完走。単独ではスライスのみ"
     },
     {
       "artifact": "output/merged-m5-m6-mag13b.gcode.3mf",
@@ -233,8 +233,9 @@
       "estimatedTime": "2h 29m 31s",
       "filament": "PLA Basic Orange(FF6A13) AMS0-1 77.7g",
       "amsSlots": "1",
-      "result": "pending",
-      "resultNotes": "残り3種を1プレートに集約。個別3回(162m)に対し150mで12分短縮、プレート交換も2回削減。投入承認待ち"
+      "result": "completed",
+      "resultNotes": "完走(FINISH/100%/print_error 0)。実測 2h38m15s(19:14 RUNNING → 21:52 FINISH、見積 2h29m31s、比 1.07)。3部品とも反り・剥がれなし。集約は個別より比が良い(個別 1.10-1.17)",
+      "submittedAt": "2026-08-14T10:14:14.067Z"
     }
   ],
   "evidence": [
@@ -309,6 +310,22 @@
     {
       "path": "evidence/2026-08-14T10-11-14-m4-complete.jpg",
       "caption": "cnck-holetest-m4 完了"
+    },
+    {
+      "path": "evidence/2026-08-14T10-12-50-merged-baseline.jpg",
+      "caption": "merged-baseline"
+    },
+    {
+      "path": "evidence/2026-08-14T10-12-50-merged-baseline.jpg",
+      "caption": "集約プレート投入前(プレート空・AMS 0-1 オレンジ 100%)"
+    },
+    {
+      "path": "evidence/2026-08-14T12-52-45-merged-complete.jpg",
+      "caption": "merged-complete"
+    },
+    {
+      "path": "evidence/2026-08-14T12-52-45-merged-complete.jpg",
+      "caption": "集約プレート完了(M5/M6 のL字ブラケット + mag13b φ12.5-13.0)"
     }
   ],
   "links": {
@@ -327,6 +344,8 @@
     "MAG-6 の最適ポケット径は φ6.3(公称+0.3)。MAG-13 は φ13.0-13.4 が全て緩く、公称+0.3 の当てはめが誤りだった。穴の縮み補正は径に比例しない絶対量なので、大径では公称以下から探す",
     "MAG-13(φ13x2.4)は径に対し厚みが薄く側壁のグリップ長が足りないため、適正径でも横方向で抜ける。大径薄型は圧入で保持せず接着+座ぐりで受ける",
     "見積に対する実測比は印刷が長いほど下がる(mag6 1.17 / mag13 1.14 / cnck-m2 1.10)。固定オーバーヘッドの寄与が薄まるため",
-    "同一材料・同一色なら STL 段階で座標をずらして結合すれば単一 STL としてスライスでき、1 プレートに複数部品を載せられる(source/merge-stl.mjs)。起動シーケンスが 1 回で済むぶん個別に刷るより速く、プレート交換の回数も減る"
+    "同一材料・同一色なら STL 段階で座標をずらして結合すれば単一 STL としてスライスでき、1 プレートに複数部品を載せられる(source/merge-stl.mjs)。起動シーケンスが 1 回で済むぶん個別に刷るより速く、プレート交換の回数も減る",
+    "集約プレートの見積比は 1.07 で個別(1.10-1.17)より良い。起動シーケンスの固定費が総時間に薄まるため、まとめるほど見積に近づく",
+    "全8プレート(実7回)を反り・剥がれ・中断ゼロで完走。Textured PEI / PLA Basic / ベッド45C / brim なしで、この規模のクーポン類は安定して出る"
   ]
 }
