@@ -1,0 +1,106 @@
+[
+  {
+    "path": "source/cache/cnckitchen-hole-size-test/HoleTest_M2.stl",
+    "bytes": 885884,
+    "sha256": "685ce8f2965a903b6181d6a79d298e81d560ecf22247bc6825512f440709e5b0",
+    "origin": "https://www.printables.com/model/1648510",
+    "license": "Creative Commons — Attribution  — Noncommercial  —  NoDerivatives",
+    "author": "CNC Kitchen"
+  },
+  {
+    "path": "source/cache/cnckitchen-hole-size-test/HoleTest_M2p5+M3.stl",
+    "bytes": 839584,
+    "sha256": "8f6b4af88a712bf87abc6126a57420f327d5dbff7eabd3f3e0cd6c26522e04c3",
+    "origin": "https://www.printables.com/model/1648510",
+    "license": "Creative Commons — Attribution  — Noncommercial  —  NoDerivatives",
+    "author": "CNC Kitchen"
+  },
+  {
+    "path": "source/cache/cnckitchen-hole-size-test/HoleTest_M4.stl",
+    "bytes": 919184,
+    "sha256": "7cec2485ef32edd5225e76b138919b63b824c827c244c9a1a8131c840d4621ca",
+    "origin": "https://www.printables.com/model/1648510",
+    "license": "Creative Commons — Attribution  — Noncommercial  —  NoDerivatives",
+    "author": "CNC Kitchen"
+  },
+  {
+    "path": "source/cache/cnckitchen-hole-size-test/HoleTest_M5.stl",
+    "bytes": 986984,
+    "sha256": "52808abdcd0783fd4cdc9bd83fdc8dfa6c03c3305a5c4badf04d9bc1ea527fc3",
+    "origin": "https://www.printables.com/model/1648510",
+    "license": "Creative Commons — Attribution  — Noncommercial  —  NoDerivatives",
+    "author": "CNC Kitchen"
+  },
+  {
+    "path": "source/cache/cnckitchen-hole-size-test/HoleTest_M6.stl",
+    "bytes": 1037284,
+    "sha256": "0b49598f9c35433d809c5a1089d5958763f0ac4379b34bdff59c9574e39fbbaf",
+    "origin": "https://www.printables.com/model/1648510",
+    "license": "Creative Commons — Attribution  — Noncommercial  —  NoDerivatives",
+    "author": "CNC Kitchen"
+  },
+  {
+    "path": "source/cache/graduated-hole-test-block/HoleProbes.scad",
+    "bytes": 3523,
+    "sha256": "e933c996fa8467e20f957dadba07a1d7c125fd61d092681c201bfc47b71b8a82",
+    "origin": "https://www.printables.com/model/1444127",
+    "license": "Creative Commons — Public Domain",
+    "author": "Vladimir Gamalyan"
+  },
+  {
+    "path": "source/cache/insert-diameter-test-m3/Insert tester M3 v1.stl",
+    "bytes": 1426884,
+    "sha256": "b49d89cd8e88d036ee8b588999f1b163b047e035cc1b7c4e4c1d7a493158172e",
+    "origin": "https://www.printables.com/model/469872",
+    "license": "Creative Commons — Public Domain",
+    "author": "leicester77"
+  },
+  {
+    "path": "source/cache/md3d-heatset-test/test_heatset-insert_M3-5.stl",
+    "bytes": 3095384,
+    "sha256": "9f6b2651adbcee67a83d5c1a3ddf2e0d543a3b47af2942cf071ffc4e2b3f12bd",
+    "origin": "https://www.printables.com/model/380635",
+    "license": "Creative Commons — Attribution  — Noncommercial",
+    "author": "MD3D"
+  },
+  {
+    "path": "source/cache/diameter-tolerance-test/Diameter Tolerances - All.3mf",
+    "bytes": 272945,
+    "sha256": "bf1b3beaceb3934dbf4b8e2fa23899c998cff339e6d55c7a9fe5fb27429424c1",
+    "origin": "https://www.printables.com/model/716940",
+    "license": "Creative Commons — Attribution  — Noncommercial  —  Share Alike",
+    "author": "Marcello"
+  },
+  {
+    "path": "source/cache/diameter-tolerance-test/Diameter Tolerance - 01 mm.stl",
+    "bytes": 257484,
+    "sha256": "85b8d98d84407ebe49edb467b285abac3d625c0b8a30727af655c434096ba0f2",
+    "origin": "https://www.printables.com/model/716940",
+    "license": "Creative Commons — Attribution  — Noncommercial  —  Share Alike",
+    "author": "Marcello"
+  },
+  {
+    "path": "source/cache/diameter-tolerance-test/Diameter Tolerance - 02 mm.stl",
+    "bytes": 286984,
+    "sha256": "e229d41810bc975aaf63142b7980c8e4ec8f4d4e961913a037eae8dc32401029",
+    "origin": "https://www.printables.com/model/716940",
+    "license": "Creative Commons — Attribution  — Noncommercial  —  Share Alike",
+    "author": "Marcello"
+  },
+  {
+    "path": "source/cache/diameter-tolerance-test/Diameter Tolerance - 03 mm.stl",
+    "bytes": 326084,
+    "sha256": "6e1f4394d17c969b82017567d93efe55d42005ebcbfe3d8d0c9f8d432a613b1f",
+    "origin": "https://www.printables.com/model/716940",
+    "license": "Creative Commons — Attribution  — Noncommercial  —  Share Alike",
+    "author": "Marcello"
+  },
+  {
+    "path": "source/cache/diameter-tolerance-test/Diameter Tolerance - 04 mm.stl",
+    "bytes": 262284,
+    "sha256": "92919aac3056efec8aa7d0357480d98d1fa5050395844169c92062d13a369fe0",
+    "origin": "https://www.printables.com/model/716940",
+    "license": "Creative Commons — Attribution  — Noncommercial  —  Share Alike",
+    "author": "Marcello"
+  }
+]

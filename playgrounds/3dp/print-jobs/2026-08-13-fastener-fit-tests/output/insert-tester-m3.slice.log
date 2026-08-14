@@ -1,0 +1,37 @@
+command: /Applications/BambuStudio.app/Contents/MacOS/BambuStudio "--debug" "2" "--orient" "1" "--arrange" "1" "--ensure-on-bed" "--scale" "1" "--curr-bed-type" "Textured PEI Plate" "--load-settings" "/var/folders/y2/4nb6hjm17l7834tllh5c3dfc0000gp/T/h2dp-slice-wMEdim/machine.json;/var/folders/y2/4nb6hjm17l7834tllh5c3dfc0000gp/T/h2dp-slice-wMEdim/process.json" "--load-filaments" "/var/folders/y2/4nb6hjm17l7834tllh5c3dfc0000gp/T/h2dp-slice-wMEdim/filament.json" "--filament-map-mode" "Manual" "--extruder-nozzle-count" "1,1" "--extruder-nozzle-volume-type" "Standard,Standard" "--filament-map" "1" "--filament-nozzle-map" "1" "--filament-volume-map" "0" "--slice" "0" "--export-3mf" "/Users/daikiwatanabe/ghq/github.com/daikw/ai-for-cad/playgrounds/3dp/print-jobs/2026-08-13-fastener-fit-tests/output/insert-tester-m3.gcode.3mf" "/Users/daikiwatanabe/ghq/github.com/daikw/ai-for-cad/playgrounds/3dp/print-jobs/2026-08-13-fastener-fit-tests/source/cache/insert-diameter-test-m3/Insert tester M3 v1.stl"
+
+--- stdout ---
+[2026-08-13 18:22:08.996179] [0x00000001f6699e80] [trace]   Initializing StaticPrintConfigs
+[2026-08-13 18:22:09.007549] [0x00000001f6699e80] [warning] cli mode, Current BambuStudio Version 02.07.01.62
+                                      overhang, bottom, bothull, contour, A_laf, A_prj, unprintability
+orientation:-0.0000 -0.0000  1.0000, cost:0.0,	13764.0,	9176.0,	469.3,	0.0,	0.0,	0.0
+orientation:-0.0000  0.0000 -1.0000, cost:2247.1,	10393.4,	9176.0,	407.8,	0.0,	0.0,	0.2
+orientation:-0.0000 -1.0000 -0.0000, cost:1561.9,	1674.2,	1116.1,	163.7,	1214.3,	0.0,	0.7
+orientation: 0.0000  1.0000 -0.0000, cost:1555.3,	1674.3,	1116.0,	163.7,	1214.3,	0.0,	0.7
+orientation:1.0000 0.0000 0.0000, cost:1720.5,	999.1,	666.1,	126.4,	1203.7,	0.0,	1.3
+orientation:-1.0000 -0.0000  0.0000, cost:1702.6,	999.2,	666.0,	126.4,	1203.7,	0.0,	1.3
+orientation:-0.5951 -0.8036 -0.0000, cost:1218.7,	0.0,	0.0,	0.0,	882.5,	0.0,	2575.1
+orientation: 0.5951 -0.8036 -0.0000, cost:1278.9,	0.1,	0.0,	0.9,	898.7,	0.0,	1720.3
+orientation: 0.8036  0.5951 -0.0000, cost:1215.7,	0.0,	0.0,	0.0,	878.5,	0.0,	2569.0
+orientation:-0.8036  0.5951 -0.0000, cost:1303.5,	0.1,	0.0,	1.1,	930.6,	0.0,	1590.3
+orientation:-0.7071  0.7071 -0.0000, cost:1197.4,	0.1,	0.0,	1.1,	1199.9,	0.0,	1473.8
+orientation: 0.7071 -0.7071 -0.0000, cost:1189.8,	0.1,	0.0,	0.9,	1199.9,	0.0,	1612.8
+orientation:-0.7071 -0.0000  0.7071, cost:0.0,	0.2,	0.0,	1.6,	0.0,	0.0,	9.0
+orientation:-0.0000 -0.7071  0.7071, cost:0.0,	0.2,	0.1,	1.7,	0.0,	0.0,	8.5
+orientation: 0.7071 -0.0000  0.7071, cost:0.0,	0.1,	0.0,	1.3,	0.0,	0.0,	10.3
+orientation:-0.0000  0.7071  0.7071, cost:0.0,	0.3,	0.0,	2.1,	0.0,	0.0,	7.3
+orientation:-0.7071 -0.7071 -0.0000, cost:1107.6,	0.0,	0.0,	0.0,	1091.0,	0.0,	2357.0
+orientation: 0.7071  0.7071 -0.0000, cost:1112.6,	0.0,	0.0,	0.0,	1091.0,	0.0,	2367.1
+orientation:-0.7071 -0.0000 -0.7071, cost:0.0,	0.0,	0.0,	0.0,	0.0,	0.0,	120.0
+orientation:-0.0000 -0.7071 -0.7071, cost:0.0,	0.0,	0.0,	0.0,	0.0,	0.0,	120.0
+orientation: 0.7071 -0.0000 -0.7071, cost:0.0,	0.0,	0.1,	0.0,	0.0,	0.0,	119.9
+orientation:-0.0000  0.7071 -0.7071, cost:0.0,	0.0,	0.0,	0.0,	0.0,	0.0,	120.0
+best:-0.000000 -0.000000  1.000000, costs:0.0,	13764.0,	9176.0,	469.3,	0.0,	0.0,	0.0
+[2026-08-13 18:22:11.717428] [0x00000001f6699e80] [warning] tree support default to organic support
+[2026-08-13 18:22:11.935300] [0x00000001f6699e80] [error]   Invalid T command (T1001).
+[2026-08-13 18:22:12.413160] [0x00000001f6699e80] [error]   Invalid T command (T65535).
+[2026-08-13 18:22:12.413173] [0x00000001f6699e80] [error]   Invalid T command (T65279).
+
+--- stderr ---
+
+exit_status: 0

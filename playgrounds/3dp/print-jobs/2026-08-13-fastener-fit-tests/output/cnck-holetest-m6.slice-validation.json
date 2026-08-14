@@ -1,0 +1,68 @@
+{
+  "schemaVersion": 1,
+  "status": "prepared-not-uploaded",
+  "slicer": {
+    "path": "/Applications/BambuStudio.app/Contents/MacOS/BambuStudio",
+    "version": "02.07.01.62",
+    "validatedVersion": "02.07.01.62",
+    "matchesValidatedVersion": true
+  },
+  "source": {
+    "path": "/Users/daikiwatanabe/ghq/github.com/daikw/ai-for-cad/playgrounds/3dp/print-jobs/2026-08-13-fastener-fit-tests/source/cache/cnckitchen-hole-size-test/HoleTest_M6.stl",
+    "bytes": 1037284,
+    "sha256": "0b49598f9c35433d809c5a1089d5958763f0ac4379b34bdff59c9574e39fbbaf"
+  },
+  "artifact": {
+    "path": "/Users/daikiwatanabe/ghq/github.com/daikw/ai-for-cad/playgrounds/3dp/print-jobs/2026-08-13-fastener-fit-tests/output/cnck-holetest-m6.gcode.3mf",
+    "bytes": 1326057,
+    "sha256": "7d4934b5b5e08bad58b469d7433fd43ec34c63129649970eaaec32d659e6c6d0",
+    "plateGcodeMd5": "acc4c21ca0293c6bf23f4c8087d0e29a"
+  },
+  "settings": {
+    "printerModel": "Bambu Lab H2D Pro",
+    "printerProfile": "Bambu Lab H2D Pro 0.4 nozzle",
+    "processProfile": "0.20mm Standard @BBL H2DP",
+    "bedType": "Textured PEI Plate",
+    "bedTemperatureC": 45,
+    "nozzleMapping": "nozzle_id=0,extruder_id=1,diameter_mm=0.4",
+    "filamentProfile": "Bambu PLA Basic @BBL H2DP",
+    "filamentType": "PLA",
+    "filamentColor": "#FF6A13",
+    "layerHeightMm": 0.2,
+    "infill": "15%",
+    "walls": 2,
+    "supports": false,
+    "brim": "no_brim",
+    "scalePercent": 100
+  },
+  "slice": {
+    "modelTime": "1h 2m 30s",
+    "estimatedTime": "1h 7m 53s",
+    "estimatedSeconds": 4073,
+    "filamentWeightG": 33.35,
+    "filamentLengthM": 11.00585,
+    "layers": 244,
+    "maxZMm": 48.8,
+    "bbox": [
+      151.07892,
+      117.49999000000001,
+      176.75365000000002,
+      202.49999000000003
+    ],
+    "supportFeatures": 0,
+    "brimFeatures": 0,
+    "bridgeFeatures": 19
+  },
+  "previews": {
+    "plate": "/Users/daikiwatanabe/ghq/github.com/daikw/ai-for-cad/playgrounds/3dp/print-jobs/2026-08-13-fastener-fit-tests/output/cnck-holetest-m6.plate.png",
+    "top": "/Users/daikiwatanabe/ghq/github.com/daikw/ai-for-cad/playgrounds/3dp/print-jobs/2026-08-13-fastener-fit-tests/output/cnck-holetest-m6.top.png"
+  },
+  "warnings": [
+    {
+      "message": "bed_temperature_too_high_than_filament",
+      "level": 3,
+      "code": "1000C001"
+    }
+  ],
+  "runtimeWarnings": []
+}

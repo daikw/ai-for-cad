@@ -1,0 +1,45 @@
+command: /Applications/BambuStudio.app/Contents/MacOS/BambuStudio "--debug" "2" "--orient" "1" "--arrange" "1" "--ensure-on-bed" "--scale" "1" "--curr-bed-type" "Textured PEI Plate" "--load-settings" "/var/folders/y2/4nb6hjm17l7834tllh5c3dfc0000gp/T/h2dp-slice-8qSYMP/machine.json;/var/folders/y2/4nb6hjm17l7834tllh5c3dfc0000gp/T/h2dp-slice-8qSYMP/process.json" "--load-filaments" "/var/folders/y2/4nb6hjm17l7834tllh5c3dfc0000gp/T/h2dp-slice-8qSYMP/filament.json" "--filament-map-mode" "Manual" "--extruder-nozzle-count" "1,1" "--extruder-nozzle-volume-type" "Standard,Standard" "--filament-map" "1" "--filament-nozzle-map" "1" "--filament-volume-map" "0" "--slice" "0" "--export-3mf" "/Users/daikiwatanabe/ghq/github.com/daikw/ai-for-cad/playgrounds/3dp/print-jobs/2026-08-13-fastener-fit-tests/output/md3d-heatset-m3-5.gcode.3mf" "/Users/daikiwatanabe/ghq/github.com/daikw/ai-for-cad/playgrounds/3dp/print-jobs/2026-08-13-fastener-fit-tests/source/cache/md3d-heatset-test/test_heatset-insert_M3-5.stl"
+
+--- stdout ---
+[2026-08-13 18:22:05.897148] [0x00000001f6699e80] [trace]   Initializing StaticPrintConfigs
+[2026-08-13 18:22:05.908947] [0x00000001f6699e80] [warning] cli mode, Current BambuStudio Version 02.07.01.62
+                                      overhang, bottom, bothull, contour, A_laf, A_prj, unprintability
+orientation:-0.0000 -0.0000  1.0000, cost:78.7,	2743.3,	1915.2,	209.5,	29.8,	0.0,	0.0
+orientation:-0.0000  0.0000 -1.0000, cost:1786.4,	165.9,	1250.9,	51.5,	61.1,	0.0,	6.3
+orientation:0.0000 1.0000 0.0000, cost:266.5,	633.1,	438.1,	100.6,	206.2,	0.0,	0.3
+orientation:-0.0000 -1.0000  0.0000, cost:263.3,	633.1,	438.1,	100.6,	206.2,	0.0,	0.3
+orientation:-1.0000 -0.0000  0.0000, cost:283.8,	483.0,	335.5,	87.9,	204.8,	0.0,	0.5
+orientation: 1.0000 -0.0000 -0.0000, cost:285.1,	483.0,	335.5,	87.9,	204.8,	0.0,	0.5
+orientation:-0.7071  0.7071 -0.0000, cost:261.2,	32.8,	27.8,	22.9,	193.6,	0.0,	5.6
+orientation: 0.7071 -0.7071 -0.0000, cost:260.4,	32.8,	27.8,	22.9,	193.6,	0.0,	5.6
+orientation: 0.7071  0.7071 -0.0000, cost:253.9,	32.8,	27.8,	22.9,	187.6,	0.0,	5.5
+orientation:-0.7071 -0.7071  0.0000, cost:255.2,	32.8,	27.8,	22.9,	187.6,	0.0,	5.5
+orientation:-0.0082  0.0306 -0.9995, cost:1876.6,	56.7,	249.5,	30.1,	67.7,	0.0,	20.7
+orientation:-0.0303  0.0127 -0.9995, cost:1872.6,	52.7,	225.3,	29.0,	66.3,	0.0,	22.2
+orientation:-0.0000  0.1462 -0.9893, cost:1871.8,	45.4,	101.9,	26.9,	3665.4,	0.0,	27.8
+orientation:-0.0454  0.0106 -0.9989, cost:1883.1,	37.9,	225.0,	24.6,	3652.7,	0.0,	29.5
+orientation: 0.0325 -0.0831 -0.9960, cost:1895.3,	7.9,	44.4,	11.2,	3685.7,	0.0,	126.6
+orientation:-0.0000 -0.3250 -0.9457, cost:1859.3,	54.6,	84.2,	29.6,	17.8,	0.0,	23.3
+orientation:-0.2232  0.0000 -0.9748, cost:1874.9,	35.9,	59.4,	24.0,	3650.4,	0.0,	35.4
+orientation: 0.0000 -0.3250 -0.9457, cost:1859.3,	54.6,	84.2,	29.6,	17.8,	0.0,	23.3
+orientation:-0.7071 -0.0000  0.7071, cost:9.9,	47.4,	39.6,	27.5,	15.0,	0.0,	0.3
+orientation:-0.0000 -0.7071  0.7071, cost:11.6,	62.2,	51.8,	31.6,	19.6,	0.0,	0.2
+orientation: 0.7071 -0.0000  0.7071, cost:9.9,	47.4,	39.6,	27.5,	15.0,	0.0,	0.3
+orientation:-0.0000  0.7071  0.7071, cost:11.6,	62.2,	51.8,	31.6,	19.6,	0.0,	0.2
+orientation:-0.7071 -0.7071 -0.0000, cost:255.2,	32.8,	27.8,	22.9,	187.6,	0.0,	5.5
+orientation: 0.7071 -0.7071 -0.0000, cost:260.4,	32.8,	27.8,	22.9,	193.6,	0.0,	5.6
+orientation: 0.7071  0.7071 -0.0000, cost:253.9,	32.8,	27.8,	22.9,	187.6,	0.0,	5.5
+orientation:-0.7071  0.7071 -0.0000, cost:261.2,	32.8,	27.8,	22.9,	193.6,	0.0,	5.6
+orientation:-0.7071 -0.0000 -0.7071, cost:9.9,	47.4,	37.3,	27.5,	15.0,	0.0,	0.3
+orientation:-0.0000 -0.7071 -0.7071, cost:11.6,	62.2,	46.0,	31.6,	19.6,	0.0,	0.2
+orientation: 0.7071 -0.0000 -0.7071, cost:9.9,	47.4,	45.1,	27.5,	15.0,	0.0,	0.3
+orientation:-0.0000  0.7071 -0.7071, cost:11.6,	62.2,	51.8,	31.6,	19.6,	0.0,	0.2
+best:-0.000000 -0.000000  1.000000, costs:78.7,	2743.3,	1915.2,	209.5,	29.8,	0.0,	0.0
+[2026-08-13 18:22:06.928776] [0x00000001f6699e80] [warning] tree support default to organic support
+[2026-08-13 18:22:06.978508] [0x00000001f6699e80] [error]   Invalid T command (T1001).
+[2026-08-13 18:22:07.169860] [0x00000001f6699e80] [error]   Invalid T command (T65535).
+[2026-08-13 18:22:07.169870] [0x00000001f6699e80] [error]   Invalid T command (T65279).
+
+--- stderr ---
+
+exit_status: 0

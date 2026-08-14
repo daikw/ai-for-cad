@@ -1,0 +1,68 @@
+{
+  "schemaVersion": 1,
+  "status": "prepared-not-uploaded",
+  "slicer": {
+    "path": "/Applications/BambuStudio.app/Contents/MacOS/BambuStudio",
+    "version": "02.07.01.62",
+    "validatedVersion": "02.07.01.62",
+    "matchesValidatedVersion": true
+  },
+  "source": {
+    "path": "/Users/daikiwatanabe/ghq/github.com/daikw/ai-for-cad/playgrounds/3dp/print-jobs/2026-08-13-fastener-fit-tests/source/cache/insert-diameter-test-m3/Insert tester M3 v1.stl",
+    "bytes": 1426884,
+    "sha256": "b49d89cd8e88d036ee8b588999f1b163b047e035cc1b7c4e4c1d7a493158172e"
+  },
+  "artifact": {
+    "path": "/Users/daikiwatanabe/ghq/github.com/daikw/ai-for-cad/playgrounds/3dp/print-jobs/2026-08-13-fastener-fit-tests/output/insert-tester-m3.gcode.3mf",
+    "bytes": 1872566,
+    "sha256": "5b0685a0850eeffccbd84cb9be8c0ba5d2e8d5aa289df800ce66d6077bfc757e",
+    "plateGcodeMd5": "5a6943ce966bc1623ad4d13536fd3b31"
+  },
+  "settings": {
+    "printerModel": "Bambu Lab H2D Pro",
+    "printerProfile": "Bambu Lab H2D Pro 0.4 nozzle",
+    "processProfile": "0.20mm Standard @BBL H2DP",
+    "bedType": "Textured PEI Plate",
+    "bedTemperatureC": 45,
+    "nozzleMapping": "nozzle_id=0,extruder_id=1,diameter_mm=0.4",
+    "filamentProfile": "Bambu PLA Basic @BBL H2DP",
+    "filamentType": "PLA",
+    "filamentColor": "#000000",
+    "layerHeightMm": 0.2,
+    "infill": "15%",
+    "walls": 2,
+    "supports": false,
+    "brim": "no_brim",
+    "scalePercent": 100
+  },
+  "slice": {
+    "modelTime": "1h 38m 6s",
+    "estimatedTime": "1h 43m 28s",
+    "estimatedSeconds": 6208,
+    "filamentWeightG": 46.75,
+    "filamentLengthM": 15.42628,
+    "layers": 45,
+    "maxZMm": 9,
+    "bbox": [
+      112.99999000000001,
+      122.99999000000001,
+      236.99999000000003,
+      196.99999000000003
+    ],
+    "supportFeatures": 0,
+    "brimFeatures": 0,
+    "bridgeFeatures": 96
+  },
+  "previews": {
+    "plate": "/Users/daikiwatanabe/ghq/github.com/daikw/ai-for-cad/playgrounds/3dp/print-jobs/2026-08-13-fastener-fit-tests/output/insert-tester-m3.plate.png",
+    "top": "/Users/daikiwatanabe/ghq/github.com/daikw/ai-for-cad/playgrounds/3dp/print-jobs/2026-08-13-fastener-fit-tests/output/insert-tester-m3.top.png"
+  },
+  "warnings": [
+    {
+      "message": "bed_temperature_too_high_than_filament",
+      "level": 3,
+      "code": "1000C001"
+    }
+  ],
+  "runtimeWarnings": []
+}

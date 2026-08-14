@@ -1,0 +1,38 @@
+command: /Applications/BambuStudio.app/Contents/MacOS/BambuStudio "--debug" "2" "--orient" "1" "--arrange" "1" "--ensure-on-bed" "--scale" "1" "--curr-bed-type" "Textured PEI Plate" "--load-settings" "/var/folders/y2/4nb6hjm17l7834tllh5c3dfc0000gp/T/h2dp-slice-q07vZE/machine.json;/var/folders/y2/4nb6hjm17l7834tllh5c3dfc0000gp/T/h2dp-slice-q07vZE/process.json" "--load-filaments" "/var/folders/y2/4nb6hjm17l7834tllh5c3dfc0000gp/T/h2dp-slice-q07vZE/filament.json" "--filament-map-mode" "Manual" "--extruder-nozzle-count" "1,1" "--extruder-nozzle-volume-type" "Standard,Standard" "--filament-map" "1" "--filament-nozzle-map" "1" "--filament-volume-map" "0" "--slice" "0" "--export-3mf" "/Users/daikiwatanabe/ghq/github.com/daikw/ai-for-cad/playgrounds/3dp/print-jobs/2026-08-13-fastener-fit-tests/output/cnck-holetest-m2p5m3.gcode.3mf" "/Users/daikiwatanabe/ghq/github.com/daikw/ai-for-cad/playgrounds/3dp/print-jobs/2026-08-13-fastener-fit-tests/source/cache/cnckitchen-hole-size-test/HoleTest_M2p5+M3.stl"
+
+--- stdout ---
+[2026-08-13 18:40:56.366301] [0x00000001f6699e80] [trace]   Initializing StaticPrintConfigs
+[2026-08-13 18:40:56.377778] [0x00000001f6699e80] [warning] cli mode, Current BambuStudio Version 02.07.01.62
+                                      overhang, bottom, bothull, contour, A_laf, A_prj, unprintability
+orientation:-0.0000 -0.0000  1.0000, cost:85.8,	2315.2,	1664.3,	192.5,	69.4,	0.0,	0.0
+orientation: 1.0000 -0.0000 -0.0000, cost:1407.1,	703.5,	469.0,	106.1,	112.8,	0.0,	1.5
+orientation:-0.0000  0.0000 -1.0000, cost:1460.4,	620.0,	469.0,	99.6,	69.4,	0.0,	1.8
+orientation:-1.0000  0.0000 -0.0000, cost:175.8,	2269.8,	1594.3,	190.6,	112.8,	0.0,	0.1
+orientation:-0.7071 -0.0000  0.7071, cost:1638.2,	6.0,	0.0,	9.8,	42.3,	0.0,	157.7
+orientation: 0.7071 -0.0000 -0.7071, cost:1318.9,	0.0,	3379.9,	0.0,	42.3,	0.0,	107.8
+orientation: 0.0000 -1.0000 -0.0000, cost:308.8,	659.7,	931.1,	102.7,	233.1,	0.0,	0.4
+orientation: 0.7071  0.0000 -0.7071, cost:1318.9,	0.0,	3379.9,	0.0,	42.3,	0.0,	107.8
+orientation: 0.0000  1.0000 -0.0000, cost:303.2,	659.7,	931.1,	102.7,	233.1,	0.0,	0.4
+orientation: 0.7071 -0.0000 -0.7071, cost:1318.9,	0.0,	3379.9,	0.0,	42.3,	0.0,	107.8
+orientation:-0.7269 -0.0000  0.6867, cost:1638.2,	6.0,	1739.7,	9.8,	24.2,	0.0,	16.9
+orientation:-0.7071 -0.0000  0.7071, cost:1638.2,	6.0,	0.0,	9.8,	42.3,	0.0,	157.7
+orientation:-0.0000 -0.7071  0.7071, cost:102.5,	0.0,	0.0,	0.0,	82.3,	0.0,	326.7
+orientation: 0.7071 -0.0000  0.7071, cost:126.1,	0.0,	0.0,	0.0,	90.7,	0.0,	374.0
+orientation:-0.0000  0.7071  0.7071, cost:102.5,	0.0,	0.0,	0.0,	82.3,	0.0,	326.7
+orientation:-0.7071 -0.7071 -0.0000, cost:85.1,	0.0,	0.0,	0.0,	73.3,	0.0,	291.8
+orientation: 0.7071 -0.7071 -0.0000, cost:86.8,	0.0,	0.0,	0.0,	76.2,	0.0,	295.1
+orientation: 0.7071  0.7071 -0.0000, cost:85.3,	0.0,	0.0,	0.0,	73.3,	0.0,	292.1
+orientation:-0.7071  0.7071 -0.0000, cost:85.7,	0.0,	0.0,	0.0,	76.2,	0.0,	292.9
+orientation:-0.7071 -0.0000 -0.7071, cost:113.4,	0.0,	0.0,	0.0,	90.7,	0.0,	348.6
+orientation:-0.0000 -0.7071 -0.7071, cost:87.6,	0.0,	0.0,	0.0,	82.3,	0.0,	296.8
+orientation:-0.0000  0.7071 -0.7071, cost:87.6,	0.0,	0.0,	0.0,	82.3,	0.0,	296.8
+best:-0.000000 -0.000000  1.000000, costs:85.8,	2315.2,	1664.3,	192.5,	69.4,	0.0,	0.0
+[2026-08-13 18:40:56.542309] [0x000000016f65f000] [warning] Detected missing Voronoi vertex, input polygons will be rotated back and forth.
+[2026-08-13 18:40:56.549143] [0x00000001f6699e80] [warning] tree support default to organic support
+[2026-08-13 18:40:56.581048] [0x00000001f6699e80] [error]   Invalid T command (T1001).
+[2026-08-13 18:40:56.888473] [0x00000001f6699e80] [error]   Invalid T command (T65535).
+[2026-08-13 18:40:56.888489] [0x00000001f6699e80] [error]   Invalid T command (T65279).
+
+--- stderr ---
+
+exit_status: 0

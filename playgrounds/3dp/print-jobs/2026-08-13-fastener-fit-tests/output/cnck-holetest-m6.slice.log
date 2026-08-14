@@ -1,0 +1,37 @@
+command: /Applications/BambuStudio.app/Contents/MacOS/BambuStudio "--debug" "2" "--orient" "1" "--arrange" "1" "--ensure-on-bed" "--scale" "1" "--curr-bed-type" "Textured PEI Plate" "--load-settings" "/var/folders/y2/4nb6hjm17l7834tllh5c3dfc0000gp/T/h2dp-slice-mDtpD9/machine.json;/var/folders/y2/4nb6hjm17l7834tllh5c3dfc0000gp/T/h2dp-slice-mDtpD9/process.json" "--load-filaments" "/var/folders/y2/4nb6hjm17l7834tllh5c3dfc0000gp/T/h2dp-slice-mDtpD9/filament.json" "--filament-map-mode" "Manual" "--extruder-nozzle-count" "1,1" "--extruder-nozzle-volume-type" "Standard,Standard" "--filament-map" "1" "--filament-nozzle-map" "1" "--filament-volume-map" "0" "--slice" "0" "--export-3mf" "/Users/daikiwatanabe/ghq/github.com/daikw/ai-for-cad/playgrounds/3dp/print-jobs/2026-08-13-fastener-fit-tests/output/cnck-holetest-m6.gcode.3mf" "/Users/daikiwatanabe/ghq/github.com/daikw/ai-for-cad/playgrounds/3dp/print-jobs/2026-08-13-fastener-fit-tests/source/cache/cnckitchen-hole-size-test/HoleTest_M6.stl"
+
+--- stdout ---
+[2026-08-13 18:41:03.649239] [0x00000001f6699e80] [trace]   Initializing StaticPrintConfigs
+[2026-08-13 18:41:03.659556] [0x00000001f6699e80] [warning] cli mode, Current BambuStudio Version 02.07.01.62
+                                      overhang, bottom, bothull, contour, A_laf, A_prj, unprintability
+orientation:-0.0000 -0.0000  1.0000, cost:364.2,	2678.9,	2182.4,	207.0,	277.4,	0.0,	0.1
+orientation: 1.0000 -0.0000 -0.0000, cost:1746.2,	1874.2,	1249.5,	173.2,	337.3,	0.0,	0.7
+orientation: 0.0000 -0.0000 -1.0000, cost:1799.5,	1663.3,	1164.5,	163.1,	277.4,	0.0,	0.8
+orientation:-1.0000 -0.0000 -0.0000, cost:485.5,	2793.1,	2182.4,	211.4,	337.3,	0.0,	0.1
+orientation:-0.7071 -0.0000  0.7071, cost:2390.5,	7.3,	0.0,	10.8,	54.6,	0.0,	195.0
+orientation:-0.0000 -1.0000 -0.0000, cost:1143.4,	1504.9,	1497.1,	155.2,	862.5,	0.0,	0.6
+orientation: 0.0000  1.0000 -0.0000, cost:1115.3,	1504.9,	1497.1,	155.2,	862.5,	0.0,	0.6
+orientation: 0.7071 -0.0000 -0.7071, cost:1379.7,	0.0,	4104.2,	0.0,	54.6,	0.0,	106.8
+orientation:-0.7071  0.0000  0.7071, cost:2390.5,	7.3,	0.0,	10.8,	54.6,	0.0,	195.0
+orientation: 0.7071  0.0000 -0.7071, cost:1379.7,	0.0,	4104.2,	0.0,	54.6,	0.0,	106.8
+orientation:-0.7225 -0.0000  0.6913, cost:2390.5,	7.3,	2725.5,	10.8,	32.4,	0.0,	16.2
+orientation:-0.7071 -0.0000  0.7071, cost:2390.5,	7.3,	0.0,	10.8,	54.6,	0.0,	195.0
+orientation:-0.0000 -0.7071  0.7071, cost:375.9,	1.1,	0.0,	4.2,	288.4,	0.0,	132.9
+orientation: 0.7071 -0.0000  0.7071, cost:415.1,	0.0,	0.0,	0.0,	303.9,	0.0,	956.2
+orientation:-0.0000  0.7071  0.7071, cost:374.4,	1.1,	0.0,	4.2,	288.4,	0.0,	132.4
+orientation:-0.7071 -0.7071 -0.0000, cost:364.9,	0.0,	0.0,	0.0,	289.8,	0.0,	855.6
+orientation: 0.7071 -0.7071 -0.0000, cost:366.6,	0.0,	0.0,	0.0,	292.7,	0.0,	859.0
+orientation: 0.7071  0.7071 -0.0000, cost:363.6,	0.0,	0.0,	0.0,	289.8,	0.0,	853.1
+orientation:-0.7071  0.7071 -0.0000, cost:364.0,	0.0,	0.0,	0.0,	292.7,	0.0,	853.9
+orientation:-0.7071 -0.0000 -0.7071, cost:388.1,	0.0,	0.0,	0.0,	303.9,	0.0,	902.4
+orientation:-0.0000 -0.7071 -0.7071, cost:348.1,	0.0,	0.0,	0.0,	288.4,	0.0,	822.0
+orientation:-0.0000  0.7071 -0.7071, cost:346.7,	0.0,	0.0,	0.0,	288.4,	0.0,	819.2
+best:-0.000000 -0.000000  1.000000, costs:364.2,	2678.9,	2182.4,	207.0,	277.4,	0.0,	0.1
+[2026-08-13 18:41:03.957062] [0x00000001f6699e80] [warning] tree support default to organic support
+[2026-08-13 18:41:04.023821] [0x00000001f6699e80] [error]   Invalid T command (T1001).
+[2026-08-13 18:41:04.456513] [0x00000001f6699e80] [error]   Invalid T command (T65535).
+[2026-08-13 18:41:04.456534] [0x00000001f6699e80] [error]   Invalid T command (T65279).
+
+--- stderr ---
+
+exit_status: 0

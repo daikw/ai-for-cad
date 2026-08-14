@@ -1,0 +1,45 @@
+command: /Applications/BambuStudio.app/Contents/MacOS/BambuStudio "--debug" "2" "--orient" "1" "--arrange" "1" "--ensure-on-bed" "--scale" "1" "--curr-bed-type" "Textured PEI Plate" "--load-settings" "/var/folders/y2/4nb6hjm17l7834tllh5c3dfc0000gp/T/h2dp-slice-LavAUw/machine.json;/var/folders/y2/4nb6hjm17l7834tllh5c3dfc0000gp/T/h2dp-slice-LavAUw/process.json" "--load-filaments" "/var/folders/y2/4nb6hjm17l7834tllh5c3dfc0000gp/T/h2dp-slice-LavAUw/filament.json" "--filament-map-mode" "Manual" "--extruder-nozzle-count" "1,1" "--extruder-nozzle-volume-type" "Standard,Standard" "--filament-map" "1" "--filament-nozzle-map" "1" "--filament-volume-map" "0" "--slice" "0" "--export-3mf" "/Users/daikiwatanabe/ghq/github.com/daikw/ai-for-cad/playgrounds/3dp/print-jobs/2026-08-13-fastener-fit-tests/output/holeprobes-mag6.gcode.3mf" "/Users/daikiwatanabe/ghq/github.com/daikw/ai-for-cad/playgrounds/3dp/print-jobs/2026-08-13-fastener-fit-tests/source/cache/holeprobes/holeprobes-mag6.stl"
+
+--- stdout ---
+[2026-08-13 18:40:49.889373] [0x00000001f6699e80] [trace]   Initializing StaticPrintConfigs
+[2026-08-13 18:40:49.900460] [0x00000001f6699e80] [warning] cli mode, Current BambuStudio Version 02.07.01.62
+                                      overhang, bottom, bothull, contour, A_laf, A_prj, unprintability
+orientation:-0.0000 -0.0000  1.0000, cost:0.0,	4078.1,	2869.5,	255.4,	0.0,	0.0,	0.0
+orientation: 0.0000 -0.0000 -1.0000, cost:2078.9,	959.8,	1192.0,	123.9,	0.0,	0.0,	1.6
+orientation: 0.0000 -1.0000 -0.0000, cost:546.1,	427.5,	285.0,	82.7,	655.3,	0.0,	1.0
+orientation:-0.0000  1.0000 -0.0000, cost:546.1,	400.1,	266.8,	80.0,	655.3,	0.0,	1.1
+orientation:-1.0000 -0.0000  0.0000, cost:546.1,	136.8,	91.2,	46.8,	655.3,	0.0,	3.0
+orientation: 1.0000 -0.0000 -0.0000, cost:546.1,	109.4,	73.0,	41.8,	655.3,	0.0,	3.7
+orientation: 0.2430  0.9700 -0.0000, cost:867.5,	0.0,	0.0,	0.0,	988.7,	0.0,	1874.8
+orientation: 0.2430 -0.9700 -0.0000, cost:885.7,	0.0,	0.0,	0.0,	988.7,	0.0,	1911.2
+orientation:-0.2430 -0.9700 -0.0000, cost:885.7,	0.0,	0.0,	0.0,	988.7,	0.0,	1911.2
+orientation:-0.2430  0.9700 -0.0000, cost:867.5,	0.0,	0.0,	0.0,	988.7,	0.0,	1874.8
+orientation:-0.0000 -0.7809 -0.6247, cost:0.0,	0.0,	1093.8,	0.0,	0.0,	0.0,	100.2
+orientation:-0.0000  0.7809 -0.6247, cost:0.0,	0.0,	1054.4,	0.0,	0.0,	0.0,	100.2
+orientation: 0.0021 -0.7722 -0.6354, cost:0.0,	0.0,	1098.6,	0.0,	0.0,	0.0,	100.2
+orientation: 0.0021  0.7728 -0.6346, cost:0.0,	0.0,	1059.0,	0.0,	0.0,	0.0,	100.2
+orientation:-0.9285  0.0000 -0.3714, cost:528.1,	0.1,	179.8,	1.5,	0.0,	0.0,	53.5
+orientation: 0.9285 -0.0000 -0.3714, cost:509.9,	0.1,	146.4,	1.5,	0.0,	0.0,	62.1
+orientation: 0.5731  0.5731 -0.5857, cost:0.0,	0.0,	70.3,	0.0,	0.0,	0.0,	102.5
+orientation:0.7071 0.7071 0.0000, cost:546.1,	38.7,	25.8,	24.9,	655.3,	0.0,	10.0
+orientation:-0.7071 -0.0000  0.7071, cost:0.0,	0.0,	0.0,	0.0,	0.0,	0.0,	120.0
+orientation:-0.0000 -0.7071  0.7071, cost:0.0,	0.0,	0.0,	0.0,	0.0,	0.0,	120.0
+orientation: 0.7071 -0.0000  0.7071, cost:0.0,	0.0,	0.0,	0.0,	0.0,	0.0,	120.0
+orientation:-0.0000  0.7071  0.7071, cost:0.0,	0.0,	0.0,	0.0,	0.0,	0.0,	120.0
+orientation:-0.7071 -0.7071 -0.0000, cost:546.1,	0.0,	0.0,	0.0,	655.3,	0.0,	1225.4
+orientation: 0.7071 -0.7071 -0.0000, cost:546.1,	0.0,	0.0,	0.0,	655.3,	0.0,	1225.4
+orientation: 0.7071  0.7071 -0.0000, cost:546.1,	38.7,	25.8,	24.9,	655.3,	0.0,	10.0
+orientation:-0.7071  0.7071 -0.0000, cost:546.1,	0.0,	0.0,	0.0,	655.3,	0.0,	1225.4
+orientation:-0.7071 -0.0000 -0.7071, cost:0.0,	0.4,	0.0,	2.4,	0.0,	0.0,	6.4
+orientation:-0.0000 -0.7071 -0.7071, cost:0.0,	0.0,	0.0,	0.0,	0.0,	0.0,	120.0
+orientation: 0.7071 -0.0000 -0.7071, cost:0.0,	0.3,	0.0,	2.3,	0.0,	0.0,	6.6
+orientation:-0.0000  0.7071 -0.7071, cost:0.0,	0.0,	0.0,	0.0,	0.0,	0.0,	120.0
+best:-0.000000 -0.000000  1.000000, costs:0.0,	4078.1,	2869.5,	255.4,	0.0,	0.0,	0.0
+[2026-08-13 18:40:50.073208] [0x00000001f6699e80] [warning] tree support default to organic support
+[2026-08-13 18:40:50.119378] [0x00000001f6699e80] [error]   Invalid T command (T1001).
+[2026-08-13 18:40:50.314313] [0x00000001f6699e80] [error]   Invalid T command (T65535).
+[2026-08-13 18:40:50.314329] [0x00000001f6699e80] [error]   Invalid T command (T65279).
+
+--- stderr ---
+
+exit_status: 0

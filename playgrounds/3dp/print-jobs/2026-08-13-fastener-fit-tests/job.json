@@ -1,0 +1,242 @@
+{
+  "schema": "printjob/v1",
+  "slug": "2026-08-13-fastener-fit-tests",
+  "title": "締結キャリブレーション（ヒートインサート下穴・磁石ポケット）",
+  "status": "printing",
+  "printer": "bambu-h2d-pro",
+  "source": {
+    "kind": "printables+generated",
+    "url": "https://www.printables.com/model/1648510-hole-size-test-for-heat-set-inserts",
+    "license": "CNC Kitchen: CC BY-NC-ND / HoleProbes.scad: CC0 (Vladimir Gamalyan) / MD3D: CC BY-NC / leicester77: CC0 / Marcello: CC BY-NC-SA",
+    "notes": "Printables GraphQL の getDownloadLink は非ログインで通る（source/fetch-printables.mjs）。CC0 の HoleProbes.scad は磁石ポケット径レンジに振り直して openscad で再生成（source/gen-holeprobes.sh）。目的は fastening-with-lab-stock スキルの実測表を埋めること。",
+    "files": [
+      {
+        "path": "source/cache/cnckitchen-hole-size-test/HoleTest_M2.stl",
+        "bytes": 885884,
+        "sha256": "685ce8f2965a903b6181d6a79d298e81d560ecf22247bc6825512f440709e5b0",
+        "origin": "https://www.printables.com/model/1648510",
+        "license": "Creative Commons — Attribution  — Noncommercial  —  NoDerivatives",
+        "author": "CNC Kitchen"
+      },
+      {
+        "path": "source/cache/cnckitchen-hole-size-test/HoleTest_M2p5+M3.stl",
+        "bytes": 839584,
+        "sha256": "8f6b4af88a712bf87abc6126a57420f327d5dbff7eabd3f3e0cd6c26522e04c3",
+        "origin": "https://www.printables.com/model/1648510",
+        "license": "Creative Commons — Attribution  — Noncommercial  —  NoDerivatives",
+        "author": "CNC Kitchen"
+      },
+      {
+        "path": "source/cache/cnckitchen-hole-size-test/HoleTest_M4.stl",
+        "bytes": 919184,
+        "sha256": "7cec2485ef32edd5225e76b138919b63b824c827c244c9a1a8131c840d4621ca",
+        "origin": "https://www.printables.com/model/1648510",
+        "license": "Creative Commons — Attribution  — Noncommercial  —  NoDerivatives",
+        "author": "CNC Kitchen"
+      },
+      {
+        "path": "source/cache/cnckitchen-hole-size-test/HoleTest_M5.stl",
+        "bytes": 986984,
+        "sha256": "52808abdcd0783fd4cdc9bd83fdc8dfa6c03c3305a5c4badf04d9bc1ea527fc3",
+        "origin": "https://www.printables.com/model/1648510",
+        "license": "Creative Commons — Attribution  — Noncommercial  —  NoDerivatives",
+        "author": "CNC Kitchen"
+      },
+      {
+        "path": "source/cache/cnckitchen-hole-size-test/HoleTest_M6.stl",
+        "bytes": 1037284,
+        "sha256": "0b49598f9c35433d809c5a1089d5958763f0ac4379b34bdff59c9574e39fbbaf",
+        "origin": "https://www.printables.com/model/1648510",
+        "license": "Creative Commons — Attribution  — Noncommercial  —  NoDerivatives",
+        "author": "CNC Kitchen"
+      },
+      {
+        "path": "source/cache/graduated-hole-test-block/HoleProbes.scad",
+        "bytes": 3523,
+        "sha256": "e933c996fa8467e20f957dadba07a1d7c125fd61d092681c201bfc47b71b8a82",
+        "origin": "https://www.printables.com/model/1444127",
+        "license": "Creative Commons — Public Domain",
+        "author": "Vladimir Gamalyan"
+      },
+      {
+        "path": "source/cache/insert-diameter-test-m3/Insert tester M3 v1.stl",
+        "bytes": 1426884,
+        "sha256": "b49d89cd8e88d036ee8b588999f1b163b047e035cc1b7c4e4c1d7a493158172e",
+        "origin": "https://www.printables.com/model/469872",
+        "license": "Creative Commons — Public Domain",
+        "author": "leicester77"
+      },
+      {
+        "path": "source/cache/md3d-heatset-test/test_heatset-insert_M3-5.stl",
+        "bytes": 3095384,
+        "sha256": "9f6b2651adbcee67a83d5c1a3ddf2e0d543a3b47af2942cf071ffc4e2b3f12bd",
+        "origin": "https://www.printables.com/model/380635",
+        "license": "Creative Commons — Attribution  — Noncommercial",
+        "author": "MD3D"
+      },
+      {
+        "path": "source/cache/diameter-tolerance-test/Diameter Tolerances - All.3mf",
+        "bytes": 272945,
+        "sha256": "bf1b3beaceb3934dbf4b8e2fa23899c998cff339e6d55c7a9fe5fb27429424c1",
+        "origin": "https://www.printables.com/model/716940",
+        "license": "Creative Commons — Attribution  — Noncommercial  —  Share Alike",
+        "author": "Marcello"
+      },
+      {
+        "path": "source/cache/diameter-tolerance-test/Diameter Tolerance - 01 mm.stl",
+        "bytes": 257484,
+        "sha256": "85b8d98d84407ebe49edb467b285abac3d625c0b8a30727af655c434096ba0f2",
+        "origin": "https://www.printables.com/model/716940",
+        "license": "Creative Commons — Attribution  — Noncommercial  —  Share Alike",
+        "author": "Marcello"
+      },
+      {
+        "path": "source/cache/diameter-tolerance-test/Diameter Tolerance - 02 mm.stl",
+        "bytes": 286984,
+        "sha256": "e229d41810bc975aaf63142b7980c8e4ec8f4d4e961913a037eae8dc32401029",
+        "origin": "https://www.printables.com/model/716940",
+        "license": "Creative Commons — Attribution  — Noncommercial  —  Share Alike",
+        "author": "Marcello"
+      },
+      {
+        "path": "source/cache/diameter-tolerance-test/Diameter Tolerance - 03 mm.stl",
+        "bytes": 326084,
+        "sha256": "6e1f4394d17c969b82017567d93efe55d42005ebcbfe3d8d0c9f8d432a613b1f",
+        "origin": "https://www.printables.com/model/716940",
+        "license": "Creative Commons — Attribution  — Noncommercial  —  Share Alike",
+        "author": "Marcello"
+      },
+      {
+        "path": "source/cache/diameter-tolerance-test/Diameter Tolerance - 04 mm.stl",
+        "bytes": 262284,
+        "sha256": "92919aac3056efec8aa7d0357480d98d1fa5050395844169c92062d13a369fe0",
+        "origin": "https://www.printables.com/model/716940",
+        "license": "Creative Commons — Attribution  — Noncommercial  —  Share Alike",
+        "author": "Marcello"
+      },
+      {
+        "path": "source/fetch-printables.mjs",
+        "origin": "repo"
+      },
+      {
+        "path": "source/gen-holeprobes.sh",
+        "origin": "repo"
+      },
+      {
+        "path": "source/slice-all.sh",
+        "origin": "repo"
+      },
+      {
+        "path": "source/cache/holeprobes/holeprobes-ins-m3.stl",
+        "origin": "source/gen-holeprobes.sh (openscad)"
+      },
+      {
+        "path": "source/cache/holeprobes/holeprobes-mag6.stl",
+        "origin": "source/gen-holeprobes.sh (openscad)"
+      },
+      {
+        "path": "source/cache/holeprobes/holeprobes-mag13.stl",
+        "origin": "source/gen-holeprobes.sh (openscad)"
+      }
+    ]
+  },
+  "prints": [
+    {
+      "artifact": "output/holeprobes-mag6.gcode.3mf",
+      "sha256": "a7b5c2384150b2d1e36c99dce2486707050dfe1d62eb8f311e25d32d56958136",
+      "sliceCommand": "node ~/.claude/skills/printing-with-bambu-h2d-pro/scripts/slice-h2d-pro.mjs --input <source/cache/...> --output output/holeprobes-mag6.gcode.3mf --filament pla-basic --process 0.20-standard --color \"#000000\" --infill 15 --walls 2 --supports off --brim no_brim  (source/slice-all.sh が全条件の正本)",
+      "estimatedTime": "26m 10s",
+      "filament": "PLA Basic Orange(FF6A13) AMS0-1 11.34g",
+      "result": "completed",
+      "resultNotes": "完走(FINISH/100%/print_error 0)。submit の最終ステータス読みは Timed out したが status 再確認で RUNNING を確認していた。実測 30m31s(09:44 submit → 10:15 FINISH、見積 20m47s〜26m10s)。反り・剥がれなし",
+      "amsSlots": "1",
+      "submittedAt": "2026-08-13T09:44:25.985Z"
+    },
+    {
+      "artifact": "output/holeprobes-mag13.gcode.3mf",
+      "sha256": "01a5e8d24845f0d15833e11652191773de128f55620a617d3b4b1f862eaf9659",
+      "sliceCommand": "node ~/.claude/skills/printing-with-bambu-h2d-pro/scripts/slice-h2d-pro.mjs --input <source/cache/...> --output output/holeprobes-mag13.gcode.3mf --filament pla-basic --process 0.20-standard --color \"#000000\" --infill 15 --walls 2 --supports off --brim no_brim  (source/slice-all.sh が全条件の正本)",
+      "estimatedTime": "36m 24s",
+      "filament": "PLA Basic Orange(FF6A13) AMS0-1 18.17g",
+      "result": "pending",
+      "resultNotes": "",
+      "amsSlots": "1"
+    },
+    {
+      "artifact": "output/cnck-holetest-m2.gcode.3mf",
+      "sha256": "4f8aedec7d94de5a0a708631ec6f0df1549de3b5e74f9008d10c60a358428fa7",
+      "sliceCommand": "node ~/.claude/skills/printing-with-bambu-h2d-pro/scripts/slice-h2d-pro.mjs --input <source/cache/...> --output output/cnck-holetest-m2.gcode.3mf --filament pla-basic --process 0.20-standard --color \"#000000\" --infill 15 --walls 2 --supports off --brim no_brim  (source/slice-all.sh が全条件の正本)",
+      "estimatedTime": "40m 46s",
+      "filament": "PLA Basic Orange(FF6A13) AMS0-1 16.63g",
+      "result": "pending",
+      "resultNotes": "",
+      "amsSlots": "1"
+    },
+    {
+      "artifact": "output/cnck-holetest-m2p5m3.gcode.3mf",
+      "sha256": "0e7a0505ee7a02597e08ddfb39daaa69e92345b39e9d3f63991827dafb153c86",
+      "sliceCommand": "node ~/.claude/skills/printing-with-bambu-h2d-pro/scripts/slice-h2d-pro.mjs --input <source/cache/...> --output output/cnck-holetest-m2p5m3.gcode.3mf --filament pla-basic --process 0.20-standard --color \"#000000\" --infill 15 --walls 2 --supports off --brim no_brim  (source/slice-all.sh が全条件の正本)",
+      "estimatedTime": "41m 56s",
+      "filament": "PLA Basic Orange(FF6A13) AMS0-1 16.54g",
+      "result": "pending",
+      "resultNotes": "",
+      "amsSlots": "1"
+    },
+    {
+      "artifact": "output/cnck-holetest-m4.gcode.3mf",
+      "sha256": "72fbdf8eb22c0647e06d656493647848c53f98564589b04922aef65b53e395d9",
+      "sliceCommand": "node ~/.claude/skills/printing-with-bambu-h2d-pro/scripts/slice-h2d-pro.mjs --input <source/cache/...> --output output/cnck-holetest-m4.gcode.3mf --filament pla-basic --process 0.20-standard --color \"#000000\" --infill 15 --walls 2 --supports off --brim no_brim  (source/slice-all.sh が全条件の正本)",
+      "estimatedTime": "49m 25s",
+      "filament": "PLA Basic Orange(FF6A13) AMS0-1 21.12g",
+      "result": "pending",
+      "resultNotes": "",
+      "amsSlots": "1"
+    },
+    {
+      "artifact": "output/cnck-holetest-m5.gcode.3mf",
+      "sha256": "9fddf784489753a48bba0f0056b84a0a2e2e4d32831e8b25eb0f5745093a1f42",
+      "sliceCommand": "node ~/.claude/skills/printing-with-bambu-h2d-pro/scripts/slice-h2d-pro.mjs --input <source/cache/...> --output output/cnck-holetest-m5.gcode.3mf --filament pla-basic --process 0.20-standard --color \"#000000\" --infill 15 --walls 2 --supports off --brim no_brim  (source/slice-all.sh が全条件の正本)",
+      "estimatedTime": "53m 36s",
+      "filament": "PLA Basic Orange(FF6A13) AMS0-1 23.33g",
+      "result": "pending",
+      "resultNotes": "",
+      "amsSlots": "1"
+    },
+    {
+      "artifact": "output/cnck-holetest-m6.gcode.3mf",
+      "sha256": "7d4934b5b5e08bad58b469d7433fd43ec34c63129649970eaaec32d659e6c6d0",
+      "sliceCommand": "node ~/.claude/skills/printing-with-bambu-h2d-pro/scripts/slice-h2d-pro.mjs --input <source/cache/...> --output output/cnck-holetest-m6.gcode.3mf --filament pla-basic --process 0.20-standard --color \"#000000\" --infill 15 --walls 2 --supports off --brim no_brim  (source/slice-all.sh が全条件の正本)",
+      "estimatedTime": "1h 7m 53s",
+      "filament": "PLA Basic Orange(FF6A13) AMS0-1 33.35g",
+      "result": "pending",
+      "resultNotes": "",
+      "amsSlots": "1"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "evidence/2026-08-13T09-39-59-baseline.jpg",
+      "caption": "投入前のプレート(空・クリーン確認)"
+    },
+    {
+      "path": "evidence/2026-08-13T10-15-24-mag6-complete.jpg",
+      "caption": "holeprobes-mag6 完了(φ6.0-6.4 の5チューブ・オレンジPLA)"
+    },
+    {
+      "path": "evidence/2026-08-14T01-26-55-mag13-baseline.jpg",
+      "caption": "mag13-baseline"
+    }
+  ],
+  "links": {
+    "tickets": [],
+    "mrs": [],
+    "model": "https://www.printables.com/model/1648510-hole-size-test-for-heat-set-inserts"
+  },
+  "learnings": [
+    "Printables は非ログインで GraphQL getDownloadLink が通り STL を直取得できる（MakerWorld は 403 でブラウザ必須）",
+    "CNC Kitchen の HoleTest は L 字形状で垂直面・水平面の両方に同径穴が並び、径ラベル刻印付き。プリント方向依存の穴精度差まで 1 個で見える",
+    "同条件スライスの実測: 14 種スライス済み、うち実用セット 7 種を印刷対象に選定",
+    "実機 AMS に黒が無く白95%/オレンジ100%のみ。印刷対象は #FF6A13 で再スライスした（slice-all.sh を COLOR/FORCE/ONLY 対応に改修）",
+    "bambu-h2d-remote submit は stage 成功後に最終 status 読みが Timed out することがある。status 再実行で RUNNING を確認できれば投入は成功している"
+  ]
+}
