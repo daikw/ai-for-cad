@@ -180,9 +180,10 @@
       "sliceCommand": "node ~/.claude/skills/printing-with-bambu-h2d-pro/scripts/slice-h2d-pro.mjs --input <source/cache/...> --output output/cnck-holetest-m2p5m3.gcode.3mf --filament pla-basic --process 0.20-standard --color \"#000000\" --infill 15 --walls 2 --supports off --brim no_brim  (source/slice-all.sh が全条件の正本)",
       "estimatedTime": "41m 56s",
       "filament": "PLA Basic Orange(FF6A13) AMS0-1 16.54g",
-      "result": "pending",
-      "resultNotes": "",
-      "amsSlots": "1"
+      "result": "completed",
+      "resultNotes": "完走(FINISH/100%/print_error 0)。実測 46m19s(17:01 RUNNING → 17:47 FINISH、見積 41m56s)。反り・剥がれなし",
+      "amsSlots": "1",
+      "submittedAt": "2026-08-14T08:01:20.556Z"
     },
     {
       "artifact": "output/cnck-holetest-m4.gcode.3mf",
@@ -190,9 +191,10 @@
       "sliceCommand": "node ~/.claude/skills/printing-with-bambu-h2d-pro/scripts/slice-h2d-pro.mjs --input <source/cache/...> --output output/cnck-holetest-m4.gcode.3mf --filament pla-basic --process 0.20-standard --color \"#000000\" --infill 15 --walls 2 --supports off --brim no_brim  (source/slice-all.sh が全条件の正本)",
       "estimatedTime": "49m 25s",
       "filament": "PLA Basic Orange(FF6A13) AMS0-1 21.12g",
-      "result": "pending",
-      "resultNotes": "",
-      "amsSlots": "1"
+      "result": "completed",
+      "resultNotes": "完走(FINISH/100%/print_error 0)。実測 54m16s(18:16 RUNNING → 19:10 FINISH、見積 49m25s)。反り・剥がれなし",
+      "amsSlots": "1",
+      "submittedAt": "2026-08-14T09:16:00Z"
     },
     {
       "artifact": "output/cnck-holetest-m5.gcode.3mf",
@@ -201,7 +203,7 @@
       "estimatedTime": "53m 36s",
       "filament": "PLA Basic Orange(FF6A13) AMS0-1 23.33g",
       "result": "pending",
-      "resultNotes": "",
+      "resultNotes": "merged-m5-m6-mag13b に集約したため単独では印刷しない",
       "amsSlots": "1"
     },
     {
@@ -211,7 +213,7 @@
       "estimatedTime": "1h 7m 53s",
       "filament": "PLA Basic Orange(FF6A13) AMS0-1 33.35g",
       "result": "pending",
-      "resultNotes": "",
+      "resultNotes": "merged-m5-m6-mag13b に集約したため単独では印刷しない",
       "amsSlots": "1"
     },
     {
@@ -222,7 +224,17 @@
       "filament": "PLA Basic Orange(FF6A13) AMS0-1 21.04g",
       "amsSlots": "1",
       "result": "pending",
-      "resultNotes": "φ13.0-13.4 が全て緩かったため φ12.5-13.0 で再検証する追加クーポン。投入承認待ち"
+      "resultNotes": "merged-m5-m6-mag13b に集約したため単独では印刷しない"
+    },
+    {
+      "artifact": "output/merged-m5-m6-mag13b.gcode.3mf",
+      "sha256": "2fc5340222fe9bdd60e6ae176a99b0104195a954aac6757c54a656bd30e7d02e",
+      "sliceCommand": "source/merge-stl.mjs で HoleTest_M5 + HoleTest_M6 + holeprobes-mag13b を gap 12mm で結合し、slice-all.sh と同条件(COLOR=#FF6A13)でスライス",
+      "estimatedTime": "2h 29m 31s",
+      "filament": "PLA Basic Orange(FF6A13) AMS0-1 77.7g",
+      "amsSlots": "1",
+      "result": "pending",
+      "resultNotes": "残り3種を1プレートに集約。個別3回(162m)に対し150mで12分短縮、プレート交換も2回削減。投入承認待ち"
     }
   ],
   "evidence": [
@@ -265,6 +277,38 @@
     {
       "path": "evidence/2026-08-14T06-49-21-m2-complete.jpg",
       "caption": "cnck-holetest-m2 完了(L字ブラケット・水平/垂直両面に M2 下穴列)"
+    },
+    {
+      "path": "evidence/2026-08-14T08-00-14-m2p5m3-baseline.jpg",
+      "caption": "m2p5m3-baseline"
+    },
+    {
+      "path": "evidence/2026-08-14T08-00-14-m2p5m3-baseline.jpg",
+      "caption": "cnck-holetest-m2p5m3 投入前(プレート空)"
+    },
+    {
+      "path": "evidence/2026-08-14T08-47-56-m2p5m3-complete.jpg",
+      "caption": "m2p5m3-complete"
+    },
+    {
+      "path": "evidence/2026-08-14T08-47-56-m2p5m3-complete.jpg",
+      "caption": "cnck-holetest-m2p5m3 完了(M2.5/M3 下穴・水平/垂直両面)"
+    },
+    {
+      "path": "evidence/2026-08-14T09-14-23-next-baseline.jpg",
+      "caption": "next-baseline"
+    },
+    {
+      "path": "evidence/2026-08-14T10-11-14-m4-complete.jpg",
+      "caption": "m4-complete"
+    },
+    {
+      "path": "evidence/2026-08-14T09-14-23-next-baseline.jpg",
+      "caption": "cnck-holetest-m4 投入前(プレート空)"
+    },
+    {
+      "path": "evidence/2026-08-14T10-11-14-m4-complete.jpg",
+      "caption": "cnck-holetest-m4 完了"
     }
   ],
   "links": {
@@ -282,6 +326,7 @@
     "H2D Pro の見積に対する実測比は mag6 1.17 / mag13 1.14。この機体・この条件では見積 x1.15 で見ておくとよい",
     "MAG-6 の最適ポケット径は φ6.3(公称+0.3)。MAG-13 は φ13.0-13.4 が全て緩く、公称+0.3 の当てはめが誤りだった。穴の縮み補正は径に比例しない絶対量なので、大径では公称以下から探す",
     "MAG-13(φ13x2.4)は径に対し厚みが薄く側壁のグリップ長が足りないため、適正径でも横方向で抜ける。大径薄型は圧入で保持せず接着+座ぐりで受ける",
-    "見積に対する実測比は印刷が長いほど下がる(mag6 1.17 / mag13 1.14 / cnck-m2 1.10)。固定オーバーヘッドの寄与が薄まるため"
+    "見積に対する実測比は印刷が長いほど下がる(mag6 1.17 / mag13 1.14 / cnck-m2 1.10)。固定オーバーヘッドの寄与が薄まるため",
+    "同一材料・同一色なら STL 段階で座標をずらして結合すれば単一 STL としてスライスでき、1 プレートに複数部品を載せられる(source/merge-stl.mjs)。起動シーケンスが 1 回で済むぶん個別に刷るより速く、プレート交換の回数も減る"
   ]
 }
