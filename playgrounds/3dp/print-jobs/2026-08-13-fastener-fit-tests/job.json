@@ -229,7 +229,7 @@
     {
       "artifact": "output/merged-m5-m6-mag13b.gcode.3mf",
       "sha256": "2fc5340222fe9bdd60e6ae176a99b0104195a954aac6757c54a656bd30e7d02e",
-      "sliceCommand": "source/merge-stl.mjs で HoleTest_M5 + HoleTest_M6 + holeprobes-mag13b を gap 12mm で結合し、slice-all.sh と同条件(COLOR=#FF6A13)でスライス",
+      "sliceCommand": "tools/merge-stl.mjs(当時は本ジョブの source/ に置いていた。行折り返しの --max-width は後から追加) で HoleTest_M5 + HoleTest_M6 + holeprobes-mag13b を gap 12mm で結合し、slice-all.sh と同条件(COLOR=#FF6A13)でスライス",
       "estimatedTime": "2h 29m 31s",
       "filament": "PLA Basic Orange(FF6A13) AMS0-1 77.7g",
       "amsSlots": "1",

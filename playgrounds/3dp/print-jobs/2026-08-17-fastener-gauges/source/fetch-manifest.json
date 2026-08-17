@@ -1,0 +1,18 @@
+[
+  {
+    "path": "source/cache/metric-screw-measuring-device/metric_screw_measuring_device-sanitized.stl",
+    "bytes": 851584,
+    "sha256": "a9ecbae3b2558ab44fa68d2c65164992771d098cfb70c7e35da58219dccd6b46",
+    "origin": "https://www.printables.com/model/38356",
+    "license": "Creative Commons — Attribution  — Noncommercial  —  Share Alike",
+    "author": "cmh"
+  },
+  {
+    "path": "source/cache/countersink-gauge/Countersing Gauge v1.stl",
+    "bytes": 429484,
+    "sha256": "4e21e79ab8924f624c977445d22083ff8beba41e70c9b2441bf854dcccbcfdd6",
+    "origin": "https://www.printables.com/model/1004080",
+    "license": "Creative Commons — Attribution  — Noncommercial  —  Share Alike",
+    "author": "Kopr"
+  }
+]

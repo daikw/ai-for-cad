@@ -53,9 +53,16 @@ const bbox = (tris) => {
   return { mn, mx, size: mx.map((v, i) => v - mn[i]) }
 }
 
-const [out, gapArg, ...inputs] = process.argv.slice(2)
+const argv = process.argv.slice(2)
+let maxWidth = Infinity
+const mwIdx = argv.indexOf('--max-width')
+if (mwIdx !== -1) {
+  maxWidth = Number(argv[mwIdx + 1])
+  argv.splice(mwIdx, 2)
+}
+const [out, gapArg, ...inputs] = argv
 if (!out || !inputs.length) {
-  console.error('usage: merge-stl.mjs out.stl gap_mm in1.stl [in2.stl ...]')
+  console.error('usage: merge-stl.mjs [--max-width MM] out.stl gap_mm in1.stl [in2.stl ...]')
   process.exit(2)
 }
 const gap = Number(gapArg)
@@ -65,27 +72,47 @@ const parts = inputs.map((p) => {
   return { path: p, tris, box: bbox(tris) }
 })
 
-const totalW = parts.reduce((a, p) => a + p.box.size[0], 0) + gap * (parts.length - 1)
-const maxD = Math.max(...parts.map((p) => p.box.size[1]))
+// 幅上限を超えたら次の行に折り返す。行の高さはその行の最大 depth。
+const rows = [[]]
+let rowW = 0
+for (const p of parts) {
+  const add = (rows.at(-1).length ? gap : 0) + p.box.size[0]
+  if (rows.at(-1).length && rowW + add > maxWidth) {
+    rows.push([p])
+    rowW = p.box.size[0]
+  } else {
+    rows.at(-1).push(p)
+    rowW += add
+  }
+}
+const rowWidth = (r) => r.reduce((a, p) => a + p.box.size[0], 0) + gap * (r.length - 1)
+const rowDepth = (r) => Math.max(...r.map((p) => p.box.size[1]))
+const totalW = Math.max(...rows.map(rowWidth))
+const maxD = rows.reduce((a, r) => a + rowDepth(r), 0) + gap * (rows.length - 1)
 
 const merged = []
-let cursorX = -totalW / 2
-for (const p of parts) {
-  // X は左から詰める。Y は中央揃え。Z はプレート面に接地。
-  const dx = cursorX - p.box.mn[0]
-  const dy = -p.box.mn[1] - p.box.size[1] / 2
-  const dz = -p.box.mn[2]
-  for (const t of p.tris) {
-    const c = t.slice()
-    for (let v = 0; v < 3; v++) {
-      c[3 + v * 3 + 0] += dx
-      c[3 + v * 3 + 1] += dy
-      c[3 + v * 3 + 2] += dz
+let cursorY = -maxD / 2
+for (const row of rows) {
+  const d = rowDepth(row)
+  let cursorX = -rowWidth(row) / 2
+  for (const p of row) {
+    // X は行の中で左から詰める。Y は行内で中央揃え。Z はプレート面に接地。
+    const dx = cursorX - p.box.mn[0]
+    const dy = cursorY + d / 2 - p.box.mn[1] - p.box.size[1] / 2
+    const dz = -p.box.mn[2]
+    for (const t of p.tris) {
+      const c = t.slice()
+      for (let v = 0; v < 3; v++) {
+        c[3 + v * 3 + 0] += dx
+        c[3 + v * 3 + 1] += dy
+        c[3 + v * 3 + 2] += dz
+      }
+      merged.push(c)
     }
-    merged.push(c)
+    console.log(`  ${p.box.size.map((s) => s.toFixed(1)).join(' x ')} mm  x=[${cursorX.toFixed(1)}, ${(cursorX + p.box.size[0]).toFixed(1)}] y=${cursorY.toFixed(1)}  ${p.path.split('/').pop()}`)
+    cursorX += p.box.size[0] + gap
   }
-  console.log(`  ${p.box.size.map((s) => s.toFixed(1)).join(' x ')} mm  x=[${cursorX.toFixed(1)}, ${(cursorX + p.box.size[0]).toFixed(1)}]  ${p.path.split('/').pop()}`)
-  cursorX += p.box.size[0] + gap
+  cursorY += d + gap
 }
 
 const buf = Buffer.alloc(84 + merged.length * 50)

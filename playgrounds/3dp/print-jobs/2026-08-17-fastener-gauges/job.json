@@ -1,0 +1,77 @@
+{
+  "schema": "printjob/v1",
+  "slug": "2026-08-17-fastener-gauges",
+  "title": "締結ゲージ一式（ネジ測定具・皿角ゲージ・TAP 下穴）",
+  "status": "prepared",
+  "printer": "bambu-h2d-pro",
+  "source": {
+    "kind": "printables+generated",
+    "url": "https://www.printables.com/model/38356-metric-screw-measuring-device-m225345-4-50mm",
+    "license": "cmh: CC BY-NC-SA / Kopr: CC BY-NC-SA / HoleProbes.scad: CC0 (Vladimir Gamalyan)",
+    "notes": "ノギスが手元に無く 2026-08-13 ジョブの実測表が埋まらないため、測定具そのものを刷る。あわせて在庫3系統のうち唯一未検証の TAP(タッピングねじ)の下穴レンジを取る。TAP は公開の決定版クーポンが無いので HoleProbes.scad から生成した。現地不在のためプレート交換の要らない1枚集約にしている",
+    "files": [
+      {
+        "path": "source/cache/metric-screw-measuring-device/metric_screw_measuring_device-sanitized.stl",
+        "bytes": 851584,
+        "sha256": "a9ecbae3b2558ab44fa68d2c65164992771d098cfb70c7e35da58219dccd6b46",
+        "origin": "https://www.printables.com/model/38356",
+        "license": "Creative Commons — Attribution  — Noncommercial  —  Share Alike",
+        "author": "cmh"
+      },
+      {
+        "path": "source/cache/countersink-gauge/Countersing Gauge v1.stl",
+        "bytes": 429484,
+        "sha256": "4e21e79ab8924f624c977445d22083ff8beba41e70c9b2441bf854dcccbcfdd6",
+        "origin": "https://www.printables.com/model/1004080",
+        "license": "Creative Commons — Attribution  — Noncommercial  —  Share Alike",
+        "author": "Kopr"
+      },
+      {
+        "path": "source/fetch-printables.mjs",
+        "origin": "repo"
+      },
+      {
+        "path": "source/gen-tap-probes.sh",
+        "origin": "repo"
+      },
+      {
+        "path": "source/cache/tapprobes/tapprobes-m2.stl",
+        "origin": "source/gen-tap-probes.sh (openscad)"
+      },
+      {
+        "path": "source/cache/tapprobes/tapprobes-m2p5.stl",
+        "origin": "source/gen-tap-probes.sh (openscad)"
+      },
+      {
+        "path": "source/cache/tapprobes/tapprobes-m3.stl",
+        "origin": "source/gen-tap-probes.sh (openscad)"
+      },
+      {
+        "path": "source/cache/merged-gauges.stl",
+        "origin": "tools/merge-stl.mjs --max-width 280 gap 12"
+      }
+    ]
+  },
+  "prints": [
+    {
+      "artifact": "output/merged-gauges.gcode.3mf",
+      "sha256": "20f3f11b96534153cefbea9a5a8144ac394ae3738e5c8a946bce594049e9d83f",
+      "sliceCommand": "tools/merge-stl.mjs --max-width 280 <out> 12 <measuring-device> <countersink-gauge> <tapprobes-m2> <tapprobes-m2p5> <tapprobes-m3> でX方向2行に折り返して結合し、slice-h2d-pro.mjs --filament pla-basic --process 0.20-standard --color #FF6A13 --infill 15 --walls 2 --supports off --brim no_brim",
+      "estimatedTime": "1h 36m 45s",
+      "filament": "PLA Basic Orange(FF6A13) AMS0-1 47.64g",
+      "amsSlots": "1",
+      "result": "pending",
+      "resultNotes": "ユーザーの事前承認済み。Tailscale SSH の再認証待ちで未投入"
+    }
+  ],
+  "evidence": [],
+  "links": {
+    "tickets": [],
+    "mrs": [],
+    "model": "https://www.printables.com/model/38356-metric-screw-measuring-device-m225345-4-50mm"
+  },
+  "learnings": [
+    "merge-stl.mjs は 1 行に並べるだけだと幅がプレートを超える(今回 423mm)。--max-width で行折り返しを入れて 248.5 x 90.6mm に収めた",
+    "TAP のレンジは呼び径 x0.8〜0.85 をまたぐように取る(M2 φ1.5-1.9 / M2.5 φ1.9-2.3 / M3 φ2.2-2.6)。MAG-13 で片側レンジにして外した反省を反映"
+  ]
+}
