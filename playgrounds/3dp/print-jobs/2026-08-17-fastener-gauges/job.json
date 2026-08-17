@@ -2,7 +2,7 @@
   "schema": "printjob/v1",
   "slug": "2026-08-17-fastener-gauges",
   "title": "締結ゲージ一式（ネジ測定具・皿角ゲージ・TAP 下穴）",
-  "status": "prepared",
+  "status": "completed",
   "printer": "bambu-h2d-pro",
   "source": {
     "kind": "printables+generated",
@@ -60,11 +60,25 @@
       "estimatedTime": "1h 36m 45s",
       "filament": "PLA Basic Orange(FF6A13) AMS0-1 47.64g",
       "amsSlots": "1",
-      "result": "pending",
-      "resultNotes": "ユーザーの事前承認済み。Tailscale SSH の再認証待ちで未投入"
+      "result": "completed",
+      "resultNotes": "完走(FINISH/100%/print_error 0)。13:38 RUNNING → 15:31 FINISH だが 15:16(94%) と 15:31 の間にポーリングが飛んでおり、実 FINISH は 15:22 前後と推定(比 1.08 相当)。完了スナップショット時点でプレートは既に裏返され造形物も回収済みだったため、造形物の状態は未確認",
+      "submittedAt": "2026-08-17T04:37:59.273Z"
     }
   ],
-  "evidence": [],
+  "evidence": [
+    {
+      "path": "evidence/2026-08-17T04-36-21-baseline.jpg",
+      "caption": "投入前のプレート(空・クリーン)"
+    },
+    {
+      "path": "evidence/2026-08-17T06-31-27-complete.jpg",
+      "caption": "complete"
+    },
+    {
+      "path": "evidence/2026-08-17T06-31-27-complete.jpg",
+      "caption": "完了後のスナップショット。既に造形物は回収されプレートが裏返っている(出来は未確認)"
+    }
+  ],
   "links": {
     "tickets": [],
     "mrs": [],
@@ -72,6 +86,8 @@
   },
   "learnings": [
     "merge-stl.mjs は 1 行に並べるだけだと幅がプレートを超える(今回 423mm)。--max-width で行折り返しを入れて 248.5 x 90.6mm に収めた",
-    "TAP のレンジは呼び径 x0.8〜0.85 をまたぐように取る(M2 φ1.5-1.9 / M2.5 φ1.9-2.3 / M3 φ2.2-2.6)。MAG-13 で片側レンジにして外した反省を反映"
+    "TAP のレンジは呼び径 x0.8〜0.85 をまたぐように取る(M2 φ1.5-1.9 / M2.5 φ1.9-2.3 / M3 φ2.2-2.6)。MAG-13 で片側レンジにして外した反省を反映",
+    "完了スナップショットは FINISH 検知の直後に撮っても間に合わないことがある。現地に人がいる場合は回収の方が速く、造形物の状態はユーザー報告に頼るしかない",
+    "監視スクリプトの 90 分上限に 2 回連続で当たった。印刷見積から締切を決める作りにして tools/ に置くべき(現状はスクラッチパッドの使い捨て)"
   ]
 }
