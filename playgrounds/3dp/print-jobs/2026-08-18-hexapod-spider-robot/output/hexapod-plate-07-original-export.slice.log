@@ -1,0 +1,13 @@
+[2026-08-18 21:34:13.857503] [0x00000001f6699e80] [trace]   Initializing StaticPrintConfigs
+[2026-08-18 21:34:13.870295] [0x00000001f6699e80] [warning] cli mode, Current BambuStudio Version 02.07.01.62
+[2026-08-18 21:34:13.935363] [0x00000001f6699e80] [warning] run:2864, can not find system preset file: /Applications/BambuStudio.app/Contents/Resources/profiles/BBL/machine_full/Bambu Lab P1S 0.4 nozzle.json 
+[2026-08-18 21:34:13.935377] [0x00000001f6699e80] [warning] run:2886, can not find system preset file: /Applications/BambuStudio.app/Contents/Resources/profiles/BBL/process_full/0.20mm Standard @BBL X1C.json 
+[2026-08-18 21:34:13.935395] [0x00000001f6699e80] [warning] no filament colors found in projects
+[2026-08-18 21:34:13.936094] [0x00000001f6699e80] [warning] load_nozzle_infos_with_compatibility: building nozzle list from filament map and volume types
+[2026-08-18 21:34:13.936113] [0x00000001f6699e80] [warning] load_nozzle_infos_with_compatibility: building nozzle list from filament map and volume types
+[2026-08-18 21:34:13.936129] [0x00000001f6699e80] [warning] load_nozzle_infos_with_compatibility: building nozzle list from filament map and volume types
+[2026-08-18 21:34:13.936142] [0x00000001f6699e80] [warning] load_nozzle_infos_with_compatibility: building nozzle list from filament map and volume types
+[2026-08-18 21:34:13.936160] [0x00000001f6699e80] [warning] load_nozzle_infos_with_compatibility: building nozzle list from filament map and volume types
+[2026-08-18 21:34:13.936174] [0x00000001f6699e80] [warning] load_nozzle_infos_with_compatibility: building nozzle list from filament map and volume types
+[2026-08-18 21:34:13.936187] [0x00000001f6699e80] [warning] load_nozzle_infos_with_compatibility: building nozzle list from filament map and volume types
+[2026-08-18 21:34:13.936202] [0x00000001f6699e80] [warning] load_nozzle_infos_with_compatibility: building nozzle list from filament map and volume types

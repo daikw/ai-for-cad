@@ -11,5 +11,6 @@
 | [2026-08-03-pla-whisker-hunt](./2026-08-03-pla-whisker-hunt/) | PLA ヒゲ撲滅実験（ヒゲタワー） | completed | 2 | 0 |
 | [2026-08-03-squish-cubes](./2026-08-03-squish-cubes/) | スキッシュキューブ 4 種（per-object インフィル 3MF） | completed | 1 | 0 |
 | [2026-08-04-fibonacci-balls](./2026-08-04-fibonacci-balls/) | Fibonacci Spheres セル構造比較ペア（粗100穴 vs 細500穴・40mm） | completed | 1 | 2 |
-| [2026-08-13-fastener-fit-tests](./2026-08-13-fastener-fit-tests/) | 締結キャリブレーション（ヒートインサート下穴・磁石ポケット） | completed | 9 | 22 |
+| [2026-08-13-fastener-fit-tests](./2026-08-13-fastener-fit-tests/) | 締結キャリブレーション（ヒートインサート下穴・磁石ポケット） | completed | 9 | 23 |
 | [2026-08-17-fastener-gauges](./2026-08-17-fastener-gauges/) | 締結ゲージ一式（ネジ測定具・皿角ゲージ・TAP 下穴） | completed | 1 | 3 |
+| [2026-08-18-hexapod-spider-robot](./2026-08-18-hexapod-spider-robot/) | Hexapod Spider Robot with Servo & Arduino | printing | 8 | 14 |

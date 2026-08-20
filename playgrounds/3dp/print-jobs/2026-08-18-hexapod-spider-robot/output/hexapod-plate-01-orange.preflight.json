@@ -1,0 +1,26 @@
+{
+  "ready": true,
+  "printer_state": "FINISH",
+  "previous_fail_reason": "0",
+  "canceled_terminal_state_override": false,
+  "file": "/Users/daikiwatanabe/ghq/github.com/daikw/ai-for-cad/playgrounds/3dp/print-jobs/2026-08-18-hexapod-spider-robot/output/hexapod-plate-01-orange.gcode.3mf",
+  "remote": "hexapod-plate-01-orange.gcode.3mf",
+  "printer_model": "Bambu Lab H2D Pro",
+  "printer_profile": "Bambu Lab H2D Pro 0.4 nozzle",
+  "nozzle_mapping": "nozzle_id=0,extruder_id=1,diameter_mm=0.4",
+  "plate": "Metadata/plate_1.gcode",
+  "estimated_time": "5h 17m 21s",
+  "weight_g": "173.07",
+  "layers": "202",
+  "max_z_mm": "33.60",
+  "plate_gcode_md5": "f3a473e8483a93005f78a18583fe56f8",
+  "ams_mapping": [
+    1
+  ],
+  "ams_mapping2": [
+    {
+      "ams_id": 0,
+      "slot_id": 1
+    }
+  ]
+}

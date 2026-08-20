@@ -1,0 +1,5 @@
+[2026-08-18 21:33:43.617142] [0x00000001f6699e80] [trace]   Initializing StaticPrintConfigs
+[2026-08-18 21:33:43.628779] [0x00000001f6699e80] [warning] cli mode, Current BambuStudio Version 02.07.01.62
+[2026-08-18 21:33:44.293673] [0x00000001f6699e80] [error]   Invalid T command (T1001).
+[2026-08-18 21:33:45.535823] [0x00000001f6699e80] [error]   Invalid T command (T65535).
+[2026-08-18 21:33:45.535842] [0x00000001f6699e80] [error]   Invalid T command (T65279).

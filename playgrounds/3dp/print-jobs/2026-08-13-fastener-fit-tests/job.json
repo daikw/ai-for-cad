@@ -326,10 +326,16 @@
     {
       "path": "evidence/2026-08-14T12-52-45-merged-complete.jpg",
       "caption": "集約プレート完了(M5/M6 のL字ブラケット + mag13b φ12.5-13.0)"
+    },
+    {
+      "path": "evidence/2026-08-18T08-46-34-diatol-baseline.jpg",
+      "caption": "diatol-baseline"
     }
   ],
   "links": {
-    "tickets": [],
+    "tickets": [
+      "https://gitlab.photosynth.dev/cto/lab-ops/-/work_items/31"
+    ],
     "mrs": [],
     "model": "https://www.printables.com/model/1648510-hole-size-test-for-heat-set-inserts"
   },

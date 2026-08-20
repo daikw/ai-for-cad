@@ -61,7 +61,7 @@
       "filament": "PLA Basic Orange(FF6A13) AMS0-1 47.64g",
       "amsSlots": "1",
       "result": "completed",
-      "resultNotes": "完走(FINISH/100%/print_error 0)。13:38 RUNNING → 15:31 FINISH だが 15:16(94%) と 15:31 の間にポーリングが飛んでおり、実 FINISH は 15:22 前後と推定(比 1.08 相当)。完了スナップショット時点でプレートは既に裏返され造形物も回収済みだったため、造形物の状態は未確認",
+      "resultNotes": "完走(FINISH/100%/print_error 0)。13:38 RUNNING → 15:31 FINISH だが 15:16(94%) と 15:31 の間にポーリングが飛んでおり、実 FINISH は 15:22 前後と推定(比 1.08 相当)。完了スナップショット時点でプレートは既に裏返され造形物も回収済みだったため、造形物の状態はカメラでは未確認だったが、ユーザー実物確認で問題なしと判明(2026-08-17)",
       "submittedAt": "2026-08-17T04:37:59.273Z"
     }
   ],
@@ -80,7 +80,9 @@
     }
   ],
   "links": {
-    "tickets": [],
+    "tickets": [
+      "https://gitlab.photosynth.dev/cto/lab-ops/-/work_items/31"
+    ],
     "mrs": [],
     "model": "https://www.printables.com/model/38356-metric-screw-measuring-device-m225345-4-50mm"
   },

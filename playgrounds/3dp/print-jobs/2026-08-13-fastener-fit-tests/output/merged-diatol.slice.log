@@ -1,0 +1,47 @@
+command: /Applications/BambuStudio.app/Contents/MacOS/BambuStudio "--debug" "2" "--orient" "1" "--arrange" "1" "--ensure-on-bed" "--scale" "1" "--curr-bed-type" "Textured PEI Plate" "--load-settings" "/var/folders/y2/4nb6hjm17l7834tllh5c3dfc0000gp/T/h2dp-slice-k1NkZs/machine.json;/var/folders/y2/4nb6hjm17l7834tllh5c3dfc0000gp/T/h2dp-slice-k1NkZs/process.json" "--load-filaments" "/var/folders/y2/4nb6hjm17l7834tllh5c3dfc0000gp/T/h2dp-slice-k1NkZs/filament.json" "--filament-map-mode" "Manual" "--extruder-nozzle-count" "1,1" "--extruder-nozzle-volume-type" "Standard,Standard" "--filament-map" "1" "--filament-nozzle-map" "1" "--filament-volume-map" "0" "--slice" "0" "--export-3mf" "/Users/daikiwatanabe/ghq/github.com/daikw/ai-for-cad/playgrounds/3dp/print-jobs/2026-08-13-fastener-fit-tests/output/merged-diatol.gcode.3mf" "/Users/daikiwatanabe/ghq/github.com/daikw/ai-for-cad/playgrounds/3dp/print-jobs/2026-08-13-fastener-fit-tests/source/cache/merged-diatol.stl"
+
+--- stdout ---
+[2026-08-18 17:46:05.573060] [0x00000001f6699e80] [trace]   Initializing StaticPrintConfigs
+[2026-08-18 17:46:05.640824] [0x00000001f6699e80] [warning] cli mode, Current BambuStudio Version 02.07.01.62
+                                      overhang, bottom, bothull, contour, A_laf, A_prj, unprintability
+orientation:-0.0000 -0.0000  1.0000, cost:0.0,	8166.5,	9912.0,	361.5,	0.0,	0.0,	0.0
+orientation: 0.0000 -0.0000 -1.0000, cost:5363.7,	121.0,	5761.9,	44.0,	0.0,	0.0,	11.9
+orientation: 0.0000  1.0000 -0.0000, cost:644.9,	1584.0,	1161.6,	159.2,	278.8,	0.0,	0.3
+orientation:-0.0000 -1.0000  0.0000, cost:1348.5,	528.0,	352.0,	91.9,	278.8,	0.0,	1.9
+orientation:-1.0000 -0.0000 -0.0000, cost:550.5,	118.8,	79.2,	43.6,	293.1,	0.0,	3.4
+orientation:1.0000 0.0000 0.0000, cost:547.8,	118.8,	79.2,	43.6,	293.1,	0.0,	3.4
+orientation: 0.8593 -0.5115 -0.0000, cost:328.1,	0.0,	0.0,	0.0,	229.7,	0.0,	780.8
+orientation: 0.9418 -0.3361 -0.0000, cost:663.0,	0.0,	0.0,	0.0,	240.2,	0.0,	1450.8
+orientation:-0.0510  0.9987 -0.0000, cost:1726.4,	0.0,	0.0,	0.0,	3064.7,	0.0,	3634.2
+orientation:-0.9418 -0.3361  0.0000, cost:650.5,	0.0,	0.0,	0.0,	225.5,	0.0,	1425.4
+orientation:-0.0000  0.0602 -0.9982, cost:5423.3,	127.5,	2612.4,	45.2,	10675.8,	0.0,	18.4
+orientation:-0.0000  0.0599 -0.9982, cost:5423.0,	128.1,	2612.4,	45.3,	10674.9,	0.0,	18.3
+orientation:-0.3100 -0.9507 -0.0000, cost:1722.3,	0.0,	425.8,	0.0,	223.1,	0.0,	179.6
+orientation: 0.3100 -0.9507 -0.0000, cost:1724.6,	0.0,	425.8,	0.0,	223.8,	0.0,	179.7
+orientation:-0.0000 -0.1192 -0.9929, cost:5441.4,	5.1,	381.9,	9.1,	10884.1,	0.0,	196.6
+orientation: 0.0000  0.0601 -0.9982, cost:5423.4,	115.5,	2612.4,	43.0,	10699.4,	0.0,	19.4
+orientation: 0.0296 -0.0938 -0.9951, cost:5443.5,	2.3,	557.6,	6.0,	10885.8,	0.0,	170.0
+orientation:-0.0297 -0.0937 -0.9952, cost:5442.4,	4.4,	559.9,	8.4,	10883.7,	0.0,	154.1
+orientation:-0.0349 -0.1072 -0.9936, cost:5443.5,	2.3,	559.9,	6.1,	10885.7,	0.0,	169.1
+orientation: 0.0359 -0.1102 -0.9933, cost:5443.9,	1.1,	548.2,	4.2,	10887.3,	0.0,	183.2
+orientation:-0.7071 -0.0000  0.7071, cost:0.0,	0.0,	0.0,	0.0,	0.0,	0.0,	120.0
+orientation:-0.0000 -0.7071  0.7071, cost:0.0,	0.0,	0.0,	0.0,	0.0,	0.0,	120.0
+orientation: 0.7071 -0.0000  0.7071, cost:0.0,	0.0,	0.0,	0.0,	0.0,	0.0,	120.0
+orientation:-0.0000  0.7071  0.7071, cost:0.0,	0.0,	0.0,	0.0,	0.0,	0.0,	120.0
+orientation:-0.7071 -0.7071 -0.0000, cost:276.6,	0.0,	0.0,	0.0,	261.4,	0.0,	678.5
+orientation: 0.7071 -0.7071 -0.0000, cost:287.9,	0.0,	0.0,	0.0,	270.8,	0.0,	701.3
+orientation: 0.7071  0.7071 -0.0000, cost:275.7,	0.0,	0.0,	0.0,	261.4,	0.0,	676.6
+orientation:-0.7071  0.7071 -0.0000, cost:287.7,	0.0,	0.0,	0.0,	270.8,	0.0,	700.8
+orientation:-0.7071 -0.0000 -0.7071, cost:0.0,	0.0,	0.0,	0.0,	0.0,	0.0,	120.0
+orientation:-0.0000 -0.7071 -0.7071, cost:0.0,	0.0,	0.0,	0.0,	0.0,	0.0,	120.0
+orientation: 0.7071 -0.0000 -0.7071, cost:0.0,	0.0,	0.0,	0.0,	0.0,	0.0,	120.0
+orientation:-0.0000  0.7071 -0.7071, cost:0.0,	0.0,	0.0,	0.0,	0.0,	0.0,	120.0
+best:-0.000000 -0.000000  1.000000, costs:0.0,	8166.5,	9912.0,	361.5,	0.0,	0.0,	0.0
+[2026-08-18 17:46:06.312454] [0x00000001f6699e80] [warning] tree support default to organic support
+[2026-08-18 17:46:06.412033] [0x00000001f6699e80] [error]   Invalid T command (T1001).
+[2026-08-18 17:46:06.579314] [0x00000001f6699e80] [error]   Invalid T command (T65535).
+[2026-08-18 17:46:06.579328] [0x00000001f6699e80] [error]   Invalid T command (T65279).
+
+--- stderr ---
+
+exit_status: 0

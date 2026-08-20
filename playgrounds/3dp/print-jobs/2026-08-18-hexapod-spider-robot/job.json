@@ -1,0 +1,256 @@
+{
+  "schema": "printjob/v1",
+  "slug": "2026-08-18-hexapod-spider-robot",
+  "title": "Hexapod Spider Robot with Servo & Arduino",
+  "status": "printing",
+  "printer": "bambu-h2d-pro",
+  "source": {
+    "kind": "makerworld",
+    "url": "https://makerworld.com/en/models/1973965-hexapod-spider-robot-with-servo-arduino#profileId-2122819",
+    "license": "MakerWorld Standard Digital File License (personal/internal use; no redistribution or sale of digital or printed versions)",
+    "notes": "Emre Kalem's source STL ZIP and eight-plate P1S profile were downloaded on 2026-08-18. The published profile is 0.20 mm, 3 walls, 10% grid infill, manual normal supports, automatic brim, 1157 g, and 29.7 h. It was not submitted directly: each plate was exported to preserve the designer's object count and orientation, then rearranged and resliced for H2D Pro with the validated 02.07.01.62 profiles. Automatic normal support replaces the profile's painted manual support after STL export. Plates 1-3 use orange PLA; plates 4-8 use white PLA. The designer states that the firmware/software is still under development.",
+    "files": [
+      {
+        "path": "source/cache/makerworld-1973965-stl.zip",
+        "bytes": 1097987,
+        "sha256": "6172dfa79cfb30073f3be8bb41cf4f67209ef66d5a064019b1699b5a837f9497",
+        "origin": "MakerWorld model 1973965 — Download All STL/CAD files"
+      },
+      {
+        "path": "source/cache/makerworld-2122819-profile.3mf",
+        "bytes": 3914431,
+        "sha256": "4e5340bc357711ea858bc8e3bafbf368e108a7d3c5f25d433267c0fe27bbb69c",
+        "origin": "MakerWorld print profile instance 2122819 / profile 468765961"
+      },
+      {
+        "path": "source/slice-plates.zsh",
+        "bytes": 3701,
+        "sha256": "c002b0c42cc326c2741c4caf318c86cdb3a262e0bab35905a27922c673b96029",
+        "origin": "repo"
+      },
+      {
+        "path": "source/BOM.md",
+        "bytes": 2954,
+        "sha256": "9dd69aeaaec2b60cb3e2351ed848686fe6aa1951d0f77cc4233f9b31b67afe9b",
+        "origin": "MakerWorld description plus validated print estimates"
+      },
+      {
+        "path": "source/profiles/h2d-pro-machine.json",
+        "sha256": "2487623ae17bf8a10a143abf1ba7a83f1258fd47fe262d8a62e978f194362955",
+        "origin": "printing-with-bambu-h2d-pro profile flattener"
+      },
+      {
+        "path": "source/profiles/h2d-pro-process.json",
+        "sha256": "f7ba668a03890e92f20bbd70f699e3f2d3bc8c5ac9a2c4618a3ee9d02a5ced88",
+        "origin": "printing-with-bambu-h2d-pro profile flattener; reviewed per-job support override"
+      },
+      {
+        "path": "source/profiles/pla-basic-orange.json",
+        "sha256": "094c3dcb25c3829fd5ccb4d1283651b598d7ec9bae243e90e0db30e79774eb81",
+        "origin": "printing-with-bambu-h2d-pro profile flattener"
+      },
+      {
+        "path": "source/profiles/pla-basic-white.json",
+        "sha256": "c74efb807ac40d2184321a7976f60bdc0d5a563ffcba9ac2384e51d7b102fa52",
+        "origin": "printing-with-bambu-h2d-pro profile flattener"
+      },
+      {
+        "path": "source/monitor-plate-01.zsh",
+        "bytes": 3369,
+        "sha256": "06267e519fed691fee561330d5fb83ebd625fc54397034330809aee9fc73418f",
+        "origin": "repo; plate-number-aware 90-second live status monitor with terminal evidence capture"
+      }
+    ]
+  },
+  "prints": [
+    {
+      "artifact": "output/hexapod-plate-01-orange.gcode.3mf",
+      "sha256": "291f9b5d8d0b49399f7a1edf352eae7886daed5cd6013f17756bcb287550dfb3",
+      "sliceCommand": "source/slice-plates.zsh (plate 1)",
+      "estimatedTime": "5h 17m 21s",
+      "filament": "Bambu PLA Basic Orange (#FF6A13), AMS0-1, 173.07 g",
+      "amsSlots": "1",
+      "dimensionsMm": [
+        211.63,
+        133.88,
+        33.6
+      ],
+      "preflight": "output/hexapod-plate-01-orange.preflight.json",
+      "submittedAt": "2026-08-19T02:10:38.465Z",
+      "resultNotes": "Remote submit staged 3,058,616 bytes with matching SHA-256; final inline status timed out, then independent status confirmed acceptance / RUNNING, print_type local, 0%, layer 0/202, remaining 322 min, print_error 0, storage present / First layer confirmed at 2%, layer 1/202, remaining 314 min, print_error 0; camera shows orange extrusion on the bed with no visible detachment or clumping / FINISH/100%, print_error 0; completion monitor observed 2026-08-19T07:49:08Z / Submitted 2026-08-19T02:10:38Z and reached FINISH at 2026-08-19T07:49:08Z (elapsed 5h38m30s versus 5h17m21s estimate). Completion camera shows all six orange Leg_A parts upright on the plate with no visible spaghetti or detachment; physical inspection remains pending.",
+      "result": "completed"
+    },
+    {
+      "artifact": "output/hexapod-plate-02-orange.gcode.3mf",
+      "sha256": "402660c642a12d6eb20d0ed47ca6414acc9c5ffef791f18192c91b69fb356d26",
+      "sliceCommand": "source/slice-plates.zsh (plate 2)",
+      "estimatedTime": "6h 24m 23s",
+      "filament": "Bambu PLA Basic Orange (#FF6A13), AMS0-1, 235.36 g",
+      "amsSlots": "1",
+      "dimensionsMm": [
+        203.03,
+        253.17,
+        28.6
+      ],
+      "preflight": "output/hexapod-plate-02-orange.preflight.json",
+      "submittedAt": "2026-08-19T08:34:31.311Z",
+      "resultNotes": "Remote submit staged 3,257,133 bytes with matching SHA-256; final inline status timed out, then independent status confirmed RUNNING/local for the expected subtask / RUNNING, print_type local, progress 0%, print_error 0, storage present; layer_num still carried over from prior terminal report during preparation / First layer confirmed at 1%, layer 1/161, remaining 383 min, print_error 0 / FINISH/100%, print_error 0; completion monitor observed 2026-08-19T15:20:41Z / Submitted 2026-08-19T08:34:31Z and reached FINISH at 2026-08-19T15:20:41Z (elapsed 6h46m10s versus 6h24m23s estimate). Completion camera shows all six orange Leg_B parts upright with no visible spaghetti or detachment; user reports they have been recovered.",
+      "result": "completed"
+    },
+    {
+      "artifact": "output/hexapod-plate-03-orange.gcode.3mf",
+      "sha256": "81e9479df09a723121108d364c5972f18d484c84d10002db76802fa5583a7d42",
+      "sliceCommand": "source/slice-plates.zsh (plate 3)",
+      "estimatedTime": "8h 49m 13s",
+      "filament": "Bambu PLA Basic Orange (#FF6A13), AMS0-1, 282.03 g",
+      "amsSlots": "1",
+      "dimensionsMm": [
+        233.58,
+        211.63,
+        118.8
+      ],
+      "preflight": "output/hexapod-plate-03-orange.preflight.json",
+      "submittedAt": "2026-08-20T03:55:45.696Z",
+      "resultNotes": "Remote submit staged 7,588,416 bytes with matching SHA-256; final inline status timed out, then independent status confirmed PREPARE/local for the expected subtask / PREPARE, print_type local, progress 0%, print_error 0, storage present; layer totals still carried over from prior terminal report during preparation / First layer confirmed at 1%, layer 1/1065, remaining 528 min, print_error 0"
+    },
+    {
+      "artifact": "output/hexapod-plate-04-white.gcode.3mf",
+      "sha256": "a1bdaae10c71a537f6e8d6dc18f270b62dfb196fa0fbbcc4d21e64cd7b7fbfd0",
+      "sliceCommand": "source/slice-plates.zsh (plate 4)",
+      "estimatedTime": "4h 36m 27s",
+      "filament": "Bambu PLA Basic White (#FFFFFF), AMS0-0, 195.28 g",
+      "amsSlots": "0",
+      "dimensionsMm": [
+        244.77,
+        248.44,
+        37
+      ],
+      "preflight": "output/hexapod-plate-04-white.preflight.json"
+    },
+    {
+      "artifact": "output/hexapod-plate-05-white.gcode.3mf",
+      "sha256": "2247a8e36447b569e3c765c086057ad600bc6bccaa81484deb4e9d9016622e9a",
+      "sliceCommand": "source/slice-plates.zsh (plate 5)",
+      "estimatedTime": "2h 26m 5s",
+      "filament": "Bambu PLA Basic White (#FFFFFF), AMS0-0, 118.76 g",
+      "amsSlots": "0",
+      "dimensionsMm": [
+        148.19,
+        179.84,
+        70
+      ],
+      "preflight": "output/hexapod-plate-05-white.preflight.json"
+    },
+    {
+      "artifact": "output/hexapod-plate-06-white.gcode.3mf",
+      "sha256": "2086109c9a4c5de0644d27002999801dd2768c605dde7fe9016ae6edb6acd668",
+      "sliceCommand": "source/slice-plates.zsh (plate 6)",
+      "estimatedTime": "1h 23m 43s",
+      "filament": "Bambu PLA Basic White (#FFFFFF), AMS0-0, 30.32 g",
+      "amsSlots": "0",
+      "dimensionsMm": [
+        204.85,
+        184.88,
+        14.6
+      ],
+      "preflight": "output/hexapod-plate-06-white.preflight.json"
+    },
+    {
+      "artifact": "output/hexapod-plate-07-white.gcode.3mf",
+      "sha256": "5ceb35d01ac3d806b58c473ebe387292b208913c3daaf3815853883f58fb6c3c",
+      "sliceCommand": "source/slice-plates.zsh (plate 7)",
+      "estimatedTime": "1h 7m 12s",
+      "filament": "Bambu PLA Basic White (#FFFFFF), AMS0-0, 50.41 g",
+      "amsSlots": "0",
+      "dimensionsMm": [
+        220.2,
+        130.2,
+        2
+      ],
+      "preflight": "output/hexapod-plate-07-white.preflight.json"
+    },
+    {
+      "artifact": "output/hexapod-plate-08-white.gcode.3mf",
+      "sha256": "c6c0df4d68447502a3d96af42014bcacd8149169417f80b9531fa6d5e6826255",
+      "sliceCommand": "source/slice-plates.zsh (plate 8)",
+      "estimatedTime": "2h 44m 18s",
+      "filament": "Bambu PLA Basic White (#FFFFFF), AMS0-0, 115.56 g",
+      "amsSlots": "0",
+      "dimensionsMm": [
+        218.2,
+        142.43,
+        32
+      ],
+      "preflight": "output/hexapod-plate-08-white.preflight.json"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "evidence/2026-08-18T12-29-59-preflight-baseline.jpg",
+      "caption": "Preflight camera check: Textured PEI plate installed and visually empty; capture again immediately before submit"
+    },
+    {
+      "path": "evidence/2026-08-19T02-08-29-baseline-plate-01.jpg",
+      "caption": "baseline-plate-01"
+    },
+    {
+      "path": "evidence/2026-08-19T02-10-44-start-plate-01.jpg",
+      "caption": "start-plate-01"
+    },
+    {
+      "path": "evidence/2026-08-19T02-15-02-calibration-plate-01.jpg",
+      "caption": "calibration-plate-01"
+    },
+    {
+      "path": "evidence/2026-08-19T02-21-16-first-layer-plate-01.jpg",
+      "caption": "first-layer-plate-01"
+    },
+    {
+      "path": "evidence/2026-08-19T07-49-14-complete-plate-01.jpg",
+      "caption": "complete-plate-01"
+    },
+    {
+      "path": "evidence/2026-08-19T08-27-39-baseline-plate-02.jpg",
+      "caption": "baseline-plate-02"
+    },
+    {
+      "path": "evidence/2026-08-19T08-34-31-start-plate-02.jpg",
+      "caption": "start-plate-02"
+    },
+    {
+      "path": "evidence/2026-08-19T08-41-27-calibration-plate-02.jpg",
+      "caption": "calibration-plate-02"
+    },
+    {
+      "path": "evidence/2026-08-19T08-46-05-first-layer-plate-02.jpg",
+      "caption": "first-layer-plate-02"
+    },
+    {
+      "path": "evidence/2026-08-19T15-20-46-complete-plate-02.jpg",
+      "caption": "complete-plate-02"
+    },
+    {
+      "path": "evidence/2026-08-20T03-48-43-baseline-plate-03.jpg",
+      "caption": "baseline-plate-03"
+    },
+    {
+      "path": "evidence/2026-08-20T03-55-45-start-plate-03.jpg",
+      "caption": "start-plate-03"
+    },
+    {
+      "path": "evidence/2026-08-20T04-06-15-first-layer-plate-03.jpg",
+      "caption": "first-layer-plate-03"
+    }
+  ],
+  "links": {
+    "tickets": [],
+    "mrs": [],
+    "model": "https://makerworld.com/en/models/1973965-hexapod-spider-robot-with-servo-arduino#profileId-2122819"
+  },
+  "learnings": [
+    "MakerWorld's H2D Pro compatibility filter downloaded the same P1S-authored 3MF (identical SHA-256), so compatibility metadata is not evidence of an H2D-native slice.",
+    "Exporting each original plate to transformed STL files preserved the designer's count and orientation; H2D Pro could then rearrange those objects without reorienting them.",
+    "Painted manual supports are lost by STL export. Normal automatic support at the designer's 30-degree threshold increased the H2D estimate from 1157 g to 1200.79 g.",
+    "The live AMS had insufficient material for a single-color 1.2 kg job but enough orange and white PLA for a plate-level two-color split without purge waste."
+  ]
+}

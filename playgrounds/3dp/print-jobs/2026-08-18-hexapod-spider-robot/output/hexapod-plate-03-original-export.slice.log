@@ -1,0 +1,17 @@
+[2026-08-18 21:33:50.282736] [0x00000001f6699e80] [trace]   Initializing StaticPrintConfigs
+[2026-08-18 21:33:50.295877] [0x00000001f6699e80] [warning] cli mode, Current BambuStudio Version 02.07.01.62
+[2026-08-18 21:33:50.367625] [0x00000001f6699e80] [warning] run:2864, can not find system preset file: /Applications/BambuStudio.app/Contents/Resources/profiles/BBL/machine_full/Bambu Lab P1S 0.4 nozzle.json 
+[2026-08-18 21:33:50.367643] [0x00000001f6699e80] [warning] run:2886, can not find system preset file: /Applications/BambuStudio.app/Contents/Resources/profiles/BBL/process_full/0.20mm Standard @BBL X1C.json 
+[2026-08-18 21:33:50.367663] [0x00000001f6699e80] [warning] no filament colors found in projects
+[2026-08-18 21:33:50.368372] [0x00000001f6699e80] [warning] load_nozzle_infos_with_compatibility: building nozzle list from filament map and volume types
+[2026-08-18 21:33:50.368394] [0x00000001f6699e80] [warning] load_nozzle_infos_with_compatibility: building nozzle list from filament map and volume types
+[2026-08-18 21:33:50.368409] [0x00000001f6699e80] [warning] load_nozzle_infos_with_compatibility: building nozzle list from filament map and volume types
+[2026-08-18 21:33:50.368423] [0x00000001f6699e80] [warning] load_nozzle_infos_with_compatibility: building nozzle list from filament map and volume types
+[2026-08-18 21:33:50.368441] [0x00000001f6699e80] [warning] load_nozzle_infos_with_compatibility: building nozzle list from filament map and volume types
+[2026-08-18 21:33:50.368456] [0x00000001f6699e80] [warning] load_nozzle_infos_with_compatibility: building nozzle list from filament map and volume types
+[2026-08-18 21:33:50.368497] [0x00000001f6699e80] [warning] load_nozzle_infos_with_compatibility: building nozzle list from filament map and volume types
+[2026-08-18 21:33:50.368509] [0x00000001f6699e80] [warning] load_nozzle_infos_with_compatibility: building nozzle list from filament map and volume types
+[2026-08-18 21:33:50.511395] [0x00000001f6699e80] [error]   ZFiller: encounter idx from clip: 16
+[2026-08-18 21:33:50.511778] [0x000000016d7e3000] [error]   ZFiller: encounter idx from clip: 11
+[2026-08-18 21:33:50.512385] [0x000000016dbef000] [error]   ZFiller: encounter idx from clip: 11
+[2026-08-18 21:33:50.512659] [0x000000016d3d7000] [error]   ZFiller: encounter idx from clip: 12

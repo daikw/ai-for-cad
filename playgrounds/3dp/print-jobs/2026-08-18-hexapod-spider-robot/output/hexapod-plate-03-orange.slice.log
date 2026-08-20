@@ -1,0 +1,29 @@
+[2026-08-18 21:33:52.484858] [0x00000001f6699e80] [trace]   Initializing StaticPrintConfigs
+[2026-08-18 21:33:52.500573] [0x00000001f6699e80] [warning] cli mode, Current BambuStudio Version 02.07.01.62
+[2026-08-18 21:33:53.268724] [0x000000017366f000] [error]   ZFiller: encounter idx from clip: 11
+[2026-08-18 21:33:53.270798] [0x00000001f6699e80] [error]   ZFiller: encounter idx from clip: 11
+[2026-08-18 21:33:53.272002] [0x0000000171a1b000] [error]   ZFiller: encounter idx from clip: 12
+[2026-08-18 21:33:53.272090] [0x000000017263f000] [error]   ZFiller: encounter idx from clip: 16
+[2026-08-18 21:33:53.282425] [0x0000000170df7000] [error]   ZFiller: encounter idx from clip: 12
+[2026-08-18 21:33:53.282547] [0x0000000173263000] [error]   ZFiller: encounter idx from clip: 11
+[2026-08-18 21:33:53.282735] [0x000000017366f000] [error]   ZFiller: encounter idx from clip: 16
+[2026-08-18 21:33:53.284463] [0x0000000173a7b000] [error]   ZFiller: encounter idx from clip: 11
+[2026-08-18 21:33:53.295472] [0x0000000172a4b000] [error]   ZFiller: encounter idx from clip: 16
+[2026-08-18 21:33:53.295612] [0x00000001709eb000] [error]   ZFiller: encounter idx from clip: 6
+[2026-08-18 21:33:53.296020] [0x0000000172a4b000] [error]   ZFiller: encounter idx from clip: 26
+[2026-08-18 21:33:53.296355] [0x000000017160f000] [error]   ZFiller: encounter idx from clip: 11
+[2026-08-18 21:33:53.309992] [0x000000017263f000] [error]   ZFiller: encounter idx from clip: 6
+[2026-08-18 21:33:53.311666] [0x0000000173263000] [error]   ZFiller: encounter idx from clip: 26
+[2026-08-18 21:33:53.312029] [0x0000000172a4b000] [error]   ZFiller: encounter idx from clip: 16
+[2026-08-18 21:33:53.313528] [0x0000000171a1b000] [error]   ZFiller: encounter idx from clip: 11
+[2026-08-18 21:33:53.322253] [0x0000000171a1b000] [error]   ZFiller: encounter idx from clip: 11
+[2026-08-18 21:33:53.323553] [0x000000017263f000] [error]   ZFiller: encounter idx from clip: 16
+[2026-08-18 21:33:53.324011] [0x0000000172233000] [error]   ZFiller: encounter idx from clip: 11
+[2026-08-18 21:33:53.324107] [0x00000001709eb000] [error]   ZFiller: encounter idx from clip: 12
+[2026-08-18 21:33:53.333484] [0x0000000172233000] [error]   ZFiller: encounter idx from clip: 11
+[2026-08-18 21:33:53.333983] [0x0000000172233000] [error]   ZFiller: encounter idx from clip: 12
+[2026-08-18 21:33:53.335531] [0x0000000171a1b000] [error]   ZFiller: encounter idx from clip: 11
+[2026-08-18 21:33:53.336842] [0x000000017366f000] [error]   ZFiller: encounter idx from clip: 16
+[2026-08-18 21:33:53.707364] [0x00000001f6699e80] [error]   Invalid T command (T1001).
+[2026-08-18 21:33:56.340707] [0x00000001f6699e80] [error]   Invalid T command (T65535).
+[2026-08-18 21:33:56.340723] [0x00000001f6699e80] [error]   Invalid T command (T65279).
